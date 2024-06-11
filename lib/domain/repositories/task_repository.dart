@@ -8,9 +8,9 @@ abstract class TaskRepository {
 
   Future<List<TaskEntity>> getTasksByMode({required TaskMode taskMode, required String orderBy});
 
-  Future<int> createTask({required TaskEntity task});
+  Future<int> createTask({required Map<String, dynamic> task});
 
-  Future<int> updateTask({required TaskEntity task, required int taskId});
+  Future<int> updateTask({required Map<String, dynamic> task, required int taskId});
 
   Future<int> deleteTask({required int taskId});
 }

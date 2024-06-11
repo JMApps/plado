@@ -32,7 +32,7 @@ class TaskUseCase {
     }
   }
 
-  Future<int> createTask({required TaskEntity task}) async {
+  Future<int> createTask({required Map<String, dynamic> task}) async {
     try {
       return await _taskRepository.createTask(task: task);
     } catch (e) {
@@ -40,7 +40,7 @@ class TaskUseCase {
     }
   }
 
-  Future<int> updateTask({required TaskEntity task, required int taskId}) async {
+  Future<int> updateTask({required Map<String, dynamic> task, required int taskId}) async {
     try {
       return await _taskRepository.updateTask(task: task, taskId: taskId);
     } catch (e) {
