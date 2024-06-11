@@ -23,6 +23,14 @@ class HabitUseCase {
     }
   }
 
+  Future<List<HabitEntity>> getSearchHabits({required String searchQuery}) async {
+    try {
+      return await _habitRepository.searchHabits(searchQuery: searchQuery);
+    } catch (e) {
+      throw Exception('${AppExceptionMessages.getSearchHabitException} $e');
+    }
+  }
+
   Future<int> createHabit({required Map<String, dynamic> habit}) async {
     try {
       return await _habitRepository.createHabit(habit: habit);
