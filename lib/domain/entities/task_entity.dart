@@ -5,7 +5,7 @@ import '../../core/strings/app_exception_messages.dart';
 import '../../data/models/task_model.dart';
 
 class TaskEntity {
-  final int id;
+  final int taskId;
   final String taskTitle;
   final String? taskDescription;
   final DateTime startDateTime;
@@ -17,7 +17,7 @@ class TaskEntity {
   final List<String> taskTags;
 
   TaskEntity({
-    required this.id,
+    required this.taskId,
     required this.taskTitle,
     required this.taskDescription,
     required this.startDateTime,
@@ -35,7 +35,7 @@ class TaskEntity {
 
   factory TaskEntity.fromModel(TaskModel model) {
     return TaskEntity(
-      id: model.taskId,
+      taskId: model.taskId,
       taskTitle: model.taskTitle,
       taskDescription: model.taskDescription,
       startDateTime: model.startDateTime,
