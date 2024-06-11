@@ -2,6 +2,7 @@ import '../../core/enums/task/task_mode.dart';
 import '../../core/enums/task/task_priority.dart';
 import '../../core/enums/task/task_status.dart';
 import '../../core/strings/app_exception_messages.dart';
+import '../../data/models/task_model.dart';
 
 class TaskEntity {
   final int id;
@@ -30,5 +31,20 @@ class TaskEntity {
     if (startDateTime.isAfter(endDateTime)) {
       throw ArgumentError(AppExceptionMessages.dateIsAfterException);
     }
+  }
+
+  factory TaskEntity.fromModel(TaskModel model) {
+    return TaskEntity(
+      id: model.taskId,
+      taskTitle: model.taskTitle,
+      taskDescription: model.taskDescription,
+      startDateTime: model.startDateTime,
+      endDateTime: model.endDateTime,
+      taskMode: model.taskMode,
+      taskPriority: model.taskPriority,
+      taskStatus: model.taskStatus,
+      taskColor: model.taskColor,
+      taskTags: model.taskTags,
+    );
   }
 }
