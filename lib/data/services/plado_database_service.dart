@@ -40,7 +40,7 @@ class PladoDatabaseService {
   void _createDb(Database db, int version) async {
     await db.execute('''
       CREATE VIRTUAL TABLE IF NOT EXISTS Table_of_tasks USING FTS4 (
-        task_id INTEGER PRIMARY KEY,
+        task_id INTEGER PRIMARY KEY AUTOINCREMENT,
         task_title TEXT,
         task_description TEXT,
         start_date_time TEXT,
@@ -54,8 +54,8 @@ class PladoDatabaseService {
     ''');
 
     await db.execute('''
-      CREATE VIRTUAL TABLE IF NOT EXISTS Table_of_habits USING FTS4 (
-        habit_id INTEGER PRIMARY KEY,
+      CREATE TABLE Table_of_habits (
+        habit_id INTEGER PRIMARY KEY AUTOINCREMENT,
         habit_title TEXT,
         habit_description TEXT,
         start_date_time TEXT,
