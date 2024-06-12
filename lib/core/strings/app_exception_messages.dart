@@ -14,4 +14,6 @@ class AppExceptionMessages {
   static const String createHabitException = 'Error create habit\n';
   static const String updateHabitException = 'Error update habit\n';
   static const String deleteHabitException = 'Error remove habit\n';
+
+  static const String invalidRouteException = 'Invalid route:';
 }
