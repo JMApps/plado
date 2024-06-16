@@ -6,6 +6,9 @@ class AppMaterialStyles {
       brightness: Brightness.light,
       seedColor: Colors.orange,
     ),
+    appBarTheme: const AppBarTheme(
+      centerTitle: true,
+    )
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -13,5 +16,8 @@ class AppMaterialStyles {
       brightness: Brightness.dark,
       seedColor: Colors.orange,
     ),
+    appBarTheme: const AppBarTheme(
+      centerTitle: true,
+    )
   );
 }
