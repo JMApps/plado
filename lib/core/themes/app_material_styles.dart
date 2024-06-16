@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 
 class AppMaterialStyles {
   static ThemeData lightTheme = ThemeData(
-    brightness: Brightness.light,
+    colorScheme: ColorScheme.fromSeed(
+      brightness: Brightness.light,
+      seedColor: Colors.orange,
+    ),
   );
 
   static ThemeData darkTheme = ThemeData(
-    brightness: Brightness.dark,
+    colorScheme: ColorScheme.fromSeed(
+      brightness: Brightness.dark,
+      seedColor: Colors.orange,
+    ),
   );
 }
