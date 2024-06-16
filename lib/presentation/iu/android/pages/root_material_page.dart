@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/routes/cupertino_routes.dart';
+import '../../../../core/routes/material_routes.dart';
 import '../../../../core/strings/app_strings.dart';
-import '../../ios/pages/home_page.dart';
+import '../../../../core/themes/app_material_styles.dart';
+import 'home_page.dart';
 
 class RootMaterialPage extends StatelessWidget {
   const RootMaterialPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: AppStrings.appName,
-      onGenerateRoute: CupertinoRoutes.onGenerateRoute,
-      home: HomePage(),
+      theme: AppMaterialStyles.lightTheme,
+      darkTheme: AppMaterialStyles.darkTheme,
+      onGenerateRoute: MaterialRoutes.onGenerateRoute,
+      home: const HomePage(),
     );
   }
 }

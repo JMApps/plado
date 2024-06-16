@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../../../../core/strings/app_strings.dart';
-
 class AddTaskPage extends StatelessWidget {
   const AddTaskPage({super.key});
 
@@ -9,8 +7,7 @@ class AddTaskPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
-        middle: Text(AppStrings.addingTask),
-        previousPageTitle: AppStrings.main,
+        middle: Text(''),
       ),
       child: Container(),
     );

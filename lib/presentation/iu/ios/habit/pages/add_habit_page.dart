@@ -10,7 +10,6 @@ class AddHabitPage extends StatelessWidget {
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
         middle: Text(AppStrings.addingHabit),
-        previousPageTitle: AppStrings.main,
       ),
       child: Container(),
     );

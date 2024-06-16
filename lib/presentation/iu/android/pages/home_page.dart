@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/strings/app_strings.dart';
 import '../../../../core/styles/app_styles.dart';
-import '../task/pages/day_task_container.dart';
-import '../task/pages/month_task_container.dart';
-import '../task/pages/season_task_container.dart';
-import '../task/pages/week_task_container.dart';
-import '../task/pages/year_task_container.dart';
+import '../task/lists/day_task_container.dart';
+import '../task/lists/month_task_container.dart';
+import '../task/lists/season_task_container.dart';
+import '../task/lists/week_task_container.dart';
+import '../task/lists/year_task_container.dart';
 import '../widgets/fab_add_task.dart';
 
 class HomePage extends StatefulWidget {
@@ -36,15 +36,26 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         title: const Text(AppStrings.appName),
+        leading: IconButton(
+          onPressed: () {},
+          tooltip: AppStrings.sortTasks,
+          icon: const Icon(Icons.sort_rounded),
+        ),
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.sort_rounded),
+            tooltip: AppStrings.settings,
+            icon: const Icon(Icons.settings),
+          ),
+          IconButton(
+            onPressed: () {},
+            tooltip: AppStrings.addingHabit,
+            icon: const Icon(Icons.task_alt_rounded),
           ),
         ],
         bottom: TabBar(
           controller: _tabController,
-          labelPadding: AppStyles.padding,
+          labelPadding: AppStyles.paddingHorVerMini,
           padding: AppStyles.paddingMicro,
           splashBorderRadius: AppStyles.border,
           labelStyle: const TextStyle(fontSize: 16),

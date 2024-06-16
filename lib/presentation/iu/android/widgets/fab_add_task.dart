@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/routes/name_routes.dart';
+import '../../../../core/strings/app_strings.dart';
 
 class FabAddTask extends StatelessWidget {
   const FabAddTask({super.key});
@@ -8,8 +9,9 @@ class FabAddTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      elevation: 0,
+      tooltip: AppStrings.addTask,
       backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      elevation: 0.5,
       child: const Icon(Icons.add),
       onPressed: () {
         Navigator.pushNamed(context, NameRoutes.createTaskPage);

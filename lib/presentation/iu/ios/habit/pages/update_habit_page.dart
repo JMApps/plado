@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../../../core/strings/app_strings.dart';
-
 class UpdateHabitPage extends StatelessWidget {
   const UpdateHabitPage({super.key});
 
@@ -9,8 +7,7 @@ class UpdateHabitPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
-        middle: Text(AppStrings.change),
-        previousPageTitle: AppStrings.main,
+        middle: Text(''),
       ),
       child: Container(),
     );
