@@ -18,8 +18,9 @@ class DayTaskList extends StatelessWidget {
     final sortState = Provider.of<TaskSortState>(context);
     return FutureBuilder<List<TaskEntity>>(
       future: Provider.of<TaskDataState>(context).getTasksByMode(
-          taskMode: TaskMode.day,
-          orderBy: '${sortState.getSort} ${sortState.getOrder}'),
+        taskMode: TaskMode.day,
+        orderBy: '${sortState.getSort} ${sortState.getOrder}',
+      ),
       builder: (context, snapshot) {
         if (snapshot.hasData && snapshot.data!.isNotEmpty) {
           return ListView.builder(

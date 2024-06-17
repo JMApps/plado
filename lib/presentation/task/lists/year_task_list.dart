@@ -5,6 +5,7 @@ import '../../../../../core/enums/task/task_mode.dart';
 import '../../../../../core/strings/app_strings.dart';
 import '../../../../../data/state/task_data_state.dart';
 import '../../../../../domain/entities/task_entity.dart';
+import '../../state/task_sort_state.dart';
 import '../../widgets/main_error_text.dart';
 import '../../widgets/time_is_empty.dart';
 import '../items/task_item.dart';
@@ -14,8 +15,12 @@ class YearTaskList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sortState = Provider.of<TaskSortState>(context);
     return FutureBuilder<List<TaskEntity>>(
-      future: Provider.of<TaskDataState>(context).getTasksByMode(taskMode: TaskMode.year, orderBy: 'task_id DESC'),
+      future: Provider.of<TaskDataState>(context).getTasksByMode(
+        taskMode: TaskMode.year,
+        orderBy: '${sortState.getSort} ${sortState.getOrder}',
+      ),
       builder: (context, snapshot) {
         if (snapshot.hasData && snapshot.data!.isNotEmpty) {
           return ListView.builder(
