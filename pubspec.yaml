@@ -19,8 +19,11 @@ dependencies:
   # System
   path: ^1.9.0
 
-  #State management
+  # State management
   provider: ^6.1.2
+
+  # UI
+  salomon_bottom_bar: ^3.3.2
 
 dev_dependencies:
   flutter_test:
