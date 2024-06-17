@@ -9,13 +9,13 @@ import '../../widgets/main_error_text.dart';
 import '../../widgets/time_is_empty.dart';
 import '../items/task_item.dart';
 
-class SeasonTaskContainer extends StatelessWidget {
-  const SeasonTaskContainer({super.key});
+class YearTaskList extends StatelessWidget {
+  const YearTaskList({super.key});
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<TaskEntity>>(
-      future: Provider.of<TaskDataState>(context).getTasksByMode(taskMode: TaskMode.season, orderBy: 'task_id DESC'),
+      future: Provider.of<TaskDataState>(context).getTasksByMode(taskMode: TaskMode.year, orderBy: 'task_id DESC'),
       builder: (context, snapshot) {
         if (snapshot.hasData && snapshot.data!.isNotEmpty) {
           return ListView.builder(

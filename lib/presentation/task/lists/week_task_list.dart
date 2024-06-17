@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:plado/presentation/iu/android/task/items/task_item.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../core/enums/task/task_mode.dart';
@@ -8,14 +7,15 @@ import '../../../../../data/state/task_data_state.dart';
 import '../../../../../domain/entities/task_entity.dart';
 import '../../widgets/main_error_text.dart';
 import '../../widgets/time_is_empty.dart';
+import '../items/task_item.dart';
 
-class DayTaskContainer extends StatelessWidget {
-  const DayTaskContainer({super.key});
+class WeekTaskList extends StatelessWidget {
+  const WeekTaskList({super.key});
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<TaskEntity>>(
-      future: Provider.of<TaskDataState>(context).getTasksByMode(taskMode: TaskMode.day, orderBy: 'task_id DESC'),
+      future: Provider.of<TaskDataState>(context).getTasksByMode(taskMode: TaskMode.week, orderBy: 'task_id DESC'),
       builder: (context, snapshot) {
         if (snapshot.hasData && snapshot.data!.isNotEmpty) {
           return ListView.builder(
