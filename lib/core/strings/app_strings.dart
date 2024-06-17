@@ -2,8 +2,13 @@ class AppStrings {
   static const String appName = 'PlaDo';
 
   static const String sortTasks = 'Сортировка задач';
+  static const String sortHabits = 'Сортировка привычек';
+  static const String order = 'Порядок';
+  static const String firstNew = 'Сначала новые (А-Я)';
+  static const String firstOld = 'Сначала старые (Я-А)';
 
   static const String sortByAddTime = 'По дате добавления';
+  static const String sortTitle = 'По названию';
   static const String sortByPriority = 'По приоритету';
   static const String sortByColor = 'По цвету';
 

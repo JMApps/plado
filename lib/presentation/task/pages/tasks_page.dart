@@ -8,6 +8,7 @@ import '../lists/month_task_list.dart';
 import '../lists/season_task_list.dart';
 import '../lists/week_task_list.dart';
 import '../lists/year_task_list.dart';
+import '../widgets/sort_bottom_sheet.dart';
 
 class TasksPage extends StatefulWidget {
   const TasksPage({super.key});
@@ -36,6 +37,19 @@ class _TasksPageState extends State<TasksPage> with TickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         title: const Text(AppStrings.appName),
+        actions: [
+          IconButton(
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                builder: (_) => const SortBottomSheet(),
+              );
+            },
+            tooltip: AppStrings.sortTasks,
+            icon: const Icon(Icons.sort),
+          ),
+        ],
         bottom: TabBar(
           controller: _tabController,
           labelPadding: AppStyles.paddingHorVerMini,
@@ -52,13 +66,6 @@ class _TasksPageState extends State<TasksPage> with TickerProviderStateMixin {
             Text(AppStrings.year),
           ],
         ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            tooltip: AppStrings.sortTasks,
-            icon: const Icon(Icons.sort),
-          ),
-        ],
       ),
       body: TabBarView(
         controller: _tabController,

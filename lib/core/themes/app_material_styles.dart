@@ -8,7 +8,11 @@ class AppMaterialStyles {
     ),
     appBarTheme: const AppBarTheme(
       centerTitle: true,
-    )
+    ),
+    bottomSheetTheme: const BottomSheetThemeData(
+      showDragHandle: true,
+      dragHandleSize: Size(48, 3),
+    ),
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -18,6 +22,10 @@ class AppMaterialStyles {
     ),
     appBarTheme: const AppBarTheme(
       centerTitle: true,
-    )
+    ),
+    bottomSheetTheme: const BottomSheetThemeData(
+      showDragHandle: true,
+      dragHandleSize: Size(48, 3),
+    ),
   );
 }

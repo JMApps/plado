@@ -32,8 +32,14 @@ class AppStyles {
   static const paddingLeft = EdgeInsets.only(left: 16);
   static const paddingLeftMini = EdgeInsets.only(left: 8);
 
+  static const paddingWithoutTop = EdgeInsets.only(left: 16, right: 16, bottom: 16);
+  static const paddingWithoutTopMini = EdgeInsets.only(left: 8, right: 8, bottom: 16);
+
   static const border = BorderRadius.all(Radius.circular(16));
   static const borderMini = BorderRadius.all(Radius.circular(8));
+
+  static const shape = RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16)));
+  static const shapeMini = RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8)));
 
   static const mainPages = <Widget>[
     TasksPage(),
