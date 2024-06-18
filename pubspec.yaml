@@ -34,3 +34,8 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+
+  fonts:
+    - family: 'Raleway'
+      fonts:
+        - asset: assets/fonts/raleway_regular.ttf
