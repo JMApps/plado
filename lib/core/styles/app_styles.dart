@@ -36,6 +36,9 @@ class AppStyles {
   static const paddingWithoutTop = EdgeInsets.only(left: 16, right: 16, bottom: 16);
   static const paddingWithoutTopMini = EdgeInsets.only(left: 8, right: 8, bottom: 16);
 
+  static const paddingWithoutBottom = EdgeInsets.only(left: 16, right: 16, top: 16);
+  static const paddingWithoutBottomMini = EdgeInsets.only(left: 8, right: 8, top: 16);
+
   static const border = BorderRadius.all(Radius.circular(16));
   static const borderMini = BorderRadius.all(Radius.circular(8));
 
@@ -69,5 +72,11 @@ class AppStyles {
     Colors.teal,
     Colors.pink,
     Colors.lime,
+  ];
+
+  static const priorityColors = <Color>[
+    Colors.transparent,
+    Colors.amber,
+    Colors.red,
   ];
 }
