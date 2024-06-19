@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plado/core/styles/app_styles.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../core/strings/app_strings.dart';
@@ -18,12 +19,13 @@ class DayTaskList extends StatelessWidget {
     final sortState = Provider.of<TaskSortState>(context);
     return FutureBuilder<List<TaskEntity>>(
       future: Provider.of<TaskDataState>(context).getTasksByMode(
-        taskPeriod: TaskPeriod.day,
+        taskPeriod: TaskPeriod.day.name,
         orderBy: '${sortState.getSort} ${sortState.getOrder}',
       ),
       builder: (context, snapshot) {
         if (snapshot.hasData && snapshot.data!.isNotEmpty) {
           return ListView.builder(
+            padding: AppStyles.paddingMini,
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
               final TaskEntity taskModel = snapshot.data![index];

@@ -5,6 +5,7 @@ import '../../../../../core/strings/app_strings.dart';
 import '../../../../../data/state/task_data_state.dart';
 import '../../../../../domain/entities/task_entity.dart';
 import '../../../core/enums/task_period.dart';
+import '../../../core/styles/app_styles.dart';
 import '../../state/task_sort_state.dart';
 import '../../widgets/main_error_text.dart';
 import '../../widgets/time_is_empty.dart';
@@ -18,12 +19,13 @@ class MonthTaskList extends StatelessWidget {
     final sortState = Provider.of<TaskSortState>(context);
     return FutureBuilder<List<TaskEntity>>(
       future: Provider.of<TaskDataState>(context).getTasksByMode(
-        taskPeriod: TaskPeriod.month,
+        taskPeriod: TaskPeriod.month.name,
         orderBy: '${sortState.getSort} ${sortState.getOrder}',
       ),
       builder: (context, snapshot) {
         if (snapshot.hasData && snapshot.data!.isNotEmpty) {
           return ListView.builder(
+            padding: AppStyles.paddingMini,
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
               final TaskEntity taskModel = snapshot.data![index];
