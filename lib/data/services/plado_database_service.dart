@@ -39,18 +39,17 @@ class PladoDatabaseService {
 
   void _createDb(Database db, int version) async {
     await db.execute('''
-      CREATE VIRTUAL TABLE IF NOT EXISTS Table_of_tasks USING FTS4 (
+      CREATE TABLE Table_of_tasks (
         task_id INTEGER PRIMARY KEY AUTOINCREMENT,
         task_title TEXT,
         task_description TEXT,
         start_date_time TEXT,
         end_date_time TEXT,
         task_period TEXT,
-        task_priority TEXT,
+        task_priority_index INT,
         task_status TEXT,
-        task_color INTEGER,
-        task_tags TEXT
-      );
+        task_color_index INTEGER
+        );
     ''');
 
     await db.execute('''
@@ -62,7 +61,7 @@ class PladoDatabaseService {
         end_date_time TEXT,
         habit_period TEXT,
         completed_days TEXT
-      );
+        );
     ''');
   }
 }

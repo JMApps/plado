@@ -5,7 +5,9 @@ import 'package:provider/provider.dart';
 import '../../../../../core/strings/app_strings.dart';
 import '../../../core/enums/task_period.dart';
 import '../../../core/enums/task_priority.dart';
+import '../../../core/enums/task_status.dart';
 import '../../../core/styles/app_styles.dart';
+import '../../../data/state/task_data_state.dart';
 import '../../state/task_color_state.dart';
 import '../../state/task_period_state.dart';
 import '../../state/task_priority_state.dart';
@@ -55,6 +57,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
               TextField(
                 controller: _taskTextController,
                 autofocus: true,
+                textInputAction: TextInputAction.next,
                 decoration: const InputDecoration(
                   hintText: AppStrings.taskHint,
                 ),
@@ -62,6 +65,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
               const SizedBox(height: 16),
               TextField(
                 controller: _taskTextDescController,
+                textInputAction: TextInputAction.done,
                 decoration: const InputDecoration(
                   hintText: AppStrings.taskDescription,
                 ),
@@ -127,7 +131,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         },
                         child: CircleAvatar(
                           backgroundColor: AppStyles.tashabColors[index].withOpacity(theme.brightness == Brightness.light ? 1 : 0.5),
-                          child: taskColorState.getColorIndex == index ? const Icon(Icons.check_rounded, color: Colors.black,) : const SizedBox(),
+                          child: taskColorState.getColorIndex == index ? const Icon(Icons.check_rounded, color: Colors.black) : const SizedBox(),
                         ),
                       );
                     },
@@ -135,14 +139,33 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 },
               ),
               const SizedBox(height: 16),
-              OutlinedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text(
-                  AppStrings.add,
-                  style: TextStyle(fontSize: 18),
-                ),
+              Builder(
+                builder: (context) {
+                  return OutlinedButton(
+                    onPressed: () {
+                      if (_taskTextController.text.trim().isNotEmpty) {
+                        Navigator.of(context).pop();
+                        final Map<String, dynamic> taskMap = {
+                          'task_title': _taskTextController.text.trim(),
+                          'task_description': _taskTextDescController.text.trim(),
+                          'start_date_time': DateTime.now().toIso8601String(),
+                          'end_date_time': DateTime.now().toIso8601String(),
+                          'task_period': context.read<TaskPeriodState>().getTaskPeriod.name,
+                          'task_priority_index': context.read<TaskPriorityState>().getTaskPriority.index,
+                          'task_status': TaskStatus.inProgress.name,
+                          'task_color_index': context.read<TaskColorState>().getColorIndex,
+                        };
+                        context.read<TaskDataState>().createTask(taskMap: taskMap);
+                      } else {
+                        // Set edit text error
+                      }
+                    },
+                    child: const Text(
+                      AppStrings.add,
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  );
+                }
               ),
             ],
           ),

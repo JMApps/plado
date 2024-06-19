@@ -9,7 +9,6 @@ class MainBackButton extends StatelessWidget {
       onPressed: () {
         Navigator.of(context).pop();
       },
-      splashRadius: 20,
       icon: const Icon(
         Icons.arrow_back_ios_new_rounded,
       ),
