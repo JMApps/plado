@@ -1,6 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 
-import '../../core/enums/task/task_mode.dart';
+import '../../core/enums/task_period.dart';
 import '../../domain/entities/task_entity.dart';
 import '../../domain/repositories/task_repository.dart';
 import '../models/task_model.dart';
@@ -27,9 +27,9 @@ class TaskDataRepository implements TaskRepository {
   }
 
   @override
-  Future<List<TaskEntity>> getTasksByMode({required TaskMode taskMode, required String orderBy}) async {
+  Future<List<TaskEntity>> getTasksByMode({required TaskPeriod taskPeriod, required String orderBy}) async {
     final Database database = await _pladoDatabaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(_tasksTableName, where: 'task_mode = ?', whereArgs: [taskMode.toString()], orderBy: orderBy,);
+    final List<Map<String, Object?>> resources = await database.query(_tasksTableName, where: 'task_period = ?', whereArgs: [taskPeriod.toString()], orderBy: orderBy,);
     final List<TaskEntity> tasksByMode = resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
     return tasksByMode;
   }

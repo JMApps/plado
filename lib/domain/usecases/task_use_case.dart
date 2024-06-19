@@ -1,4 +1,6 @@
-import '../../core/enums/task/task_mode.dart';
+
+import 'package:plado/core/enums/task_period.dart';
+
 import '../../core/strings/app_exception_messages.dart';
 import '../entities/task_entity.dart';
 import '../repositories/task_repository.dart';
@@ -24,9 +26,9 @@ class TaskUseCase {
     }
   }
 
-  Future<List<TaskEntity>> getTasksByMode({required TaskMode taskMode, required String orderBy}) async {
+  Future<List<TaskEntity>> getTasksByMode({required TaskPeriod taskPeriod, required String orderBy}) async {
     try {
-      return await _taskRepository.getTasksByMode(taskMode: taskMode, orderBy: orderBy);
+      return await _taskRepository.getTasksByMode(taskPeriod: taskPeriod, orderBy: orderBy);
     } catch (e) {
       throw Exception('${AppExceptionMessages.getTasksByModeException} $e');
     }

@@ -1,6 +1,6 @@
-import '../../core/enums/task/task_mode.dart';
-import '../../core/enums/task/task_priority.dart';
-import '../../core/enums/task/task_status.dart';
+import '../../core/enums/task_period.dart';
+import '../../core/enums/task_priority.dart';
+import '../../core/enums/task_status.dart';
 import '../../core/strings/app_exception_messages.dart';
 import '../../data/models/task_model.dart';
 
@@ -10,7 +10,7 @@ class TaskEntity {
   final String? taskDescription;
   final DateTime startDateTime;
   final DateTime endDateTime;
-  final TaskMode taskMode;
+  final TaskPeriod taskPeriod;
   final TaskPriority taskPriority;
   final TaskStatus taskStatus;
   final int taskColor;
@@ -22,7 +22,7 @@ class TaskEntity {
     required this.taskDescription,
     required this.startDateTime,
     required this.endDateTime,
-    required this.taskMode,
+    required this.taskPeriod,
     required this.taskPriority,
     required this.taskStatus,
     required this.taskColor,
@@ -40,7 +40,7 @@ class TaskEntity {
       taskDescription: model.taskDescription,
       startDateTime: model.startDateTime,
       endDateTime: model.endDateTime,
-      taskMode: model.taskMode,
+      taskPeriod: model.taskPeriod,
       taskPriority: model.taskPriority,
       taskStatus: model.taskStatus,
       taskColor: model.taskColor,

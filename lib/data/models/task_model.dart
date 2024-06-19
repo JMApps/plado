@@ -1,6 +1,6 @@
-import '../../core/enums/task/task_mode.dart';
-import '../../core/enums/task/task_priority.dart';
-import '../../core/enums/task/task_status.dart';
+import '../../core/enums/task_period.dart';
+import '../../core/enums/task_priority.dart';
+import '../../core/enums/task_status.dart';
 import '../../core/strings/app_exception_messages.dart';
 
 class TaskModel {
@@ -9,7 +9,7 @@ class TaskModel {
   final String? taskDescription;
   final DateTime startDateTime;
   final DateTime endDateTime;
-  final TaskMode taskMode;
+  final TaskPeriod taskPeriod;
   final TaskPriority taskPriority;
   final TaskStatus taskStatus;
   final int taskColor;
@@ -21,7 +21,7 @@ class TaskModel {
     required this.taskDescription,
     required this.startDateTime,
     required this.endDateTime,
-    required this.taskMode,
+    required this.taskPeriod,
     required this.taskPriority,
     required this.taskStatus,
     required this.taskColor,
@@ -39,7 +39,7 @@ class TaskModel {
       taskDescription: map['task_description'] as String?,
       startDateTime: DateTime.parse(map['start_date_time'] as String),
       endDateTime: DateTime.parse(map['end_date_time'] as String),
-      taskMode: map['task_mode'] as TaskMode,
+      taskPeriod: map['task_period'] as TaskPeriod,
       taskPriority: map['task_priority'] as TaskPriority,
       taskStatus: map['task_status'] as TaskStatus,
       taskColor: map['task_color'] as int,
@@ -53,7 +53,7 @@ class TaskModel {
       'task_description': taskDescription,
       'start_date_time': startDateTime.toIso8601String(),
       'end_date_time': endDateTime.toIso8601String(),
-      'task_mode': taskMode,
+      'task_period': taskPeriod,
       'task_priority': taskPriority,
       'task_status': taskStatus,
       'task_color': taskColor,

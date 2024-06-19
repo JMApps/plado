@@ -77,7 +77,7 @@ class _TasksPageState extends State<TasksPage> with TickerProviderStateMixin {
           YearTaskList(),
         ],
       ),
-      floatingActionButton: const FabAddTask(),
+      floatingActionButton: FabAddTask(timeModeIndex: _tabController.index,),
     );
   }
 }

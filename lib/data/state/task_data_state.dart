@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../core/enums/task/task_mode.dart';
+import '../../core/enums/task_period.dart';
 import '../../domain/entities/task_entity.dart';
 import '../../domain/usecases/task_use_case.dart';
 import '../repositories/task_data_repository.dart';
@@ -16,8 +16,8 @@ class TaskDataState extends ChangeNotifier {
     return await _taskUseCase.getTaskById(taskId: taskId);
   }
 
-  Future<List<TaskEntity>> getTasksByMode({required TaskMode taskMode, required String orderBy}) async {
-    return await _taskUseCase.getTasksByMode(taskMode: taskMode, orderBy: orderBy);
+  Future<List<TaskEntity>> getTasksByMode({required TaskPeriod taskPeriod, required String orderBy}) async {
+    return await _taskUseCase.getTasksByMode(taskPeriod: taskPeriod, orderBy: orderBy);
   }
 
   Future<List<TaskEntity>> searchTasks({required String searchQuery}) async {

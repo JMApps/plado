@@ -1,4 +1,4 @@
-enum TaskMode {
+enum TaskPeriod {
   day,
   week,
   month,
