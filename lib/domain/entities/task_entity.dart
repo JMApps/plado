@@ -1,20 +1,16 @@
-import '../../core/enums/task_period.dart';
-import '../../core/enums/task_priority.dart';
-import '../../core/enums/task_status.dart';
 import '../../core/strings/app_exception_messages.dart';
 import '../../data/models/task_model.dart';
 
 class TaskEntity {
   final int taskId;
   final String taskTitle;
-  final String? taskDescription;
+  final String taskDescription;
   final DateTime startDateTime;
   final DateTime endDateTime;
-  final TaskPeriod taskPeriod;
-  final TaskPriority taskPriority;
-  final TaskStatus taskStatus;
-  final int taskColor;
-  final List<String> taskTags;
+  final String taskPeriod;
+  final int taskPriorityIndex;
+  final String taskStatus;
+  final int taskColorIndex;
 
   TaskEntity({
     required this.taskId,
@@ -23,10 +19,9 @@ class TaskEntity {
     required this.startDateTime,
     required this.endDateTime,
     required this.taskPeriod,
-    required this.taskPriority,
+    required this.taskPriorityIndex,
     required this.taskStatus,
-    required this.taskColor,
-    required this.taskTags,
+    required this.taskColorIndex,
   }) {
     if (startDateTime.isAfter(endDateTime)) {
       throw ArgumentError(AppExceptionMessages.dateIsAfterException);
@@ -41,10 +36,9 @@ class TaskEntity {
       startDateTime: model.startDateTime,
       endDateTime: model.endDateTime,
       taskPeriod: model.taskPeriod,
-      taskPriority: model.taskPriority,
+      taskPriorityIndex: model.taskPriorityIndex,
       taskStatus: model.taskStatus,
-      taskColor: model.taskColor,
-      taskTags: model.taskTags,
+      taskColorIndex: model.taskColorIndex,
     );
   }
 }

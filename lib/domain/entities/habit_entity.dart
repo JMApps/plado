@@ -1,13 +1,12 @@
-import '../../core/enums/habit_period.dart';
 import '../../data/models/habit_model.dart';
 
 class HabitEntity {
   final int habitId;
   final String habitTitle;
-  final String? habitDescription;
+  final String habitDescription;
   final DateTime startDateTime;
   final DateTime endDateTime;
-  final HabitPeriod habitPeriod;
+  final String habitPeriod;
   final List<bool> completedDays;
 
   HabitEntity({

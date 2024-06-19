@@ -1,19 +1,15 @@
-import '../../core/enums/task_period.dart';
-import '../../core/enums/task_priority.dart';
-import '../../core/enums/task_status.dart';
 import '../../core/strings/app_exception_messages.dart';
 
 class TaskModel {
   final int taskId;
   final String taskTitle;
-  final String? taskDescription;
+  final String taskDescription;
   final DateTime startDateTime;
   final DateTime endDateTime;
-  final TaskPeriod taskPeriod;
-  final TaskPriority taskPriority;
-  final TaskStatus taskStatus;
-  final int taskColor;
-  final List<String> taskTags;
+  final String taskPeriod;
+  final int taskPriorityIndex;
+  final String taskStatus;
+  final int taskColorIndex;
 
   TaskModel({
     required this.taskId,
@@ -22,10 +18,9 @@ class TaskModel {
     required this.startDateTime,
     required this.endDateTime,
     required this.taskPeriod,
-    required this.taskPriority,
+    required this.taskPriorityIndex,
     required this.taskStatus,
-    required this.taskColor,
-    required this.taskTags,
+    required this.taskColorIndex,
   }) {
     if (startDateTime.isAfter(endDateTime)) {
       throw ArgumentError(AppExceptionMessages.dateIsAfterException);
@@ -36,14 +31,13 @@ class TaskModel {
     return TaskModel(
       taskId: map['task_id'] as int,
       taskTitle: map['task_title'] as String,
-      taskDescription: map['task_description'] as String?,
+      taskDescription: map['task_description'] as String,
       startDateTime: DateTime.parse(map['start_date_time'] as String),
       endDateTime: DateTime.parse(map['end_date_time'] as String),
-      taskPeriod: map['task_period'] as TaskPeriod,
-      taskPriority: map['task_priority'] as TaskPriority,
-      taskStatus: map['task_status'] as TaskStatus,
-      taskColor: map['task_color'] as int,
-      taskTags: map['task_tags'] as List<String>,
+      taskPeriod: map['task_period'] as String,
+      taskPriorityIndex: map['task_priority_index'] as int,
+      taskStatus: map['task_status'] as String,
+      taskColorIndex: map['task_color_index'] as int,
     );
   }
 
@@ -54,10 +48,9 @@ class TaskModel {
       'start_date_time': startDateTime.toIso8601String(),
       'end_date_time': endDateTime.toIso8601String(),
       'task_period': taskPeriod,
-      'task_priority': taskPriority,
+      'task_priority_index': taskPriorityIndex,
       'task_status': taskStatus,
-      'task_color': taskColor,
-      'task_tags': taskTags,
+      'task_color_index': taskColorIndex,
     };
   }
 }

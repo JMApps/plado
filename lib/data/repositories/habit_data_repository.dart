@@ -34,16 +34,16 @@ class HabitDataRepository implements HabitRepository {
   }
 
   @override
-  Future<int> createHabit({required Map<String, dynamic> habit}) async {
+  Future<int> createHabit({required Map<String, dynamic> habitMap}) async {
     final Database database = await _pladoDatabaseService.db;
-    final int createHabit = await database.insert(_tasksTableName, habit, conflictAlgorithm: ConflictAlgorithm.ignore);
+    final int createHabit = await database.insert(_tasksTableName, habitMap, conflictAlgorithm: ConflictAlgorithm.ignore);
     return createHabit;
   }
 
   @override
-  Future<int> updateHabit({required Map<String, dynamic> habit, required int habitId}) async {
+  Future<int> updateHabit({required Map<String, dynamic> habitMap, required int habitId}) async {
     final Database database = await _pladoDatabaseService.db;
-    final int updateHabit = await database.update(_tasksTableName, habit, where: 'habit_id = ?', whereArgs: [habitId], conflictAlgorithm: ConflictAlgorithm.ignore);
+    final int updateHabit = await database.update(_tasksTableName, habitMap, where: 'habit_id = ?', whereArgs: [habitId], conflictAlgorithm: ConflictAlgorithm.ignore);
     return updateHabit;
   }
 

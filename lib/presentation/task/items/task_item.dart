@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/styles/app_styles.dart';
 import '../../../../../domain/entities/task_entity.dart';
+import '../../../core/styles/app_styles.dart';
 
 class TaskItem extends StatelessWidget {
   const TaskItem({
@@ -15,13 +15,29 @@ class TaskItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: AppStyles.paddingMini,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(taskModel.taskTitle),
-        ],
+    return Padding(
+      padding: AppStyles.paddingBottomMini,
+      child: ListTile(
+        onTap: () {},
+        shape: AppStyles.shapeMini,
+        visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+        contentPadding: AppStyles.paddingRight,
+        horizontalTitleGap: 8,
+        tileColor: AppStyles.priorityColors[taskModel.taskPriorityIndex].withOpacity(0.05),
+        leading: Checkbox(
+          value: false,
+          onChanged: (bool? onChanged) {},
+        ),
+        trailing: Icon(
+          Icons.circle,
+          color: AppStyles.tashabColors[taskModel.taskColorIndex],
+          size: 15,
+        ),
+        title: Text(
+          taskModel.taskTitle,
+          style: const TextStyle(fontSize: 18),
+        ),
+        subtitle: Text(taskModel.taskDescription),
       ),
     );
   }

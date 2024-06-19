@@ -7,9 +7,9 @@ abstract class HabitRepository {
 
   Future<List<HabitEntity>> searchHabits({required String searchQuery});
 
-  Future<int> createHabit({required Map<String, dynamic> habit});
+  Future<int> createHabit({required Map<String, dynamic> habitMap});
 
-  Future<int> updateHabit({required Map<String, dynamic> habit, required int habitId});
+  Future<int> updateHabit({required Map<String, dynamic> habitMap, required int habitId});
 
   Future<int> deleteHabit({required int habitId});
 }

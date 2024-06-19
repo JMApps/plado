@@ -1,6 +1,5 @@
 import 'package:sqflite/sqflite.dart';
 
-import '../../core/enums/task_period.dart';
 import '../../domain/entities/task_entity.dart';
 import '../../domain/repositories/task_repository.dart';
 import '../models/task_model.dart';
@@ -21,15 +20,15 @@ class TaskDataRepository implements TaskRepository {
   @override
   Future<TaskEntity> getTaskById({required int taskId}) async {
     final Database database = await _pladoDatabaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(_tasksTableName, where: 'task_id = ?', whereArgs: [taskId],);
+    final List<Map<String, Object?>> resources = await database.query(_tasksTableName, where: 'task_id = ?', whereArgs: [taskId]);
     final TaskEntity? taskById = resources.isNotEmpty ? TaskEntity.fromModel(TaskModel.fromMap(resources.first)) : null;
     return taskById!;
   }
 
   @override
-  Future<List<TaskEntity>> getTasksByMode({required TaskPeriod taskPeriod, required String orderBy}) async {
+  Future<List<TaskEntity>> getTasksByMode({required String taskPeriod, required String orderBy}) async {
     final Database database = await _pladoDatabaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(_tasksTableName, where: 'task_period = ?', whereArgs: [taskPeriod.toString()], orderBy: orderBy,);
+    final List<Map<String, Object?>> resources = await database.query(_tasksTableName, where: 'task_period = ?', whereArgs: [taskPeriod], orderBy: orderBy);
     final List<TaskEntity> tasksByMode = resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
     return tasksByMode;
   }
@@ -37,29 +36,29 @@ class TaskDataRepository implements TaskRepository {
   @override
   Future<List<TaskEntity>> searchTasks({required String searchQuery}) async {
     final Database database = await _pladoDatabaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(_tasksTableName, where: 'task_title MATCH ? OR task_description MATCH ?', whereArgs: [searchQuery, searchQuery],);
+    final List<Map<String, Object?>> resources = await database.query(_tasksTableName, where: 'task_title LIKE ? OR task_description LIKE ?', whereArgs: [searchQuery, searchQuery]);
     final List<TaskEntity> searchResult = resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
     return searchResult;
   }
 
   @override
-  Future<int> createTask({required Map<String, dynamic> task}) async {
+  Future<int> createTask({required Map<String, dynamic> taskMap}) async {
     final Database database = await _pladoDatabaseService.db;
-    final int taskId = await database.insert(_tasksTableName, task, conflictAlgorithm: ConflictAlgorithm.ignore,);
+    final int taskId = await database.insert(_tasksTableName, taskMap, conflictAlgorithm: ConflictAlgorithm.ignore);
     return taskId;
   }
 
   @override
-  Future<int> updateTask({required Map<String, dynamic> task, required int taskId}) async {
+  Future<int> updateTask({required Map<String, dynamic> taskMap, required int taskId}) async {
     final Database database = await _pladoDatabaseService.db;
-    final int rowsAffected = await database.update(_tasksTableName, task, where: 'task_id = ?', whereArgs: [taskId], conflictAlgorithm: ConflictAlgorithm.ignore,);
+    final int rowsAffected = await database.update(_tasksTableName, taskMap, where: 'task_id = ?', whereArgs: [taskId], conflictAlgorithm: ConflictAlgorithm.ignore);
     return rowsAffected;
   }
 
   @override
   Future<int> deleteTask({required int taskId}) async {
     final Database database = await _pladoDatabaseService.db;
-    final int rowsDeleted = await database.delete(_tasksTableName, where: 'task_id = ?', whereArgs: [taskId],);
+    final int rowsDeleted = await database.delete(_tasksTableName, where: 'task_id = ?', whereArgs: [taskId]);
     return rowsDeleted;
   }
 }

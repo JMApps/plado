@@ -1,6 +1,3 @@
-
-import 'package:plado/core/enums/task_period.dart';
-
 import '../entities/task_entity.dart';
 
 abstract class TaskRepository {
@@ -8,13 +5,13 @@ abstract class TaskRepository {
 
   Future<TaskEntity> getTaskById({required int taskId});
 
-  Future<List<TaskEntity>> getTasksByMode({required TaskPeriod taskPeriod, required String orderBy});
+  Future<List<TaskEntity>> getTasksByMode({required String taskPeriod, required String orderBy});
 
   Future<List<TaskEntity>> searchTasks({required String searchQuery});
 
-  Future<int> createTask({required Map<String, dynamic> task});
+  Future<int> createTask({required Map<String, dynamic> taskMap});
 
-  Future<int> updateTask({required Map<String, dynamic> task, required int taskId});
+  Future<int> updateTask({required Map<String, dynamic> taskMap, required int taskId});
 
   Future<int> deleteTask({required int taskId});
 }

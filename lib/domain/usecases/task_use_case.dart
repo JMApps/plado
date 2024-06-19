@@ -1,6 +1,3 @@
-
-import 'package:plado/core/enums/task_period.dart';
-
 import '../../core/strings/app_exception_messages.dart';
 import '../entities/task_entity.dart';
 import '../repositories/task_repository.dart';
@@ -26,7 +23,7 @@ class TaskUseCase {
     }
   }
 
-  Future<List<TaskEntity>> getTasksByMode({required TaskPeriod taskPeriod, required String orderBy}) async {
+  Future<List<TaskEntity>> getTasksByMode({required String taskPeriod, required String orderBy}) async {
     try {
       return await _taskRepository.getTasksByMode(taskPeriod: taskPeriod, orderBy: orderBy);
     } catch (e) {
@@ -42,17 +39,17 @@ class TaskUseCase {
     }
   }
 
-  Future<int> createTask({required Map<String, dynamic> task}) async {
+  Future<int> createTask({required Map<String, dynamic> taskMap}) async {
     try {
-      return await _taskRepository.createTask(task: task);
+      return await _taskRepository.createTask(taskMap: taskMap);
     } catch (e) {
       throw Exception('${AppExceptionMessages.createTaskException} $e');
     }
   }
 
-  Future<int> updateTask({required Map<String, dynamic> task, required int taskId}) async {
+  Future<int> updateTask({required Map<String, dynamic> taskMap, required int taskId}) async {
     try {
-      return await _taskRepository.updateTask(task: task, taskId: taskId);
+      return await _taskRepository.updateTask(taskMap: taskMap, taskId: taskId);
     } catch (e) {
       throw Exception('${AppExceptionMessages.updateTaskException} $e');
     }

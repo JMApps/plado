@@ -1,12 +1,12 @@
-import '../../core/enums/habit_period.dart';
+
 
 class HabitModel {
   final int habitId;
   final String habitTitle;
-  final String? habitDescription;
+  final String habitDescription;
   final DateTime startDateTime;
   final DateTime endDateTime;
-  final HabitPeriod habitPeriod;
+  final String habitPeriod;
   final List<bool> completedDays;
 
   HabitModel({
@@ -23,10 +23,10 @@ class HabitModel {
     return HabitModel(
       habitId: map['habit_id'] as int,
       habitTitle: map['habit_title'] as String,
-      habitDescription: map['habit_description'] as String?,
+      habitDescription: map['habit_description'] as String,
       startDateTime: DateTime.parse(map['start_date_time'] as String),
       endDateTime: DateTime.parse(map['end_date_time'] as String),
-      habitPeriod: map['habit_period'] as HabitPeriod,
+      habitPeriod: map['habit_period'] as String,
       completedDays: (map['complete_days'] as List<dynamic>).map((e) => e as bool).toList(),
     );
   }

@@ -31,17 +31,17 @@ class HabitUseCase {
     }
   }
 
-  Future<int> createHabit({required Map<String, dynamic> habit}) async {
+  Future<int> createHabit({required Map<String, dynamic> habitMap}) async {
     try {
-      return await _habitRepository.createHabit(habit: habit);
+      return await _habitRepository.createHabit(habitMap: habitMap);
     } catch (e) {
       throw Exception('${AppExceptionMessages.createHabitException} $e');
     }
   }
 
-  Future<int> updateHabit({required Map<String, dynamic> habit, required int habitId}) async {
+  Future<int> updateHabit({required Map<String, dynamic> habitMap, required int habitId}) async {
     try {
-      return await _habitRepository.updateHabit(habit: habit, habitId: habitId);
+      return await _habitRepository.updateHabit(habitMap: habitMap, habitId: habitId);
     } catch (e) {
       throw Exception('${AppExceptionMessages.updateHabitException} $e');
     }
