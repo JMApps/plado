@@ -5,6 +5,7 @@ import '../../presentation/task/pages/graphics_page.dart';
 import '../../presentation/task/pages/habits_page.dart';
 import '../../presentation/task/pages/settings_page.dart';
 import '../../presentation/task/pages/tasks_page.dart';
+import '../enums/task_period.dart';
 
 class AppStyles {
   static const padding = EdgeInsets.all(16);
@@ -47,5 +48,26 @@ class AppStyles {
     GraphicsPage(),
     SettingsPage(),
     AboutUsPage(),
+  ];
+
+  static const taskModeList = <TaskPeriod>[
+    TaskPeriod.day,
+    TaskPeriod.week,
+    TaskPeriod.month,
+    TaskPeriod.season,
+    TaskPeriod.year,
+  ];
+
+  static const tashabColors = <Color>[
+    Colors.amber,
+    Colors.green,
+    Colors.blue,
+    Colors.brown,
+    Colors.cyan,
+    Colors.red,
+    Colors.purple,
+    Colors.teal,
+    Colors.pink,
+    Colors.lime,
   ];
 }
