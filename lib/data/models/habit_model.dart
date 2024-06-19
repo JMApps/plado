@@ -1,4 +1,4 @@
-import '../../core/enums/habit/habit_period.dart';
+import '../../core/enums/habit_period.dart';
 
 class HabitModel {
   final int habitId;

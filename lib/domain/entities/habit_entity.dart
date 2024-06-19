@@ -1,6 +1,5 @@
-import 'package:plado/data/models/habit_model.dart';
-
-import '../../core/enums/habit/habit_period.dart';
+import '../../core/enums/habit_period.dart';
+import '../../data/models/habit_model.dart';
 
 class HabitEntity {
   final int habitId;

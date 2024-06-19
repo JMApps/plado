@@ -22,23 +22,48 @@ class HomePage extends StatelessWidget {
         items: [
           SalomonBottomBarItem(
             icon: const Icon(Icons.add_alarm_outlined),
-            title: const Text(AppStrings.tasks),
+            title: const Text(
+              AppStrings.tasks,
+              style: TextStyle(
+                fontFamily: 'Raleway',
+              ),
+            ),
           ),
           SalomonBottomBarItem(
             icon: const Icon(Icons.task_alt_rounded),
-            title: const Text(AppStrings.habits),
+            title: const Text(
+              AppStrings.habits,
+              style: TextStyle(
+                fontFamily: 'Raleway',
+              ),
+            ),
           ),
           SalomonBottomBarItem(
             icon: const Icon(Icons.auto_graph),
-            title: const Text(AppStrings.graphics),
+            title: const Text(
+              AppStrings.graphics,
+              style: TextStyle(
+                fontFamily: 'Raleway',
+              ),
+            ),
           ),
           SalomonBottomBarItem(
             icon: const Icon(Icons.settings),
-            title: const Text(AppStrings.settings),
+            title: const Text(
+              AppStrings.settings,
+              style: TextStyle(
+                fontFamily: 'Raleway',
+              ),
+            ),
           ),
           SalomonBottomBarItem(
             icon: const Icon(Icons.info_outline),
-            title: const Text(AppStrings.aboutUs),
+            title: const Text(
+              AppStrings.aboutUs,
+              style: TextStyle(
+                fontFamily: 'Raleway',
+              ),
+            ),
           ),
         ],
       ),

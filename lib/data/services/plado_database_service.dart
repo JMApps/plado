@@ -45,7 +45,7 @@ class PladoDatabaseService {
         task_description TEXT,
         start_date_time TEXT,
         end_date_time TEXT,
-        task_mode TEXT,
+        task_period TEXT,
         task_priority TEXT,
         task_status TEXT,
         task_color INTEGER,
