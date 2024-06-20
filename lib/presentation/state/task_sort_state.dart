@@ -19,10 +19,10 @@ class TaskSortState extends ChangeNotifier {
         _sort = 'task_title';
         break;
       case 2:
-        _sort = 'task_priority';
+        _sort = 'task_priority_index';
         break;
       case 3:
-        _sort = 'task_color';
+        _sort = 'task_color_index';
         break;
       default:
         _sort = 'task_id';

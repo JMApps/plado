@@ -26,14 +26,6 @@ class HabitDataRepository implements HabitRepository {
   }
 
   @override
-  Future<List<HabitEntity>> searchHabits({required String searchQuery}) async {
-    final Database database = await _pladoDatabaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(_tasksTableName, where: 'habit_title LIKE ? OR habit_description LIKE ?', whereArgs: [searchQuery, searchQuery]);
-    final List<HabitEntity> searchResult = resources.isNotEmpty ? resources.map((e) => HabitEntity.fromModel(HabitModel.fromMap(e))).toList() : [];
-    return searchResult;
-  }
-
-  @override
   Future<int> createHabit({required Map<String, dynamic> habitMap}) async {
     final Database database = await _pladoDatabaseService.db;
     final int createHabit = await database.insert(_tasksTableName, habitMap, conflictAlgorithm: ConflictAlgorithm.ignore);

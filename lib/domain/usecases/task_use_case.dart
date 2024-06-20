@@ -31,14 +31,6 @@ class TaskUseCase {
     }
   }
 
-  Future<List<TaskEntity>> getSearchTasks({required String searchQuery}) async {
-    try {
-      return await _taskRepository.searchTasks(searchQuery: searchQuery);
-    } catch (e) {
-      throw Exception('${AppExceptionMessages.getSearchTasksException} $e');
-    }
-  }
-
   Future<int> createTask({required Map<String, dynamic> taskMap}) async {
     try {
       return await _taskRepository.createTask(taskMap: taskMap);

@@ -34,14 +34,6 @@ class TaskDataRepository implements TaskRepository {
   }
 
   @override
-  Future<List<TaskEntity>> searchTasks({required String searchQuery}) async {
-    final Database database = await _pladoDatabaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(_tasksTableName, where: 'task_title LIKE ? OR task_description LIKE ?', whereArgs: [searchQuery, searchQuery]);
-    final List<TaskEntity> searchResult = resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
-    return searchResult;
-  }
-
-  @override
   Future<int> createTask({required Map<String, dynamic> taskMap}) async {
     final Database database = await _pladoDatabaseService.db;
     final int taskId = await database.insert(_tasksTableName, taskMap, conflictAlgorithm: ConflictAlgorithm.ignore);

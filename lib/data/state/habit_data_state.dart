@@ -15,10 +15,6 @@ class HabitDataState extends ChangeNotifier {
     return await _habitUseCase.getHabitById(habitId: habitId);
   }
 
-  Future<List<HabitEntity>> searchHabits({required String searchQuery}) async {
-    return await _habitUseCase.getSearchHabits(searchQuery: searchQuery);
-  }
-
   Future<int> createHabit({required Map<String, dynamic> habitMap}) async {
     final int createHabit = await _habitUseCase.createHabit(habitMap: habitMap);
     notifyListeners();
