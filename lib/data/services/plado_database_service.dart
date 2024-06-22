@@ -42,13 +42,14 @@ class PladoDatabaseService {
       CREATE TABLE Table_of_tasks (
         task_id INTEGER PRIMARY KEY AUTOINCREMENT,
         task_title TEXT,
-        task_description TEXT,
         start_date_time TEXT,
         end_date_time TEXT,
         task_period TEXT,
         task_priority_index INT,
         task_status TEXT,
-        task_color_index INTEGER
+        task_color_index INTEGER,
+        remind_status INTEGER,
+        notification_id INTEGER
         );
     ''');
 
