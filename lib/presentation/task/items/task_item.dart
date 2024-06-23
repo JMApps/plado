@@ -35,9 +35,12 @@ class TaskItem extends StatelessWidget {
         ),
         title: Text(
           taskModel.taskTitle,
-          style: const TextStyle(fontSize: 18),
+          style: const TextStyle(
+            fontSize: 18,
+            overflow: TextOverflow.ellipsis,
+          ),
+          maxLines: 1,
         ),
-        subtitle: Text(taskModel.taskDescription),
       ),
     );
   }

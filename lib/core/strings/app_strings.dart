@@ -6,6 +6,7 @@ class AppStrings {
   static const String order = 'Порядок';
   static const String firstNew = 'Сначала новые (А-Я)';
   static const String firstOld = 'Сначала старые (Я-А)';
+  static const String remind = 'Напомнить';
 
   static const String sortByAddTime = 'По дате добавления';
   static const String sortTitle = 'По названию';
@@ -37,7 +38,6 @@ class AppStrings {
   static const String addTask = 'Добавить задачу';
   static const String addingTask = 'Добавление задачи';
   static const String taskHint = 'Название задачи';
-  static const String taskDescription = 'Описание задачи (необязательно)';
 
   static const String addFirstHabit = 'Добавьте первую привычку';
   static const String addHabit = 'Добавить привычку';

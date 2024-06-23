@@ -14,7 +14,7 @@ class PercentTime extends StatelessWidget {
     return Padding(
       padding: AppStyles.paddingWithoutBottomMini,
       child: LinearProgressIndicator(
-        backgroundColor: theme.colorScheme.inversePrimary.withOpacity(0.25),
+        backgroundColor: theme.colorScheme.error.withOpacity(0.25),
         valueColor: AlwaysStoppedAnimation<Color>(theme.colorScheme.outline.withOpacity(isLightTheme ? 1 : 0.5)),
         value: percentage / 100,
         borderRadius: BorderRadius.circular(25),
