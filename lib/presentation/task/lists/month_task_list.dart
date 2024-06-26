@@ -21,7 +21,7 @@ class MonthTaskList extends StatelessWidget {
     final sortState = Provider.of<TaskSortState>(context);
     return Column(
       children: [
-        PercentTime(percentage: Provider.of<RestTimesState>(context).calculateElapsedWeekPercentage()),
+        PercentTime(percentage: Provider.of<RestTimesState>(context).calculateElapsedMonthPercentage()),
         Expanded(
           child: FutureBuilder<List<TaskEntity>>(
             future: Provider.of<TaskDataState>(context).getTasksByMode(

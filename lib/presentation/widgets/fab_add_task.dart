@@ -17,7 +17,11 @@ class FabAddTask extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       child: const Icon(Icons.add),
       onPressed: () {
-        Navigator.pushNamed(context, NameRoutes.createTaskPage, arguments: AddTaskArgs(timeModeIndex: timeModeIndex));
+        Navigator.pushNamed(
+          context,
+          NameRoutes.createTaskPage,
+          arguments: AddTaskArgs(timeModeIndex: timeModeIndex),
+        );
       },
     );
   }

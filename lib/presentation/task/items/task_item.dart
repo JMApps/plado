@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../domain/entities/task_entity.dart';
 import '../../../core/styles/app_styles.dart';
@@ -41,6 +42,7 @@ class TaskItem extends StatelessWidget {
           ),
           maxLines: 1,
         ),
+        subtitle: Text(DateFormat('dd.MM.yyyy – HH:mm').format(taskModel.startDateTime)),
       ),
     );
   }

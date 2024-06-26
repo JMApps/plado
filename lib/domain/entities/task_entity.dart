@@ -10,7 +10,6 @@ class TaskEntity {
   final int taskPriorityIndex;
   final String taskStatus;
   final int taskColorIndex;
-  final int remindStatus;
   final int? notificationId;
 
   TaskEntity({
@@ -22,7 +21,6 @@ class TaskEntity {
     required this.taskPriorityIndex,
     required this.taskStatus,
     required this.taskColorIndex,
-    required this.remindStatus,
     required this.notificationId,
   }) {
     if (startDateTime.isAfter(endDateTime)) {
@@ -40,7 +38,6 @@ class TaskEntity {
       taskPriorityIndex: model.taskPriorityIndex,
       taskStatus: model.taskStatus,
       taskColorIndex: model.taskColorIndex,
-      remindStatus: model.remindStatus,
       notificationId: model.notificationId,
     );
   }

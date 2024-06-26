@@ -9,7 +9,6 @@ class TaskModel {
   final int taskPriorityIndex;
   final String taskStatus;
   final int taskColorIndex;
-  final int remindStatus;
   final int? notificationId;
 
   TaskModel({
@@ -21,7 +20,6 @@ class TaskModel {
     required this.taskPriorityIndex,
     required this.taskStatus,
     required this.taskColorIndex,
-    required this.remindStatus,
     required this.notificationId,
   }) {
     if (startDateTime.isAfter(endDateTime)) {
@@ -39,7 +37,6 @@ class TaskModel {
       taskPriorityIndex: map['task_priority_index'] as int,
       taskStatus: map['task_status'] as String,
       taskColorIndex: map['task_color_index'] as int,
-      remindStatus: map['remind_status'] as int,
       notificationId: map['notification_id'] as int,
     );
   }
@@ -53,7 +50,6 @@ class TaskModel {
       'task_priority_index': taskPriorityIndex,
       'task_status': taskStatus,
       'task_color_index': taskColorIndex,
-      'remind_status': remindStatus,
       'notification_id': notificationId,
     };
   }

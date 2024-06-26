@@ -4,8 +4,8 @@ class AppStrings {
   static const String sortTasks = 'Сортировка задач';
   static const String sortHabits = 'Сортировка привычек';
   static const String order = 'Порядок';
-  static const String firstNew = 'Сначала новые (А-Я)';
-  static const String firstOld = 'Сначала старые (Я-А)';
+  static const String firstNew = 'Сначала новые (Я-А)';
+  static const String firstOld = 'Сначала старые (А-Я)';
   static const String remind = 'Напомнить';
 
   static const String sortByAddTime = 'По дате добавления';
@@ -27,6 +27,7 @@ class AppStrings {
 
   static const String color = 'Цвет';
   static const String add = 'Добавить';
+  static const String addClose = 'Добавить и закрыть';
 
   static const String tasks = 'Задачи';
   static const String habits = 'Привычки';

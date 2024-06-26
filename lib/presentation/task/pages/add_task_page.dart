@@ -5,13 +5,11 @@ import 'package:provider/provider.dart';
 import '../../../../../core/strings/app_strings.dart';
 import '../../../core/enums/task_period.dart';
 import '../../../core/enums/task_priority.dart';
-import '../../../core/enums/task_status.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/state/task_data_state.dart';
-import '../../state/task_color_state.dart';
-import '../../state/task_period_state.dart';
-import '../../state/task_priority_state.dart';
+import '../../state/add_task_state.dart';
 import '../../widgets/main_back_button.dart';
+import '../widgets/task_notification.dart';
 
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({
@@ -27,7 +25,6 @@ class AddTaskPage extends StatefulWidget {
 
 class _AddTaskPageState extends State<AddTaskPage> {
   final _taskTextController = TextEditingController();
-  final _taskTextDescController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,48 +32,37 @@ class _AddTaskPageState extends State<AddTaskPage> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => TaskPeriodState(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => TaskPriorityState(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => TaskColorState(),
+          create: (_) => AddTaskState(),
         ),
       ],
       child: Scaffold(
         appBar: AppBar(
           title: const Text(AppStrings.addingTask),
           leading: const MainBackButton(),
+          actions: const [
+            TaskNotification(),
+          ],
         ),
         body: SingleChildScrollView(
           padding: AppStyles.padding,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextField(
-                controller: _taskTextController,
-                autofocus: true,
-                textInputAction: TextInputAction.next,
-                decoration: const InputDecoration(
-                  hintText: AppStrings.taskHint,
-                ),
-              ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: _taskTextDescController,
-                textInputAction: TextInputAction.done,
-                decoration: const InputDecoration(
-                  hintText: AppStrings.taskDescription,
-                ),
-              ),
-              const SizedBox(height: 16),
-              const Text(AppStrings.timeMode),
-              const SizedBox(height: 8),
-              Consumer<TaskPeriodState>(
-                builder: (BuildContext context, taskPeriodState, _) {
-                  return CupertinoSlidingSegmentedControl<TaskPeriod>(
-                    groupValue: taskPeriodState.getTaskPeriod,
+          child: Consumer<AddTaskState>(
+            builder: (BuildContext context, addTaskState, _) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  TextField(
+                    controller: _taskTextController,
+                    autofocus: true,
+                    textInputAction: TextInputAction.done,
+                    maxLength: 50,
+                    decoration: const InputDecoration(
+                      hintText: AppStrings.taskHint,
+                    ),
+                  ),
+                  const Text(AppStrings.timeMode),
+                  const SizedBox(height: 8),
+                  CupertinoSlidingSegmentedControl<TaskPeriod>(
+                    groupValue: addTaskState.getTaskPeriod,
                     thumbColor: theme.colorScheme.onPrimary,
                     children: const <TaskPeriod, Widget>{
                       TaskPeriod.day: Text(AppStrings.day),
@@ -86,18 +72,14 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       TaskPeriod.year: Text(AppStrings.year),
                     },
                     onValueChanged: (TaskPeriod? taskPeriod) {
-                      taskPeriodState.setTaskPeriod = taskPeriod!;
+                      addTaskState.setTaskPeriod = taskPeriod!;
                     },
-                  );
-                },
-              ),
-              const SizedBox(height: 16),
-              const Text(AppStrings.priority),
-              const SizedBox(height: 8),
-              Consumer<TaskPriorityState>(
-                builder: (BuildContext context, taskPriorityState, _) {
-                  return CupertinoSlidingSegmentedControl<TaskPriority>(
-                    groupValue: taskPriorityState.getTaskPriority,
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(AppStrings.priority),
+                  const SizedBox(height: 8),
+                  CupertinoSlidingSegmentedControl<TaskPriority>(
+                    groupValue: addTaskState.getTaskPriority,
                     thumbColor: theme.colorScheme.onPrimary,
                     children: const <TaskPriority, Widget>{
                       TaskPriority.low: Text(AppStrings.low),
@@ -105,17 +87,13 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       TaskPriority.high: Text(AppStrings.high),
                     },
                     onValueChanged: (TaskPriority? taskPriority) {
-                      taskPriorityState.setTaskPriority = taskPriority!;
+                      addTaskState.setTaskPriority = taskPriority!;
                     },
-                  );
-                },
-              ),
-              const SizedBox(height: 16),
-              const Text(AppStrings.color),
-              const SizedBox(height: 8),
-              Consumer<TaskColorState>(
-                builder: (BuildContext context, taskColorState, _) {
-                  return GridView.builder(
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(AppStrings.color),
+                  const SizedBox(height: 8),
+                  GridView.builder(
                     padding: EdgeInsets.zero,
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -127,35 +105,34 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
                         onTap: () {
-                          taskColorState.setColorIndex = index;
+                          addTaskState.setColorIndex = index;
                         },
                         child: CircleAvatar(
                           backgroundColor: AppStyles.tashabColors[index].withOpacity(theme.brightness == Brightness.light ? 1 : 0.5),
-                          child: taskColorState.getColorIndex == index ? const Icon(Icons.check_rounded, color: Colors.black) : const SizedBox(),
+                          child: addTaskState.getColorIndex == index ? const Icon(Icons.check_rounded, color: Colors.black) : const SizedBox(),
                         ),
                       );
                     },
-                  );
-                },
-              ),
-              const SizedBox(height: 16),
-              Builder(
-                builder: (context) {
-                  return OutlinedButton(
+                  ),
+                  const SizedBox(height: 16),
+                  OutlinedButton(
                     onPressed: () {
                       if (_taskTextController.text.trim().isNotEmpty) {
-                        Navigator.of(context).pop();
                         final Map<String, dynamic> taskMap = {
                           'task_title': _taskTextController.text.trim(),
-                          'task_description': _taskTextDescController.text.trim(),
                           'start_date_time': DateTime.now().toIso8601String(),
                           'end_date_time': DateTime.now().toIso8601String(),
-                          'task_period': context.read<TaskPeriodState>().getTaskPeriod.name,
-                          'task_priority_index': context.read<TaskPriorityState>().getTaskPriority.index,
-                          'task_status': TaskStatus.inProgress.name,
-                          'task_color_index': context.read<TaskColorState>().getColorIndex,
+                          'task_period': addTaskState.getTaskPeriod.name,
+                          'task_priority_index': addTaskState.getTaskPriority.index,
+                          'task_status': addTaskState.getTaskStatus.name,
+                          'task_color_index': addTaskState.getColorIndex,
+                          'notification_id': 0,
                         };
-                        context.read<TaskDataState>().createTask(taskMap: taskMap);
+                        Provider.of<TaskDataState>(context, listen: false).createTask(taskMap: taskMap);
+                        _taskTextController.clear();
+                        addTaskState.setTaskPeriod = TaskPeriod.day;
+                        addTaskState.setTaskPriority = TaskPriority.low;
+                        addTaskState.setColorIndex = 0;
                       } else {
                         // Set edit text error
                       }
@@ -164,10 +141,35 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       AppStrings.add,
                       style: TextStyle(fontSize: 18),
                     ),
-                  );
-                }
-              ),
-            ],
+                  ),
+                  const SizedBox(height: 8),
+                  OutlinedButton(
+                    onPressed: () {
+                      if (_taskTextController.text.trim().isNotEmpty) {
+                        Navigator.of(context).pop();
+                        final Map<String, dynamic> taskMap = {
+                          'task_title': _taskTextController.text.trim(),
+                          'start_date_time': DateTime.now().toIso8601String(),
+                          'end_date_time': DateTime.now().toIso8601String(),
+                          'task_period': addTaskState.getTaskPeriod.name,
+                          'task_priority_index': addTaskState.getTaskPriority.index,
+                          'task_status': addTaskState.getTaskStatus.name,
+                          'task_color_index': addTaskState.getColorIndex,
+                          'notification_id': 0,
+                        };
+                        Provider.of<TaskDataState>(context, listen: false).createTask(taskMap: taskMap);
+                      } else {
+                        // Set edit text error
+                      }
+                    },
+                    child: const Text(
+                      AppStrings.addClose,
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ),

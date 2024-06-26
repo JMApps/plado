@@ -48,7 +48,6 @@ class PladoDatabaseService {
         task_priority_index INT,
         task_status TEXT,
         task_color_index INTEGER,
-        remind_status INTEGER,
         notification_id INTEGER
         );
     ''');

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plado/core/enums/task_status.dart';
 
 import '../../core/enums/task_period.dart';
 import '../../core/enums/task_priority.dart';
@@ -19,6 +20,15 @@ class AddTaskState extends ChangeNotifier {
 
   set setTaskPriority(TaskPriority taskPriority) {
     _taskPriority = taskPriority;
+    notifyListeners();
+  }
+
+  TaskStatus _taskStatus = TaskStatus.inProgress;
+
+  TaskStatus get getTaskStatus => _taskStatus;
+
+  set setTaskStatus(TaskStatus taskStatus) {
+    _taskStatus = taskStatus;
     notifyListeners();
   }
 
