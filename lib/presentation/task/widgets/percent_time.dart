@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../core/styles/app_styles.dart';
+import 'package:plado/core/styles/app_styles.dart';
 
 class PercentTime extends StatelessWidget {
   const PercentTime({super.key, required this.percentage});
@@ -13,11 +12,19 @@ class PercentTime extends StatelessWidget {
     bool isLightTheme = theme.brightness == Brightness.light;
     return Padding(
       padding: AppStyles.paddingWithoutBottomMini,
-      child: LinearProgressIndicator(
-        backgroundColor: theme.colorScheme.error.withOpacity(0.25),
-        valueColor: AlwaysStoppedAnimation<Color>(theme.colorScheme.outline.withOpacity(isLightTheme ? 1 : 0.5)),
-        value: percentage / 100,
-        borderRadius: BorderRadius.circular(25),
+      child: Row(
+        children: [
+          const SizedBox(width: 16),
+          CircularProgressIndicator(
+            backgroundColor: theme.colorScheme.error.withOpacity(0.25),
+            valueColor: AlwaysStoppedAnimation<Color>(theme.colorScheme.outline.withOpacity(isLightTheme ? 1 : 0.5)),
+            strokeCap: StrokeCap.round,
+            value: percentage / 100,
+          ),
+          const SizedBox(width: 4),
+          Text('${(-percentage / 100).toStringAsFixed(2)}%'),
+          const SizedBox(width: 16),
+        ],
       ),
     );
   }

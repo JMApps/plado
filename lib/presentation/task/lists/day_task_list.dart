@@ -19,9 +19,10 @@ class DayTaskList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final sortState = Provider.of<TaskSortState>(context);
+    final restTime = Provider.of<RestTimesState>(context);
     return Column(
       children: [
-        PercentTime(percentage: Provider.of<RestTimesState>(context).calculateElapsedDayPercentage()),
+        PercentTime(percentage: restTime.calculateElapsedDayPercentage()),
         Expanded(
           child: FutureBuilder<List<TaskEntity>>(
             future: Provider.of<TaskDataState>(context).getTasksByMode(
