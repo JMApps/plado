@@ -52,7 +52,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 children: [
                   TextField(
                     controller: _taskTextController,
+                    textCapitalization: TextCapitalization.sentences,
                     autofocus: true,
+                    keyboardType: TextInputType.text,
                     textInputAction: TextInputAction.done,
                     maxLength: 50,
                     decoration: const InputDecoration(
