@@ -13,13 +13,10 @@ class RestTimesState extends ChangeNotifier {
   }
 
   void _startTimer() {
-    int secondsUntilNextMinute = 60 - _currentDateTime.second;
 
-    _timer = Timer(Duration(seconds: secondsUntilNextMinute), () {
-      Timer.periodic(const Duration(minutes: 1), (timer) {
-        _currentDateTime = DateTime.now();
-        notifyListeners();
-      });
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      _currentDateTime = DateTime.now();
+      notifyListeners();
     });
   }
 

@@ -8,6 +8,7 @@ import '../../../core/enums/task_priority.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/state/task_data_state.dart';
 import '../../state/add_task_state.dart';
+import '../../state/rest_times_state.dart';
 import '../../widgets/main_back_button.dart';
 import '../widgets/task_notification.dart';
 
@@ -34,6 +35,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
         ChangeNotifierProvider(
           create: (_) => AddTaskState(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => RestTimesState(),
+        ),
       ],
       child: Scaffold(
         appBar: AppBar(
@@ -50,6 +54,22 @@ class _AddTaskPageState extends State<AddTaskPage> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  Consumer<RestTimesState>(
+                    builder: (BuildContext context, restTimesState, _) {
+                      return Column(
+                        children: [
+                          Text('До конца дня осталось: '),
+                          const SizedBox(height: 8),
+                          LinearProgressIndicator(
+                            value: restTimesState.calculateElapsedDayPercentage() / 100,
+                            minHeight: 15,
+                            borderRadius: AppStyles.border,
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 16),
                   TextField(
                     controller: _taskTextController,
                     textCapitalization: TextCapitalization.sentences,
@@ -77,7 +97,6 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       addTaskState.setTaskPeriod = taskPeriod!;
                     },
                   ),
-                  const SizedBox(height: 8),
                   const Text(AppStrings.priority),
                   const SizedBox(height: 8),
                   CupertinoSlidingSegmentedControl<TaskPriority>(
