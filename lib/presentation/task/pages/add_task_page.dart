@@ -5,11 +5,13 @@ import 'package:provider/provider.dart';
 import '../../../../../core/strings/app_strings.dart';
 import '../../../core/enums/task_period.dart';
 import '../../../core/enums/task_priority.dart';
+import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/state/task_data_state.dart';
 import '../../state/add_task_state.dart';
 import '../../state/rest_times_state.dart';
 import '../../widgets/main_back_button.dart';
+import '../widgets/rest_time_indicator.dart';
 import '../widgets/task_notification.dart';
 
 class AddTaskPage extends StatefulWidget {
@@ -56,17 +58,40 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 children: [
                   Consumer<RestTimesState>(
                     builder: (BuildContext context, restTimesState, _) {
-                      return Column(
-                        children: [
-                          Text('До конца дня осталось: '),
-                          const SizedBox(height: 8),
-                          LinearProgressIndicator(
-                            value: restTimesState.calculateElapsedDayPercentage() / 100,
-                            minHeight: 15,
-                            borderRadius: AppStyles.border,
-                          ),
-                        ],
-                      );
+                      late Widget restIndicator;
+                      switch (addTaskState.getTaskPeriod.index) {
+                        case 0:
+                          restIndicator = RestTimeIndicator(
+                            remainingTime: restTimesState.calculateElapsedDayPercentage()[AppConstraints.remainingTime],
+                            elapsedPercentage: restTimesState.calculateElapsedDayPercentage()[AppConstraints.elapsedPercentage],
+                          );
+                          break;
+                        case 1:
+                          restIndicator = RestTimeIndicator(
+                            remainingTime: restTimesState.calculateElapsedWeekPercentage()[AppConstraints.remainingTime],
+                            elapsedPercentage: restTimesState.calculateElapsedWeekPercentage()[AppConstraints.elapsedPercentage],
+                          );
+                          break;
+                        case 2:
+                          restIndicator = RestTimeIndicator(
+                            remainingTime: restTimesState.calculateElapsedMonthPercentage()[AppConstraints.remainingTime],
+                            elapsedPercentage: restTimesState.calculateElapsedMonthPercentage()[AppConstraints.elapsedPercentage],
+                          );
+                          break;
+                        case 3:
+                          restIndicator = RestTimeIndicator(
+                            remainingTime: restTimesState.calculateElapsedSeasonPercentage(restTimesState.getCurrentSeason())[AppConstraints.remainingTime],
+                            elapsedPercentage: restTimesState.calculateElapsedSeasonPercentage(restTimesState.getCurrentSeason())[AppConstraints.elapsedPercentage],
+                          );
+                          break;
+                        case 4:
+                          restIndicator = RestTimeIndicator(
+                            remainingTime: restTimesState.calculateElapsedYearPercentage()[AppConstraints.remainingTime],
+                            elapsedPercentage: restTimesState.calculateElapsedYearPercentage()[AppConstraints.elapsedPercentage],
+                          );
+                          break;
+                      }
+                      return restIndicator;
                     },
                   ),
                   const SizedBox(height: 16),
@@ -97,6 +122,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       addTaskState.setTaskPeriod = taskPeriod!;
                     },
                   ),
+                  const SizedBox(height: 16),
                   const Text(AppStrings.priority),
                   const SizedBox(height: 8),
                   CupertinoSlidingSegmentedControl<TaskPriority>(
@@ -111,7 +137,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       addTaskState.setTaskPriority = taskPriority!;
                     },
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 16),
                   const Text(AppStrings.color),
                   const SizedBox(height: 8),
                   GridView.builder(
@@ -119,7 +145,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: 10,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                    const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 10,
                       crossAxisSpacing: 8,
                     ),
@@ -129,8 +156,14 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           addTaskState.setColorIndex = index;
                         },
                         child: CircleAvatar(
-                          backgroundColor: AppStyles.tashabColors[index].withOpacity(theme.brightness == Brightness.light ? 1 : 0.5),
-                          child: addTaskState.getColorIndex == index ? const Icon(Icons.check_rounded, color: Colors.black) : const SizedBox(),
+                          backgroundColor: AppStyles.tashabColors[index]
+                              .withOpacity(theme.brightness == Brightness.light
+                              ? 1
+                              : 0.5),
+                          child: addTaskState.getColorIndex == index
+                              ? const Icon(Icons.check_rounded,
+                              color: Colors.black)
+                              : const SizedBox(),
                         ),
                       );
                     },
@@ -138,18 +171,22 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   const SizedBox(height: 16),
                   OutlinedButton(
                     onPressed: () {
-                      if (_taskTextController.text.trim().isNotEmpty) {
+                      if (_taskTextController.text
+                          .trim()
+                          .isNotEmpty) {
                         final Map<String, dynamic> taskMap = {
                           'task_title': _taskTextController.text.trim(),
                           'start_date_time': DateTime.now().toIso8601String(),
                           'end_date_time': DateTime.now().toIso8601String(),
                           'task_period': addTaskState.getTaskPeriod.name,
-                          'task_priority_index': addTaskState.getTaskPriority.index,
+                          'task_priority_index': addTaskState.getTaskPriority
+                              .index,
                           'task_status': addTaskState.getTaskStatus.name,
                           'task_color_index': addTaskState.getColorIndex,
                           'notification_id': 0,
                         };
-                        Provider.of<TaskDataState>(context, listen: false).createTask(taskMap: taskMap);
+                        Provider.of<TaskDataState>(context, listen: false)
+                            .createTask(taskMap: taskMap);
                         _taskTextController.clear();
                         addTaskState.setTaskPeriod = TaskPeriod.day;
                         addTaskState.setTaskPriority = TaskPriority.low;
@@ -166,19 +203,23 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   const SizedBox(height: 8),
                   OutlinedButton(
                     onPressed: () {
-                      if (_taskTextController.text.trim().isNotEmpty) {
+                      if (_taskTextController.text
+                          .trim()
+                          .isNotEmpty) {
                         Navigator.of(context).pop();
                         final Map<String, dynamic> taskMap = {
                           'task_title': _taskTextController.text.trim(),
                           'start_date_time': DateTime.now().toIso8601String(),
                           'end_date_time': DateTime.now().toIso8601String(),
                           'task_period': addTaskState.getTaskPeriod.name,
-                          'task_priority_index': addTaskState.getTaskPriority.index,
+                          'task_priority_index':
+                          addTaskState.getTaskPriority.index,
                           'task_status': addTaskState.getTaskStatus.name,
                           'task_color_index': addTaskState.getColorIndex,
                           'notification_id': 0,
                         };
-                        Provider.of<TaskDataState>(context, listen: false).createTask(taskMap: taskMap);
+                        Provider.of<TaskDataState>(context, listen: false)
+                            .createTask(taskMap: taskMap);
                       } else {
                         // Set edit text error
                       }
