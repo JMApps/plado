@@ -45,9 +45,6 @@ class _AddTaskPageState extends State<AddTaskPage> {
         appBar: AppBar(
           title: const Text(AppStrings.addingTask),
           leading: const MainBackButton(),
-          actions: const [
-            TaskNotification(),
-          ],
         ),
         body: SingleChildScrollView(
           padding: AppStyles.padding,
