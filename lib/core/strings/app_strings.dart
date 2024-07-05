@@ -7,6 +7,8 @@ class AppStrings {
   static const String firstNew = 'Сначала новые (Я-А)';
   static const String firstOld = 'Сначала старые (А-Я)';
   static const String remind = 'Напомнить';
+  static const String selectDate = 'Выбрать дату';
+  static const String selectTime = 'Выбрать время';
 
   static const String sortByAddTime = 'По дате добавления';
   static const String sortTitle = 'По названию';

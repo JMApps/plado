@@ -12,7 +12,6 @@ import '../../state/add_task_state.dart';
 import '../../state/rest_times_state.dart';
 import '../../widgets/main_back_button.dart';
 import '../widgets/rest_time_indicator.dart';
-import '../widgets/task_notification.dart';
 
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({
@@ -59,32 +58,54 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       switch (addTaskState.getTaskPeriod.index) {
                         case 0:
                           restIndicator = RestTimeIndicator(
-                            remainingTime: restTimesState.calculateElapsedDayPercentage()[AppConstraints.remainingTime],
-                            elapsedPercentage: restTimesState.calculateElapsedDayPercentage()[AppConstraints.elapsedPercentage],
+                            remainingTime:
+                                restTimesState.calculateElapsedDayPercentage()[
+                                    AppConstraints.remainingTime],
+                            elapsedPercentage:
+                                restTimesState.calculateElapsedDayPercentage()[
+                                    AppConstraints.elapsedPercentage],
                           );
                           break;
                         case 1:
                           restIndicator = RestTimeIndicator(
-                            remainingTime: restTimesState.calculateElapsedWeekPercentage()[AppConstraints.remainingTime],
-                            elapsedPercentage: restTimesState.calculateElapsedWeekPercentage()[AppConstraints.elapsedPercentage],
+                            remainingTime:
+                                restTimesState.calculateElapsedWeekPercentage()[
+                                    AppConstraints.remainingTime],
+                            elapsedPercentage:
+                                restTimesState.calculateElapsedWeekPercentage()[
+                                    AppConstraints.elapsedPercentage],
                           );
                           break;
                         case 2:
                           restIndicator = RestTimeIndicator(
-                            remainingTime: restTimesState.calculateElapsedMonthPercentage()[AppConstraints.remainingTime],
-                            elapsedPercentage: restTimesState.calculateElapsedMonthPercentage()[AppConstraints.elapsedPercentage],
+                            remainingTime: restTimesState
+                                    .calculateElapsedMonthPercentage()[
+                                AppConstraints.remainingTime],
+                            elapsedPercentage: restTimesState
+                                    .calculateElapsedMonthPercentage()[
+                                AppConstraints.elapsedPercentage],
                           );
                           break;
                         case 3:
                           restIndicator = RestTimeIndicator(
-                            remainingTime: restTimesState.calculateElapsedSeasonPercentage(restTimesState.getCurrentSeason())[AppConstraints.remainingTime],
-                            elapsedPercentage: restTimesState.calculateElapsedSeasonPercentage(restTimesState.getCurrentSeason())[AppConstraints.elapsedPercentage],
+                            remainingTime:
+                                restTimesState.calculateElapsedSeasonPercentage(
+                                        restTimesState.getCurrentSeason())[
+                                    AppConstraints.remainingTime],
+                            elapsedPercentage:
+                                restTimesState.calculateElapsedSeasonPercentage(
+                                        restTimesState.getCurrentSeason())[
+                                    AppConstraints.elapsedPercentage],
                           );
                           break;
                         case 4:
                           restIndicator = RestTimeIndicator(
-                            remainingTime: restTimesState.calculateElapsedYearPercentage()[AppConstraints.remainingTime],
-                            elapsedPercentage: restTimesState.calculateElapsedYearPercentage()[AppConstraints.elapsedPercentage],
+                            remainingTime:
+                                restTimesState.calculateElapsedYearPercentage()[
+                                    AppConstraints.remainingTime],
+                            elapsedPercentage:
+                                restTimesState.calculateElapsedYearPercentage()[
+                                    AppConstraints.elapsedPercentage],
                           );
                           break;
                       }
@@ -143,7 +164,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: 10,
                     gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 10,
                       crossAxisSpacing: 8,
                     ),
@@ -155,29 +176,50 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         child: CircleAvatar(
                           backgroundColor: AppStyles.tashabColors[index]
                               .withOpacity(theme.brightness == Brightness.light
-                              ? 1
-                              : 0.5),
+                                  ? 1
+                                  : 0.5),
                           child: addTaskState.getColorIndex == index
                               ? const Icon(Icons.check_rounded,
-                              color: Colors.black)
+                                  color: Colors.black)
                               : const SizedBox(),
                         ),
                       );
                     },
                   ),
                   const SizedBox(height: 16),
+                  const Text(AppStrings.remind),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    visualDensity: const VisualDensity(vertical: -4, horizontal: -4),
+                    title: Row(
+                      children: [
+                        TextButton.icon(
+                          onPressed: () {},
+                          icon: const Icon(Icons.date_range),
+                          label: const Text(AppStrings.selectDate),
+                        ),
+                        TextButton.icon(
+                          onPressed: () {},
+                          icon: const Icon(Icons.access_time),
+                          label: const Text(AppStrings.selectTime),
+                        ),
+                      ],
+                    ),
+                    trailing: Switch(
+                      value: false,
+                      onChanged: (bool onChanged) {},
+                    ),
+                  ),
                   OutlinedButton(
                     onPressed: () {
-                      if (_taskTextController.text
-                          .trim()
-                          .isNotEmpty) {
+                      if (_taskTextController.text.trim().isNotEmpty) {
                         final Map<String, dynamic> taskMap = {
                           'task_title': _taskTextController.text.trim(),
                           'start_date_time': DateTime.now().toIso8601String(),
                           'end_date_time': DateTime.now().toIso8601String(),
                           'task_period': addTaskState.getTaskPeriod.name,
-                          'task_priority_index': addTaskState.getTaskPriority
-                              .index,
+                          'task_priority_index':
+                              addTaskState.getTaskPriority.index,
                           'task_status': addTaskState.getTaskStatus.name,
                           'task_color_index': addTaskState.getColorIndex,
                           'notification_id': 0,
@@ -200,9 +242,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   const SizedBox(height: 8),
                   OutlinedButton(
                     onPressed: () {
-                      if (_taskTextController.text
-                          .trim()
-                          .isNotEmpty) {
+                      if (_taskTextController.text.trim().isNotEmpty) {
                         Navigator.of(context).pop();
                         final Map<String, dynamic> taskMap = {
                           'task_title': _taskTextController.text.trim(),
@@ -210,7 +250,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           'end_date_time': DateTime.now().toIso8601String(),
                           'task_period': addTaskState.getTaskPeriod.name,
                           'task_priority_index':
-                          addTaskState.getTaskPriority.index,
+                              addTaskState.getTaskPriority.index,
                           'task_status': addTaskState.getTaskStatus.name,
                           'task_color_index': addTaskState.getColorIndex,
                           'notification_id': 0,
