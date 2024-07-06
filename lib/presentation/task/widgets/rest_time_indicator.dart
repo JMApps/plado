@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:plado/core/strings/app_strings.dart';
 
+import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 
 class RestTimeIndicator extends StatelessWidget {
@@ -21,12 +21,18 @@ class RestTimeIndicator extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: Text('${AppStrings.remaining} $remainingTime'),
+              child: Text(
+                '${AppStrings.remaining} $remainingTime',
+                style: const TextStyle(fontSize: 17),
+              ),
             ),
             Card(
               child: Padding(
                 padding: AppStyles.paddingHorizontalMini,
-                child: Text('${(elapsedPercentage - 100).toStringAsFixed(2)}%'),
+                child: Text(
+                  '${(elapsedPercentage - 100).toStringAsFixed(2)}%',
+                  style: const TextStyle(fontSize: 16),
+                ),
               ),
             ),
           ],

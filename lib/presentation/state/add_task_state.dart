@@ -5,6 +5,7 @@ import '../../core/enums/task_period.dart';
 import '../../core/enums/task_priority.dart';
 
 class AddTaskState extends ChangeNotifier {
+
   TaskPeriod _taskPeriod = TaskPeriod.day;
 
   TaskPeriod get getTaskPeriod => _taskPeriod;
@@ -38,6 +39,15 @@ class AddTaskState extends ChangeNotifier {
 
   set setColorIndex(int colorIndex) {
     _colorIndex = colorIndex;
+    notifyListeners();
+  }
+
+  bool _isRemind = false;
+
+  bool get getIsRemind => _isRemind;
+
+  set setIsRemind(bool isRemind) {
+    _isRemind = isRemind;
     notifyListeners();
   }
 }
