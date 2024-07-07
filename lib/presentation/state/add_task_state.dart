@@ -50,4 +50,13 @@ class AddTaskState extends ChangeNotifier {
     _isRemind = isRemind;
     notifyListeners();
   }
+
+  late DateTime _taskDateTime;
+
+  DateTime get getTaskDateTime => _taskDateTime;
+
+  set setTaskDateTime(DateTime taskDateTime) {
+    _taskDateTime = taskDateTime;
+    notifyListeners();
+  }
 }

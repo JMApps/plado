@@ -10,9 +10,15 @@ class RestTimesState extends ChangeNotifier {
   DateTime _currentDateTime = DateTime.now();
   Timer? _timer;
 
-  RestTimesState() {
+  RestTimesState({required String day, required String hour, required String minute})  : _day = day, _hour = hour, _minute = minute {
     _startTimer();
   }
+
+  late final String _day;
+
+  late final String _hour;
+
+  late final String _minute;
 
   void _startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -28,42 +34,42 @@ class RestTimesState extends ChangeNotifier {
   }
 
   Map<String, dynamic> getRestTimeIndicator(TaskPeriod taskPeriod) {
-    late String remainingTime;
-    late double elapsedPercentage;
-    late DateTime timeInterval;
+    final String remainingTime;
+    final double elapsedPercentage;
+    final DateTime endDateTime;
     switch (taskPeriod) {
       case TaskPeriod.day:
         final startOfDay = DateTime(_currentDateTime.year, _currentDateTime.month, _currentDateTime.day);
         final endOfDay = startOfDay.add(const Duration(hours: 24));
-        remainingTime = _formatRemainingTime(endOfDay.difference(_currentDateTime));
+        remainingTime = _formatRemainingTime(remainingTime: endOfDay.difference(_currentDateTime));
 
         final elapsedTime = _currentDateTime.difference(startOfDay).inMinutes;
         final totalMinutesInDay = const Duration(hours: 24).inMinutes;
 
         elapsedPercentage = (elapsedTime / totalMinutesInDay) * 100.0;
-        timeInterval = startOfDay;
+        endDateTime = endOfDay.add(const Duration(days: -1));
         break;
       case TaskPeriod.week:
         final startOfWeek = DateTime(_currentDateTime.year, _currentDateTime.month, _currentDateTime.day - _currentDateTime.weekday + 1);
         final endOfWeek = startOfWeek.add(const Duration(days: 7));
-        remainingTime = _formatRemainingTime(endOfWeek.difference(_currentDateTime));
+        remainingTime = _formatRemainingTime(remainingTime: endOfWeek.difference(_currentDateTime));
 
         final elapsedTime = _currentDateTime.difference(startOfWeek).inMinutes;
         final totalMinutesInMonth = const Duration(days: 7).inMinutes;
 
         elapsedPercentage = (elapsedTime / totalMinutesInMonth) * 100.0;
-        timeInterval = startOfWeek;
+        endDateTime = endOfWeek.add(const Duration(days: -1));;
         break;
       case TaskPeriod.month:
         final startOfMonth = DateTime(_currentDateTime.year, _currentDateTime.month);
         final endOfMonth = startOfMonth.add(Duration(days: daysInMonth(_currentDateTime.year, _currentDateTime.month)));
-        remainingTime = _formatRemainingTime(endOfMonth.difference(_currentDateTime));
+        remainingTime = _formatRemainingTime(remainingTime: endOfMonth.difference(_currentDateTime));
 
         final elapsedTime = _currentDateTime.difference(startOfMonth).inMinutes;
         final totalMinutesInMonth = Duration(days: daysInMonth(_currentDateTime.year, _currentDateTime.month)).inMinutes;
 
         elapsedPercentage = (elapsedTime / totalMinutesInMonth) * 100.0;
-        timeInterval = startOfMonth;
+        endDateTime = endOfMonth.add(const Duration(days: -1));;
         break;
       case TaskPeriod.season:
         final int startSeasonMonth;
@@ -90,30 +96,30 @@ class RestTimesState extends ChangeNotifier {
 
         final startSeason = DateTime(getCurrentSeason() == Season.winter ? _currentDateTime.year - 1 : _currentDateTime.year, startSeasonMonth, 1);
         final endSeason = DateTime(getCurrentSeason() == Season.winter ? _currentDateTime.year - 1 : _currentDateTime.year, endSeasonMonth + 1, 1);
-        remainingTime = _formatRemainingTime(endSeason.difference(_currentDateTime));
+        remainingTime = _formatRemainingTime(remainingTime: endSeason.difference(_currentDateTime));
 
         final elapsedTime = _currentDateTime.difference(startSeason).inMinutes;
         final totalMinutesInSeason = endSeason.difference(startSeason).inMinutes;
 
         elapsedPercentage = (elapsedTime / totalMinutesInSeason) * 100.0;
-        timeInterval = startSeason;
+        endDateTime = endSeason.add(const Duration(days: -1));;
         break;
       case TaskPeriod.year:
         final startOfYear = DateTime(_currentDateTime.year);
         final endOfYear = startOfYear.add(Duration(days: isLeapYear(_currentDateTime.year) ? 366 : 365));
-        remainingTime = _formatRemainingTime(endOfYear.difference(_currentDateTime));
+        remainingTime = _formatRemainingTime(remainingTime: endOfYear.difference(_currentDateTime));
 
         final elapsedTime = _currentDateTime.difference(startOfYear).inMinutes;
         final totalMinutesInYear = endOfYear.difference(startOfYear).inMinutes;
 
         elapsedPercentage = (elapsedTime / totalMinutesInYear) * 100.0;
-        timeInterval = startOfYear;
+        endDateTime = endOfYear.add(const Duration(days: -1));;
         break;
     }
     return {
       AppConstraints.remainingTimeString: remainingTime,
       AppConstraints.elapsedPercentage: elapsedPercentage,
-      AppConstraints.dateTimeInterval: timeInterval,
+      AppConstraints.dateTimeInterval: endDateTime,
     };
   }
 
@@ -169,17 +175,17 @@ class RestTimesState extends ChangeNotifier {
     return currentSeason;
   }
 
-  String _formatRemainingTime(Duration remainingTime) {
+  String _formatRemainingTime({required Duration remainingTime}) {
     int days = remainingTime.inDays;
     int hours = remainingTime.inHours % 24;
     int minutes = remainingTime.inMinutes % 60;
 
     List<String> parts = [];
 
-    if (days > 0) parts.add('$days д');
-    if (hours > 0) parts.add('$hours ч');
-    if (minutes > 0) parts.add('$minutes мин');
+    if (days > 0) parts.add('$days $_day');
+    if (hours > 0) parts.add('$hours $_hour');
+    if (minutes > 0) parts.add('$minutes $_minute');
 
-    return parts.join(', ');
+    return parts.join('. ');
   }
 }

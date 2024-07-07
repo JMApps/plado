@@ -48,7 +48,13 @@ class AppStrings {
 
   static const String remaining = 'Осталось:';
 
+  static const String hours = 'Часы';
+  static const String minutes = 'Минуты';
+  static const String select = 'Выбрать';
+  static const String cancel = 'Отмена';
+  static const String selectCorrectTime = 'Невозможно выбрать прошедшее время';
+
   static const String shortDay = 'д';
-  static const String shorHour = 'ч';
+  static const String shortHour = 'ч';
   static const String shortMinute = 'м';
 }
