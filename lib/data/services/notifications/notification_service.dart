@@ -4,15 +4,15 @@ import 'package:timezone/timezone.dart' as tz;
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-class LocalNoticeService {
+class NotificationService {
 
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   static const AndroidNotificationDetails _androidDailyNotificationDetails =
   AndroidNotificationDetails(
-    'Daily notification channel ID',
+    'Task notification channel ID',
     'Notifications',
-    channelDescription: 'Daily notifications',
+    channelDescription: 'Task notifications',
     importance: Importance.max,
     priority: Priority.max,
   );

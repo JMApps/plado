@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:plado/data/services/notifications/notification_service.dart';
 import 'package:provider/provider.dart';
 
 import 'data/state/task_data_state.dart';
@@ -8,6 +9,7 @@ import 'presentation/state/task_sort_state.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await NotificationService().setupNotification();
   runApp(
     MultiProvider(
       providers: [
