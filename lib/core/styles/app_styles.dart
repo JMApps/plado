@@ -79,4 +79,12 @@ class AppStyles {
     Colors.amber,
     Colors.red,
   ];
+
+  static const taskPeriodList = <TaskPeriod> [
+    TaskPeriod.day,
+    TaskPeriod.week,
+    TaskPeriod.month,
+    TaskPeriod.season,
+    TaskPeriod.year,
+  ];
 }
