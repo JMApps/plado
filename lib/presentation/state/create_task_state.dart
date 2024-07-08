@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:plado/core/enums/task_status.dart';
 
 import '../../core/enums/task_period.dart';
 import '../../core/enums/task_priority.dart';
+import '../../core/enums/task_status.dart';
 
-class AddTaskState extends ChangeNotifier {
+class CreateTaskState extends ChangeNotifier {
 
-  TaskPeriod _taskPeriod = TaskPeriod.day;
+  CreateTaskState(this._taskPeriod);
+
+  late TaskPeriod _taskPeriod;
 
   TaskPeriod get getTaskPeriod => _taskPeriod;
 

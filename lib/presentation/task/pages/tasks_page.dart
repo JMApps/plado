@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/strings/app_strings.dart';
 import '../../../../../core/styles/app_styles.dart';
-import '../../widgets/fab_add_task.dart';
+import '../../../core/routes/name_routes.dart';
+import '../../../data/models/arguments/create_task_args.dart';
 import '../lists/day_task_list.dart';
 import '../lists/month_task_list.dart';
 import '../lists/season_task_list.dart';
@@ -77,7 +78,19 @@ class _TasksPageState extends State<TasksPage> with TickerProviderStateMixin {
           YearTaskList(),
         ],
       ),
-      floatingActionButton: FabAddTask(timeModeIndex: _tabController.index,),
+      floatingActionButton: FloatingActionButton(
+        elevation: 0,
+        tooltip: AppStrings.addTask,
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        child: const Icon(Icons.add),
+        onPressed: () {
+          Navigator.pushNamed(
+            context,
+            NameRoutes.createTaskPage,
+            arguments: CreateTaskArgs(taskPeriod: AppStyles.taskPeriodList[_tabController.index]),
+          );
+        },
+      ),
     );
   }
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../data/models/arguments/add_task_args.dart';
+import '../../data/models/arguments/create_task_args.dart';
+import '../../data/models/arguments/update_task_args.dart';
 import '../../presentation/habit/pages/add_habit_page.dart';
 import '../../presentation/habit/pages/update_habit_page.dart';
-import '../../presentation/task/pages/add_task_page.dart';
+import '../../presentation/task/pages/create_task_page.dart';
 import '../../presentation/task/pages/update_task_page.dart';
 import '../strings/app_exception_messages.dart';
 import 'name_routes.dart';
@@ -12,13 +13,14 @@ class MaterialRoutes {
   static Route onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case NameRoutes.createTaskPage:
-        final AddTaskArgs addTaskArgs = routeSettings.arguments as AddTaskArgs;
+        final CreateTaskArgs createTaskArgs = routeSettings.arguments as CreateTaskArgs;
         return MaterialPageRoute(
-          builder: (_) => AddTaskPage(timeModeIndex: addTaskArgs.timeModeIndex),
+          builder: (_) => CreateTaskPage(taskPeriod: createTaskArgs.taskPeriod),
         );
       case NameRoutes.updateTaskPage:
+        final UpdateTaskArgs updateTaskArgs = routeSettings.arguments as UpdateTaskArgs;
         return MaterialPageRoute(
-          builder: (_) => const UpdateTaskPage(),
+          builder: (_) => UpdateTaskPage(taskModel: updateTaskArgs.taskEntity),
         );
       case NameRoutes.createHabitPage:
         return MaterialPageRoute(

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/routes/name_routes.dart';
 
-class FabAddHabit extends StatelessWidget {
-  const FabAddHabit({super.key});
+class FabCreateHabit extends StatelessWidget {
+  const FabCreateHabit({super.key});
 
   @override
   Widget build(BuildContext context) {
