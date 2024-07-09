@@ -6,7 +6,7 @@ class HabitModel {
   final String habitDescription;
   final DateTime startDateTime;
   final DateTime endDateTime;
-  final String habitPeriod;
+  final int habitPeriod;
   final List<bool> completedDays;
 
   HabitModel({
@@ -26,7 +26,7 @@ class HabitModel {
       habitDescription: map['habit_description'] as String,
       startDateTime: DateTime.parse(map['start_date_time'] as String),
       endDateTime: DateTime.parse(map['end_date_time'] as String),
-      habitPeriod: map['habit_period'] as String,
+      habitPeriod: map['habit_period'] as int,
       completedDays: (map['complete_days'] as List<dynamic>).map((e) => e as bool).toList(),
     );
   }

@@ -31,7 +31,7 @@ class TaskItem extends StatelessWidget {
         ),
         trailing: Icon(
           Icons.circle,
-          color: AppStyles.tashabColors[taskModel.taskColorIndex],
+          color: AppStyles.taskHabitColors[taskModel.taskColorIndex],
           size: 15,
         ),
         title: Text(

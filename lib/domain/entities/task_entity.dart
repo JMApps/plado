@@ -6,22 +6,24 @@ class TaskEntity {
   final String taskTitle;
   final DateTime startDateTime;
   final DateTime endDateTime;
-  final String taskPeriod;
+  final int taskPeriodIndex;
   final int taskPriorityIndex;
-  final String taskStatus;
+  final int taskStatusIndex;
   final int taskColorIndex;
-  final int? notificationId;
+  final int notificationId;
+  final DateTime? notificationDate;
 
   TaskEntity({
     required this.taskId,
     required this.taskTitle,
     required this.startDateTime,
     required this.endDateTime,
-    required this.taskPeriod,
+    required this.taskPeriodIndex,
     required this.taskPriorityIndex,
-    required this.taskStatus,
+    required this.taskStatusIndex,
     required this.taskColorIndex,
     required this.notificationId,
+    required this.notificationDate,
   }) {
     if (startDateTime.isAfter(endDateTime)) {
       throw ArgumentError(AppExceptionMessages.dateIsAfterException);
@@ -34,11 +36,12 @@ class TaskEntity {
       taskTitle: model.taskTitle,
       startDateTime: model.startDateTime,
       endDateTime: model.endDateTime,
-      taskPeriod: model.taskPeriod,
+      taskPeriodIndex: model.taskPriorityIndex,
       taskPriorityIndex: model.taskPriorityIndex,
-      taskStatus: model.taskStatus,
+      taskStatusIndex: model.taskStatusIndex,
       taskColorIndex: model.taskColorIndex,
       notificationId: model.notificationId,
+      notificationDate: model.notificationDate,
     );
   }
 }

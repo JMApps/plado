@@ -6,6 +6,8 @@ import '../../presentation/task/pages/habits_page.dart';
 import '../../presentation/task/pages/settings_page.dart';
 import '../../presentation/task/pages/tasks_page.dart';
 import '../enums/task_period.dart';
+import '../enums/task_priority.dart';
+import '../enums/task_status.dart';
 
 class AppStyles {
   static const padding = EdgeInsets.all(16);
@@ -61,7 +63,7 @@ class AppStyles {
     TaskPeriod.year,
   ];
 
-  static const tashabColors = <Color>[
+  static const taskHabitColors = <Color>[
     Colors.amber,
     Colors.green,
     Colors.blue,
@@ -86,5 +88,17 @@ class AppStyles {
     TaskPeriod.month,
     TaskPeriod.season,
     TaskPeriod.year,
+  ];
+
+  static const taskPriorityList = <TaskPriority> [
+    TaskPriority.low,
+    TaskPriority.medium,
+    TaskPriority.high,
+  ];
+
+  static const taskStatusList = <TaskStatus> [
+    TaskStatus.inProgress,
+    TaskStatus.complete,
+    TaskStatus.canceled,
   ];
 }

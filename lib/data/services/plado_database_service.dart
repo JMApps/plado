@@ -44,11 +44,12 @@ class PladoDatabaseService {
         task_title TEXT,
         start_date_time TEXT,
         end_date_time TEXT,
-        task_period TEXT,
-        task_priority_index INT,
-        task_status TEXT,
+        task_period INTEGER,
+        task_priority_index INTEGER,
+        task_status INTEGER,
         task_color_index INTEGER,
-        notification_id INTEGER
+        notification_id INTEGER,
+        notification_date TEXT
         );
     ''');
 
@@ -59,8 +60,10 @@ class PladoDatabaseService {
         habit_description TEXT,
         start_date_time TEXT,
         end_date_time TEXT,
-        habit_period TEXT,
-        completed_days TEXT
+        habit_period INTEGER,
+        completed_days INTEGER,
+        notification_id INTEGER,
+        notification_date TEXT
         );
     ''');
   }
