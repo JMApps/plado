@@ -15,8 +15,8 @@ class TaskDataState extends ChangeNotifier {
     return await _taskUseCase.getTaskById(taskId: taskId);
   }
 
-  Future<List<TaskEntity>> getTasksByMode({required String taskPeriod, required String orderBy}) async {
-    return await _taskUseCase.getTasksByMode(taskPeriod: taskPeriod, orderBy: orderBy);
+  Future<List<TaskEntity>> getTasksByMode({required int taskPeriodIndex, required String orderBy}) async {
+    return await _taskUseCase.getTasksByMode(taskPeriodIndex: taskPeriodIndex, orderBy: orderBy);
   }
 
   Future<int> createTask({required Map<String, dynamic> taskMap}) async {

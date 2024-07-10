@@ -35,6 +35,12 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
   TimeOfDay _selectedTime = TimeOfDay.now();
 
   @override
+  void dispose() {
+    _taskTextController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final taskDataState = Provider.of<TaskDataState>(context, listen: false);
     final appColors = Theme.of(context).colorScheme;
@@ -141,7 +147,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                           createTaskState.setColorIndex = index;
                         },
                         child: CircleAvatar(
-                          backgroundColor: AppStyles.tashabColors[index].withOpacity(Theme.of(context).brightness == Brightness.light ? 1 : 0.5),
+                          backgroundColor: AppStyles.taskHabitColors[index].withOpacity(Theme.of(context).brightness == Brightness.light ? 1 : 0.5),
                           child: createTaskState.getColorIndex == index ? const Icon(Icons.check_rounded, color: Colors.black) : const SizedBox(),
                         ),
                       );
@@ -222,18 +228,20 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                       if (_taskTextController.text.trim().isNotEmpty) {
                         _currentTime = DateTime.now();
                         final notificationId = Random().nextInt(1000000);
+                        createTaskState.setTaskNotificationDate = DateTime(_currentTime.year, _currentTime.month, _currentTime.day, _selectedTime.hour, _selectedTime.minute);
                         final Map<String, dynamic> taskMap = {
                           'task_title': _taskTextController.text.trim(),
                           'start_date_time': _currentTime.toIso8601String(),
                           'end_date_time': _currentTime.toIso8601String(),
-                          'task_period': createTaskState.getTaskPeriod.name,
+                          'task_period': createTaskState.getTaskPeriod.index,
                           'task_priority_index': createTaskState.getTaskPriority.index,
-                          'task_status': createTaskState.getTaskStatus.name,
+                          'task_status': createTaskState.getTaskStatus.index,
                           'task_color_index': createTaskState.getColorIndex,
                           'notification_id': createTaskState.getIsRemind ? notificationId : 0,
+                          'notification_date': createTaskState.getIsRemind ? createTaskState.getTaskNotificationDate : null,
                         };
                         if (createTaskState.getIsRemind) {
-                          _notificationService.futureNotification(DateTime(_currentTime.year, _currentTime.month, _currentTime.day, _selectedTime.hour, _selectedTime.minute), AppStrings.appName, _taskTextController.text.trim(), notificationId);
+                          _notificationService.futureNotification(createTaskState.getTaskNotificationDate, AppStrings.appName, _taskTextController.text.trim(), notificationId);
                         }
                         taskDataState.createTask(taskMap: taskMap);
                         _taskTextController.clear();
@@ -267,19 +275,21 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                       if (_taskTextController.text.trim().isNotEmpty) {
                         _currentTime = DateTime.now();
                         final notificationId = Random().nextInt(1000000);
+                        createTaskState.setTaskNotificationDate = DateTime(_currentTime.year, _currentTime.month, _currentTime.day, _selectedTime.hour, _selectedTime.minute);
                         Navigator.of(context).pop();
                         final Map<String, dynamic> taskMap = {
                           'task_title': _taskTextController.text.trim(),
                           'start_date_time': _currentTime.toIso8601String(),
                           'end_date_time': _currentTime.toIso8601String(),
-                          'task_period': createTaskState.getTaskPeriod.name,
+                          'task_period': createTaskState.getTaskPeriod.index,
                           'task_priority_index': createTaskState.getTaskPriority.index,
-                          'task_status': createTaskState.getTaskStatus.name,
+                          'task_status': createTaskState.getTaskStatus.index,
                           'task_color_index': createTaskState.getColorIndex,
                           'notification_id': createTaskState.getIsRemind ? notificationId : 0,
+                          'notification_date': createTaskState.getIsRemind ? createTaskState.getTaskNotificationDate : null,
                         };
                         if (createTaskState.getIsRemind) {
-                          _notificationService.futureNotification(DateTime(_currentTime.year, _currentTime.month, _currentTime.day, _selectedTime.hour, _selectedTime.minute), AppStrings.appName, _taskTextController.text.trim(), notificationId);
+                          _notificationService.futureNotification(createTaskState.getTaskNotificationDate, AppStrings.appName, _taskTextController.text.trim(), notificationId);
                         }
                         taskDataState.createTask(taskMap: taskMap);
                       } else {

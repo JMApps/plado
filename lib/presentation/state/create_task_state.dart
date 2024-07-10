@@ -53,12 +53,12 @@ class CreateTaskState extends ChangeNotifier {
     notifyListeners();
   }
 
-  late DateTime _taskDateTime;
+  late DateTime _taskNotificationDate;
 
-  DateTime get getTaskDateTime => _taskDateTime;
+  DateTime get getTaskNotificationDate => _taskNotificationDate;
 
-  set setTaskDateTime(DateTime taskDateTime) {
-    _taskDateTime = taskDateTime;
+  set setTaskNotificationDate(DateTime taskNotificationDate) {
+    _taskNotificationDate = taskNotificationDate;
     notifyListeners();
   }
 }

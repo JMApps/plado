@@ -23,9 +23,9 @@ class TaskUseCase {
     }
   }
 
-  Future<List<TaskEntity>> getTasksByMode({required String taskPeriod, required String orderBy}) async {
+  Future<List<TaskEntity>> getTasksByMode({required int taskPeriodIndex, required String orderBy}) async {
     try {
-      return await _taskRepository.getTasksByMode(taskPeriod: taskPeriod, orderBy: orderBy);
+      return await _taskRepository.getTasksByMode(taskPeriodIndex: taskPeriodIndex, orderBy: orderBy);
     } catch (e) {
       throw Exception('${AppExceptionMessages.getTasksByModeException} $e');
     }

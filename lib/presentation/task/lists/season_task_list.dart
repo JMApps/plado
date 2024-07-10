@@ -19,7 +19,7 @@ class SeasonTaskList extends StatelessWidget {
     final sortState = Provider.of<TaskSortState>(context);
     return FutureBuilder<List<TaskEntity>>(
       future: Provider.of<TaskDataState>(context).getTasksByMode(
-        taskPeriod: TaskPeriod.season.name,
+        taskPeriodIndex: TaskPeriod.season.index,
         orderBy: '${sortState.getSort} ${sortState.getOrder}',
       ),
       builder: (context, snapshot) {

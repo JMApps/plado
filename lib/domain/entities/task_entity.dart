@@ -1,17 +1,16 @@
-import '../../core/strings/app_exception_messages.dart';
 import '../../data/models/task_model.dart';
 
 class TaskEntity {
   final int taskId;
   final String taskTitle;
-  final DateTime startDateTime;
-  final DateTime endDateTime;
+  final String startDateTime;
+  final String endDateTime;
   final int taskPeriodIndex;
   final int taskPriorityIndex;
   final int taskStatusIndex;
   final int taskColorIndex;
   final int notificationId;
-  final DateTime? notificationDate;
+  final String? notificationDate;
 
   TaskEntity({
     required this.taskId,
@@ -24,11 +23,7 @@ class TaskEntity {
     required this.taskColorIndex,
     required this.notificationId,
     required this.notificationDate,
-  }) {
-    if (startDateTime.isAfter(endDateTime)) {
-      throw ArgumentError(AppExceptionMessages.dateIsAfterException);
-    }
-  }
+  });
 
   factory TaskEntity.fromModel(TaskModel model) {
     return TaskEntity(

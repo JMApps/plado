@@ -5,7 +5,7 @@ abstract class TaskRepository {
 
   Future<TaskEntity> getTaskById({required int taskId});
 
-  Future<List<TaskEntity>> getTasksByMode({required String taskPeriod, required String orderBy});
+  Future<List<TaskEntity>> getTasksByMode({required int taskPeriodIndex, required String orderBy});
 
   Future<int> createTask({required Map<String, dynamic> taskMap});
 
