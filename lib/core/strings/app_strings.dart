@@ -47,6 +47,7 @@ class AppStrings {
   static const String addHabit = 'Добавить привычку';
   static const String addingHabit = 'Добавление привычки';
 
+  static const String added = 'Добавлено:';
   static const String remaining = 'Осталось:';
 
   static const String hours = 'Часы';

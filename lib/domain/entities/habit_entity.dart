@@ -6,7 +6,7 @@ class HabitEntity {
   final String habitDescription;
   final DateTime startDateTime;
   final DateTime endDateTime;
-  final String habitPeriod;
+  final int habitPeriod;
   final List<bool> completedDays;
 
   HabitEntity({

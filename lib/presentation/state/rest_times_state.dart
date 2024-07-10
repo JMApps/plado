@@ -58,7 +58,7 @@ class RestTimesState extends ChangeNotifier {
         final totalMinutesInMonth = const Duration(days: 7).inMinutes;
 
         elapsedPercentage = (elapsedTime / totalMinutesInMonth) * 100.0;
-        endDateTime = endOfWeek.add(const Duration(days: -1));;
+        endDateTime = endOfWeek.add(const Duration(days: -1));
         break;
       case TaskPeriod.month:
         final startOfMonth = DateTime(_currentDateTime.year, _currentDateTime.month);
@@ -69,7 +69,7 @@ class RestTimesState extends ChangeNotifier {
         final totalMinutesInMonth = Duration(days: daysInMonth(_currentDateTime.year, _currentDateTime.month)).inMinutes;
 
         elapsedPercentage = (elapsedTime / totalMinutesInMonth) * 100.0;
-        endDateTime = endOfMonth.add(const Duration(days: -1));;
+        endDateTime = endOfMonth.add(const Duration(days: -1));
         break;
       case TaskPeriod.season:
         final int startSeasonMonth;
@@ -102,7 +102,7 @@ class RestTimesState extends ChangeNotifier {
         final totalMinutesInSeason = endSeason.difference(startSeason).inMinutes;
 
         elapsedPercentage = (elapsedTime / totalMinutesInSeason) * 100.0;
-        endDateTime = endSeason.add(const Duration(days: -1));;
+        endDateTime = endSeason.add(const Duration(days: -1));
         break;
       case TaskPeriod.year:
         final startOfYear = DateTime(_currentDateTime.year);
@@ -113,7 +113,7 @@ class RestTimesState extends ChangeNotifier {
         final totalMinutesInYear = endOfYear.difference(startOfYear).inMinutes;
 
         elapsedPercentage = (elapsedTime / totalMinutesInYear) * 100.0;
-        endDateTime = endOfYear.add(const Duration(days: -1));;
+        endDateTime = endOfYear.add(const Duration(days: -1));
         break;
     }
     return {
