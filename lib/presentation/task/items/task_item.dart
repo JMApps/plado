@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../../../domain/entities/task_entity.dart';
 import '../../../core/styles/app_styles.dart';
@@ -16,6 +16,8 @@ class TaskItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime parsedDate = DateTime.parse(taskModel.startDateTime);
+    String timeAgo = timeago.format(parsedDate, locale: 'ru');
     return Padding(
       padding: AppStyles.paddingBottomMini,
       child: ListTile(
@@ -42,7 +44,7 @@ class TaskItem extends StatelessWidget {
           ),
           maxLines: 1,
         ),
-        subtitle: Text(DateFormat('dd.MM.yyyy – HH:mm').format(taskModel.startDateTime)),
+        subtitle: Text(timeAgo),
       ),
     );
   }
