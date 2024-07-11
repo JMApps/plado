@@ -13,6 +13,7 @@ class RootMaterialPage extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: AppStrings.appName,
+      locale: const Locale('ru'),
       theme: AppMaterialStyles.lightTheme,
       darkTheme: AppMaterialStyles.darkTheme,
       onGenerateRoute: MaterialRoutes.onGenerateRoute,

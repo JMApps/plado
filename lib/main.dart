@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:plado/data/services/notifications/notification_service.dart';
 import 'package:provider/provider.dart';
 
+import 'data/services/notifications/notification_service.dart';
 import 'data/state/task_data_state.dart';
 import 'presentation/pages/root_material_page.dart';
 import 'presentation/state/bottom_nav_index_state.dart';

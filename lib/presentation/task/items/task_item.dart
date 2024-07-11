@@ -17,6 +17,7 @@ class TaskItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateTime parsedDate = DateTime.parse(taskModel.startDateTime);
+    // TODO обязательно передать текущую локаль
     String timeAgo = timeago.format(parsedDate, locale: 'ru');
     return Padding(
       padding: AppStyles.paddingBottomMini,
