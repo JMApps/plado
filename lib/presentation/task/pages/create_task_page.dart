@@ -238,7 +238,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                           'task_status': createTaskState.getTaskStatus.index,
                           'task_color_index': createTaskState.getColorIndex,
                           'notification_id': createTaskState.getIsRemind ? notificationId : 0,
-                          'notification_date': createTaskState.getIsRemind ? createTaskState.getTaskNotificationDate : null,
+                          'notification_date': createTaskState.getIsRemind ? createTaskState.getTaskNotificationDate : '',
                         };
                         if (createTaskState.getIsRemind) {
                           _notificationService.futureNotification(createTaskState.getTaskNotificationDate, AppStrings.appName, _taskTextController.text.trim(), notificationId);
@@ -286,7 +286,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                           'task_status': createTaskState.getTaskStatus.index,
                           'task_color_index': createTaskState.getColorIndex,
                           'notification_id': createTaskState.getIsRemind ? notificationId : 0,
-                          'notification_date': createTaskState.getIsRemind ? createTaskState.getTaskNotificationDate : null,
+                          'notification_date': createTaskState.getIsRemind ? createTaskState.getTaskNotificationDate : '',
                         };
                         if (createTaskState.getIsRemind) {
                           _notificationService.futureNotification(createTaskState.getTaskNotificationDate, AppStrings.appName, _taskTextController.text.trim(), notificationId);

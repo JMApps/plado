@@ -58,7 +58,7 @@ class AppStrings {
 
   static const String enterTaskTitle = 'Введите название задачи';
 
-  static const String shortDay = 'д';
-  static const String shortHour = 'ч';
-  static const String shortMinute = 'м';
+  static const String shortDay = 'д.';
+  static const String shortHour = 'ч.';
+  static const String shortMinute = 'м.';
 }

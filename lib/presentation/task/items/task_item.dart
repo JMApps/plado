@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:plado/core/routes/name_routes.dart';
+import 'package:plado/data/models/arguments/update_task_args.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../../../domain/entities/task_entity.dart';
@@ -18,11 +20,14 @@ class TaskItem extends StatelessWidget {
   Widget build(BuildContext context) {
     DateTime parsedDate = DateTime.parse(taskModel.startDateTime);
     // TODO обязательно передать текущую локаль
-    String timeAgo = timeago.format(parsedDate, locale: 'ru');
+    String timeAgo = timeago.format(parsedDate, locale: 'en');
     return Padding(
       padding: AppStyles.paddingBottomMini,
       child: ListTile(
         onTap: () {},
+        onLongPress: () {
+          Navigator.pushNamed(context, NameRoutes.updateTaskPage, arguments: UpdateTaskArgs(taskEntity: taskModel));
+        },
         shape: AppStyles.shapeMini,
         visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
         contentPadding: AppStyles.paddingRight,
