@@ -26,14 +26,9 @@ class CreateTaskState extends ChangeNotifier {
     notifyListeners();
   }
 
-  TaskStatus _taskStatus = TaskStatus.inProgress;
+  final TaskStatus _taskStatus = TaskStatus.inProgress;
 
   TaskStatus get getTaskStatus => _taskStatus;
-
-  set setTaskStatus(TaskStatus taskStatus) {
-    _taskStatus = taskStatus;
-    notifyListeners();
-  }
 
   int _colorIndex = 0;
 
@@ -53,11 +48,11 @@ class CreateTaskState extends ChangeNotifier {
     notifyListeners();
   }
 
-  late DateTime _taskNotificationDate;
+  late String _taskNotificationDate;
 
-  DateTime get getTaskNotificationDate => _taskNotificationDate;
+  String get getTaskNotificationDate => _taskNotificationDate;
 
-  set setTaskNotificationDate(DateTime taskNotificationDate) {
+  set setTaskNotificationDate(String taskNotificationDate) {
     _taskNotificationDate = taskNotificationDate;
     notifyListeners();
   }
