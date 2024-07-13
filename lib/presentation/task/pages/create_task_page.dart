@@ -30,7 +30,6 @@ class CreateTaskPage extends StatefulWidget {
 
 class _CreateTaskPageState extends State<CreateTaskPage> {
   final _taskTextController = TextEditingController();
-  final _notificationService = NotificationService();
   DateTime _currentTime = DateTime.now();
   TimeOfDay _selectedTime = TimeOfDay.now();
 
@@ -42,7 +41,6 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
 
   @override
   Widget build(BuildContext context) {
-    final taskDataState = Provider.of<TaskDataState>(context, listen: false);
     final appColors = Theme.of(context).colorScheme;
     return MultiProvider(
       providers: [
@@ -166,49 +164,53 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                         return Row(
                           children: [
                             TextButton.icon(
-                              onPressed: createTaskState.getIsRemind ? () async {
-                                _currentTime = DateTime.now();
-                                _currentTime = (await showDatePicker(
-                                  context: context,
-                                  helpText: AppStrings.selectDate,
-                                  cancelText: AppStrings.cancel,
-                                  confirmText: AppStrings.select,
-                                  initialDate: _currentTime,
-                                  firstDate: _currentTime,
-                                  lastDate: restTimesState.getRestTimeIndicator(createTaskState.getTaskPeriod)[AppConstraints.dateTimeInterval],
-                                ))!;
-                              } : null,
+                              onPressed: createTaskState.getIsRemind
+                                  ? () async {
+                                      _currentTime = DateTime.now();
+                                      _currentTime = (await showDatePicker(
+                                        context: context,
+                                        helpText: AppStrings.selectDate,
+                                        cancelText: AppStrings.cancel,
+                                        confirmText: AppStrings.select,
+                                        initialDate: _currentTime,
+                                        firstDate: _currentTime,
+                                        lastDate: restTimesState.getRestTimeIndicator(createTaskState.getTaskPeriod)[AppConstraints.dateTimeInterval],
+                                      ))!;
+                                    }
+                                  : null,
                               icon: const Icon(Icons.date_range),
                               label: const Text(AppStrings.selectDate),
                             ),
                             TextButton.icon(
-                              onPressed: createTaskState.getIsRemind ? () async {
-                                TimeOfDay now = TimeOfDay.now();
-                                _selectedTime = (await showTimePicker(
-                                  context: context,
-                                  initialTime: now,
-                                  helpText: AppStrings.selectTime,
-                                  hourLabelText: AppStrings.hours,
-                                  minuteLabelText: AppStrings.minutes,
-                                  cancelText: AppStrings.cancel,
-                                  confirmText: AppStrings.select,
-                                ))!;
-                                if (!context.mounted) return;
-                                if (_selectedTime.hour < now.hour || (_selectedTime.hour == now.hour && _selectedTime.minute < now.minute)) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      backgroundColor: appColors.inversePrimary,
-                                      content: Text(
-                                        AppStrings.selectCorrectTime,
-                                        style: TextStyle(
-                                          fontSize: 17,
-                                          color: appColors.onSurface,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                }
-                                                            } : null,
+                              onPressed: createTaskState.getIsRemind
+                                  ? () async {
+                                      _selectedTime = TimeOfDay.now();
+                                      _selectedTime = (await showTimePicker(
+                                        context: context,
+                                        initialTime: _selectedTime,
+                                        helpText: AppStrings.selectTime,
+                                        hourLabelText: AppStrings.hours,
+                                        minuteLabelText: AppStrings.minutes,
+                                        cancelText: AppStrings.cancel,
+                                        confirmText: AppStrings.select,
+                                      ))!;
+                                      if (!context.mounted) return;
+                                      if (_selectedTime.hour < _selectedTime.hour || (_selectedTime.hour == _selectedTime.hour && _selectedTime.minute < _selectedTime.minute)) {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(
+                                            backgroundColor: appColors.inversePrimary,
+                                            content: Text(
+                                              AppStrings.selectCorrectTime,
+                                              style: TextStyle(
+                                                fontSize: 17,
+                                                color: appColors.onSurface,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    }
+                                  : null,
                               icon: const Icon(Icons.access_time),
                               label: const Text(AppStrings.selectTime),
                             ),
@@ -226,24 +228,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                   OutlinedButton(
                     onPressed: () {
                       if (_taskTextController.text.trim().isNotEmpty) {
-                        _currentTime = DateTime.now();
-                        final notificationId = Random().nextInt(1000000);
-                        createTaskState.setTaskNotificationDate = DateTime(_currentTime.year, _currentTime.month, _currentTime.day, _selectedTime.hour, _selectedTime.minute);
-                        final Map<String, dynamic> taskMap = {
-                          'task_title': _taskTextController.text.trim(),
-                          'start_date_time': _currentTime.toIso8601String(),
-                          'end_date_time': _currentTime.toIso8601String(),
-                          'task_period': createTaskState.getTaskPeriod.index,
-                          'task_priority_index': createTaskState.getTaskPriority.index,
-                          'task_status': createTaskState.getTaskStatus.index,
-                          'task_color_index': createTaskState.getColorIndex,
-                          'notification_id': createTaskState.getIsRemind ? notificationId : 0,
-                          'notification_date': createTaskState.getIsRemind ? createTaskState.getTaskNotificationDate : '',
-                        };
-                        if (createTaskState.getIsRemind) {
-                          _notificationService.futureNotification(createTaskState.getTaskNotificationDate, AppStrings.appName, _taskTextController.text.trim(), notificationId);
-                        }
-                        taskDataState.createTask(taskMap: taskMap);
+                        _createTask(createTaskState);
                         _taskTextController.clear();
                         createTaskState.setTaskPeriod = TaskPeriod.day;
                         createTaskState.setTaskPriority = TaskPriority.low;
@@ -273,25 +258,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                   OutlinedButton(
                     onPressed: () {
                       if (_taskTextController.text.trim().isNotEmpty) {
-                        _currentTime = DateTime.now();
-                        final notificationId = Random().nextInt(1000000);
-                        createTaskState.setTaskNotificationDate = DateTime(_currentTime.year, _currentTime.month, _currentTime.day, _selectedTime.hour, _selectedTime.minute);
-                        Navigator.of(context).pop();
-                        final Map<String, dynamic> taskMap = {
-                          'task_title': _taskTextController.text.trim(),
-                          'start_date_time': _currentTime.toIso8601String(),
-                          'end_date_time': _currentTime.toIso8601String(),
-                          'task_period': createTaskState.getTaskPeriod.index,
-                          'task_priority_index': createTaskState.getTaskPriority.index,
-                          'task_status': createTaskState.getTaskStatus.index,
-                          'task_color_index': createTaskState.getColorIndex,
-                          'notification_id': createTaskState.getIsRemind ? notificationId : 0,
-                          'notification_date': createTaskState.getIsRemind ? createTaskState.getTaskNotificationDate : '',
-                        };
-                        if (createTaskState.getIsRemind) {
-                          _notificationService.futureNotification(createTaskState.getTaskNotificationDate, AppStrings.appName, _taskTextController.text.trim(), notificationId);
-                        }
-                        taskDataState.createTask(taskMap: taskMap);
+                        _createTask(createTaskState);
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
@@ -320,5 +287,28 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
         ),
       ),
     );
+  }
+
+  _createTask(CreateTaskState createTaskState) {
+    _currentTime = DateTime.now();
+    final notificationId = Random().nextInt(AppConstraints.randomNotificationNumber);
+    createTaskState.setTaskNotificationDate = DateTime(_currentTime.year, _currentTime.month, _currentTime.day, _selectedTime.hour, _selectedTime.minute).toIso8601String();
+    final Map<String, dynamic> taskMap = {
+      'task_title': _taskTextController.text.trim(),
+      'start_date_time': _currentTime.toIso8601String(),
+      'end_date_time': _currentTime.toIso8601String(),
+      'task_period': createTaskState.getTaskPeriod.index,
+      'task_priority_index': createTaskState.getTaskPriority.index,
+      'task_status': createTaskState.getTaskStatus.index,
+      'task_color_index': createTaskState.getColorIndex,
+      'notification_id': createTaskState.getIsRemind ? notificationId : 0,
+      'notification_date': createTaskState.getIsRemind
+          ? createTaskState.getTaskNotificationDate
+          : '',
+    };
+    if (createTaskState.getIsRemind) {
+      NotificationService().futureNotification(DateTime.parse(createTaskState.getTaskNotificationDate), AppStrings.appName, _taskTextController.text.trim(), notificationId);
+    }
+    Provider.of<TaskDataState>(context, listen: false).createTask(taskMap: taskMap);
   }
 }
