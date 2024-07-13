@@ -30,6 +30,7 @@ class AppStrings {
   static const String color = 'Цвет';
   static const String add = 'Добавить';
   static const String addClose = 'Добавить и закрыть';
+  static const String change = 'Изменить';
 
   static const String tasks = 'Задачи';
   static const String habits = 'Привычки';
@@ -54,7 +55,7 @@ class AppStrings {
   static const String minutes = 'Минуты';
   static const String select = 'Выбрать';
   static const String cancel = 'Отмена';
-  static const String selectCorrectTime = 'Невозможно выбрать прошедшее время';
+  static const String selectCorrectTime = 'Выберите корректную дату и время';
 
   static const String enterTaskTitle = 'Введите название задачи';
 
