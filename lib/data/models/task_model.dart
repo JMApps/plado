@@ -8,7 +8,7 @@ class TaskModel {
   final int taskStatusIndex;
   final int taskColorIndex;
   final int notificationId;
-  final String? notificationDate;
+  final String notificationDate;
 
   TaskModel({
     required this.taskId,
@@ -34,7 +34,7 @@ class TaskModel {
       taskStatusIndex: map['task_status'] as int,
       taskColorIndex: map['task_color_index'] as int,
       notificationId: map['notification_id'] as int,
-      notificationDate: map['notification_date'] as String?
+      notificationDate: map['notification_date'] as String,
     );
   }
 
@@ -48,7 +48,7 @@ class TaskModel {
       'task_status': taskStatusIndex,
       'task_color_index': taskColorIndex,
       'notification_id': notificationId,
-      'notification_date': notificationDate!,
+      'notification_date': notificationDate,
     };
   }
 }

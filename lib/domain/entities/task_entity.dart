@@ -10,7 +10,7 @@ class TaskEntity {
   final int taskStatusIndex;
   final int taskColorIndex;
   final int notificationId;
-  final String? notificationDate;
+  final String notificationDate;
 
   TaskEntity({
     required this.taskId,
