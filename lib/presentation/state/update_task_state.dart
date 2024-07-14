@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 
 import '../../core/enums/task_period.dart';
 import '../../core/enums/task_priority.dart';
-import '../../core/enums/task_status.dart';
 
 class UpdateTaskState extends ChangeNotifier {
   UpdateTaskState({
     required TaskPeriod taskPeriod,
     required TaskPriority taskPriority,
-    required TaskStatus taskStatus,
     required int colorIndex,
-    required DateTime taskNotificationDate,
+    required bool isRemind,
+    required int notificationId,
+    required String taskNotificationDate,
   })  : _taskPeriod = taskPeriod,
         _taskPriority = taskPriority,
-        _taskStatus = taskStatus,
         _colorIndex = colorIndex,
+        _isRemind = isRemind,
+        _notificationId = notificationId,
         _taskNotificationDate = taskNotificationDate;
 
   late TaskPeriod _taskPeriod;
@@ -32,15 +33,6 @@ class UpdateTaskState extends ChangeNotifier {
 
   set setTaskPriority(TaskPriority taskPriority) {
     _taskPriority = taskPriority;
-    notifyListeners();
-  }
-
-  late TaskStatus _taskStatus;
-
-  TaskStatus get getTaskStatus => _taskStatus;
-
-  set setTaskStatus(TaskStatus taskStatus) {
-    _taskStatus = taskStatus;
     notifyListeners();
   }
 
@@ -62,11 +54,15 @@ class UpdateTaskState extends ChangeNotifier {
     notifyListeners();
   }
 
-  late DateTime _taskNotificationDate;
+  late final int _notificationId;
 
-  DateTime get getTaskNotificationData => _taskNotificationDate;
+  int get getNotificationId => _notificationId;
 
-  set setTaskNotificationDate(DateTime taskNotificationDate) {
+  late String _taskNotificationDate;
+
+  String get getTaskNotificationDate => _taskNotificationDate;
+
+  set setTaskNotificationDate(String taskNotificationDate) {
     _taskNotificationDate = taskNotificationDate;
     notifyListeners();
   }
