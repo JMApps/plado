@@ -197,19 +197,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                 }
                                 if (_selectedDate.isBefore(_currentTime)) {
                                   if (!context.mounted) return;
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      backgroundColor:
-                                      appColors.inversePrimary,
-                                      content: Text(
-                                        AppStrings.selectCorrectTime,
-                                        style: TextStyle(
-                                          fontSize: 17,
-                                          color: appColors.onSurface,
-                                        ),
-                                      ),
-                                    ),
-                                  );
+                                  _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectTime);
                                 }
                               } : null,
                               icon: const Icon(Icons.access_time),
@@ -229,42 +217,18 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                   OutlinedButton(
                     onPressed: () {
                       if (_taskTextController.text.trim().isNotEmpty) {
-                        _currentTime = DateTime.now();
                         if (createTaskState.getIsRemind) {
+                          _currentTime = DateTime.now();
                           if (_selectedDate.isAfter(_currentTime)) {
                             _createTask(createTaskState);
                           } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                backgroundColor: appColors.inversePrimary,
-                                duration: const Duration(milliseconds: 350),
-                                content: Text(
-                                  AppStrings.selectCorrectTime,
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                    color: appColors.onSurface,
-                                  ),
-                                ),
-                              ),
-                            );
+                            _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectTime);
                           }
                         } else {
                           _createTask(createTaskState);
                         }
                       } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            backgroundColor: appColors.inversePrimary,
-                            duration: const Duration(milliseconds: 350),
-                            content: Text(
-                              AppStrings.enterTaskTitle,
-                              style: TextStyle(
-                                fontSize: 17,
-                                color: appColors.onSurface,
-                              ),
-                            ),
-                          ),
-                        );
+                        _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.enterTaskTitle);
                       }
                     },
                     child: const Text(
@@ -276,44 +240,20 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                   OutlinedButton(
                     onPressed: () {
                       if (_taskTextController.text.trim().isNotEmpty) {
-                        _currentTime = DateTime.now();
                         if (createTaskState.getIsRemind) {
+                          _currentTime = DateTime.now();
                           if (_selectedDate.isAfter(_currentTime)) {
                             Navigator.of(context).pop();
                             _createTask(createTaskState);
                           } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                backgroundColor: appColors.inversePrimary,
-                                duration: const Duration(milliseconds: 350),
-                                content: Text(
-                                  AppStrings.selectCorrectTime,
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                    color: appColors.onSurface,
-                                  ),
-                                ),
-                              ),
-                            );
+                            _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectTime);
                           }
                         } else {
                           Navigator.of(context).pop();
                           _createTask(createTaskState);
                         }
                       } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            backgroundColor: appColors.inversePrimary,
-                            duration: const Duration(milliseconds: 350),
-                            content: Text(
-                              AppStrings.enterTaskTitle,
-                              style: TextStyle(
-                                fontSize: 17,
-                                color: appColors.onSurface,
-                              ),
-                            ),
-                          ),
-                        );
+                        _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.enterTaskTitle);
                       }
                     },
                     child: const Text(
@@ -351,12 +291,30 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
       'notification_id': notificationId,
       'notification_date': createTaskState.getIsRemind ? createTaskState.getTaskNotificationDate : '',
     };
+
     Provider.of<TaskDataState>(context, listen: false).createTask(taskMap: taskMap);
+
     _taskTextController.clear();
     createTaskState.setTaskNotificationDate = '';
     _selectedDate = _currentTime;
     createTaskState.setTaskPeriod = TaskPeriod.day;
     createTaskState.setTaskPriority = TaskPriority.low;
     createTaskState.setColorIndex = 0;
+  }
+
+  void _showScaffoldMessage(Color color, Color textColor, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: color,
+        duration: const Duration(seconds: 1),
+        content: Text(
+          message,
+          style: TextStyle(
+            fontSize: 17,
+            color: textColor,
+          ),
+        ),
+      ),
+    );
   }
 }
