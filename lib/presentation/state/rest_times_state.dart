@@ -186,6 +186,6 @@ class RestTimesState extends ChangeNotifier {
     if (hours > 0) parts.add('$hours $_hour');
     if (minutes > 0) parts.add('$minutes $_minute');
 
-    return parts.join('. ');
+    return parts.join(' ');
   }
 }

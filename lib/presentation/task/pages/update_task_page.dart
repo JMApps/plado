@@ -190,7 +190,7 @@ class _UpdateTaskPageState extends State<UpdateTaskPage> {
                                   cancelText: AppStrings.cancel,
                                   confirmText: AppStrings.select,
                                   initialDate: _argDateTime,
-                                  firstDate: _argDateTime,
+                                  firstDate: _currentDateTime,
                                   lastDate: restTimesState.getRestTimeIndicator(updateTaskState.getTaskPeriod)[AppConstraints.dateTimeInterval],
                                 );
                                 if (selectedDate != null) {
