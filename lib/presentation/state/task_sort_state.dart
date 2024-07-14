@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plado/core/strings/app_constraints.dart';
 
 class TaskSortState extends ChangeNotifier {
   int _sortIndex = 0;
@@ -35,7 +36,7 @@ class TaskSortState extends ChangeNotifier {
 
   int get getOrderIndex => _orderIndex;
 
-  String _order = 'DESC';
+  String _order = AppConstraints.descSort;
 
   String get getOrder => _order;
 
@@ -43,13 +44,13 @@ class TaskSortState extends ChangeNotifier {
     _orderIndex = orderIndex;
     switch (_orderIndex) {
       case 0:
-        _order = 'DESC';
+        _order = AppConstraints.descSort;
         break;
       case 1:
-        _order = 'ASC';
+        _order = AppConstraints.ascSort;
         break;
       default:
-        _order = 'DESC';
+        _order = AppConstraints.descSort;
     }
     // Save index value
     notifyListeners();

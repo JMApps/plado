@@ -31,7 +31,7 @@ class TaskEntity {
       taskTitle: model.taskTitle,
       startDateTime: model.startDateTime,
       endDateTime: model.endDateTime,
-      taskPeriodIndex: model.taskPriorityIndex,
+      taskPeriodIndex: model.taskPeriodIndex,
       taskPriorityIndex: model.taskPriorityIndex,
       taskStatusIndex: model.taskStatusIndex,
       taskColorIndex: model.taskColorIndex,

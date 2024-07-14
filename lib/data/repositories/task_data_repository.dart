@@ -8,6 +8,7 @@ import '../services/plado_database_service.dart';
 class TaskDataRepository implements TaskRepository {
   final PladoDatabaseService _pladoDatabaseService = PladoDatabaseService();
   final String _tasksTableName = 'Table_of_tasks';
+  final String _taskId = 'task_id';
 
   @override
   Future<List<TaskEntity>> getAllTasks({required String orderBy}) async {
@@ -20,7 +21,7 @@ class TaskDataRepository implements TaskRepository {
   @override
   Future<TaskEntity> getTaskById({required int taskId}) async {
     final Database database = await _pladoDatabaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(_tasksTableName, where: 'task_id = ?', whereArgs: [taskId]);
+    final List<Map<String, Object?>> resources = await database.query(_tasksTableName, where: '$_taskId = ?', whereArgs: [taskId]);
     final TaskEntity? taskById = resources.isNotEmpty ? TaskEntity.fromModel(TaskModel.fromMap(resources.first)) : null;
     return taskById!;
   }
@@ -28,7 +29,7 @@ class TaskDataRepository implements TaskRepository {
   @override
   Future<List<TaskEntity>> getTasksByMode({required int taskPeriodIndex, required String orderBy}) async {
     final Database database = await _pladoDatabaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(_tasksTableName, where: 'task_period = ?', whereArgs: [taskPeriodIndex], orderBy: orderBy);
+    final List<Map<String, Object?>> resources = await database.query(_tasksTableName, where: 'task_period_index = ?', whereArgs: [taskPeriodIndex], orderBy: orderBy);
     final List<TaskEntity> tasksByMode = resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
     return tasksByMode;
   }
@@ -41,16 +42,16 @@ class TaskDataRepository implements TaskRepository {
   }
 
   @override
-  Future<int> updateTask({required Map<String, dynamic> taskMap, required int taskId}) async {
+  Future<int> updateTask({ required int taskId, required Map<String, dynamic> taskMap}) async {
     final Database database = await _pladoDatabaseService.db;
-    final int rowsAffected = await database.update(_tasksTableName, taskMap, where: 'task_id = ?', whereArgs: [taskId], conflictAlgorithm: ConflictAlgorithm.ignore);
+    final int rowsAffected = await database.update(_tasksTableName, taskMap, where: '$_taskId = ?', whereArgs: [taskId], conflictAlgorithm: ConflictAlgorithm.replace);
     return rowsAffected;
   }
 
   @override
   Future<int> deleteTask({required int taskId}) async {
     final Database database = await _pladoDatabaseService.db;
-    final int rowsDeleted = await database.delete(_tasksTableName, where: 'task_id = ?', whereArgs: [taskId]);
+    final int rowsDeleted = await database.delete(_tasksTableName, where: '$_taskId = ?', whereArgs: [taskId]);
     return rowsDeleted;
   }
 }

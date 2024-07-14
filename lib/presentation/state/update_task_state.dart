@@ -5,14 +5,14 @@ import '../../core/enums/task_priority.dart';
 
 class UpdateTaskState extends ChangeNotifier {
   UpdateTaskState({
-    required TaskPeriod taskPeriod,
-    required TaskPriority taskPriority,
+    required TaskPeriod taskPeriodIndex,
+    required TaskPriority taskPriorityIndex,
     required int colorIndex,
     required bool isRemind,
     required int notificationId,
     required String taskNotificationDate,
-  })  : _taskPeriod = taskPeriod,
-        _taskPriority = taskPriority,
+  })  : _taskPeriod = taskPeriodIndex,
+        _taskPriority = taskPriorityIndex,
         _colorIndex = colorIndex,
         _isRemind = isRemind,
         _notificationId = notificationId,

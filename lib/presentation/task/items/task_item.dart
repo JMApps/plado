@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:plado/core/routes/name_routes.dart';
-import 'package:plado/data/models/arguments/update_task_args.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../../../domain/entities/task_entity.dart';
+import '../../../core/routes/name_routes.dart';
 import '../../../core/styles/app_styles.dart';
+import '../../../data/models/arguments/update_task_args.dart';
 
 class TaskItem extends StatelessWidget {
   const TaskItem({
@@ -35,7 +35,9 @@ class TaskItem extends StatelessWidget {
         tileColor: AppStyles.priorityColors[taskModel.taskPriorityIndex].withOpacity(0.05),
         leading: Checkbox(
           value: false,
-          onChanged: (bool? onChanged) {},
+          onChanged: (bool? onChanged) {
+
+          },
         ),
         trailing: Icon(
           Icons.circle,

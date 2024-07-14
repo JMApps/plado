@@ -37,8 +37,7 @@ class _UpdateTaskPageState extends State<UpdateTaskPage> {
   @override
   void initState() {
     super.initState();
-    _taskTextController =
-        TextEditingController(text: widget.taskModel.taskTitle);
+    _taskTextController = TextEditingController(text: widget.taskModel.taskTitle);
   }
 
   @override
@@ -54,8 +53,8 @@ class _UpdateTaskPageState extends State<UpdateTaskPage> {
       providers: [
         ChangeNotifierProvider(
           create: (_) => UpdateTaskState(
-            taskPeriod: AppStyles.taskPeriodList[widget.taskModel.taskPeriodIndex],
-            taskPriority: AppStyles.taskPriorityList[widget.taskModel.taskPriorityIndex],
+            taskPeriodIndex: AppStyles.taskPeriodList[widget.taskModel.taskPeriodIndex],
+            taskPriorityIndex: AppStyles.taskPriorityList[widget.taskModel.taskPriorityIndex],
             colorIndex: widget.taskModel.taskColorIndex,
             isRemind: widget.taskModel.notificationId > 0 ? true : false,
             notificationId: widget.taskModel.notificationId,
@@ -282,7 +281,7 @@ class _UpdateTaskPageState extends State<UpdateTaskPage> {
 
     final Map<String, dynamic> taskMap = {
       'task_title': _taskTextController.text.trim(),
-      'task_period': updateTaskState.getTaskPeriod.index,
+      'task_period_index': updateTaskState.getTaskPeriod.index,
       'task_priority_index': updateTaskState.getTaskPriority.index,
       'task_color_index': updateTaskState.getColorIndex,
       'notification_id': notificationId,
