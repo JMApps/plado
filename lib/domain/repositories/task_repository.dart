@@ -12,4 +12,6 @@ abstract class TaskRepository {
   Future<int> updateTask({required Map<String, dynamic> taskMap, required int taskId});
 
   Future<int> deleteTask({required int taskId});
+
+  Future<int> changeTaskStatus({required int taskId, required int taskStatusIndex});
 }

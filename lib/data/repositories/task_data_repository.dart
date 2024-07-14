@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 
+import '../../core/styles/app_styles.dart';
 import '../../domain/entities/task_entity.dart';
 import '../../domain/repositories/task_repository.dart';
 import '../models/task_model.dart';
@@ -37,21 +38,32 @@ class TaskDataRepository implements TaskRepository {
   @override
   Future<int> createTask({required Map<String, dynamic> taskMap}) async {
     final Database database = await _pladoDatabaseService.db;
-    final int taskId = await database.insert(_tasksTableName, taskMap, conflictAlgorithm: ConflictAlgorithm.ignore);
-    return taskId;
+    final int createTask = await database.insert(_tasksTableName, taskMap, conflictAlgorithm: ConflictAlgorithm.ignore);
+    return createTask;
   }
 
   @override
   Future<int> updateTask({ required int taskId, required Map<String, dynamic> taskMap}) async {
     final Database database = await _pladoDatabaseService.db;
-    final int rowsAffected = await database.update(_tasksTableName, taskMap, where: '$_taskId = ?', whereArgs: [taskId], conflictAlgorithm: ConflictAlgorithm.replace);
-    return rowsAffected;
+    final int updateTask = await database.update(_tasksTableName, taskMap, where: '$_taskId = ?', whereArgs: [taskId], conflictAlgorithm: ConflictAlgorithm.replace);
+    return updateTask;
   }
 
   @override
   Future<int> deleteTask({required int taskId}) async {
     final Database database = await _pladoDatabaseService.db;
-    final int rowsDeleted = await database.delete(_tasksTableName, where: '$_taskId = ?', whereArgs: [taskId]);
-    return rowsDeleted;
+    final int deleteTask = await database.delete(_tasksTableName, where: '$_taskId = ?', whereArgs: [taskId]);
+    return deleteTask;
+  }
+
+  @override
+  Future<int> changeTaskStatus({required int taskId, required int taskStatusIndex}) async {
+    final Database database = await _pladoDatabaseService.db;
+
+    final getTaskStatusIndex = AppStyles.taskStatusList[taskStatusIndex].index;
+    final Map<String, int> taskStatusMap = {'task_status_index': getTaskStatusIndex};
+
+    final int statusTask = await database.update(_tasksTableName, taskStatusMap, where: '$_taskId = ?', whereArgs: [taskId], conflictAlgorithm: ConflictAlgorithm.replace);
+    return statusTask;
   }
 }

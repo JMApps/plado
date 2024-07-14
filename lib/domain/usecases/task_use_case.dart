@@ -54,4 +54,12 @@ class TaskUseCase {
       throw Exception('${AppExceptionMessages.deleteTaskException} $e');
     }
   }
+
+  Future<int> changeTaskStatus({required int taskId, required int taskStatusIndex}) async {
+    try {
+      return await _taskRepository.changeTaskStatus(taskId: taskId, taskStatusIndex: taskStatusIndex);
+    } catch (e) {
+      throw Exception('${AppExceptionMessages.changeStatusTaskException} $e');
+    }
+  }
 }
