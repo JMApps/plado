@@ -37,7 +37,8 @@ class _UpdateTaskPageState extends State<UpdateTaskPage> {
   @override
   void initState() {
     super.initState();
-    _taskTextController = TextEditingController(text: widget.taskModel.taskTitle);
+    _taskTextController =
+        TextEditingController(text: widget.taskModel.taskTitle);
   }
 
   @override

@@ -228,7 +228,8 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                           _createTask(createTaskState);
                         }
                       } else {
-                        _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.enterTaskTitle);
+                        _showScaffoldMessage(appColors.inversePrimary,
+                            appColors.onSurface, AppStrings.enterTaskTitle);
                       }
                     },
                     child: const Text(
