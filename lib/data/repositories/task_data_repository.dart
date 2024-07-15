@@ -3,6 +3,7 @@ import 'package:sqflite/sqflite.dart';
 import '../../core/styles/app_styles.dart';
 import '../../domain/entities/task_entity.dart';
 import '../../domain/repositories/task_repository.dart';
+import '../models/task_count_model.dart';
 import '../models/task_model.dart';
 import '../services/plado_database_service.dart';
 
@@ -28,11 +29,40 @@ class TaskDataRepository implements TaskRepository {
   }
 
   @override
-  Future<List<TaskEntity>> getTasksByMode({required int taskPeriodIndex, required String orderBy}) async {
+  Future<List<TaskEntity>> getTasksByMode({required int taskPeriodIndex, required String startTime, required String endTime, required String orderBy}) async {
     final Database database = await _pladoDatabaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(_tasksTableName, where: 'task_period_index = ?', whereArgs: [taskPeriodIndex], orderBy: orderBy);
+    final List<Map<String, Object?>> resources = await database.query(_tasksTableName, where: 'task_period_index = ? AND start_date_time = ? AND end_date_time = ?', whereArgs: [taskPeriodIndex, startTime, endTime], orderBy: 'CASE WHEN task_status_index = 1 THEN 1 ELSE 0 END, $orderBy');
     final List<TaskEntity> tasksByMode = resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
     return tasksByMode;
+  }
+
+  @override
+  Future<TaskCountModel> getTasksNumber({required int taskPeriodIndex}) async {
+    final Database database = await _pladoDatabaseService.db;
+
+    final List<Map<String, Object?>> inProgress = await database.query(
+      _tasksTableName,
+      where: 'task_status_index = ? AND task_period_index = ?',
+      whereArgs: [0, taskPeriodIndex],
+    );
+
+    final List<Map<String, Object?>> complete = await database.query(
+      _tasksTableName,
+      where: 'task_status_index = ? AND task_period_index = ?',
+      whereArgs: [1, taskPeriodIndex],
+    );
+
+    final List<Map<String, Object?>> canceled = await database.query(
+      _tasksTableName,
+      where: 'task_status_index = ? AND task_period_index = ?',
+      whereArgs: [2, taskPeriodIndex],
+    );
+
+    return TaskCountModel(
+      inProgress: inProgress.length,
+      complete: complete.length,
+      canceled: canceled.length,
+    );
   }
 
   @override

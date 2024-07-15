@@ -33,6 +33,8 @@ class _UpdateTaskPageState extends State<UpdateTaskPage> {
   late final TextEditingController _taskTextController;
   late DateTime _argDateTime;
   DateTime _currentDateTime = DateTime.now();
+  late DateTime _startTime;
+  late DateTime _endTime;
 
   @override
   void initState() {
@@ -88,6 +90,8 @@ class _UpdateTaskPageState extends State<UpdateTaskPage> {
                 children: [
                   Consumer<RestTimesState>(
                     builder: (context, restTimesState, _) {
+                      _startTime = restTimesState.getRestTimeIndicator(updateTaskState.getTaskPeriod)[AppConstraints.startDateTime];
+                      _endTime = restTimesState.getRestTimeIndicator(updateTaskState.getTaskPeriod)[AppConstraints.endDateTime];
                       return RestTimeIndicator(
                         remainingTime: restTimesState.getRestTimeIndicator(updateTaskState.getTaskPeriod)[AppConstraints.remainingTimeString],
                         elapsedPercentage: restTimesState.getRestTimeIndicator(updateTaskState.getTaskPeriod)[AppConstraints.elapsedPercentage],
@@ -191,7 +195,7 @@ class _UpdateTaskPageState extends State<UpdateTaskPage> {
                                   confirmText: AppStrings.select,
                                   initialDate: _argDateTime,
                                   firstDate: _currentDateTime,
-                                  lastDate: restTimesState.getRestTimeIndicator(updateTaskState.getTaskPeriod)[AppConstraints.dateTimeInterval],
+                                  lastDate: _endTime,
                                 );
                                 if (selectedDate != null) {
                                   _argDateTime = selectedDate;
@@ -260,6 +264,17 @@ class _UpdateTaskPageState extends State<UpdateTaskPage> {
                       style: TextStyle(fontSize: 18),
                     ),
                   ),
+                  OutlinedButton(onPressed: () {
+                    Navigator.of(context).pop();
+                    Provider.of<TaskDataState>(context, listen: false).deleteTask(taskId: widget.taskModel.taskId);
+                  },
+                    child: Text(AppStrings.delete,
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: appColors.error
+                      ),
+                    ),
+                  ),
                 ],
               );
             },
@@ -281,13 +296,14 @@ class _UpdateTaskPageState extends State<UpdateTaskPage> {
 
     final Map<String, dynamic> taskMap = {
       'task_title': _taskTextController.text.trim(),
+      'start_date_time': _startTime.toIso8601String(),
+      'end_date_time': _endTime.toIso8601String(),
       'task_period_index': updateTaskState.getTaskPeriod.index,
       'task_priority_index': updateTaskState.getTaskPriority.index,
       'task_color_index': updateTaskState.getColorIndex,
       'notification_id': notificationId,
       'notification_date': updateTaskState.getIsRemind ? updateTaskState.getTaskNotificationDate : '',
     };
-
     Provider.of<TaskDataState>(context, listen: false).updateTask(taskId: widget.taskModel.taskId, taskMap: taskMap);
   }
 

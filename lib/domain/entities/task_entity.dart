@@ -4,6 +4,8 @@ class TaskEntity {
   final int taskId;
   final String taskTitle;
   final String startDateTime;
+  final String completeDateTime;
+  final String createDateTime;
   final String endDateTime;
   final int taskPeriodIndex;
   final int taskPriorityIndex;
@@ -15,6 +17,8 @@ class TaskEntity {
   TaskEntity({
     required this.taskId,
     required this.taskTitle,
+    required this.createDateTime,
+    required this.completeDateTime,
     required this.startDateTime,
     required this.endDateTime,
     required this.taskPeriodIndex,
@@ -29,6 +33,8 @@ class TaskEntity {
     return TaskEntity(
       taskId: model.taskId,
       taskTitle: model.taskTitle,
+      createDateTime: model.createDateTime,
+      completeDateTime: model.completeDateTime,
       startDateTime: model.startDateTime,
       endDateTime: model.endDateTime,
       taskPeriodIndex: model.taskPeriodIndex,

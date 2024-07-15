@@ -32,6 +32,8 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
   final _taskTextController = TextEditingController();
   DateTime _currentTime = DateTime.now();
   DateTime _selectedDate = DateTime.now();
+  late DateTime _startTime;
+  late DateTime _endTime;
 
   @override
   void dispose() {
@@ -69,6 +71,8 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                 children: [
                   Consumer<RestTimesState>(
                     builder: (context, restTimesState, _) {
+                      _startTime = restTimesState.getRestTimeIndicator(createTaskState.getTaskPeriod)[AppConstraints.startDateTime];
+                      _endTime = restTimesState.getRestTimeIndicator(createTaskState.getTaskPeriod)[AppConstraints.endDateTime];
                       return RestTimeIndicator(
                         remainingTime: restTimesState.getRestTimeIndicator(createTaskState.getTaskPeriod)[AppConstraints.remainingTimeString],
                         elapsedPercentage: restTimesState.getRestTimeIndicator(createTaskState.getTaskPeriod)[AppConstraints.elapsedPercentage],
@@ -172,7 +176,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                   confirmText: AppStrings.select,
                                   initialDate: _currentTime,
                                   firstDate: _currentTime,
-                                  lastDate: restTimesState.getRestTimeIndicator(createTaskState.getTaskPeriod)[AppConstraints.dateTimeInterval],
+                                  lastDate: _endTime,
                                 );
                                 if (selectedDate != null) {
                                   _selectedDate = selectedDate;
@@ -214,53 +218,61 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                       },
                     ),
                   ),
-                  OutlinedButton(
-                    onPressed: () {
-                      if (_taskTextController.text.trim().isNotEmpty) {
-                        if (createTaskState.getIsRemind) {
-                          _currentTime = DateTime.now();
-                          if (_selectedDate.isAfter(_currentTime)) {
-                            _createTask(createTaskState);
+                  Builder(
+                    builder: (context) {
+                      return OutlinedButton(
+                        onPressed: () {
+                          if (_taskTextController.text.trim().isNotEmpty) {
+                            if (createTaskState.getIsRemind) {
+                              _currentTime = DateTime.now();
+                              if (_selectedDate.isAfter(_currentTime)) {
+                                _createTask(createTaskState);
+                              } else {
+                                _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectTime);
+                              }
+                            } else {
+                              _createTask(createTaskState);
+                            }
                           } else {
-                            _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectTime);
+                            _showScaffoldMessage(appColors.inversePrimary,
+                                appColors.onSurface, AppStrings.enterTaskTitle);
                           }
-                        } else {
-                          _createTask(createTaskState);
-                        }
-                      } else {
-                        _showScaffoldMessage(appColors.inversePrimary,
-                            appColors.onSurface, AppStrings.enterTaskTitle);
-                      }
-                    },
-                    child: const Text(
-                      AppStrings.add,
-                      style: TextStyle(fontSize: 18),
-                    ),
+                        },
+                        child: const Text(
+                          AppStrings.add,
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      );
+                    }
                   ),
                   const SizedBox(height: 8),
-                  OutlinedButton(
-                    onPressed: () {
-                      if (_taskTextController.text.trim().isNotEmpty) {
-                        if (createTaskState.getIsRemind) {
-                          _currentTime = DateTime.now();
-                          if (_selectedDate.isAfter(_currentTime)) {
-                            Navigator.of(context).pop();
-                            _createTask(createTaskState);
+                  Builder(
+                    builder: (context) {
+                      return OutlinedButton(
+                        onPressed: () {
+                          if (_taskTextController.text.trim().isNotEmpty) {
+                            if (createTaskState.getIsRemind) {
+                              _currentTime = DateTime.now();
+                              if (_selectedDate.isAfter(_currentTime)) {
+                                Navigator.of(context).pop();
+                                _createTask(createTaskState);
+                              } else {
+                                _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectTime);
+                              }
+                            } else {
+                              Navigator.of(context).pop();
+                              _createTask(createTaskState);
+                            }
                           } else {
-                            _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectTime);
+                            _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.enterTaskTitle);
                           }
-                        } else {
-                          Navigator.of(context).pop();
-                          _createTask(createTaskState);
-                        }
-                      } else {
-                        _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.enterTaskTitle);
-                      }
-                    },
-                    child: const Text(
-                      AppStrings.addClose,
-                      style: TextStyle(fontSize: 18),
-                    ),
+                        },
+                        child: const Text(
+                          AppStrings.addClose,
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      );
+                    }
                   ),
                 ],
               );
@@ -283,8 +295,10 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
 
     final Map<String, dynamic> taskMap = {
       'task_title': _taskTextController.text.trim(),
-      'start_date_time': _currentTime.toIso8601String(),
-      'end_date_time': _currentTime.toIso8601String(),
+      'create_date_time': _currentTime.toIso8601String(),
+      'complete_date_time': _currentTime.toIso8601String(),
+      'start_date_time': _startTime.toIso8601String(),
+      'end_date_time': _endTime.toIso8601String(),
       'task_period_index': createTaskState.getTaskPeriod.index,
       'task_priority_index': createTaskState.getTaskPriority.index,
       'task_status_index': createTaskState.getTaskStatus.index,

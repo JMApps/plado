@@ -1,6 +1,8 @@
 class TaskModel {
   final int taskId;
   final String taskTitle;
+  final String createDateTime;
+  final String completeDateTime;
   final String startDateTime;
   final String endDateTime;
   final int taskPeriodIndex;
@@ -13,6 +15,8 @@ class TaskModel {
   TaskModel({
     required this.taskId,
     required this.taskTitle,
+    required this.createDateTime,
+    required this.completeDateTime,
     required this.startDateTime,
     required this.endDateTime,
     required this.taskPeriodIndex,
@@ -27,6 +31,8 @@ class TaskModel {
     return TaskModel(
       taskId: map['task_id'] as int,
       taskTitle: map['task_title'] as String,
+      createDateTime: map['create_date_time'] as String,
+      completeDateTime: map['complete_date_time'] as String,
       startDateTime: map['start_date_time'] as String,
       endDateTime: map['end_date_time'] as String,
       taskPeriodIndex: map['task_period_index'] as int,
@@ -41,6 +47,8 @@ class TaskModel {
   Map<String, dynamic> toMap() {
     return {
       'task_title': taskTitle,
+      'create_date_time': createDateTime,
+      'complete_date_time': completeDateTime,
       'start_date_time': startDateTime,
       'end_date_time': endDateTime,
       'task_period_index': taskPeriodIndex,

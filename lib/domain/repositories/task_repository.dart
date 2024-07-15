@@ -1,3 +1,4 @@
+import '../../data/models/task_count_model.dart';
 import '../entities/task_entity.dart';
 
 abstract class TaskRepository {
@@ -5,7 +6,9 @@ abstract class TaskRepository {
 
   Future<TaskEntity> getTaskById({required int taskId});
 
-  Future<List<TaskEntity>> getTasksByMode({required int taskPeriodIndex, required String orderBy});
+  Future<List<TaskEntity>> getTasksByMode({required int taskPeriodIndex, required String startTime, required String endTime, required String orderBy});
+
+  Future<TaskCountModel> getTasksNumber({required int taskPeriodIndex});
 
   Future<int> createTask({required Map<String, dynamic> taskMap});
 

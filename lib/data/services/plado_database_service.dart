@@ -43,6 +43,8 @@ class PladoDatabaseService {
         task_id INTEGER PRIMARY KEY AUTOINCREMENT,
         task_title TEXT,
         start_date_time TEXT,
+        complete_date_time TEXT,
+        create_date_time TEXT,
         end_date_time TEXT,
         task_period_index INTEGER,
         task_priority_index INTEGER,

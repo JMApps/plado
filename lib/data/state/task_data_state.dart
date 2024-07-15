@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:plado/data/models/task_count_model.dart';
 
 import '../../domain/entities/task_entity.dart';
 import '../../domain/usecases/task_use_case.dart';
@@ -15,8 +16,14 @@ class TaskDataState extends ChangeNotifier {
     return await _taskUseCase.getTaskById(taskId: taskId);
   }
 
-  Future<List<TaskEntity>> getTasksByMode({required int taskPeriodIndex, required String orderBy}) async {
-    return await _taskUseCase.getTasksByMode(taskPeriodIndex: taskPeriodIndex, orderBy: orderBy);
+  Future<List<TaskEntity>> getTasksByMode({required int taskPeriodIndex, required String startTime, required String endTime, required String orderBy}) async {
+    return await _taskUseCase.getTasksByMode(taskPeriodIndex: taskPeriodIndex, startTime: startTime, endTime: endTime, orderBy: orderBy);
+  }
+
+  Future<TaskCountModel> getTasksNumber({required int taskPeriodIndex}) async {
+    final taskCountModel = await _taskUseCase.getTasksNumber(taskPeriodIndex: taskPeriodIndex);
+    notifyListeners();
+    return taskCountModel;
   }
 
   Future<int> createTask({required Map<String, dynamic> taskMap}) async {

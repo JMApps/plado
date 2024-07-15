@@ -5,7 +5,9 @@ import '../../../../../core/strings/app_strings.dart';
 import '../../../../../data/state/task_data_state.dart';
 import '../../../../../domain/entities/task_entity.dart';
 import '../../../core/enums/task_period.dart';
+import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
+import '../../state/rest_times_state.dart';
 import '../../state/task_sort_state.dart';
 import '../../widgets/main_error_text.dart';
 import '../../widgets/time_is_empty.dart';
@@ -17,9 +19,14 @@ class MonthTaskList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final sortState = Provider.of<TaskSortState>(context);
+    final restTimeState = Provider.of<RestTimesState>(context);
+    final DateTime startTime = restTimeState.getRestTimeIndicator(TaskPeriod.month)[AppConstraints.startDateTime];
+    final DateTime endTime = restTimeState.getRestTimeIndicator(TaskPeriod.month)[AppConstraints.endDateTime];
     return FutureBuilder<List<TaskEntity>>(
       future: Provider.of<TaskDataState>(context).getTasksByMode(
         taskPeriodIndex: TaskPeriod.month.index,
+        startTime: startTime.toIso8601String(),
+        endTime: endTime.toIso8601String(),
         orderBy: '${sortState.getSort} ${sortState.getOrder}',
       ),
       builder: (context, snapshot) {

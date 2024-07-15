@@ -1,4 +1,6 @@
+
 import '../../core/strings/app_exception_messages.dart';
+import '../../data/models/task_count_model.dart';
 import '../entities/task_entity.dart';
 import '../repositories/task_repository.dart';
 
@@ -23,11 +25,19 @@ class TaskUseCase {
     }
   }
 
-  Future<List<TaskEntity>> getTasksByMode({required int taskPeriodIndex, required String orderBy}) async {
+  Future<List<TaskEntity>> getTasksByMode({required int taskPeriodIndex, required String startTime, required String endTime, required String orderBy}) async {
     try {
-      return await _taskRepository.getTasksByMode(taskPeriodIndex: taskPeriodIndex, orderBy: orderBy);
+      return await _taskRepository.getTasksByMode(taskPeriodIndex: taskPeriodIndex, startTime: startTime, endTime: endTime, orderBy: orderBy);
     } catch (e) {
       throw Exception('${AppExceptionMessages.getTasksByModeException} $e');
+    }
+  }
+
+  Future<TaskCountModel> getTasksNumber({required int taskPeriodIndex}) async {
+    try {
+      return await _taskRepository.getTasksNumber(taskPeriodIndex: taskPeriodIndex);
+    } catch (e) {
+      throw Exception('${AppExceptionMessages.getTasksNumberException} $e');
     }
   }
 
