@@ -31,6 +31,7 @@ class AppStrings {
   static const String add = 'Добавить';
   static const String addClose = 'Добавить и закрыть';
   static const String change = 'Изменить';
+  static const String delete = 'Удалить';
 
   static const String tasks = 'Задачи';
   static const String habits = 'Привычки';

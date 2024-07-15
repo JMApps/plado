@@ -4,6 +4,7 @@ class AppExceptionMessages {
   static const String getTaskByIdException = 'Error get task by id\n';
   static const String getTasksByModeException = 'Error get task by mode\n';
   static const String getSearchTasksException = 'Error get search task\n';
+  static const String getTasksNumberException = 'Error get tasks number task\n';
   static const String createTaskException = 'Error create task\n';
   static const String updateTaskException = 'Error update task\n';
   static const String deleteTaskException = 'Error remove task\n';
