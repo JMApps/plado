@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:plado/data/services/notifications/notification_service.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -7,6 +6,7 @@ import '../../../../../domain/entities/task_entity.dart';
 import '../../../core/routes/name_routes.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/models/arguments/update_task_args.dart';
+import '../../../data/services/notifications/notification_service.dart';
 import '../../../data/state/task_data_state.dart';
 
 class TaskItem extends StatelessWidget {
@@ -22,7 +22,7 @@ class TaskItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final taskDataState = Provider.of<TaskDataState>(context, listen: false);
-    DateTime parsedDate = DateTime.parse(taskModel.startDateTime);
+    DateTime parsedDate = DateTime.parse(taskModel.createDateTime);
     bool statusTask = taskModel.taskStatusIndex == 0 ? false : true;
     // TODO обязательно передать текущую локаль
     String timeAgo = timeago.format(parsedDate, locale: 'en');
@@ -51,7 +51,7 @@ class TaskItem extends StatelessWidget {
           } : null,
         ),
         trailing: Icon(
-          Icons.circle,
+          statusTask ? Icons.circle_rounded : Icons.circle_outlined,
           color: AppStyles.taskHabitColors[taskModel.taskColorIndex],
           size: 15,
         ),
