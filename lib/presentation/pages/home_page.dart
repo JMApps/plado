@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
+import '../../core/strings/app_constraints.dart';
 import '../../core/strings/app_strings.dart';
 import '../../core/styles/app_styles.dart';
 import '../state/bottom_nav_index_state.dart';
@@ -25,7 +26,7 @@ class HomePage extends StatelessWidget {
             title: const Text(
               AppStrings.tasks,
               style: TextStyle(
-                fontFamily: 'Raleway',
+                fontFamily: AppConstraints.fontRaleway,
               ),
             ),
           ),
@@ -34,7 +35,7 @@ class HomePage extends StatelessWidget {
             title: const Text(
               AppStrings.habits,
               style: TextStyle(
-                fontFamily: 'Raleway',
+                fontFamily: AppConstraints.fontRaleway,
               ),
             ),
           ),
@@ -43,7 +44,7 @@ class HomePage extends StatelessWidget {
             title: const Text(
               AppStrings.graphics,
               style: TextStyle(
-                fontFamily: 'Raleway',
+                fontFamily: AppConstraints.fontRaleway,
               ),
             ),
           ),
@@ -52,7 +53,7 @@ class HomePage extends StatelessWidget {
             title: const Text(
               AppStrings.settings,
               style: TextStyle(
-                fontFamily: 'Raleway',
+                fontFamily: AppConstraints.fontRaleway,
               ),
             ),
           ),
@@ -61,7 +62,7 @@ class HomePage extends StatelessWidget {
             title: const Text(
               AppStrings.aboutUs,
               style: TextStyle(
-                fontFamily: 'Raleway',
+                fontFamily: AppConstraints.fontRaleway,
               ),
             ),
           ),

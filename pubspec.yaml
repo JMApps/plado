@@ -45,4 +45,4 @@ flutter:
         - asset: assets/fonts/raleway_regular.ttf
     - family: 'Roboto Slab'
       fonts:
-        - asset: assets/fonts/roboto_slab_regular.ttf
+        - asset: assets/fonts/roboto_slab_light.ttf

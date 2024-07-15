@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../../../core/strings/app_strings.dart';
 import '../../../../../core/styles/app_styles.dart';
 import '../../../core/routes/name_routes.dart';
+import '../../../core/strings/app_constraints.dart';
 import '../../../data/models/arguments/create_task_args.dart';
 import '../../../data/state/task_data_state.dart';
 import '../../state/rest_times_state.dart';
@@ -60,7 +61,7 @@ class _TasksPageState extends State<TasksPage> with TickerProviderStateMixin {
                   return Text.rich(
                     TextSpan(
                       style: const TextStyle(
-                        fontFamily: 'Roboto slab'
+                        fontFamily: AppConstraints.fontRobotoSlab,
                       ),
                       children: [
                         TextSpan(
@@ -102,7 +103,7 @@ class _TasksPageState extends State<TasksPage> with TickerProviderStateMixin {
             labelPadding: AppStyles.paddingHorVerMini,
             padding: AppStyles.paddingMicro,
             splashBorderRadius: AppStyles.border,
-            labelStyle: const TextStyle(fontSize: 16),
+            labelStyle: const TextStyle(fontSize: 16, fontFamily: AppConstraints.fontRaleway),
             tabAlignment: TabAlignment.center,
             isScrollable: true,
             tabs: const [
