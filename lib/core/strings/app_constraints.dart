@@ -4,6 +4,9 @@ class AppConstraints {
   static const String elapsedPercentage = 'elapsedPercentage';
   static const String endDateTime = 'end_date_time';
 
+  static const String fontRaleway = 'Raleway';
+  static const String fontRobotoSlab = 'Roboto Slab';
+
   static const int randomNotificationNumber = 1000000;
 
   static const String ascSort = 'ASC';

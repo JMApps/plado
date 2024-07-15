@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plado/core/strings/app_constraints.dart';
 import 'package:plado/core/styles/app_styles.dart';
 
 class PercentTime extends StatelessWidget {
@@ -22,7 +23,12 @@ class PercentTime extends StatelessWidget {
             value: percentage / 100,
           ),
           const SizedBox(width: 4),
-          Text('${(-percentage / 100).toStringAsFixed(2)}%'),
+          Text(
+            '${(-percentage / 100).toStringAsFixed(2)}%',
+            style: const TextStyle(
+              fontFamily: AppConstraints.fontRobotoSlab,
+            ),
+          ),
           const SizedBox(width: 16),
         ],
       ),

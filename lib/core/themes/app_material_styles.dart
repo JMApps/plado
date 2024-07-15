@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../strings/app_constraints.dart';
 import '../styles/app_styles.dart';
 
 class AppMaterialStyles {
   static ThemeData lightTheme = ThemeData(
-    fontFamily: 'Raleway',
+    fontFamily: AppConstraints.fontRaleway,
     colorScheme: ColorScheme.fromSeed(
       brightness: Brightness.light,
       seedColor: Colors.orange,
@@ -30,7 +31,7 @@ class AppMaterialStyles {
   );
 
   static ThemeData darkTheme = ThemeData(
-    fontFamily: 'Raleway',
+    fontFamily: AppConstraints.fontRaleway,
     colorScheme: ColorScheme.fromSeed(
       brightness: Brightness.dark,
       seedColor: Colors.orange,

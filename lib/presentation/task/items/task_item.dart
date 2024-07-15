@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plado/core/strings/app_constraints.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -64,7 +65,13 @@ class TaskItem extends StatelessWidget {
           ),
           maxLines: 1,
         ),
-        subtitle: Text(timeAgo),
+        subtitle: Text(
+          timeAgo,
+          style: const TextStyle(
+            fontSize: 14,
+            fontFamily: AppConstraints.fontRobotoSlab,
+          ),
+        ),
       ),
     );
   }
