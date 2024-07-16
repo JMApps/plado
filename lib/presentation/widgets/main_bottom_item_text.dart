@@ -12,10 +12,13 @@ class MainBottomItemText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      itemText,
-      style: const TextStyle(
-        fontFamily: AppConstraints.fontRaleway,
+    return Tooltip(
+      message: itemText,
+      child: Text(
+        itemText,
+        style: const TextStyle(
+          fontFamily: AppConstraints.fontRaleway,
+        ),
       ),
     );
   }
