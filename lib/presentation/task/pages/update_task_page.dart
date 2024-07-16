@@ -51,6 +51,7 @@ class _UpdateTaskPageState extends State<UpdateTaskPage> {
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).colorScheme;
+    final restTimesState = Provider.of<RestTimesState>(context);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -63,13 +64,6 @@ class _UpdateTaskPageState extends State<UpdateTaskPage> {
             taskNotificationDate: widget.taskModel.notificationDate,
           ),
         ),
-        ChangeNotifierProvider(
-          create: (_) => RestTimesState(
-            day: AppStrings.shortDay,
-            hour: AppStrings.shortHour,
-            minute: AppStrings.shortMinute,
-          ),
-        ),
       ],
       child: Scaffold(
         appBar: AppBar(
@@ -80,6 +74,8 @@ class _UpdateTaskPageState extends State<UpdateTaskPage> {
           padding: AppStyles.padding,
           child: Consumer<UpdateTaskState>(
             builder: (context, updateTaskState, _) {
+              _startTime = restTimesState.getRestTimeIndicator(updateTaskState.getTaskPeriod)[AppConstraints.startDateTime];
+              _endTime = restTimesState.getRestTimeIndicator(updateTaskState.getTaskPeriod)[AppConstraints.endDateTime];
               if (widget.taskModel.notificationDate.isNotEmpty) {
                 _argDateTime = DateTime.parse(widget.taskModel.notificationDate);
               } else {
@@ -88,15 +84,9 @@ class _UpdateTaskPageState extends State<UpdateTaskPage> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Consumer<RestTimesState>(
-                    builder: (context, restTimesState, _) {
-                      _startTime = restTimesState.getRestTimeIndicator(updateTaskState.getTaskPeriod)[AppConstraints.startDateTime];
-                      _endTime = restTimesState.getRestTimeIndicator(updateTaskState.getTaskPeriod)[AppConstraints.endDateTime];
-                      return RestTimeIndicator(
-                        remainingTime: restTimesState.getRestTimeIndicator(updateTaskState.getTaskPeriod)[AppConstraints.remainingTimeString],
-                        elapsedPercentage: restTimesState.getRestTimeIndicator(updateTaskState.getTaskPeriod)[AppConstraints.elapsedPercentage],
-                      );
-                    },
+                  RestTimeIndicator(
+                    remainingTime: restTimesState.getRestTimeIndicator(updateTaskState.getTaskPeriod)[AppConstraints.remainingTimeString],
+                    elapsedPercentage: restTimesState.getRestTimeIndicator(updateTaskState.getTaskPeriod)[AppConstraints.elapsedPercentage],
                   ),
                   const SizedBox(height: 16),
                   TextField(

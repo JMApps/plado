@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 
 import '../../core/enums/season.dart';
@@ -7,38 +5,14 @@ import '../../core/enums/task_period.dart';
 import '../../core/strings/app_constraints.dart';
 
 class RestTimesState extends ChangeNotifier {
-  DateTime _currentDateTime = DateTime.now();
-  Timer? _timer;
-
-  RestTimesState({required String day, required String hour, required String minute})  : _day = day, _hour = hour, _minute = minute {
-    _startTimer();
-  }
-
-  late final String _day;
-
-  late final String _hour;
-
-  late final String _minute;
-
-  void _startTimer() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      _currentDateTime = DateTime.now();
-      notifyListeners();
-    });
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
-  }
+  final DateTime _currentDateTime = DateTime.now();
 
   DateTime get getCurrentDateTime => _currentDateTime;
 
   Map<String, dynamic> getRestTimeIndicator(TaskPeriod taskPeriod) {
     const Duration minusMicro = Duration(microseconds: -1);
     final DateTime startDateTime;
-    final String remainingTime;
+    final Duration remainingTime;
     final double elapsedPercentage;
     final DateTime endDateTime;
     switch (taskPeriod) {
@@ -50,7 +24,7 @@ class RestTimesState extends ChangeNotifier {
         final totalMinutesInDay = const Duration(hours: 24).inMinutes;
 
         startDateTime = startOfDay;
-        remainingTime = _formatRemainingTime(remainingTime: endOfDay.difference(_currentDateTime));
+        remainingTime = endOfDay.difference(_currentDateTime);
         elapsedPercentage = (elapsedTime / totalMinutesInDay) * 100.0;
         endDateTime = endOfDay.add(minusMicro);
         break;
@@ -62,7 +36,7 @@ class RestTimesState extends ChangeNotifier {
         final totalMinutesInMonth = const Duration(days: 7).inMinutes;
 
         startDateTime = startOfWeek;
-        remainingTime = _formatRemainingTime(remainingTime: endOfWeek.difference(_currentDateTime));
+        remainingTime = endOfWeek.difference(_currentDateTime);
         elapsedPercentage = (elapsedTime / totalMinutesInMonth) * 100.0;
         endDateTime = endOfWeek.add(minusMicro);
         break;
@@ -74,7 +48,7 @@ class RestTimesState extends ChangeNotifier {
         final totalMinutesInMonth = Duration(days: daysInMonth(_currentDateTime.year, _currentDateTime.month)).inMinutes;
 
         startDateTime = startOfMonth;
-        remainingTime = _formatRemainingTime(remainingTime: endOfMonth.difference(_currentDateTime));
+        remainingTime = endOfMonth.difference(_currentDateTime);
         elapsedPercentage = (elapsedTime / totalMinutesInMonth) * 100.0;
         endDateTime = endOfMonth.add(minusMicro);
         break;
@@ -108,7 +82,7 @@ class RestTimesState extends ChangeNotifier {
         final totalMinutesInSeason = endSeason.difference(startSeason).inMinutes;
 
         startDateTime = startSeason;
-        remainingTime = _formatRemainingTime(remainingTime: endSeason.difference(_currentDateTime));
+        remainingTime = endSeason.difference(_currentDateTime);
         elapsedPercentage = (elapsedTime / totalMinutesInSeason) * 100.0;
         endDateTime = endSeason.add(minusMicro);
         break;
@@ -120,7 +94,7 @@ class RestTimesState extends ChangeNotifier {
         final totalMinutesInYear = endOfYear.difference(startOfYear).inMinutes;
 
         startDateTime = startOfYear;
-        remainingTime = _formatRemainingTime(remainingTime: endOfYear.difference(_currentDateTime));
+        remainingTime = endOfYear.difference(_currentDateTime);
         elapsedPercentage = (elapsedTime / totalMinutesInYear) * 100.0;
         endDateTime = endOfYear.add(minusMicro);
         break;
@@ -183,19 +157,5 @@ class RestTimesState extends ChangeNotifier {
         break;
     }
     return currentSeason;
-  }
-
-  String _formatRemainingTime({required Duration remainingTime}) {
-    int days = remainingTime.inDays;
-    int hours = remainingTime.inHours % 24;
-    int minutes = remainingTime.inMinutes % 60;
-
-    List<String> parts = [];
-
-    if (days > 0) parts.add('$days $_day');
-    if (hours > 0) parts.add('$hours $_hour');
-    if (minutes > 0) parts.add('$minutes $_minute');
-
-    return parts.join(' ');
   }
 }

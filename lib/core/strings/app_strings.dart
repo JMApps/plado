@@ -32,6 +32,7 @@ class AppStrings {
   static const String addClose = 'Добавить и закрыть';
   static const String change = 'Изменить';
   static const String delete = 'Удалить';
+  static const String deleted = 'Удалено';
   static const String back = 'Назад';
 
   static const String tasks = 'Задачи';
@@ -54,6 +55,7 @@ class AppStrings {
   static const String added = 'Добавлено:';
   static const String remaining = 'Осталось:';
 
+  static const String remainingDayPercent = 'Остаток дня в %';
   static const String hours = 'Часы';
   static const String minutes = 'Минуты';
   static const String select = 'Выбрать';

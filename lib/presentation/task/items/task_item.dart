@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:plado/core/strings/app_constraints.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../../../domain/entities/task_entity.dart';
 import '../../../core/routes/name_routes.dart';
+import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/models/arguments/update_task_args.dart';
 import '../../../data/services/notifications/notification_service.dart';

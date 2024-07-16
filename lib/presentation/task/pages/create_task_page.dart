@@ -44,17 +44,11 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).colorScheme;
+    final restTimesState = Provider.of<RestTimesState>(context);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
           create: (_) => CreateTaskState(widget.taskPeriod),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => RestTimesState(
-            day: AppStrings.shortDay,
-            hour: AppStrings.shortHour,
-            minute: AppStrings.shortMinute,
-          ),
         ),
       ],
       child: Scaffold(
@@ -66,18 +60,14 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
           padding: AppStyles.padding,
           child: Consumer<CreateTaskState>(
             builder: (context, createTaskState, _) {
+              _startTime = restTimesState.getRestTimeIndicator(createTaskState.getTaskPeriod)[AppConstraints.startDateTime];
+              _endTime = restTimesState.getRestTimeIndicator(createTaskState.getTaskPeriod)[AppConstraints.endDateTime];
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Consumer<RestTimesState>(
-                    builder: (context, restTimesState, _) {
-                      _startTime = restTimesState.getRestTimeIndicator(createTaskState.getTaskPeriod)[AppConstraints.startDateTime];
-                      _endTime = restTimesState.getRestTimeIndicator(createTaskState.getTaskPeriod)[AppConstraints.endDateTime];
-                      return RestTimeIndicator(
-                        remainingTime: restTimesState.getRestTimeIndicator(createTaskState.getTaskPeriod)[AppConstraints.remainingTimeString],
-                        elapsedPercentage: restTimesState.getRestTimeIndicator(createTaskState.getTaskPeriod)[AppConstraints.elapsedPercentage],
-                      );
-                    },
+                  RestTimeIndicator(
+                    remainingTime: restTimesState.getRestTimeIndicator(createTaskState.getTaskPeriod)[AppConstraints.remainingTimeString],
+                    elapsedPercentage: restTimesState.getRestTimeIndicator(createTaskState.getTaskPeriod)[AppConstraints.elapsedPercentage],
                   ),
                   const SizedBox(height: 16),
                   TextField(
@@ -163,53 +153,49 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                   ListTile(
                     contentPadding: EdgeInsets.zero,
                     visualDensity: const VisualDensity(vertical: -4, horizontal: -4),
-                    title: Consumer<RestTimesState>(
-                      builder: (context, restTimesState, _) {
-                        return Row(
-                          children: [
-                            TextButton.icon(
-                              onPressed: createTaskState.getIsRemind ? () async {
-                                final selectedDate = await showDatePicker(
-                                  context: context,
-                                  helpText: AppStrings.selectDate,
-                                  cancelText: AppStrings.cancel,
-                                  confirmText: AppStrings.select,
-                                  initialDate: _currentTime,
-                                  firstDate: _currentTime,
-                                  lastDate: _endTime,
-                                );
-                                if (selectedDate != null) {
-                                  _selectedDate = selectedDate;
-                                }
-                              } : null,
-                              icon: const Icon(Icons.date_range),
-                              label: const Text(AppStrings.selectDate),
-                            ),
-                            TextButton.icon(
-                              onPressed: createTaskState.getIsRemind ? () async {
-                                final selectedTime = await showTimePicker(
-                                  context: context,
-                                  initialTime: TimeOfDay(hour: _currentTime.hour, minute: _currentTime.minute),
-                                  helpText: AppStrings.selectTime,
-                                  hourLabelText: AppStrings.hours,
-                                  minuteLabelText: AppStrings.minutes,
-                                  cancelText: AppStrings.cancel,
-                                  confirmText: AppStrings.select,
-                                );
-                                if (selectedTime != null) {
-                                  _selectedDate = DateTime(_selectedDate.year, _selectedDate.month, _selectedDate.day, selectedTime.hour, selectedTime.minute);
-                                }
-                                if (_selectedDate.isBefore(_currentTime)) {
-                                  if (!context.mounted) return;
-                                  _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectTime);
-                                }
-                              } : null,
-                              icon: const Icon(Icons.access_time),
-                              label: const Text(AppStrings.selectTime),
-                            ),
-                          ],
-                        );
-                      },
+                    title: Row(
+                      children: [
+                        TextButton.icon(
+                          onPressed: createTaskState.getIsRemind ? () async {
+                            final selectedDate = await showDatePicker(
+                              context: context,
+                              helpText: AppStrings.selectDate,
+                              cancelText: AppStrings.cancel,
+                              confirmText: AppStrings.select,
+                              initialDate: _currentTime,
+                              firstDate: _currentTime,
+                              lastDate: _endTime,
+                            );
+                            if (selectedDate != null) {
+                              _selectedDate = selectedDate;
+                            }
+                          } : null,
+                          icon: const Icon(Icons.date_range),
+                          label: const Text(AppStrings.selectDate),
+                        ),
+                        TextButton.icon(
+                          onPressed: createTaskState.getIsRemind ? () async {
+                            final selectedTime = await showTimePicker(
+                              context: context,
+                              initialTime: TimeOfDay(hour: _currentTime.hour, minute: _currentTime.minute),
+                              helpText: AppStrings.selectTime,
+                              hourLabelText: AppStrings.hours,
+                              minuteLabelText: AppStrings.minutes,
+                              cancelText: AppStrings.cancel,
+                              confirmText: AppStrings.select,
+                            );
+                            if (selectedTime != null) {
+                              _selectedDate = DateTime(_selectedDate.year, _selectedDate.month, _selectedDate.day, selectedTime.hour, selectedTime.minute);
+                            }
+                            if (_selectedDate.isBefore(_currentTime)) {
+                              if (!context.mounted) return;
+                              _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectTime);
+                            }
+                          } : null,
+                          icon: const Icon(Icons.access_time),
+                          label: const Text(AppStrings.selectTime),
+                        ),
+                      ],
                     ),
                     trailing: Switch(
                       value: createTaskState.getIsRemind,
@@ -234,8 +220,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                               _createTask(createTaskState);
                             }
                           } else {
-                            _showScaffoldMessage(appColors.inversePrimary,
-                                appColors.onSurface, AppStrings.enterTaskTitle);
+                            _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.enterTaskTitle);
                           }
                         },
                         child: const Text(
@@ -243,7 +228,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                           style: TextStyle(fontSize: 18),
                         ),
                       );
-                    }
+                    },
                   ),
                   const SizedBox(height: 8),
                   Builder(
@@ -272,7 +257,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                           style: TextStyle(fontSize: 18),
                         ),
                       );
-                    }
+                    },
                   ),
                 ],
               );
