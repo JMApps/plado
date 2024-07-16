@@ -7,7 +7,6 @@ import '../../../core/enums/task_period.dart';
 import '../../../core/routes/name_routes.dart';
 import '../../../core/strings/app_constraints.dart';
 import '../../../data/models/arguments/create_task_args.dart';
-import '../../../data/state/task_data_state.dart';
 import '../../state/rest_times_state.dart';
 import '../lists/day_task_list.dart';
 import '../lists/month_task_list.dart';
@@ -40,7 +39,6 @@ class _TasksPageState extends State<TasksPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final appColors = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
         title: const Text(AppStrings.appName),
