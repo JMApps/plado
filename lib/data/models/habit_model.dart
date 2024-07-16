@@ -1,5 +1,3 @@
-
-
 class HabitModel {
   final int habitId;
   final String habitTitle;

@@ -10,9 +10,9 @@ class NotificationService {
 
   static const AndroidNotificationDetails _androidDailyNotificationDetails =
   AndroidNotificationDetails(
-    'Task notification channel ID',
+    'PlaDo notification channel ID',
     'Notifications',
-    channelDescription: 'Task notifications',
+    channelDescription: 'PlaDo notifications',
     importance: Importance.max,
     priority: Priority.max,
   );
