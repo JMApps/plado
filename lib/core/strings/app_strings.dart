@@ -34,6 +34,7 @@ class AppStrings {
   static const String delete = 'Удалить';
 
   static const String tasks = 'Задачи';
+  static const String tasksNumber = 'Количество задач';
   static const String habits = 'Привычки';
   static const String graphics = 'Графики';
   static const String settings = 'Настройки';

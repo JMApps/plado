@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../../core/strings/app_strings.dart';
 import '../../../../../core/styles/app_styles.dart';
+import '../../../core/enums/task_period.dart';
 import '../../../core/routes/name_routes.dart';
 import '../../../core/strings/app_constraints.dart';
 import '../../../data/models/arguments/create_task_args.dart';
@@ -58,25 +59,22 @@ class _TasksPageState extends State<TasksPage> with TickerProviderStateMixin {
               future: Provider.of<TaskDataState>(context).getTasksNumber(taskPeriodIndex: _tabController.index),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return Text.rich(
-                    TextSpan(
-                      style: const TextStyle(
-                        fontFamily: AppConstraints.fontRobotoSlab,
+                  return Tooltip(
+                    message: AppStrings.tasksNumber,
+                    child: Text.rich(
+                      TextSpan(
+                        style: const TextStyle(fontFamily: AppConstraints.fontRobotoSlab),
+                        children: [
+                          TextSpan(
+                            text: '${snapshot.data!.inProgress} / ',
+                            style: TextStyle(color: appColors.error),
+                          ),
+                          TextSpan(
+                            text: '${snapshot.data!.complete}',
+                            style: TextStyle(color: appColors.primary),
+                          ),
+                        ],
                       ),
-                      children: [
-                        TextSpan(
-                          text: '${snapshot.data!.inProgress}',
-                          style: TextStyle(color: appColors.error),
-                        ),
-                        TextSpan(
-                          text: ' / ',
-                          style: TextStyle(color: appColors.onSurface),
-                        ),
-                        TextSpan(
-                          text: '${snapshot.data!.complete}',
-                          style: TextStyle(color: appColors.primary),
-                        ),
-                      ],
                     ),
                   );
                 } else {
@@ -103,7 +101,10 @@ class _TasksPageState extends State<TasksPage> with TickerProviderStateMixin {
             labelPadding: AppStyles.paddingHorVerMini,
             padding: AppStyles.paddingMicro,
             splashBorderRadius: AppStyles.border,
-            labelStyle: const TextStyle(fontSize: 16, fontFamily: AppConstraints.fontRaleway),
+            labelStyle: const TextStyle(
+              fontSize: 16,
+              fontFamily: AppConstraints.fontRaleway,
+            ),
             tabAlignment: TabAlignment.center,
             isScrollable: true,
             tabs: const [
@@ -115,15 +116,34 @@ class _TasksPageState extends State<TasksPage> with TickerProviderStateMixin {
             ],
           ),
         ),
-        body: TabBarView(
-          controller: _tabController,
-          children: const [
-            DayTaskList(),
-            WeekTaskList(),
-            MonthTaskList(),
-            SeasonTaskList(),
-            YearTaskList(),
-          ],
+        body: Consumer<RestTimesState>(
+          builder: (context, restTimeState, _) {
+            return TabBarView(
+              controller: _tabController,
+              children: [
+                DayTaskList(
+                  startDate: restTimeState.getRestTimeIndicator(TaskPeriod.day)[AppConstraints.startDateTime],
+                  endDate: restTimeState.getRestTimeIndicator(TaskPeriod.day)[AppConstraints.endDateTime],
+                ),
+                WeekTaskList(
+                  startDate: restTimeState.getRestTimeIndicator(TaskPeriod.week)[AppConstraints.startDateTime],
+                  endDate: restTimeState.getRestTimeIndicator(TaskPeriod.week)[AppConstraints.endDateTime],
+                ),
+                MonthTaskList(
+                  startDate: restTimeState.getRestTimeIndicator(TaskPeriod.month)[AppConstraints.startDateTime],
+                  endDate: restTimeState.getRestTimeIndicator(TaskPeriod.month)[AppConstraints.endDateTime],
+                ),
+                SeasonTaskList(
+                  startDate: restTimeState.getRestTimeIndicator(TaskPeriod.season)[AppConstraints.startDateTime],
+                  endDate: restTimeState.getRestTimeIndicator(TaskPeriod.season)[AppConstraints.endDateTime],
+                ),
+                YearTaskList(
+                  startDate: restTimeState.getRestTimeIndicator(TaskPeriod.year)[AppConstraints.startDateTime],
+                  endDate: restTimeState.getRestTimeIndicator(TaskPeriod.year)[AppConstraints.endDateTime],
+                ),
+              ],
+            );
+          },
         ),
         floatingActionButton: FloatingActionButton(
           elevation: 0,

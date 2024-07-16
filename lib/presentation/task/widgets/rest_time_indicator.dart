@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:plado/core/strings/app_constraints.dart';
 
+import '../../../core/strings/app_constraints.dart';
 import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 
