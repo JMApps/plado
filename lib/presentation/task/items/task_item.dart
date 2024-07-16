@@ -42,12 +42,10 @@ class TaskItem extends StatelessWidget {
           value: statusTask,
           onChanged: !statusTask ? (bool? onChanged) {
             if (onChanged!) {
-              taskDataState.changeTaskStatus(taskId: taskModel.taskId, taskStatusIndex: 1);
+              taskDataState.changeTaskStatus(taskId: taskModel.taskId, taskStatusIndex: 1, completeDateTime: DateTime.now().toIso8601String());
               if (taskModel.notificationId > 0) {
                 NotificationService().cancelNotificationWithId(taskModel.notificationId);
               }
-            } else {
-              taskDataState.changeTaskStatus(taskId: taskModel.taskId, taskStatusIndex: 0);
             }
           } : null,
         ),

@@ -89,11 +89,14 @@ class TaskDataRepository implements TaskRepository {
   }
 
   @override
-  Future<int> changeTaskStatus({required int taskId, required int taskStatusIndex}) async {
+  Future<int> changeTaskStatus({required int taskId, required int taskStatusIndex, required String completeDateTime}) async {
     final Database database = await _pladoDatabaseService.db;
 
     final getTaskStatusIndex = AppStyles.taskStatusList[taskStatusIndex].index;
-    final Map<String, int> taskStatusMap = {_taskStatusIndex: getTaskStatusIndex};
+    final Map<String, dynamic> taskStatusMap = {
+      _taskStatusIndex: getTaskStatusIndex,
+      'complete_date_time': completeDateTime,
+    };
 
     final int statusTask = await database.update(_tasksTableName, taskStatusMap, where: '$_taskId = ?', whereArgs: [taskId], conflictAlgorithm: ConflictAlgorithm.replace);
     return statusTask;

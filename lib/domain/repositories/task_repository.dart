@@ -16,5 +16,5 @@ abstract class TaskRepository {
 
   Future<int> deleteTask({required int taskId});
 
-  Future<int> changeTaskStatus({required int taskId, required int taskStatusIndex});
+  Future<int> changeTaskStatus({required int taskId, required int taskStatusIndex, required String completeDateTime});
 }

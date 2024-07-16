@@ -42,8 +42,8 @@ class TaskDataState extends ChangeNotifier {
     return deleteTask;
   }
 
-  Future<int> changeTaskStatus({required int taskId, required int taskStatusIndex}) async {
-    final int statusTask = await _taskUseCase.changeTaskStatus(taskId: taskId, taskStatusIndex: taskStatusIndex);
+  Future<int> changeTaskStatus({required int taskId, required int taskStatusIndex, required String completeDateTime}) async {
+    final int statusTask = await _taskUseCase.changeTaskStatus(taskId: taskId, taskStatusIndex: taskStatusIndex, completeDateTime: completeDateTime);
     notifyListeners();
     return statusTask;
   }
