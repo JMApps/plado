@@ -8,6 +8,7 @@ import '../services/plado_database_service.dart';
 class HabitDataRepository implements HabitRepository {
   final PladoDatabaseService _pladoDatabaseService = PladoDatabaseService();
   final String _tasksTableName = 'Table_of_habit';
+  final String _habitId = 'habit_id';
 
   @override
   Future<List<HabitEntity>> getAllHabits({required String orderBy}) async {
@@ -20,7 +21,7 @@ class HabitDataRepository implements HabitRepository {
   @override
   Future<HabitEntity> getHabitById({required int habitId}) async {
     final Database database = await _pladoDatabaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(_tasksTableName, where: 'habit_id = ?', whereArgs: [habitId]);
+    final List<Map<String, Object?>> resources = await database.query(_tasksTableName, where: '$_habitId = ?', whereArgs: [habitId]);
     final HabitEntity? habitById = resources.isNotEmpty ? HabitEntity.fromModel(HabitModel.fromMap(resources.first)) : null;
     return habitById!;
   }
@@ -28,21 +29,21 @@ class HabitDataRepository implements HabitRepository {
   @override
   Future<int> createHabit({required Map<String, dynamic> habitMap}) async {
     final Database database = await _pladoDatabaseService.db;
-    final int createHabit = await database.insert(_tasksTableName, habitMap, conflictAlgorithm: ConflictAlgorithm.ignore);
+    final int createHabit = await database.insert(_tasksTableName, habitMap);
     return createHabit;
   }
 
   @override
   Future<int> updateHabit({required Map<String, dynamic> habitMap, required int habitId}) async {
     final Database database = await _pladoDatabaseService.db;
-    final int updateHabit = await database.update(_tasksTableName, habitMap, where: 'habit_id = ?', whereArgs: [habitId], conflictAlgorithm: ConflictAlgorithm.ignore);
+    final int updateHabit = await database.update(_tasksTableName, habitMap, where: '$_habitId = ?', whereArgs: [habitId]);
     return updateHabit;
   }
 
   @override
   Future<int> deleteHabit({required int habitId}) async {
     final Database database = await _pladoDatabaseService.db;
-    final int deleteHabit = await database.delete(_tasksTableName, where: 'habit_id = ?', whereArgs: [habitId]);
+    final int deleteHabit = await database.delete(_tasksTableName, where: '$_habitId = ?', whereArgs: [habitId]);
     return deleteHabit;
   }
 }

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../../core/strings/app_strings.dart';
 import '../../widgets/main_back_button.dart';
 
-class AddHabitPage extends StatelessWidget {
-  const AddHabitPage({super.key});
+class CreateHabitPage extends StatelessWidget {
+  const CreateHabitPage({super.key});
 
   @override
   Widget build(BuildContext context) {
