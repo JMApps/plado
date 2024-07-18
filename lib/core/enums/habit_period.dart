@@ -3,5 +3,4 @@ enum HabitPeriod {
   days66,
   days40,
   days90,
-  other,
 }

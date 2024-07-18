@@ -6,7 +6,9 @@ class AppStrings {
   static const String order = 'Порядок';
   static const String firstNew = 'Сначала новые (Я-А)';
   static const String firstOld = 'Сначала старые (А-Я)';
+
   static const String remind = 'Напомнить';
+  static const String dailyHabitNotification = 'Напоминать ежедневно';
   static const String selectDate = 'Выбрать дату';
   static const String selectTime = 'Выбрать время';
 
@@ -16,11 +18,17 @@ class AppStrings {
   static const String sortByColor = 'По цвету';
 
   static const String timeInterval = 'Промежуток времени';
+
   static const String day = 'День';
   static const String week = 'Неделя';
   static const String month = 'Месяц';
   static const String season = 'Сезон';
   static const String year = 'Год';
+
+  static const String days21 = '21 день';
+  static const String days40 = '40 дней';
+  static const String days66 = '66 дней';
+  static const String daya90 = '90 дней';
 
   static const String priority = 'Приоритет';
   static const String low = 'Обычный';
@@ -52,7 +60,7 @@ class AppStrings {
   static const String addHabit = 'Добавить привычку';
   static const String addingHabit = 'Добавление привычки';
   static const String changingHabit = 'Изменение привычки';
-  static const String titleHabit = 'Название привычки';
+  static const String habitHint = 'Название привычки';
   static const String descriptionHabit = 'Описание привычки';
 
   static const String added = 'Добавлено:';
