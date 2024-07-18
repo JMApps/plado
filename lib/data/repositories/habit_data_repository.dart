@@ -7,7 +7,7 @@ import '../services/plado_database_service.dart';
 
 class HabitDataRepository implements HabitRepository {
   final PladoDatabaseService _pladoDatabaseService = PladoDatabaseService();
-  final String _tasksTableName = 'Table_of_habit';
+  final String _tasksTableName = 'Table_of_habits';
   final String _habitId = 'habit_id';
 
   @override

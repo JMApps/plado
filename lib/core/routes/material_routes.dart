@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../data/models/arguments/create_task_args.dart';
 import '../../data/models/arguments/update_task_args.dart';
-import '../../presentation/habit/pages/add_habit_page.dart';
+import '../../presentation/habit/pages/create_habit_page.dart';
 import '../../presentation/habit/pages/update_habit_page.dart';
 import '../../presentation/task/pages/create_task_page.dart';
 import '../../presentation/task/pages/update_task_page.dart';
@@ -24,7 +24,7 @@ class MaterialRoutes {
         );
       case NameRoutes.createHabitPage:
         return MaterialPageRoute(
-          builder: (_) => const AddHabitPage(),
+          builder: (_) => const CreateHabitPage(),
         );
       case NameRoutes.updateHabitPage:
         return MaterialPageRoute(

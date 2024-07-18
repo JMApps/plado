@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../../core/routes/name_routes.dart';
 import '../../../core/strings/app_strings.dart';
-import '../../../data/models/arguments/create_task_args.dart';
-import '../../../data/state/habit_data_state.dart';
-import '../../../domain/entities/habit_entity.dart';
+import '../lists/habit_list.dart';
 
 class HabitsPage extends StatelessWidget {
   const HabitsPage({super.key});
@@ -16,12 +13,7 @@ class HabitsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text(AppStrings.habits),
       ),
-      body: FutureBuilder<List<HabitEntity>>(
-        future: Provider.of<HabitDataState>(context).getAllHabits(orderBy: orderBy),
-        builder: (context, snapshot) {
-          return const SizedBox();
-        },
-      ),
+      body: const HabitList(),
       floatingActionButton: FloatingActionButton(
         elevation: 0,
         tooltip: AppStrings.addingHabit,
