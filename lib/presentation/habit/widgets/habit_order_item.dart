@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../state/task_sort_state.dart';
 
-class OrderItem extends StatelessWidget {
-  const OrderItem({
+class HabitOrderItem extends StatelessWidget {
+  const HabitOrderItem({
     super.key,
     required this.title,
     required this.orderIndex,

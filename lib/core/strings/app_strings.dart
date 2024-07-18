@@ -11,11 +11,11 @@ class AppStrings {
   static const String selectTime = 'Выбрать время';
 
   static const String sortByAddTime = 'По дате добавления';
-  static const String sortTitle = 'По названию';
+  static const String sortByTitle = 'По названию';
   static const String sortByPriority = 'По приоритету';
   static const String sortByColor = 'По цвету';
 
-  static const String timeMode = 'Промежуток времени';
+  static const String timeInterval = 'Промежуток времени';
   static const String day = 'День';
   static const String week = 'Неделя';
   static const String month = 'Месяц';

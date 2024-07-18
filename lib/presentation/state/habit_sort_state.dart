@@ -21,13 +21,8 @@ class HabitSortState extends ChangeNotifier {
         _sort = 'habit_title';
         break;
       case 2:
-        _sort = 'complete_date_time';
+        _sort = 'habit_color';
         break;
-      case 3:
-        _sort = 'habit_period_index';
-        break;
-      default:
-        _sort = 'complete_days';
     }
     // Save index value
     notifyListeners();
