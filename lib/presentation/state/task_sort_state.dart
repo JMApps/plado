@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:plado/core/strings/app_constraints.dart';
+
+import '../../core/strings/app_constraints.dart';
 
 class TaskSortState extends ChangeNotifier {
   int _sortIndex = 0;

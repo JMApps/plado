@@ -4,8 +4,10 @@ import 'package:provider/provider.dart';
 import '../../../../core/routes/material_routes.dart';
 import '../../../../core/strings/app_strings.dart';
 import '../../../../core/themes/app_material_styles.dart';
+import '../../data/state/habit_data_state.dart';
 import '../../data/state/task_data_state.dart';
 import '../state/bottom_nav_index_state.dart';
+import '../state/habit_sort_state.dart';
 import '../state/rest_times_state.dart';
 import '../state/task_sort_state.dart';
 import 'home_page.dart';
@@ -21,13 +23,19 @@ class RootMaterialPage extends StatelessWidget {
           create: (_) => BottomNavIndexState(),
         ),
         ChangeNotifierProvider(
+          create: (_) => RestTimesState(),
+        ),
+        ChangeNotifierProvider(
           create: (_) => TaskSortState(),
         ),
         ChangeNotifierProvider(
           create: (_) => TaskDataState(),
         ),
         ChangeNotifierProvider(
-          create: (_) => RestTimesState(),
+          create: (_) => HabitSortState(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => HabitDataState(),
         ),
       ],
       child: MaterialApp(

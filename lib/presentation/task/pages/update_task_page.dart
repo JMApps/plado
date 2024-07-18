@@ -67,8 +67,16 @@ class _UpdateTaskPageState extends State<UpdateTaskPage> {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(AppStrings.updatingTask),
+          title: const Text(AppStrings.changingTask),
           leading: const MainBackButton(),
+          actions: [
+            IconButton(onPressed: () {
+              Navigator.of(context).pop();
+              Provider.of<TaskDataState>(context, listen: false).deleteTask(taskId: widget.taskModel.taskId);
+            },
+              icon: const Icon(Icons.delete_outline_rounded),
+            ),
+          ],
         ),
         body: SingleChildScrollView(
           padding: AppStyles.padding,
@@ -252,17 +260,6 @@ class _UpdateTaskPageState extends State<UpdateTaskPage> {
                     child: const Text(
                       AppStrings.change,
                       style: TextStyle(fontSize: 18),
-                    ),
-                  ),
-                  OutlinedButton(onPressed: () {
-                    Navigator.of(context).pop();
-                    Provider.of<TaskDataState>(context, listen: false).deleteTask(taskId: widget.taskModel.taskId);
-                  },
-                    child: Text(AppStrings.delete,
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: appColors.error
-                      ),
                     ),
                   ),
                 ],

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../presentation/task/pages/about_us_page.dart';
 import '../../presentation/task/pages/graphics_page.dart';
-import '../../presentation/task/pages/habits_page.dart';
+import '../../presentation/habit/pages/habits_page.dart';
 import '../../presentation/task/pages/settings_page.dart';
 import '../../presentation/task/pages/tasks_page.dart';
 import '../enums/task_period.dart';
