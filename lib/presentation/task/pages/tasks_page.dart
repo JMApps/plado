@@ -13,7 +13,7 @@ import '../lists/month_task_list.dart';
 import '../lists/season_task_list.dart';
 import '../lists/week_task_list.dart';
 import '../lists/year_task_list.dart';
-import '../widgets/sort_bottom_sheet.dart';
+import '../widgets/task_sort_bottom_sheet.dart';
 
 class TasksPage extends StatefulWidget {
   const TasksPage({super.key});
@@ -48,7 +48,7 @@ class _TasksPageState extends State<TasksPage> with TickerProviderStateMixin {
               showModalBottomSheet(
                 context: context,
                 isScrollControlled: true,
-                builder: (_) => const SortBottomSheet(),
+                builder: (_) => const TaskSortBottomSheet(),
               );
             },
             tooltip: AppStrings.sortTasks,

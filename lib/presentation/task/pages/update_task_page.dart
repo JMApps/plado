@@ -15,7 +15,7 @@ import '../../../domain/entities/task_entity.dart';
 import '../../state/rest_times_state.dart';
 import '../../state/update_task_state.dart';
 import '../../widgets/main_back_button.dart';
-import '../widgets/rest_time_indicator.dart';
+import '../widgets/task_time_indicator.dart';
 
 class UpdateTaskPage extends StatefulWidget {
   const UpdateTaskPage({
@@ -92,7 +92,7 @@ class _UpdateTaskPageState extends State<UpdateTaskPage> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  RestTimeIndicator(
+                  TaskTimeIndicator(
                     remainingTime: restTimesState.getRestTimeIndicator(updateTaskState.getTaskPeriod)[AppConstraints.remainingTimeString],
                     elapsedPercentage: restTimesState.getRestTimeIndicator(updateTaskState.getTaskPeriod)[AppConstraints.elapsedPercentage],
                   ),
@@ -109,7 +109,7 @@ class _UpdateTaskPageState extends State<UpdateTaskPage> {
                     ),
                   ),
                   const Text(
-                    AppStrings.timeMode,
+                    AppStrings.timeInterval,
                     style: TextStyle(fontSize: 17),
                   ),
                   const SizedBox(height: 8),

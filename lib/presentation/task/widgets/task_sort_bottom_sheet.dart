@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
-import 'order_item.dart';
-import 'sort_item.dart';
+import 'task_order_item.dart';
+import 'task_sort_item.dart';
 
-class SortBottomSheet extends StatelessWidget {
-  const SortBottomSheet({super.key});
+class TaskSortBottomSheet extends StatelessWidget {
+  const TaskSortBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +27,10 @@ class SortBottomSheet extends StatelessWidget {
             ),
             leading: Icon(Icons.sort),
           ),
-          SortItem(title: AppStrings.sortByAddTime, index: 0),
-          SortItem(title: AppStrings.sortTitle, index: 1),
-          SortItem(title: AppStrings.sortByPriority, index: 2),
-          SortItem(title: AppStrings.sortByColor, index: 3),
+          TaskSortItem(title: AppStrings.sortByAddTime, index: 0),
+          TaskSortItem(title: AppStrings.sortByTitle, index: 1),
+          TaskSortItem(title: AppStrings.sortByPriority, index: 2),
+          TaskSortItem(title: AppStrings.sortByColor, index: 3),
           ListTile(
             visualDensity: VisualDensity(horizontal: -4, vertical: -4),
             title: Text(
@@ -42,8 +42,8 @@ class SortBottomSheet extends StatelessWidget {
             ),
             leading: Icon(Icons.sort_by_alpha),
           ),
-          OrderItem(title: AppStrings.firstNew, orderIndex: 0),
-          OrderItem(title: AppStrings.firstOld, orderIndex: 1),
+          TaskOrderItem(title: AppStrings.firstNew, orderIndex: 0),
+          TaskOrderItem(title: AppStrings.firstOld, orderIndex: 1),
         ],
       ),
     );

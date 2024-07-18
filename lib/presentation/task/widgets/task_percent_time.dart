@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:plado/core/strings/app_constraints.dart';
 import 'package:plado/core/styles/app_styles.dart';
 
-class PercentTime extends StatelessWidget {
-  const PercentTime({super.key, required this.percentage});
+class TaskPercentTime extends StatelessWidget {
+  const TaskPercentTime({super.key, required this.percentage});
 
   final double percentage;
 

@@ -4,8 +4,8 @@ import '../../../core/strings/app_constraints.dart';
 import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 
-class RestTimeIndicator extends StatelessWidget {
-  const RestTimeIndicator({
+class TaskTimeIndicator extends StatelessWidget {
+  const TaskTimeIndicator({
     super.key,
     required this.remainingTime,
     required this.elapsedPercentage,

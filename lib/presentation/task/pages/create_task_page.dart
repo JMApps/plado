@@ -14,7 +14,7 @@ import '../../../data/state/task_data_state.dart';
 import '../../state/create_task_state.dart';
 import '../../state/rest_times_state.dart';
 import '../../widgets/main_back_button.dart';
-import '../widgets/rest_time_indicator.dart';
+import '../widgets/task_time_indicator.dart';
 
 class CreateTaskPage extends StatefulWidget {
   const CreateTaskPage({
@@ -65,7 +65,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  RestTimeIndicator(
+                  TaskTimeIndicator(
                     remainingTime: restTimesState.getRestTimeIndicator(createTaskState.getTaskPeriod)[AppConstraints.remainingTimeString],
                     elapsedPercentage: restTimesState.getRestTimeIndicator(createTaskState.getTaskPeriod)[AppConstraints.elapsedPercentage],
                   ),
@@ -82,7 +82,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                     ),
                   ),
                   const Text(
-                    AppStrings.timeMode,
+                    AppStrings.timeInterval,
                     style: TextStyle(fontSize: 17),
                   ),
                   const SizedBox(height: 8),

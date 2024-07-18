@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../state/task_sort_state.dart';
 
-class SortItem extends StatelessWidget {
-  const SortItem({
+class TaskSortItem extends StatelessWidget {
+  const TaskSortItem({
     super.key,
     required this.title,
     required this.index,
