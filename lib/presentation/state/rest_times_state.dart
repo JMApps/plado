@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 
 import '../../core/enums/season.dart';
@@ -5,12 +7,31 @@ import '../../core/enums/task_period.dart';
 import '../../core/strings/app_constraints.dart';
 
 class RestTimesState extends ChangeNotifier {
-  final DateTime _currentDateTime = DateTime.now();
+  DateTime _currentDateTime = DateTime.now();
+  Timer? _timer;
+
+  RestTimesState() {
+    _startTimer();
+  }
 
   DateTime get getCurrentDateTime => _currentDateTime;
 
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      _currentDateTime = DateTime.now();
+      notifyListeners();
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
   Map<String, dynamic> getRestTimeIndicator(TaskPeriod taskPeriod) {
     const Duration minusMicro = Duration(microseconds: -1);
+
     final DateTime startDateTime;
     final Duration remainingTime;
     final double elapsedPercentage;
