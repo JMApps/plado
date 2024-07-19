@@ -54,13 +54,13 @@ class AppStrings {
   static const String addTask = 'Добавить задачу';
   static const String addingTask = 'Добавление задачи';
   static const String changingTask = 'Изменение задачи';
-  static const String taskHint = 'Название задачи';
+  static const String taskHint = 'Введите название';
 
   static const String addFirstHabit = 'Добавьте первую привычку';
   static const String addHabit = 'Добавить привычку';
   static const String addingHabit = 'Добавление привычки';
   static const String changingHabit = 'Изменение привычки';
-  static const String habitHint = 'Название привычки';
+  static const String habitHint = 'Введите название';
   static const String descriptionHabit = 'Описание привычки';
 
   static const String added = 'Добавлено:';
@@ -71,7 +71,8 @@ class AppStrings {
   static const String minutes = 'Минуты';
   static const String select = 'Выбрать';
   static const String cancel = 'Отмена';
-  static const String selectCorrectTime = 'Выберите корректную дату и время';
+  static const String selectCorrectDateTime = 'Выберите корректную дату и время';
+  static const String selectCorrectTime = 'Выберите корректное время';
 
   static const String enterTaskTitle = 'Введите название задачи';
   static const String enterHabitTitle = 'Введите название привычки';

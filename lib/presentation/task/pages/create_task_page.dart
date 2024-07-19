@@ -189,7 +189,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                             }
                             if (_selectedDate.isBefore(_currentTime)) {
                               if (!context.mounted) return;
-                              _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectTime);
+                              _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectDateTime);
                             }
                           } : null,
                           icon: const Icon(Icons.access_time),
@@ -214,7 +214,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                               if (_selectedDate.isAfter(_currentTime)) {
                                 _createTask(createTaskState);
                               } else {
-                                _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectTime);
+                                _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectDateTime);
                               }
                             } else {
                               _createTask(createTaskState);
@@ -242,7 +242,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                 Navigator.of(context).pop();
                                 _createTask(createTaskState);
                               } else {
-                                _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectTime);
+                                _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectDateTime);
                               }
                             } else {
                               Navigator.of(context).pop();

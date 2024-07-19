@@ -218,7 +218,7 @@ class _UpdateTaskPageState extends State<UpdateTaskPage> {
                                 }
                                 if (_argDateTime.isBefore(_currentDateTime)) {
                                   if (!context.mounted) return;
-                                  _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectTime);
+                                  _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectDateTime);
                                 }
                               } : null,
                               icon: const Icon(Icons.access_time),
@@ -247,7 +247,7 @@ class _UpdateTaskPageState extends State<UpdateTaskPage> {
                             Navigator.of(context).pop();
                             _updateTask(updateTaskState);
                           } else {
-                            _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectTime);
+                            _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectDateTime);
                           }
                         } else {
                           Navigator.of(context).pop();
