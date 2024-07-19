@@ -25,6 +25,8 @@ class AppStrings {
   static const String season = 'Сезон';
   static const String year = 'Год';
 
+  static const String dayNumbers = 'Количество дней';
+
   static const String days21 = '21 день';
   static const String days40 = '40 дней';
   static const String days66 = '66 дней';

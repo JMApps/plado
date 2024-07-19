@@ -101,4 +101,11 @@ class AppStyles {
     TaskStatus.complete,
     TaskStatus.canceled,
   ];
+
+  static const habitPeriodList = <int> [
+    21,
+    40,
+    66,
+    90,
+  ];
 }
