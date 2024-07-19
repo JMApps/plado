@@ -21,7 +21,9 @@ class TaskDataState extends ChangeNotifier {
   }
 
   Future<TaskCountModel> getTasksNumber({required int taskPeriodIndex}) async {
-    return await _taskUseCase.getTasksNumber(taskPeriodIndex: taskPeriodIndex);
+    final TaskCountModel taskCountModel = await _taskUseCase.getTasksNumber(taskPeriodIndex: taskPeriodIndex);
+    notifyListeners();
+    return taskCountModel;
   }
 
   Future<int> createTask({required Map<String, dynamic> taskMap}) async {

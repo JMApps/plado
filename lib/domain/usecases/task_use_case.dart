@@ -1,5 +1,4 @@
 
-import '../../core/strings/app_exception_messages.dart';
 import '../../data/models/task_count_model.dart';
 import '../entities/task_entity.dart';
 import '../repositories/task_repository.dart';
@@ -10,66 +9,34 @@ class TaskUseCase {
   TaskUseCase(this._taskRepository);
 
   Future<List<TaskEntity>> getAllTasks({required String orderBy}) async {
-    try {
-      return await _taskRepository.getAllTasks(orderBy: orderBy);
-    } catch (e) {
-      throw Exception('${AppExceptionMessages.getAllTaskException} $e');
-    }
+    return await _taskRepository.getAllTasks(orderBy: orderBy);
   }
 
   Future<TaskEntity> getTaskById({required int taskId}) async {
-    try {
-      return await _taskRepository.getTaskById(taskId: taskId);
-    } catch (e) {
-      throw Exception('${AppExceptionMessages.getTaskByIdException} $e');
-    }
+    return await _taskRepository.getTaskById(taskId: taskId);
   }
 
   Future<List<TaskEntity>> getTasksByMode({required int taskPeriodIndex, required String startTime, required String endTime, required String orderBy}) async {
-    try {
-      return await _taskRepository.getTasksByMode(taskPeriodIndex: taskPeriodIndex, startTime: startTime, endTime: endTime, orderBy: orderBy);
-    } catch (e) {
-      throw Exception('${AppExceptionMessages.getTasksByModeException} $e');
-    }
+    return await _taskRepository.getTasksByMode(taskPeriodIndex: taskPeriodIndex, startTime: startTime, endTime: endTime, orderBy: orderBy);
   }
 
   Future<TaskCountModel> getTasksNumber({required int taskPeriodIndex}) async {
-    try {
-      return await _taskRepository.getTasksNumber(taskPeriodIndex: taskPeriodIndex);
-    } catch (e) {
-      throw Exception('${AppExceptionMessages.getTasksNumberException} $e');
-    }
+    return await _taskRepository.getTasksNumber(taskPeriodIndex: taskPeriodIndex);
   }
 
   Future<int> createTask({required Map<String, dynamic> taskMap}) async {
-    try {
-      return await _taskRepository.createTask(taskMap: taskMap);
-    } catch (e) {
-      throw Exception('${AppExceptionMessages.createTaskException} $e');
-    }
+    return await _taskRepository.createTask(taskMap: taskMap);
   }
 
   Future<int> updateTask({required Map<String, dynamic> taskMap, required int taskId}) async {
-    try {
-      return await _taskRepository.updateTask(taskMap: taskMap, taskId: taskId);
-    } catch (e) {
-      throw Exception('${AppExceptionMessages.updateTaskException} $e');
-    }
+    return await _taskRepository.updateTask(taskMap: taskMap, taskId: taskId);
   }
 
   Future<int> deleteTask({required int taskId}) async {
-    try {
-      return await _taskRepository.deleteTask(taskId: taskId);
-    } catch (e) {
-      throw Exception('${AppExceptionMessages.deleteTaskException} $e');
-    }
+    return await _taskRepository.deleteTask(taskId: taskId);
   }
 
   Future<int> changeTaskStatus({required int taskId, required int taskStatusIndex, required String completeDateTime}) async {
-    try {
-      return await _taskRepository.changeTaskStatus(taskId: taskId, taskStatusIndex: taskStatusIndex, completeDateTime: completeDateTime);
-    } catch (e) {
-      throw Exception('${AppExceptionMessages.changeStatusTaskException} $e');
-    }
+    return await _taskRepository.changeTaskStatus(taskId: taskId, taskStatusIndex: taskStatusIndex, completeDateTime: completeDateTime);
   }
 }

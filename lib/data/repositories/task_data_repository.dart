@@ -33,6 +33,11 @@ class TaskDataRepository implements TaskRepository {
   @override
   Future<List<TaskEntity>> getTasksByMode({required int taskPeriodIndex, required String startTime, required String endTime, required String orderBy}) async {
     final Database database = await _pladoDatabaseService.db;
+    final Map<String, dynamic> taskStatusMap = {
+      _taskStatusIndex: 2,
+      'complete_date_time': endTime,
+    };
+    await database.update(_tasksTableName, taskStatusMap, where: 'end_date_time < ?', whereArgs: [endTime]);
     final List<Map<String, Object?>> resources = await database.query(_tasksTableName, where: '$_taskPeriodIndex = ? AND start_date_time = ? AND end_date_time = ?', whereArgs: [taskPeriodIndex, startTime, endTime], orderBy: 'CASE WHEN $_taskStatusIndex = 1 THEN 1 ELSE 0 END, $orderBy');
     final List<TaskEntity> tasksByMode = resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
     return tasksByMode;
