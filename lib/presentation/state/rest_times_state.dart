@@ -1,7 +1,8 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
+import '../../core/enums/habit_period.dart';
 import '../../core/enums/season.dart';
 import '../../core/enums/task_period.dart';
 import '../../core/strings/app_constraints.dart';
@@ -9,6 +10,7 @@ import '../../core/strings/app_constraints.dart';
 class RestTimesState extends ChangeNotifier {
   DateTime _currentDateTime = DateTime.now();
   Timer? _timer;
+  static const Duration minusMicro = Duration(microseconds: -1);
 
   RestTimesState() {
     _startTimer();
@@ -29,102 +31,129 @@ class RestTimesState extends ChangeNotifier {
     super.dispose();
   }
 
-  Map<String, dynamic> getRestTimeIndicator(TaskPeriod taskPeriod) {
-    const Duration minusMicro = Duration(microseconds: -1);
+  Map<String, dynamic> restHabitDays(HabitPeriod habitPeriod) {
+    final int days;
+    switch (habitPeriod) {
+      case HabitPeriod.days21:
+        days = 21;
+        break;
+      case HabitPeriod.days40:
+        days = 40;
+        break;
+      case HabitPeriod.days66:
+        days = 66;
+        break;
+      case HabitPeriod.days90:
+        days = 90;
+        break;
+    }
 
-    final DateTime startDateTime;
-    final Duration remainingTime;
-    final double elapsedPercentage;
-    final DateTime endDateTime;
+    return _calculateHabitPeriod(days);
+  }
+
+  Map<String, dynamic> _calculateHabitPeriod(int days) {
+    final DateTime startDateTime = DateTime(_currentDateTime.year, _currentDateTime.month, _currentDateTime.day);
+    final DateTime endDateTime = startDateTime.add(Duration(days: days));
+
+    return {
+      AppConstraints.startDateTime: startDateTime,
+      AppConstraints.endDateTime: endDateTime.add(minusMicro),
+    };
+  }
+
+  Map<String, dynamic> restTaskTimes(TaskPeriod taskPeriod) {
+    final Map<String, dynamic> periodData;
+
     switch (taskPeriod) {
       case TaskPeriod.day:
-        final startOfDay = DateTime(_currentDateTime.year, _currentDateTime.month, _currentDateTime.day);
-        final endOfDay = startOfDay.add(const Duration(hours: 24));
-
-        final elapsedTime = _currentDateTime.difference(startOfDay).inMinutes;
-        final totalMinutesInDay = const Duration(hours: 24).inMinutes;
-
-        startDateTime = startOfDay;
-        remainingTime = endOfDay.difference(_currentDateTime);
-        elapsedPercentage = (elapsedTime / totalMinutesInDay) * 100.0;
-        endDateTime = endOfDay.add(minusMicro);
+        periodData = _calculatePeriodData(
+            startPeriod: DateTime(_currentDateTime.year, _currentDateTime.month, _currentDateTime.day),
+            duration: const Duration(hours: 24)
+        );
         break;
       case TaskPeriod.week:
         final startOfWeek = DateTime(_currentDateTime.year, _currentDateTime.month, _currentDateTime.day - _currentDateTime.weekday + 1);
-        final endOfWeek = startOfWeek.add(const Duration(days: 7));
-
-        final elapsedTime = _currentDateTime.difference(startOfWeek).inMinutes;
-        final totalMinutesInMonth = const Duration(days: 7).inMinutes;
-
-        startDateTime = startOfWeek;
-        remainingTime = endOfWeek.difference(_currentDateTime);
-        elapsedPercentage = (elapsedTime / totalMinutesInMonth) * 100.0;
-        endDateTime = endOfWeek.add(minusMicro);
+        periodData = _calculatePeriodData(
+            startPeriod: startOfWeek,
+            duration: const Duration(days: 7)
+        );
         break;
       case TaskPeriod.month:
         final startOfMonth = DateTime(_currentDateTime.year, _currentDateTime.month);
-        final endOfMonth = startOfMonth.add(Duration(days: daysInMonth(_currentDateTime.year, _currentDateTime.month)));
-
-        final elapsedTime = _currentDateTime.difference(startOfMonth).inMinutes;
-        final totalMinutesInMonth = Duration(days: daysInMonth(_currentDateTime.year, _currentDateTime.month)).inMinutes;
-
-        startDateTime = startOfMonth;
-        remainingTime = endOfMonth.difference(_currentDateTime);
-        elapsedPercentage = (elapsedTime / totalMinutesInMonth) * 100.0;
-        endDateTime = endOfMonth.add(minusMicro);
+        periodData = _calculatePeriodData(
+            startPeriod: startOfMonth,
+            duration: Duration(days: daysInMonth(_currentDateTime.year, _currentDateTime.month))
+        );
         break;
       case TaskPeriod.season:
-        final int startSeasonMonth;
-        final int endSeasonMonth;
-
-        switch (_getCurrentSeason(_currentDateTime.month)) {
-          case Season.spring:
-            startSeasonMonth = 3;
-            endSeasonMonth = 5;
-            break;
-          case Season.summer:
-            startSeasonMonth = 6;
-            endSeasonMonth = 8;
-            break;
-          case Season.fall:
-            startSeasonMonth = 9;
-            endSeasonMonth = 11;
-            break;
-          case Season.winter:
-            startSeasonMonth = 12;
-            endSeasonMonth = 2;
-            break;
-        }
-
-        final startSeason = DateTime(getCurrentSeason() == Season.winter ? _currentDateTime.year - 1 : _currentDateTime.year, startSeasonMonth, 1);
-        final endSeason = DateTime(getCurrentSeason() == Season.winter ? _currentDateTime.year - 1 : _currentDateTime.year, endSeasonMonth + 1, 1);
-
-        final elapsedTime = _currentDateTime.difference(startSeason).inMinutes;
-        final totalMinutesInSeason = endSeason.difference(startSeason).inMinutes;
-
-        startDateTime = startSeason;
-        remainingTime = endSeason.difference(_currentDateTime);
-        elapsedPercentage = (elapsedTime / totalMinutesInSeason) * 100.0;
-        endDateTime = endSeason.add(minusMicro);
+        final seasonData = _getSeasonPeriodData(_currentDateTime);
+        periodData = _calculatePeriodData(
+            startPeriod: seasonData['startSeason'],
+            endPeriod: seasonData['endSeason']
+        );
         break;
       case TaskPeriod.year:
         final startOfYear = DateTime(_currentDateTime.year);
-        final endOfYear = startOfYear.add(Duration(days: isLeapYear(_currentDateTime.year) ? 366 : 365));
-
-        final elapsedTime = _currentDateTime.difference(startOfYear).inMinutes;
-        final totalMinutesInYear = endOfYear.difference(startOfYear).inMinutes;
-
-        startDateTime = startOfYear;
-        remainingTime = endOfYear.difference(_currentDateTime);
-        elapsedPercentage = (elapsedTime / totalMinutesInYear) * 100.0;
-        endDateTime = endOfYear.add(minusMicro);
+        periodData = _calculatePeriodData(
+            startPeriod: startOfYear,
+            duration: Duration(days: isLeapYear(_currentDateTime.year) ? 366 : 365)
+        );
         break;
     }
+
+    return periodData;
+  }
+
+  Map<String, dynamic> _calculatePeriodData({
+    required DateTime startPeriod,
+    Duration? duration,
+    DateTime? endPeriod,
+  }) {
+    final DateTime endDateTime = duration != null ? startPeriod.add(duration) : endPeriod!;
+    final int elapsedTimeInMinutes = _currentDateTime.difference(startPeriod).inMinutes;
+    final int totalMinutes = endDateTime.difference(startPeriod).inMinutes;
+    final Duration remainingTime = endDateTime.difference(_currentDateTime);
+    final double elapsedPercentage = (elapsedTimeInMinutes / totalMinutes) * 100.0;
+
     return {
-      AppConstraints.startDateTime: startDateTime,
+      AppConstraints.startDateTime: startPeriod,
       AppConstraints.remainingTimeString: remainingTime,
       AppConstraints.elapsedPercentage: elapsedPercentage,
-      AppConstraints.endDateTime: endDateTime,
+      AppConstraints.endDateTime: endDateTime.add(minusMicro),
+    };
+  }
+
+  Map<String, dynamic> _getSeasonPeriodData(DateTime currentDateTime) {
+    final int startSeasonMonth;
+    final int endSeasonMonth;
+    final int currentYear = currentDateTime.year;
+    final int previousYear = currentYear - 1;
+
+    switch (_getCurrentSeason(currentDateTime.month)) {
+      case Season.spring:
+        startSeasonMonth = 3;
+        endSeasonMonth = 5;
+        break;
+      case Season.summer:
+        startSeasonMonth = 6;
+        endSeasonMonth = 8;
+        break;
+      case Season.fall:
+        startSeasonMonth = 9;
+        endSeasonMonth = 11;
+        break;
+      case Season.winter:
+        startSeasonMonth = 12;
+        endSeasonMonth = 2;
+        break;
+    }
+
+    final startSeason = DateTime(_getCurrentSeason(currentDateTime.month) == Season.winter ? previousYear : currentYear, startSeasonMonth, 1);
+    final endSeason = DateTime(_getCurrentSeason(currentDateTime.month) == Season.winter ? previousYear : currentYear, endSeasonMonth + 1, 1);
+
+    return {
+      'startSeason': startSeason,
+      'endSeason': endSeason,
     };
   }
 

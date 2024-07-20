@@ -30,4 +30,13 @@ class CreateHabitState extends ChangeNotifier {
     _isRemind = isRemind;
     notifyListeners();
   }
+
+  late String _taskNotificationDate;
+
+  String get getTaskNotificationDate => _taskNotificationDate;
+
+  set setTaskNotificationDate(String taskNotificationDate) {
+    _taskNotificationDate = taskNotificationDate;
+    notifyListeners();
+  }
 }

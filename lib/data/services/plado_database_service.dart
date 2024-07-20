@@ -59,13 +59,13 @@ class PladoDatabaseService {
       CREATE TABLE Table_of_habits (
         habit_id INTEGER PRIMARY KEY AUTOINCREMENT,
         habit_title TEXT,
-        habit_description TEXT,
         create_date_time TEXT,
         complete_date_time TEXT,
         start_date_time TEXT,
         end_date_time TEXT,
         habit_period_index INTEGER,
-        completed_days INTEGER,
+        habit_color_index INTEGER,
+        completed_days TEXT,
         notification_id INTEGER,
         notification_date TEXT
         );

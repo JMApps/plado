@@ -1,15 +1,12 @@
 import 'dart:io';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-
 class NotificationService {
-
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
-  static const AndroidNotificationDetails _androidDailyNotificationDetails =
-  AndroidNotificationDetails(
+  static const AndroidNotificationDetails _androidDailyNotificationDetails = AndroidNotificationDetails(
     'PlaDo notification channel ID',
     'Notifications',
     channelDescription: 'PlaDo notifications',
@@ -17,8 +14,7 @@ class NotificationService {
     priority: Priority.max,
   );
 
-  static const DarwinNotificationDetails _iOSDailyNotificationDetails =
-  DarwinNotificationDetails();
+  static const DarwinNotificationDetails _iOSDailyNotificationDetails = DarwinNotificationDetails();
 
   Future<void> setupNotification() async {
     if (Platform.isAndroid) {
@@ -26,7 +22,6 @@ class NotificationService {
     }
 
     const AndroidInitializationSettings androidInitializationSettings = AndroidInitializationSettings('@drawable/ic_notification');
-
     const DarwinInitializationSettings iOSInitializationSettings = DarwinInitializationSettings();
 
     const InitializationSettings initializationSettings = InitializationSettings(
@@ -38,7 +33,7 @@ class NotificationService {
     tz.initializeTimeZones();
   }
 
-  Future<void> futureNotification(DateTime date, String title, String body, int notificationId) async {
+  Future<void> scheduleNotifications(DateTime date, String title, String body, int notificationId) async {
     var tzDateNotification = tz.TZDateTime.from(date, tz.local);
     await _flutterLocalNotificationsPlugin.zonedSchedule(
       notificationId,
@@ -53,6 +48,13 @@ class NotificationService {
       uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
       matchDateTimeComponents: DateTimeComponents.time,
     );
+  }
+
+  Future<void> scheduleDailyNotifications(DateTime startDate, String title, String body, int notificationId, int daysCount) async {
+    for (int i = 0; i < daysCount; i++) {
+      DateTime notificationDate = startDate.add(Duration(days: i));
+      await scheduleNotifications(notificationDate, title, body, notificationId + i);
+    }
   }
 
   Future<void> cancelNotificationWithId(int id) async {

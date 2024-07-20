@@ -1,11 +1,18 @@
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../core/strings/app_strings.dart';
 import '../../../core/enums/habit_period.dart';
+import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
+import '../../../data/services/notifications/notification_service.dart';
+import '../../../data/state/habit_data_state.dart';
 import '../../state/create_habit_state.dart';
+import '../../state/rest_times_state.dart';
 import '../../widgets/main_back_button.dart';
 
 class CreateHabitPage extends StatefulWidget {
@@ -17,7 +24,7 @@ class CreateHabitPage extends StatefulWidget {
 
 class _CreateHabitPageState extends State<CreateHabitPage> {
   final TextEditingController _habitTextController = TextEditingController();
-  late TimeOfDay _selectedTime;
+  DateTime _selectedDateTime = DateTime.now();
   late DateTime _startTime;
   late DateTime _endTime;
 
@@ -30,6 +37,7 @@ class _CreateHabitPageState extends State<CreateHabitPage> {
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).colorScheme;
+    final restTimeState = Provider.of<RestTimesState>(context);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -43,12 +51,14 @@ class _CreateHabitPageState extends State<CreateHabitPage> {
         ),
         body: Consumer<CreateHabitState>(
           builder: (context, createHabitState, _) {
+            final restHabitData = restTimeState.restHabitDays(createHabitState.getHabitPeriod);
+            _startTime = restHabitData[AppConstraints.startDateTime];
+            _endTime = restHabitData[AppConstraints.endDateTime];
             return SingleChildScrollView(
               padding: AppStyles.padding,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const SizedBox(height: 16),
                   TextField(
                     controller: _habitTextController,
                     autofocus: true,
@@ -75,7 +85,9 @@ class _CreateHabitPageState extends State<CreateHabitPage> {
                       HabitPeriod.days90: Text(AppStrings.daya90),
                     },
                     onValueChanged: (HabitPeriod? habitPeriod) {
-                      createHabitState.setHabitPeriod = habitPeriod!;
+                      if (habitPeriod != null) {
+                        createHabitState.setHabitPeriod = habitPeriod;
+                      }
                     },
                   ),
                   const SizedBox(height: 16),
@@ -115,10 +127,10 @@ class _CreateHabitPageState extends State<CreateHabitPage> {
                     ),
                     leading: IconButton(
                       onPressed: createHabitState.getIsRemind ? () async {
-                        _selectedTime = TimeOfDay.now();
+                        final currentTime = TimeOfDay.now();
                         final selectedTime = await showTimePicker(
                           context: context,
-                          initialTime: TimeOfDay(hour: _selectedTime.hour, minute: _selectedTime.minute),
+                          initialTime: TimeOfDay(hour: currentTime.hour, minute: currentTime.minute),
                           helpText: AppStrings.selectTime,
                           hourLabelText: AppStrings.hours,
                           minuteLabelText: AppStrings.minutes,
@@ -126,7 +138,7 @@ class _CreateHabitPageState extends State<CreateHabitPage> {
                           confirmText: AppStrings.select,
                         );
                         if (selectedTime != null) {
-                          _selectedTime = selectedTime;
+                          _selectedDateTime = DateTime(_selectedDateTime.year, _selectedDateTime.month, _selectedDateTime.day, selectedTime.hour, selectedTime.minute,);
                         }
                       } : null,
                       icon: const Icon(Icons.access_time),
@@ -141,7 +153,24 @@ class _CreateHabitPageState extends State<CreateHabitPage> {
                   const SizedBox(height: 8),
                   OutlinedButton(
                     onPressed: () {
-                      // Add habit
+                      if (_habitTextController.text.trim().isNotEmpty) {
+                        Navigator.of(context).pop();
+                        int notificationId = 0;
+
+                        if (createHabitState.getIsRemind) {
+                          final randomNotificationNumber = Random().nextInt(AppConstraints.randomNotificationNumber);
+                          notificationId = randomNotificationNumber;
+                          createHabitState.setTaskNotificationDate = _selectedDateTime.toIso8601String();
+
+                          final int habitDaysCount = AppStyles.habitPeriodList[createHabitState.getHabitPeriod.index];
+                          NotificationService().scheduleDailyNotifications(_selectedDateTime, AppStrings.appName, _habitTextController.text.trim(), randomNotificationNumber, habitDaysCount);
+                        }
+
+                        final habitMap = _createHabitMap(createHabitState, notificationId);
+                        Provider.of<HabitDataState>(context, listen: false).createHabit(habitMap: habitMap);
+                      } else {
+                        _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.enterHabitTitle);
+                      }
                     },
                     child: const Text(AppStrings.add),
                   ),
@@ -149,6 +178,41 @@ class _CreateHabitPageState extends State<CreateHabitPage> {
               ),
             );
           },
+        ),
+      ),
+    );
+  }
+
+  Map<String, dynamic> _createHabitMap(CreateHabitState createHabitState, int notificationId) {
+    final int habitDaysCount = AppStyles.habitPeriodList[createHabitState.getHabitPeriod.index];
+    final List<int> completedDays = List<int>.filled(habitDaysCount, 0);
+    final String completedDaysJson = jsonEncode(completedDays);
+
+    return {
+      'habit_title': _habitTextController.text.trim(),
+      'create_date_time': DateTime.now().toIso8601String(),
+      'complete_date_time': DateTime.now().toIso8601String(),
+      'start_date_time': _startTime.toIso8601String(),
+      'end_date_time': _endTime.toIso8601String(),
+      'habit_period_index': createHabitState.getHabitPeriod.index,
+      'habit_color_index': createHabitState.getColorIndex,
+      'completed_days': completedDaysJson,
+      'notification_id': notificationId,
+      'notification_date': createHabitState.getIsRemind ? createHabitState.getTaskNotificationDate : '',
+    };
+  }
+
+  void _showScaffoldMessage(Color color, Color textColor, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: color,
+        duration: const Duration(seconds: 1),
+        content: Text(
+          message,
+          style: TextStyle(
+            fontSize: 17,
+            color: textColor,
+          ),
         ),
       ),
     );
