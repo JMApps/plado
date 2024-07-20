@@ -1,5 +1,11 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:plado/presentation/state/habit_item_state.dart';
+import 'package:provider/provider.dart';
+
+import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/habit_entity.dart';
 
 class HabitItem extends StatelessWidget {
@@ -12,6 +18,56 @@ class HabitItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    final theme = Theme.of(context);
+    final bool isNight = theme.brightness == Brightness.dark ? true : false;
+    final habitColor = AppStyles.taskHabitColors[habitModel.habitColorIndex].withOpacity(isNight ? 0.5 : 1);
+    final List<dynamic> jsonList = jsonDecode(habitModel.completedDays);
+    final List<bool> completedDays = jsonList.map((e) => e == 1).toList();
+    return Card(
+      elevation: 0,
+      margin: AppStyles.paddingBottomMini,
+      child: Consumer<HabitItemState>(
+        builder: (context, habitItemState, _) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                habitModel.habitTitle,
+                style: TextStyle(
+                  color: habitColor,
+                  fontSize: 17,
+                ),
+              ),
+              Text(
+                DateFormat('d.M.yyyy H:mm').format(DateTime.parse(habitModel.createDateTime)),
+                style: const TextStyle(
+                  fontFamily: 'Roboto Slab',
+                ),
+              ),
+              SizedBox(
+                height: 50,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: completedDays.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return CircleAvatar(
+                      backgroundColor: habitColor,
+                      child: Checkbox(
+                        value: completedDays[index],
+                        onChanged: (bool? onChanged) {
+                          if (onChanged != null) {
+                            habitItemState.setDayIsTrue = onChanged;
+                          }
+                        },
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
   }
 }
