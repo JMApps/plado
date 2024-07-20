@@ -22,11 +22,16 @@ class TaskItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final taskDataState = Provider.of<TaskDataState>(context, listen: false);
-    DateTime parsedDate = DateTime.parse(taskModel.createDateTime);
-    bool statusTask = taskModel.taskStatusIndex == 0 ? false : true;
-    // TODO обязательно передать текущую локаль
-    String timeAgo = timeago.format(parsedDate, locale: 'en');
+
+    final DateTime parsedDate = DateTime.parse(taskModel.createDateTime);
+    final String timeAgo = timeago.format(parsedDate, locale: 'en');
+
+    final bool statusTask = taskModel.taskStatusIndex == 0 ? false : true;
+
+    final bool isNight = theme.brightness == Brightness.dark ? true : false;
+    final taskColor = AppStyles.taskHabitColors[taskModel.taskColorIndex].withOpacity(isNight ? 0.5 : 1);
     return Padding(
       padding: AppStyles.paddingBottomMini,
       child: ListTile(
@@ -51,7 +56,7 @@ class TaskItem extends StatelessWidget {
         ),
         trailing: Icon(
           statusTask ? Icons.circle_rounded : Icons.circle_outlined,
-          color: AppStyles.taskHabitColors[taskModel.taskColorIndex],
+          color: taskColor,
           size: 15,
         ),
         title: Text(

@@ -81,24 +81,24 @@ class _TasksPageState extends State<TasksPage> with TickerProviderStateMixin {
             controller: _tabController,
             children: [
               DayTaskList(
-                startDate: restTimeState.getRestTimeIndicator(TaskPeriod.day)[AppConstraints.startDateTime],
-                endDate: restTimeState.getRestTimeIndicator(TaskPeriod.day)[AppConstraints.endDateTime],
+                startDate: restTimeState.restTaskTimes(TaskPeriod.day)[AppConstraints.startDateTime],
+                endDate: restTimeState.restTaskTimes(TaskPeriod.day)[AppConstraints.endDateTime],
               ),
               WeekTaskList(
-                startDate: restTimeState.getRestTimeIndicator(TaskPeriod.week)[AppConstraints.startDateTime],
-                endDate: restTimeState.getRestTimeIndicator(TaskPeriod.week)[AppConstraints.endDateTime],
+                startDate: restTimeState.restTaskTimes(TaskPeriod.week)[AppConstraints.startDateTime],
+                endDate: restTimeState.restTaskTimes(TaskPeriod.week)[AppConstraints.endDateTime],
               ),
               MonthTaskList(
-                startDate: restTimeState.getRestTimeIndicator(TaskPeriod.month)[AppConstraints.startDateTime],
-                endDate: restTimeState.getRestTimeIndicator(TaskPeriod.month)[AppConstraints.endDateTime],
+                startDate: restTimeState.restTaskTimes(TaskPeriod.month)[AppConstraints.startDateTime],
+                endDate: restTimeState.restTaskTimes(TaskPeriod.month)[AppConstraints.endDateTime],
               ),
               SeasonTaskList(
-                startDate: restTimeState.getRestTimeIndicator(TaskPeriod.season)[AppConstraints.startDateTime],
-                endDate: restTimeState.getRestTimeIndicator(TaskPeriod.season)[AppConstraints.endDateTime],
+                startDate: restTimeState.restTaskTimes(TaskPeriod.season)[AppConstraints.startDateTime],
+                endDate: restTimeState.restTaskTimes(TaskPeriod.season)[AppConstraints.endDateTime],
               ),
               YearTaskList(
-                startDate: restTimeState.getRestTimeIndicator(TaskPeriod.year)[AppConstraints.startDateTime],
-                endDate: restTimeState.getRestTimeIndicator(TaskPeriod.year)[AppConstraints.endDateTime],
+                startDate: restTimeState.restTaskTimes(TaskPeriod.year)[AppConstraints.startDateTime],
+                endDate: restTimeState.restTaskTimes(TaskPeriod.year)[AppConstraints.endDateTime],
               ),
             ],
           );

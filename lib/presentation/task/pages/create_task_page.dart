@@ -60,14 +60,14 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
           padding: AppStyles.padding,
           child: Consumer<CreateTaskState>(
             builder: (context, createTaskState, _) {
-              _startTime = restTimesState.getRestTimeIndicator(createTaskState.getTaskPeriod)[AppConstraints.startDateTime];
-              _endTime = restTimesState.getRestTimeIndicator(createTaskState.getTaskPeriod)[AppConstraints.endDateTime];
+              _startTime = restTimesState.restTaskTimes(createTaskState.getTaskPeriod)[AppConstraints.startDateTime];
+              _endTime = restTimesState.restTaskTimes(createTaskState.getTaskPeriod)[AppConstraints.endDateTime];
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   TaskTimeIndicator(
-                    remainingTime: restTimesState.getRestTimeIndicator(createTaskState.getTaskPeriod)[AppConstraints.remainingTimeString],
-                    elapsedPercentage: restTimesState.getRestTimeIndicator(createTaskState.getTaskPeriod)[AppConstraints.elapsedPercentage],
+                    remainingTime: restTimesState.restTaskTimes(createTaskState.getTaskPeriod)[AppConstraints.remainingTimeString],
+                    elapsedPercentage: restTimesState.restTaskTimes(createTaskState.getTaskPeriod)[AppConstraints.elapsedPercentage],
                   ),
                   const SizedBox(height: 16),
                   TextField(
@@ -275,7 +275,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
       final randomNotificationNumber = Random().nextInt(AppConstraints.randomNotificationNumber);
       notificationId = randomNotificationNumber;
       createTaskState.setTaskNotificationDate = _selectedDate.toIso8601String();
-      NotificationService().futureNotification(_selectedDate, AppStrings.appName, _taskTextController.text.trim(), randomNotificationNumber);
+      NotificationService().scheduleNotifications(_selectedDate, AppStrings.appName, _taskTextController.text.trim(), randomNotificationNumber);
     }
 
     final Map<String, dynamic> taskMap = {

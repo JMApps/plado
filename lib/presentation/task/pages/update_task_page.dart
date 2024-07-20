@@ -82,8 +82,8 @@ class _UpdateTaskPageState extends State<UpdateTaskPage> {
           padding: AppStyles.padding,
           child: Consumer<UpdateTaskState>(
             builder: (context, updateTaskState, _) {
-              _startTime = restTimesState.getRestTimeIndicator(updateTaskState.getTaskPeriod)[AppConstraints.startDateTime];
-              _endTime = restTimesState.getRestTimeIndicator(updateTaskState.getTaskPeriod)[AppConstraints.endDateTime];
+              _startTime = restTimesState.restTaskTimes(updateTaskState.getTaskPeriod)[AppConstraints.startDateTime];
+              _endTime = restTimesState.restTaskTimes(updateTaskState.getTaskPeriod)[AppConstraints.endDateTime];
               if (widget.taskModel.notificationDate.isNotEmpty) {
                 _argDateTime = DateTime.parse(widget.taskModel.notificationDate);
               } else {
@@ -93,8 +93,8 @@ class _UpdateTaskPageState extends State<UpdateTaskPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   TaskTimeIndicator(
-                    remainingTime: restTimesState.getRestTimeIndicator(updateTaskState.getTaskPeriod)[AppConstraints.remainingTimeString],
-                    elapsedPercentage: restTimesState.getRestTimeIndicator(updateTaskState.getTaskPeriod)[AppConstraints.elapsedPercentage],
+                    remainingTime: restTimesState.restTaskTimes(updateTaskState.getTaskPeriod)[AppConstraints.remainingTimeString],
+                    elapsedPercentage: restTimesState.restTaskTimes(updateTaskState.getTaskPeriod)[AppConstraints.elapsedPercentage],
                   ),
                   const SizedBox(height: 16),
                   TextField(
@@ -278,7 +278,7 @@ class _UpdateTaskPageState extends State<UpdateTaskPage> {
       final randomNotificationNumber = Random().nextInt(AppConstraints.randomNotificationNumber);
       notificationId = randomNotificationNumber;
       updateTaskState.setTaskNotificationDate = _argDateTime.toIso8601String();
-      NotificationService().futureNotification(_argDateTime, AppStrings.appName, _taskTextController.text.trim(), randomNotificationNumber);
+      NotificationService().scheduleNotifications(_argDateTime, AppStrings.appName, _taskTextController.text.trim(), randomNotificationNumber);
     }
 
     final Map<String, dynamic> taskMap = {
