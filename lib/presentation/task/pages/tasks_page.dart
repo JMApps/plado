@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../../core/strings/app_strings.dart';
 import '../../../../../core/styles/app_styles.dart';
@@ -7,12 +6,7 @@ import '../../../core/enums/task_period.dart';
 import '../../../core/routes/name_routes.dart';
 import '../../../core/strings/app_constraints.dart';
 import '../../../data/models/arguments/create_task_args.dart';
-import '../../state/rest_times_state.dart';
-import '../lists/day_task_list.dart';
-import '../lists/month_task_list.dart';
-import '../lists/season_task_list.dart';
-import '../lists/week_task_list.dart';
-import '../lists/year_task_list.dart';
+import '../items/task_list_item.dart';
 import '../widgets/task_sort_bottom_sheet.dart';
 
 class TasksPage extends StatefulWidget {
@@ -75,34 +69,15 @@ class _TasksPageState extends State<TasksPage> with TickerProviderStateMixin {
           ],
         ),
       ),
-      body: Consumer<RestTimesState>(
-        builder: (context, restTimeState, _) {
-          return TabBarView(
-            controller: _tabController,
-            children: [
-              DayTaskList(
-                startDate: restTimeState.restTaskTimes(TaskPeriod.day)[AppConstraints.startDateTime],
-                endDate: restTimeState.restTaskTimes(TaskPeriod.day)[AppConstraints.endDateTime],
-              ),
-              WeekTaskList(
-                startDate: restTimeState.restTaskTimes(TaskPeriod.week)[AppConstraints.startDateTime],
-                endDate: restTimeState.restTaskTimes(TaskPeriod.week)[AppConstraints.endDateTime],
-              ),
-              MonthTaskList(
-                startDate: restTimeState.restTaskTimes(TaskPeriod.month)[AppConstraints.startDateTime],
-                endDate: restTimeState.restTaskTimes(TaskPeriod.month)[AppConstraints.endDateTime],
-              ),
-              SeasonTaskList(
-                startDate: restTimeState.restTaskTimes(TaskPeriod.season)[AppConstraints.startDateTime],
-                endDate: restTimeState.restTaskTimes(TaskPeriod.season)[AppConstraints.endDateTime],
-              ),
-              YearTaskList(
-                startDate: restTimeState.restTaskTimes(TaskPeriod.year)[AppConstraints.startDateTime],
-                endDate: restTimeState.restTaskTimes(TaskPeriod.year)[AppConstraints.endDateTime],
-              ),
-            ],
-          );
-        },
+      body: TabBarView(
+        controller: _tabController,
+        children: [
+          TaskListItem(taskPeriodIndex: TaskPeriod.day.index),
+          TaskListItem(taskPeriodIndex: TaskPeriod.week.index),
+          TaskListItem(taskPeriodIndex: TaskPeriod.month.index),
+          TaskListItem(taskPeriodIndex: TaskPeriod.season.index),
+          TaskListItem(taskPeriodIndex: TaskPeriod.year.index),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         elevation: 0,
@@ -114,7 +89,7 @@ class _TasksPageState extends State<TasksPage> with TickerProviderStateMixin {
             context,
             NameRoutes.createTaskPage,
             arguments: CreateTaskArgs(
-              taskPeriod: AppStyles.taskPeriodList[_tabController.index],
+              taskPeriodIndex: _tabController.index,
             ),
           );
         },
