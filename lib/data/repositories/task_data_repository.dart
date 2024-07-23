@@ -37,7 +37,7 @@ class TaskDataRepository implements TaskRepository {
       _taskStatusIndex: 2,
       'complete_date_time': endTime,
     };
-    await database.update(_tasksTableName, taskStatusMap, where: 'end_date_time < ?', whereArgs: [endTime]);
+    await database.update(_tasksTableName, taskStatusMap, where: 'end_date_time < ? AND $_taskPeriodIndex = $taskPeriodIndex', whereArgs: [endTime]);
     final List<Map<String, Object?>> resources = await database.query(_tasksTableName, where: '$_taskPeriodIndex = ? AND start_date_time = ? AND end_date_time = ?', whereArgs: [taskPeriodIndex, startTime, endTime], orderBy: 'CASE WHEN $_taskStatusIndex = 1 THEN 1 ELSE 0 END, $orderBy');
     final List<TaskEntity> tasksByMode = resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
     return tasksByMode;
