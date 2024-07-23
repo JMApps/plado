@@ -1,317 +1,91 @@
-import 'dart:math';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../core/strings/app_strings.dart';
-import '../../../core/enums/task_period.dart';
-import '../../../core/enums/task_priority.dart';
-import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
-import '../../../data/services/notifications/notification_service.dart';
-import '../../../data/state/task_data_state.dart';
-import '../../state/create_task_state.dart';
-import '../../state/rest_times_state.dart';
+import '../../state/task/task_color_state.dart';
+import '../../state/task/task_notification_date_state.dart';
+import '../../state/task/task_notification_id_state.dart';
+import '../../state/task/task_period_state.dart';
+import '../../state/task/task_priority_state.dart';
+import '../../state/task/task_remind_state.dart';
+import '../../state/task/task_title_state.dart';
 import '../../widgets/main_back_button.dart';
+import '../widgets/add_task_button.dart';
+import '../widgets/task_color_list.dart';
+import '../widgets/task_period_segment.dart';
+import '../widgets/task_priority_segment.dart';
+import '../widgets/task_remind_date_time.dart';
+import '../widgets/task_text_field.dart';
 import '../widgets/task_time_indicator.dart';
+import '../widgets/text_description.dart';
 
-class CreateTaskPage extends StatefulWidget {
+class CreateTaskPage extends StatelessWidget {
   const CreateTaskPage({
     super.key,
-    required this.taskPeriod,
+    required this.taskPeriodIndex,
   });
 
-  final TaskPeriod taskPeriod;
-
-  @override
-  State<CreateTaskPage> createState() => _CreateTaskPageState();
-}
-
-class _CreateTaskPageState extends State<CreateTaskPage> {
-  final _taskTextController = TextEditingController();
-  DateTime _currentTime = DateTime.now();
-  DateTime _selectedDate = DateTime.now();
-  late DateTime _startTime;
-  late DateTime _endTime;
-
-  @override
-  void dispose() {
-    _taskTextController.dispose();
-    super.dispose();
-  }
+  final int taskPeriodIndex;
 
   @override
   Widget build(BuildContext context) {
-    final appColors = Theme.of(context).colorScheme;
-    final restTimesState = Provider.of<RestTimesState>(context);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => CreateTaskState(widget.taskPeriod),
+          create: (_) => TaskTitleState(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => TaskPeriodState(taskPeriodIndex),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => TaskPriorityState(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => TaskColorState(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => TaskRemindState(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => TaskNotificationIdState(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => TaskNotificationDateState(DateTime.now().toIso8601String()),
         ),
       ],
       child: Scaffold(
         appBar: AppBar(
           title: const Text(AppStrings.addingTask),
           leading: const MainBackButton(),
+          actions: const [
+            AddTaskButton(),
+          ],
         ),
-        body: SingleChildScrollView(
+        body: const SingleChildScrollView(
           padding: AppStyles.padding,
-          child: Consumer<CreateTaskState>(
-            builder: (context, createTaskState, _) {
-              _startTime = restTimesState.restTaskTimes(createTaskState.getTaskPeriod)[AppConstraints.startDateTime];
-              _endTime = restTimesState.restTaskTimes(createTaskState.getTaskPeriod)[AppConstraints.endDateTime];
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  TaskTimeIndicator(
-                    remainingTime: restTimesState.restTaskTimes(createTaskState.getTaskPeriod)[AppConstraints.remainingTimeString],
-                    elapsedPercentage: restTimesState.restTaskTimes(createTaskState.getTaskPeriod)[AppConstraints.elapsedPercentage],
-                  ),
-                  const SizedBox(height: 16),
-                  TextField(
-                    controller: _taskTextController,
-                    autofocus: true,
-                    textCapitalization: TextCapitalization.sentences,
-                    keyboardType: TextInputType.text,
-                    textInputAction: TextInputAction.done,
-                    maxLength: 75,
-                    decoration: const InputDecoration(
-                      hintText: AppStrings.taskHint,
-                    ),
-                  ),
-                  const Text(
-                    AppStrings.timeInterval,
-                    style: TextStyle(fontSize: 17),
-                  ),
-                  const SizedBox(height: 8),
-                  CupertinoSlidingSegmentedControl<TaskPeriod>(
-                    groupValue: createTaskState.getTaskPeriod,
-                    thumbColor: appColors.onPrimary,
-                    children: const <TaskPeriod, Widget>{
-                      TaskPeriod.day: Text(AppStrings.day),
-                      TaskPeriod.week: Text(AppStrings.week),
-                      TaskPeriod.month: Text(AppStrings.month),
-                      TaskPeriod.season: Text(AppStrings.season),
-                      TaskPeriod.year: Text(AppStrings.year),
-                    },
-                    onValueChanged: (TaskPeriod? taskPeriod) {
-                      createTaskState.setTaskPeriod = taskPeriod!;
-                    },
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    AppStrings.priority,
-                    style: TextStyle(fontSize: 17),
-                  ),
-                  const SizedBox(height: 8),
-                  CupertinoSlidingSegmentedControl<TaskPriority>(
-                    groupValue: createTaskState.getTaskPriority,
-                    thumbColor: appColors.onPrimary,
-                    children: const <TaskPriority, Widget>{
-                      TaskPriority.low: Text(AppStrings.low),
-                      TaskPriority.medium: Text(AppStrings.medium),
-                      TaskPriority.high: Text(AppStrings.high),
-                    },
-                    onValueChanged: (TaskPriority? taskPriority) {
-                      createTaskState.setTaskPriority = taskPriority!;
-                    },
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    AppStrings.color,
-                    style: TextStyle(fontSize: 17),
-                  ),
-                  const SizedBox(height: 8),
-                  GridView.builder(
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 10,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 10,
-                      crossAxisSpacing: 8,
-                    ),
-                    itemBuilder: (BuildContext context, int index) {
-                      return GestureDetector(
-                        onTap: () {
-                          createTaskState.setColorIndex = index;
-                        },
-                        child: CircleAvatar(
-                          backgroundColor: AppStyles.taskHabitColors[index].withOpacity(Theme.of(context).brightness == Brightness.light ? 1 : 0.5),
-                          child: createTaskState.getColorIndex == index ? const Icon(Icons.check_rounded, color: Colors.black) : const SizedBox(),
-                        ),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    AppStrings.remind,
-                    style: TextStyle(fontSize: 17),
-                  ),
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    visualDensity: const VisualDensity(vertical: -4, horizontal: -4),
-                    title: Row(
-                      children: [
-                        TextButton.icon(
-                          onPressed: createTaskState.getIsRemind ? () async {
-                            final selectedDate = await showDatePicker(
-                              context: context,
-                              helpText: AppStrings.selectDate,
-                              cancelText: AppStrings.cancel,
-                              confirmText: AppStrings.select,
-                              initialDate: _currentTime,
-                              firstDate: _currentTime,
-                              lastDate: _endTime,
-                            );
-                            if (selectedDate != null) {
-                              _selectedDate = selectedDate;
-                            }
-                          } : null,
-                          icon: const Icon(Icons.date_range),
-                          label: const Text(AppStrings.selectDate),
-                        ),
-                        TextButton.icon(
-                          onPressed: createTaskState.getIsRemind ? () async {
-                            final selectedTime = await showTimePicker(
-                              context: context,
-                              initialTime: TimeOfDay(hour: _currentTime.hour, minute: _currentTime.minute),
-                              helpText: AppStrings.selectTime,
-                              hourLabelText: AppStrings.hours,
-                              minuteLabelText: AppStrings.minutes,
-                              cancelText: AppStrings.cancel,
-                              confirmText: AppStrings.select,
-                            );
-                            if (selectedTime != null) {
-                              _selectedDate = DateTime(_selectedDate.year, _selectedDate.month, _selectedDate.day, selectedTime.hour, selectedTime.minute);
-                            }
-                            if (_selectedDate.isBefore(_currentTime)) {
-                              if (!context.mounted) return;
-                              _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectDateTime);
-                            }
-                          } : null,
-                          icon: const Icon(Icons.access_time),
-                          label: const Text(AppStrings.selectTime),
-                        ),
-                      ],
-                    ),
-                    trailing: Switch(
-                      value: createTaskState.getIsRemind,
-                      onChanged: (bool onChanged) {
-                        createTaskState.setIsRemind = onChanged;
-                      },
-                    ),
-                  ),
-                  Builder(
-                    builder: (context) {
-                      return OutlinedButton(
-                        onPressed: () {
-                          if (_taskTextController.text.trim().isNotEmpty) {
-                            if (createTaskState.getIsRemind) {
-                              _currentTime = DateTime.now();
-                              if (_selectedDate.isAfter(_currentTime)) {
-                                _createTask(createTaskState);
-                              } else {
-                                _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectDateTime);
-                              }
-                            } else {
-                              _createTask(createTaskState);
-                            }
-                          } else {
-                            _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.enterTaskTitle);
-                          }
-                        },
-                        child: const Text(
-                          AppStrings.add,
-                          style: TextStyle(fontSize: 18),
-                        ),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 8),
-                  Builder(
-                    builder: (context) {
-                      return OutlinedButton(
-                        onPressed: () {
-                          if (_taskTextController.text.trim().isNotEmpty) {
-                            if (createTaskState.getIsRemind) {
-                              _currentTime = DateTime.now();
-                              if (_selectedDate.isAfter(_currentTime)) {
-                                Navigator.of(context).pop();
-                                _createTask(createTaskState);
-                              } else {
-                                _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectDateTime);
-                              }
-                            } else {
-                              Navigator.of(context).pop();
-                              _createTask(createTaskState);
-                            }
-                          } else {
-                            _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.enterTaskTitle);
-                          }
-                        },
-                        child: const Text(
-                          AppStrings.addClose,
-                          style: TextStyle(fontSize: 18),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              );
-            },
-          ),
-        ),
-      ),
-    );
-  }
-
-  void _createTask(CreateTaskState createTaskState) {
-    int notificationId = 0;
-
-    if (createTaskState.getIsRemind) {
-      final randomNotificationNumber = Random().nextInt(AppConstraints.randomNotificationNumber);
-      notificationId = randomNotificationNumber;
-      createTaskState.setTaskNotificationDate = _selectedDate.toIso8601String();
-      NotificationService().scheduleNotifications(_selectedDate, AppStrings.appName, _taskTextController.text.trim(), randomNotificationNumber);
-    }
-
-    final Map<String, dynamic> taskMap = {
-      'task_title': _taskTextController.text.trim(),
-      'create_date_time': _currentTime.toIso8601String(),
-      'complete_date_time': _currentTime.toIso8601String(),
-      'start_date_time': _startTime.toIso8601String(),
-      'end_date_time': _endTime.toIso8601String(),
-      'task_period_index': createTaskState.getTaskPeriod.index,
-      'task_priority_index': createTaskState.getTaskPriority.index,
-      'task_status_index': createTaskState.getTaskStatus.index,
-      'task_color_index': createTaskState.getColorIndex,
-      'notification_id': notificationId,
-      'notification_date': createTaskState.getIsRemind ? createTaskState.getTaskNotificationDate : '',
-    };
-
-    Provider.of<TaskDataState>(context, listen: false).createTask(taskMap: taskMap);
-
-    _taskTextController.clear();
-    createTaskState.setTaskNotificationDate = '';
-    _selectedDate = _currentTime;
-    createTaskState.setTaskPeriod = TaskPeriod.day;
-    createTaskState.setTaskPriority = TaskPriority.low;
-    createTaskState.setColorIndex = 0;
-  }
-
-  void _showScaffoldMessage(Color color, Color textColor, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor: color,
-        duration: const Duration(seconds: 1),
-        content: Text(
-          message,
-          style: TextStyle(
-            fontSize: 17,
-            color: textColor,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TaskTimeIndicator(),
+              SizedBox(height: 16),
+              TaskTextField(),
+              TextDescription(text: AppStrings.timeInterval),
+              SizedBox(height: 8),
+              TaskPeriodSegment(),
+              SizedBox(height: 16),
+              TextDescription(text: AppStrings.priority),
+              SizedBox(height: 8),
+              TaskPrioritySegment(),
+              SizedBox(height: 16),
+              TextDescription(text: AppStrings.color),
+              SizedBox(height: 8),
+              TaskColorList(),
+              SizedBox(height: 16),
+              TextDescription(text: AppStrings.remind),
+              TaskRemindDateTime(),
+              SizedBox(height: 8),
+            ],
           ),
         ),
       ),

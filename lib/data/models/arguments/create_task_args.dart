@@ -1,8 +1,5 @@
-
-import '../../../core/enums/task_period.dart';
-
 class CreateTaskArgs {
-  final TaskPeriod taskPeriod;
+  final int taskPeriodIndex;
 
-  CreateTaskArgs({required this.taskPeriod});
+  CreateTaskArgs({required this.taskPeriodIndex});
 }
