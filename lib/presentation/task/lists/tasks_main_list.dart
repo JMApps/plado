@@ -4,20 +4,21 @@ import 'package:provider/provider.dart';
 import '../../../../../core/strings/app_strings.dart';
 import '../../../../../data/state/task_data_state.dart';
 import '../../../../../domain/entities/task_entity.dart';
-import '../../../core/enums/task_period.dart';
 import '../../../core/styles/app_styles.dart';
-import '../../state/task_sort_state.dart';
+import '../../state/task/task_sort_state.dart';
 import '../../widgets/main_error_text.dart';
 import '../../widgets/time_is_empty.dart';
 import '../items/task_item.dart';
 
-class MonthTaskList extends StatelessWidget {
-  const MonthTaskList({
+class TasksMainList extends StatelessWidget {
+  const TasksMainList({
     super.key,
+    required this.taskPeriodIndex,
     required this.startDate,
     required this.endDate,
   });
 
+  final int taskPeriodIndex;
   final DateTime startDate;
   final DateTime endDate;
 
@@ -26,7 +27,7 @@ class MonthTaskList extends StatelessWidget {
     final taskSortState = Provider.of<TaskSortState>(context);
     return FutureBuilder<List<TaskEntity>>(
       future: Provider.of<TaskDataState>(context).getTasksByMode(
-        taskPeriodIndex: TaskPeriod.month.index,
+        taskPeriodIndex: taskPeriodIndex,
         startTime: startDate.toIso8601String(),
         endTime: endDate.toIso8601String(),
         orderBy: '${taskSortState.getSort} ${taskSortState.getOrder}',
@@ -35,7 +36,7 @@ class MonthTaskList extends StatelessWidget {
         if (snapshot.hasData && snapshot.data!.isNotEmpty) {
           return Scrollbar(
             child: ListView.builder(
-              padding: AppStyles.paddingWithoutTopMini,
+              padding: AppStyles.paddingWithoutBottomMini,
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 final TaskEntity taskModel = snapshot.data![index];
