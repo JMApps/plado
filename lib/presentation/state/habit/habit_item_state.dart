@@ -9,4 +9,5 @@ class HabitItemState extends ChangeNotifier {
     _dayIsTrue = dayIsTrue;
     notifyListeners();
   }
+
 }

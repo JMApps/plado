@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../core/routes/name_routes.dart';
 import '../../../core/strings/app_strings.dart';
-import '../../state/habit_item_state.dart';
+import '../../state/habit/habit_item_state.dart';
 import '../lists/habit_list.dart';
 import '../widgets/habit_sort_bottom_sheet.dart';
 

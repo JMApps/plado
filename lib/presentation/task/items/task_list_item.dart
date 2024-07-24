@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:plado/core/styles/app_styles.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/enums/task_period.dart';
 import '../../../core/strings/app_constraints.dart';
+import '../../../core/styles/app_styles.dart';
 import '../../state/rest_times_state.dart';
-import '../lists/day_task_list.dart';
-import '../lists/month_task_list.dart';
-import '../lists/season_task_list.dart';
-import '../lists/week_task_list.dart';
-import '../lists/year_task_list.dart';
+import '../lists/tasks_main_list.dart';
 
 class TaskListItem extends StatelessWidget {
   const TaskListItem({
@@ -21,33 +17,38 @@ class TaskListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final restTimeState = Provider.of<RestTimesState>(context);
-    final startDate = restTimeState.restTaskTimes(taskPeriodIndex)[AppConstraints.startDateTime];
-    final endDate = restTimeState.restTaskTimes(taskPeriodIndex)[AppConstraints.endDateTime];
+    final restTimeState = Provider.of<RestTimesState>(context).restTaskTimes(taskPeriodIndex);
+    final startDate = restTimeState[AppConstraints.startDateTime];
+    final endDate = restTimeState[AppConstraints.endDateTime];
 
     switch (AppStyles.taskPeriodList[taskPeriodIndex]) {
       case TaskPeriod.day:
-        return DayTaskList(
+        return TasksMainList(
+          taskPeriodIndex: taskPeriodIndex,
           startDate: startDate,
           endDate: endDate,
         );
       case TaskPeriod.week:
-        return WeekTaskList(
+        return TasksMainList(
+          taskPeriodIndex: taskPeriodIndex,
           startDate: startDate,
           endDate: endDate,
         );
       case TaskPeriod.month:
-        return MonthTaskList(
+        return TasksMainList(
+          taskPeriodIndex: taskPeriodIndex,
           startDate: startDate,
           endDate: endDate,
         );
       case TaskPeriod.season:
-        return SeasonTaskList(
+        return TasksMainList(
+          taskPeriodIndex: taskPeriodIndex,
           startDate: startDate,
           endDate: endDate,
         );
       case TaskPeriod.year:
-        return YearTaskList(
+        return TasksMainList(
+          taskPeriodIndex: taskPeriodIndex,
           startDate: startDate,
           endDate: endDate,
         );

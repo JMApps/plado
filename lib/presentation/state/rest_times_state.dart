@@ -6,6 +6,7 @@ import '../../core/enums/habit_period.dart';
 import '../../core/enums/season.dart';
 import '../../core/enums/task_period.dart';
 import '../../core/strings/app_constraints.dart';
+import '../../core/styles/app_styles.dart';
 
 class RestTimesState extends ChangeNotifier {
   DateTime _currentDateTime = DateTime.now();
@@ -19,7 +20,7 @@ class RestTimesState extends ChangeNotifier {
   DateTime get getCurrentDateTime => _currentDateTime;
 
   void _startTimer() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(minutes: 1), (timer) {
       _currentDateTime = DateTime.now();
       notifyListeners();
     });
@@ -61,10 +62,10 @@ class RestTimesState extends ChangeNotifier {
     };
   }
 
-  Map<String, dynamic> restTaskTimes(TaskPeriod taskPeriod) {
+  Map<String, dynamic> restTaskTimes(int taskPeriodIndex) {
     final Map<String, dynamic> periodData;
 
-    switch (taskPeriod) {
+    switch (AppStyles.taskPeriodList[taskPeriodIndex]) {
       case TaskPeriod.day:
         periodData = _calculatePeriodData(
             startPeriod: DateTime(_currentDateTime.year, _currentDateTime.month, _currentDateTime.day),

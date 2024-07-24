@@ -1,3 +1,5 @@
+import '../../core/strings/database_values.dart';
+
 class TaskModel {
   final int taskId;
   final String taskTitle;
@@ -29,34 +31,34 @@ class TaskModel {
 
   factory TaskModel.fromMap(Map<String, dynamic> map) {
     return TaskModel(
-      taskId: map['task_id'] as int,
-      taskTitle: map['task_title'] as String,
-      createDateTime: map['create_date_time'] as String,
-      completeDateTime: map['complete_date_time'] as String,
-      startDateTime: map['start_date_time'] as String,
-      endDateTime: map['end_date_time'] as String,
-      taskPeriodIndex: map['task_period_index'] as int,
-      taskPriorityIndex: map['task_priority_index'] as int,
-      taskStatusIndex: map['task_status_index'] as int,
-      taskColorIndex: map['task_color_index'] as int,
-      notificationId: map['notification_id'] as int,
-      notificationDate: map['notification_date'] as String,
+      taskId: map[DatabaseValues.dbTaskId] as int,
+      taskTitle: map[DatabaseValues.dbTaskTitle] as String,
+      createDateTime: map[DatabaseValues.dbTaskCreateDateTime] as String,
+      completeDateTime: map[DatabaseValues.dbTaskCompleteDateTime] as String,
+      startDateTime: map[DatabaseValues.dbTaskStartDateTime] as String,
+      endDateTime: map[DatabaseValues.dbTaskEndDateTime] as String,
+      taskPeriodIndex: map[DatabaseValues.dbTaskPeriodIndex] as int,
+      taskPriorityIndex: map[DatabaseValues.dbTaskPriorityIndex] as int,
+      taskStatusIndex: map[DatabaseValues.dbTaskStatusIndex] as int,
+      taskColorIndex: map[DatabaseValues.dbTaskColorIndex] as int,
+      notificationId: map[DatabaseValues.dbTaskNotificationId] as int,
+      notificationDate: map[DatabaseValues.dbTaskNotificationDate] as String,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'task_title': taskTitle,
-      'create_date_time': createDateTime,
-      'complete_date_time': completeDateTime,
-      'start_date_time': startDateTime,
-      'end_date_time': endDateTime,
-      'task_period_index': taskPeriodIndex,
-      'task_priority_index': taskPriorityIndex,
-      'task_status_index': taskStatusIndex,
-      'task_color_index': taskColorIndex,
-      'notification_id': notificationId,
-      'notification_date': notificationDate,
+      DatabaseValues.dbTaskId: taskTitle,
+      DatabaseValues.dbTaskTitle: createDateTime,
+      DatabaseValues.dbTaskCreateDateTime: completeDateTime,
+      DatabaseValues.dbTaskCompleteDateTime: startDateTime,
+      DatabaseValues.dbTaskStartDateTime: endDateTime,
+      DatabaseValues.dbTaskEndDateTime: taskPeriodIndex,
+      DatabaseValues.dbTaskPeriodIndex: taskPriorityIndex,
+      DatabaseValues.dbTaskPriorityIndex: taskStatusIndex,
+      DatabaseValues.dbTaskStatusIndex: taskColorIndex,
+      DatabaseValues.dbTaskColorIndex: notificationId,
+      DatabaseValues.dbTaskNotificationId: notificationDate,
     };
   }
 }

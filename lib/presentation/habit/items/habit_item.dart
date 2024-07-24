@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:plado/presentation/state/habit_item_state.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/habit_entity.dart';
+import '../../state/habit/habit_item_state.dart';
 
 class HabitItem extends StatelessWidget {
   const HabitItem({
@@ -20,9 +20,9 @@ class HabitItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final bool isNight = theme.brightness == Brightness.dark ? true : false;
-    final habitColor = AppStyles.taskHabitColors[habitModel.habitColorIndex].withOpacity(isNight ? 0.5 : 1);
+    final Color habitColor = AppStyles.taskHabitColors[habitModel.habitColorIndex].withOpacity(isNight ? 0.5 : 1);
     final List<dynamic> jsonList = jsonDecode(habitModel.completedDays);
-    final List<bool> completedDays = jsonList.map((e) => e == 1).toList();
+    final List<bool> completedDays = jsonList.map((e) => e == 0).toList();
     return Card(
       elevation: 0,
       margin: AppStyles.paddingBottomMini,
@@ -52,14 +52,7 @@ class HabitItem extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     return CircleAvatar(
                       backgroundColor: habitColor,
-                      child: Checkbox(
-                        value: completedDays[index],
-                        onChanged: (bool? onChanged) {
-                          if (onChanged != null) {
-                            habitItemState.setDayIsTrue = onChanged;
-                          }
-                        },
-                      ),
+                      child: Text('${index + 1}'),
                     );
                   },
                 ),

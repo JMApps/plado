@@ -7,9 +7,9 @@ import '../../../../core/themes/app_material_styles.dart';
 import '../../data/state/habit_data_state.dart';
 import '../../data/state/task_data_state.dart';
 import '../state/bottom_nav_index_state.dart';
-import '../state/habit_sort_state.dart';
+import '../state/habit/habit_sort_state.dart';
 import '../state/rest_times_state.dart';
-import '../state/task_sort_state.dart';
+import '../state/task/task_sort_state.dart';
 import 'home_page.dart';
 
 class RootMaterialPage extends StatelessWidget {

@@ -22,16 +22,10 @@ class TaskItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final taskDataState = Provider.of<TaskDataState>(context, listen: false);
-
-    final DateTime parsedDate = DateTime.parse(taskModel.createDateTime);
-    final String timeAgo = timeago.format(parsedDate, locale: 'en');
-
     final bool statusTask = taskModel.taskStatusIndex == 0 ? false : true;
-
-    final bool isNight = theme.brightness == Brightness.dark ? true : false;
-    final taskColor = AppStyles.taskHabitColors[taskModel.taskColorIndex].withOpacity(isNight ? 0.5 : 1);
+    final taskDataState = Provider.of<TaskDataState>(context, listen: false);
+    final String timeAgo = timeago.format(DateTime.parse(taskModel.createDateTime), locale: 'en');
+    final taskColor = AppStyles.taskHabitColors[taskModel.taskColorIndex].withOpacity(Theme.of(context).brightness == Brightness.dark ? 0.5 : 1);
     return Padding(
       padding: AppStyles.paddingBottomMini,
       child: ListTile(

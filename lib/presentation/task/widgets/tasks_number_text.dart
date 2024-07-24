@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../core/strings/app_constraints.dart';
 import '../../../core/strings/app_strings.dart';
+import '../../../core/styles/app_styles.dart';
 import '../../../data/state/task_data_state.dart';
 
 class TasksNumberText extends StatelessWidget {
@@ -20,9 +21,9 @@ class TasksNumberText extends StatelessWidget {
           return Tooltip(
             message: AppStrings.tasksNumber,
             child: Padding(
-              padding: const EdgeInsets.only(right: 8, top: 8),
+              padding: AppStyles.paddingLeftMini,
               child: Text.rich(
-                textAlign: TextAlign.end,
+                textAlign: TextAlign.start,
                 TextSpan(
                   style: const TextStyle(
                     fontFamily: AppConstraints.fontRobotoSlab,

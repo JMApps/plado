@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:plado/presentation/habit/items/habit_item.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/state/habit_data_state.dart';
 import '../../../domain/entities/habit_entity.dart';
-import '../../state/habit_sort_state.dart';
+import '../../state/habit/habit_sort_state.dart';
 import '../../widgets/main_error_text.dart';
 import '../../widgets/time_is_empty.dart';
+import '../items/habit_item.dart';
 
 class HabitList extends StatelessWidget {
   const HabitList({super.key});

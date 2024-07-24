@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/styles/app_styles.dart';
-import '../../state/habit_sort_state.dart';
+import '../../state/habit/habit_sort_state.dart';
 
 class HabitSortItem extends StatelessWidget {
   const HabitSortItem({

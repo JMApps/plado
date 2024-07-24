@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../presentation/task/pages/about_us_page.dart';
-import '../../presentation/task/pages/graphics_page.dart';
+import '../../presentation/pages/about_us_page.dart';
+import '../../presentation/pages/graphics_page.dart';
 import '../../presentation/habit/pages/habits_page.dart';
-import '../../presentation/task/pages/settings_page.dart';
+import '../../presentation/pages/settings_page.dart';
 import '../../presentation/task/pages/tasks_page.dart';
 import '../enums/task_period.dart';
 import '../enums/task_priority.dart';
@@ -64,21 +64,21 @@ class AppStyles {
   ];
 
   static const taskHabitColors = <Color>[
-    Colors.amber,
-    Colors.green,
+    Colors.orange,
     Colors.blue,
-    Colors.brown,
-    Colors.cyan,
-    Colors.red,
+    Colors.green,
     Colors.purple,
+    Colors.red,
+    Colors.amber,
+    Colors.blueGrey,
+    Colors.pinkAccent,
     Colors.teal,
-    Colors.pink,
-    Colors.lime,
+    Colors.yellow,
   ];
 
   static const priorityColors = <Color>[
     Colors.transparent,
-    Colors.amber,
+    Colors.orange,
     Colors.red,
   ];
 

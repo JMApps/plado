@@ -1,6 +1,8 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../../core/strings/database_values.dart';
+
 class PladoDatabaseService {
   static final PladoDatabaseService _instance = PladoDatabaseService.internal();
 
@@ -40,18 +42,18 @@ class PladoDatabaseService {
   void _createDb(Database db, int version) async {
     await db.execute('''
       CREATE TABLE Table_of_tasks (
-        task_id INTEGER PRIMARY KEY AUTOINCREMENT,
-        task_title TEXT,
-        create_date_time TEXT,
-        complete_date_time TEXT,
-        start_date_time TEXT,
-        end_date_time TEXT,
-        task_period_index INTEGER,
-        task_priority_index INTEGER,
-        task_status_index INTEGER,
-        task_color_index INTEGER,
-        notification_id INTEGER,
-        notification_date TEXT
+        ${DatabaseValues.dbTaskId} INTEGER PRIMARY KEY AUTOINCREMENT,
+        ${DatabaseValues.dbTaskTitle} TEXT,
+        ${DatabaseValues.dbTaskCreateDateTime} TEXT,
+        ${DatabaseValues.dbTaskCompleteDateTime} TEXT,
+        ${DatabaseValues.dbTaskStartDateTime} TEXT,
+        ${DatabaseValues.dbTaskEndDateTime} TEXT,
+        ${DatabaseValues.dbTaskPeriodIndex} INTEGER,
+        ${DatabaseValues.dbTaskPriorityIndex} INTEGER,
+        ${DatabaseValues.dbTaskStatusIndex} INTEGER,
+        ${DatabaseValues.dbTaskColorIndex} INTEGER,
+        ${DatabaseValues.dbTaskNotificationId} INTEGER,
+        ${DatabaseValues.dbTaskNotificationDate} TEXT
         );
     ''');
 

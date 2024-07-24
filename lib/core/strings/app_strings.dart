@@ -37,6 +37,8 @@ class AppStrings {
   static const String medium = 'Средний';
   static const String high = 'Высокий';
 
+  static const String warning = 'Внимание';
+  static const String deleteTaskContent = 'Вы уверены, что хотите безвозвратно удалить эту задачу?';
   static const String color = 'Цвет';
   static const String add = 'Добавить';
   static const String addClose = 'Добавить и закрыть';

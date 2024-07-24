@@ -15,7 +15,7 @@ class MaterialRoutes {
       case NameRoutes.createTaskPage:
         final CreateTaskArgs createTaskArgs = routeSettings.arguments as CreateTaskArgs;
         return MaterialPageRoute(
-          builder: (_) => CreateTaskPage(taskPeriod: createTaskArgs.taskPeriod),
+          builder: (_) => CreateTaskPage(taskPeriodIndex: createTaskArgs.taskPeriodIndex),
         );
       case NameRoutes.updateTaskPage:
         final UpdateTaskArgs updateTaskArgs = routeSettings.arguments as UpdateTaskArgs;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/styles/app_styles.dart';
-import '../../state/task_sort_state.dart';
+import '../../state/task/task_sort_state.dart';
 
 class TaskSortItem extends StatelessWidget {
   const TaskSortItem({
@@ -23,10 +23,16 @@ class TaskSortItem extends StatelessWidget {
       shape: AppStyles.shape,
       title: Text(
         title,
-        style: TextStyle(fontSize: 18,
-        color: sortState.getSortIndex == index ? appColors.primary : appColors.onSurface),
+        style: TextStyle(
+          fontSize: 18,
+          color: sortState.getSortIndex == index
+              ? appColors.primary
+              : appColors.onSurface,
+        ),
       ),
-      trailing: sortState.getSortIndex == index ? const Icon(Icons.check_rounded) : const SizedBox(),
+      trailing: sortState.getSortIndex == index
+          ? const Icon(Icons.check_rounded)
+          : const SizedBox(),
       onTap: () {
         sortState.setSortIndex = index;
       },
