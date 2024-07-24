@@ -22,7 +22,7 @@ class _TaskRemindDateTimeState extends State<TaskRemindDateTime> {
   @override
   void initState() {
     super.initState();
-    _argDateTime = DateTime.parse(context.read<TaskNotificationDateState>().getTaskNotificationDate);
+    _argDateTime = DateTime.parse(Provider.of<TaskNotificationDateState>(context, listen: false).getTaskNotificationDate);
   }
 
   @override

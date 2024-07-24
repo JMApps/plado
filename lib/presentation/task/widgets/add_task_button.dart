@@ -27,9 +27,6 @@ class AddTaskButton extends StatefulWidget {
 
 class _AddTaskButtonState extends State<AddTaskButton> {
   DateTime _currentDateTime = DateTime.now();
-  late Map<String, dynamic> _restTimePeriods;
-  late DateTime _startTime;
-  late DateTime _endTime;
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +63,9 @@ class _AddTaskButtonState extends State<AddTaskButton> {
     int taskNotificationId = context.read<TaskNotificationIdState>().getNotificationId;
     final String taskDateTime = context.read<TaskNotificationDateState>().getTaskNotificationDate;
 
-    _restTimePeriods = Provider.of<RestTimesState>(context, listen: false).restTaskTimes(taskPeriodIndex);
-    _startTime = _restTimePeriods[AppConstraints.startDateTime];
-    _endTime = _restTimePeriods[AppConstraints.endDateTime];
+    Map<String, dynamic> restTimePeriods = Provider.of<RestTimesState>(context, listen: false).restTaskTimes(taskPeriodIndex);
+    DateTime startTime = restTimePeriods[AppConstraints.startDateTime];
+    DateTime endTime = restTimePeriods[AppConstraints.endDateTime];
 
     if (taskIsRemind) {
       final randomNotificationNumber = Random().nextInt(AppConstraints.randomNotificationNumber);
@@ -80,8 +77,8 @@ class _AddTaskButtonState extends State<AddTaskButton> {
       DatabaseValues.dbTaskTitle: taskTitleState,
       DatabaseValues.dbTaskCreateDateTime: _currentDateTime.toIso8601String(),
       DatabaseValues.dbTaskCompleteDateTime: _currentDateTime.toIso8601String(),
-      DatabaseValues.dbTaskStartDateTime: _startTime.toIso8601String(),
-      DatabaseValues.dbTaskEndDateTime: _endTime.toIso8601String(),
+      DatabaseValues.dbTaskStartDateTime: startTime.toIso8601String(),
+      DatabaseValues.dbTaskEndDateTime: endTime.toIso8601String(),
       DatabaseValues.dbTaskPeriodIndex: taskPeriodIndex,
       DatabaseValues.dbTaskPriorityIndex: taskPriorityIndex,
       DatabaseValues.dbTaskStatusIndex: TaskStatus.inProgress.index,

@@ -15,8 +15,6 @@ class TaskTimeIndicator extends StatefulWidget {
 }
 
 class _TaskTimeIndicatorState extends State<TaskTimeIndicator> {
-  late Map<String, dynamic> _restTimePeriods;
-  late Duration _remainingTime;
   late double _elapsedPercentage;
 
   @override
@@ -24,13 +22,13 @@ class _TaskTimeIndicatorState extends State<TaskTimeIndicator> {
     final appColors = Theme.of(context).colorScheme;
     return Consumer2<RestTimesState, TaskPeriodState>(
       builder: (context, restTimeState, taskPeriodState, _) {
-        _restTimePeriods = restTimeState.restTaskTimes(taskPeriodState.getTaskPeriodIndex);
-        _remainingTime = _restTimePeriods[AppConstraints.remainingTimeString];
-        _elapsedPercentage = _restTimePeriods[AppConstraints.elapsedPercentage];
+        Map<String, dynamic> restTimePeriods = restTimeState.restTaskTimes(taskPeriodState.getTaskPeriodIndex);
+        Duration remainingTime = restTimePeriods[AppConstraints.remainingTimeString];
+        _elapsedPercentage = restTimePeriods[AppConstraints.elapsedPercentage];
 
-        int days = _remainingTime.inDays;
-        int hours = _remainingTime.inHours % 24;
-        int minutes = _remainingTime.inMinutes % 60;
+        int days = remainingTime.inDays;
+        int hours = remainingTime.inHours % 24;
+        int minutes = remainingTime.inMinutes % 60;
 
         List<String> parts = [];
 

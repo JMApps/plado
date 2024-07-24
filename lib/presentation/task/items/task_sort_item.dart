@@ -25,14 +25,10 @@ class TaskSortItem extends StatelessWidget {
         title,
         style: TextStyle(
           fontSize: 18,
-          color: sortState.getSortIndex == index
-              ? appColors.primary
-              : appColors.onSurface,
+          color: sortState.getSortIndex == index ? appColors.primary : appColors.onSurface,
         ),
       ),
-      trailing: sortState.getSortIndex == index
-          ? const Icon(Icons.check_rounded)
-          : const SizedBox(),
+      trailing: sortState.getSortIndex == index ? const Icon(Icons.check_rounded) : const SizedBox(),
       onTap: () {
         sortState.setSortIndex = index;
       },
