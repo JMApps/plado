@@ -18,6 +18,7 @@ import '../widgets/task_period_segment.dart';
 import '../widgets/task_priority_segment.dart';
 import '../widgets/task_remind_date_time.dart';
 import '../widgets/task_text_field.dart';
+import '../widgets/task_time_indicator.dart';
 import '../widgets/text_description.dart';
 
 class UpdateTaskPage extends StatelessWidget {
@@ -67,6 +68,7 @@ class UpdateTaskPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              TaskTimeIndicator(),
               SizedBox(height: 16),
               TaskTextField(),
               TextDescription(text: AppStrings.timeInterval),
