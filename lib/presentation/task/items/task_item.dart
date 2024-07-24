@@ -5,6 +5,7 @@ import 'package:timeago/timeago.dart' as timeago;
 import '../../../../../domain/entities/task_entity.dart';
 import '../../../core/routes/name_routes.dart';
 import '../../../core/strings/app_constraints.dart';
+import '../../../core/strings/database_values.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/models/arguments/update_task_args.dart';
 import '../../../data/services/notifications/notification_service.dart';
@@ -23,7 +24,6 @@ class TaskItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool statusTask = taskModel.taskStatusIndex == 0 ? false : true;
-    final taskDataState = Provider.of<TaskDataState>(context, listen: false);
     final String timeAgo = timeago.format(DateTime.parse(taskModel.createDateTime), locale: 'en');
     final taskColor = AppStyles.taskHabitColors[taskModel.taskColorIndex].withOpacity(Theme.of(context).brightness == Brightness.dark ? 0.5 : 1);
     return Padding(
@@ -38,18 +38,23 @@ class TaskItem extends StatelessWidget {
         horizontalTitleGap: 8,
         tileColor: AppStyles.priorityColors[taskModel.taskPriorityIndex].withOpacity(0.05),
         leading: Checkbox(
+          activeColor: taskColor,
           value: statusTask,
-          onChanged: !statusTask ? (bool? onChanged) {
+          onChanged: (bool? onChanged) {
+            Provider.of<TaskDataState>(context, listen: false).changeTaskStatus(taskId: taskModel.taskId, taskStatusIndex: taskModel.taskStatusIndex == 0 ? 1 : 0, completeDateTime: DateTime.now().toIso8601String());
             if (onChanged!) {
-              taskDataState.changeTaskStatus(taskId: taskModel.taskId, taskStatusIndex: 1, completeDateTime: DateTime.now().toIso8601String());
               if (taskModel.notificationId > 0) {
                 NotificationService().cancelNotificationWithId(taskModel.notificationId);
+                final Map<String, dynamic> taskMap = {
+                  DatabaseValues.dbTaskNotificationId: 0,
+                };
+                Provider.of<TaskDataState>(context, listen: false).updateTask(taskId: taskModel.taskId, taskMap: taskMap);
               }
             }
-          } : null,
+          },
         ),
         trailing: Icon(
-          statusTask ? Icons.circle_rounded : Icons.circle_outlined,
+          statusTask ? Icons.check_circle : Icons.circle_rounded,
           color: taskColor,
           size: 15,
         ),
