@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/strings/app_constraints.dart';
+import '../../../core/strings/database_values.dart';
 
 class TaskSortState extends ChangeNotifier {
   int _sortIndex = 0;
@@ -15,19 +16,19 @@ class TaskSortState extends ChangeNotifier {
     _sortIndex = sortIndex;
     switch (_sortIndex) {
       case 0:
-        _sort = 'task_id';
+        _sort = DatabaseValues.dbTaskId;
         break;
       case 1:
-        _sort = 'task_title';
+        _sort = DatabaseValues.dbTaskTitle;
         break;
       case 2:
-        _sort = 'task_priority_index';
+        _sort = DatabaseValues.dbTaskPriorityIndex;
         break;
       case 3:
-        _sort = 'task_color_index';
+        _sort = DatabaseValues.dbTaskColorIndex;
         break;
       default:
-        _sort = 'task_id';
+        _sort = DatabaseValues.dbTaskId;
     }
     // Save index value
     notifyListeners();
