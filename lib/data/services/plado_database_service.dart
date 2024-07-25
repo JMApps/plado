@@ -41,7 +41,7 @@ class PladoDatabaseService {
 
   void _createDb(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE Table_of_tasks (
+      CREATE TABLE ${DatabaseValues.dbTaskTableName} (
         ${DatabaseValues.dbTaskId} INTEGER PRIMARY KEY AUTOINCREMENT,
         ${DatabaseValues.dbTaskTitle} TEXT,
         ${DatabaseValues.dbTaskCreateDateTime} TEXT,
@@ -58,18 +58,18 @@ class PladoDatabaseService {
     ''');
 
     await db.execute('''
-      CREATE TABLE Table_of_habits (
-        habit_id INTEGER PRIMARY KEY AUTOINCREMENT,
-        habit_title TEXT,
-        create_date_time TEXT,
-        complete_date_time TEXT,
-        start_date_time TEXT,
-        end_date_time TEXT,
-        habit_period_index INTEGER,
-        habit_color_index INTEGER,
-        completed_days TEXT,
-        notification_id INTEGER,
-        notification_date TEXT
+      CREATE TABLE ${DatabaseValues.dbHabitTableName} (
+        ${DatabaseValues.dbHabitId} INTEGER PRIMARY KEY AUTOINCREMENT,
+        ${DatabaseValues.dbHabitTitle} TEXT,
+        ${DatabaseValues.dbHabitCreateDateTime} TEXT,
+        ${DatabaseValues.dbHabitCompleteDateTime} TEXT,
+        ${DatabaseValues.dbHabitStartDateTime} TEXT,
+        ${DatabaseValues.dbHabitEndDateTime} TEXT,
+        ${DatabaseValues.dbHabitPeriodIndex} INTEGER,
+        ${DatabaseValues.dbHabitColorIndex} INTEGER,
+        ${DatabaseValues.dbHabitCompletedDays} TEXT,
+        ${DatabaseValues.dbHabitNotificationId} INTEGER,
+        ${DatabaseValues.dbHabitNotificationDate} TEXT
         );
     ''');
   }

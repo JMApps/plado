@@ -1,3 +1,5 @@
+import 'package:plado/core/strings/database_values.dart';
+
 class HabitModel {
   final int habitId;
   final String habitTitle;
@@ -27,33 +29,33 @@ class HabitModel {
 
   factory HabitModel.fromMap(Map<String, dynamic> map) {
     return HabitModel(
-      habitId: map['habit_id'] as int,
-      habitTitle: map['habit_title'] as String,
-      createDateTime: map['create_date_time'] as String,
-      completeDateTime: map['complete_date_time'] as String,
-      startDateTime: map['start_date_time'] as String,
-      endDateTime: map['end_date_time'] as String,
-      habitPeriodIndex: map['habit_period_index'] as int,
-      habitColorIndex: map['habit_color_index'] as int,
-      completedDays: map['completed_days'] as String,
-      notificationId: map['notification_id'] as int,
-      notificationDate: map['notification_date'] as String,
+      habitId: map[DatabaseValues.dbHabitId] as int,
+      habitTitle: map[DatabaseValues.dbHabitTitle] as String,
+      createDateTime: map[DatabaseValues.dbHabitCreateDateTime] as String,
+      completeDateTime: map[DatabaseValues.dbHabitCompleteDateTime] as String,
+      startDateTime: map[DatabaseValues.dbHabitStartDateTime] as String,
+      endDateTime: map[DatabaseValues.dbHabitEndDateTime] as String,
+      habitPeriodIndex: map[DatabaseValues.dbHabitPeriodIndex] as int,
+      habitColorIndex: map[DatabaseValues.dbHabitColorIndex] as int,
+      completedDays: map[DatabaseValues.dbHabitCompletedDays] as String,
+      notificationId: map[DatabaseValues.dbHabitNotificationId] as int,
+      notificationDate: map[DatabaseValues.dbHabitNotificationDate] as String,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'habit_id': habitId,
-      'habit_title': habitTitle,
-      'create_date_time': createDateTime,
-      'complete_date_time': completeDateTime,
-      'start_date_time': startDateTime,
-      'end_date_time': endDateTime,
-      'habit_period_index': habitPeriodIndex,
-      'habit_color_index': habitColorIndex,
-      'completed_days': completedDays,
-      'notification_id': notificationId,
-      'notification_date': notificationDate,
+      DatabaseValues.dbHabitId: habitId,
+      DatabaseValues.dbHabitTitle: habitTitle,
+      DatabaseValues.dbHabitCreateDateTime: createDateTime,
+      DatabaseValues.dbHabitCompleteDateTime: completeDateTime,
+      DatabaseValues.dbHabitStartDateTime: startDateTime,
+      DatabaseValues.dbHabitEndDateTime: endDateTime,
+      DatabaseValues.dbHabitPeriodIndex: habitPeriodIndex,
+      DatabaseValues.dbHabitColorIndex: habitColorIndex,
+      DatabaseValues.dbHabitCompletedDays: completedDays,
+      DatabaseValues.dbHabitNotificationId: notificationId,
+      DatabaseValues.dbHabitNotificationDate: notificationDate,
     };
   }
 }
