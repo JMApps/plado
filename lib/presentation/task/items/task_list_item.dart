@@ -18,8 +18,8 @@ class TaskListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final restTimeState = Provider.of<RestTimesState>(context).restTaskTimes(taskPeriodIndex);
-    final startDate = restTimeState[AppConstraints.startDateTime];
-    final endDate = restTimeState[AppConstraints.endDateTime];
+    final startDate = restTimeState[AppConstraints.startTaskDateTime];
+    final endDate = restTimeState[AppConstraints.endTaskDateTime];
 
     switch (AppStyles.taskPeriodList[taskPeriodIndex]) {
       case TaskPeriod.day:

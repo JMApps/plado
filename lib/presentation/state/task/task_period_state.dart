@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class TaskPeriodState extends ChangeNotifier {
-
   TaskPeriodState(this._taskPeriodIndex);
 
   late int _taskPeriodIndex;

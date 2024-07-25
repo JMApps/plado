@@ -10,12 +10,11 @@ import '../services/plado_database_service.dart';
 
 class TaskDataRepository implements TaskRepository {
   final PladoDatabaseService _pladoDatabaseService = PladoDatabaseService();
-  final String _tasksTableName = 'Table_of_tasks';
 
   @override
   Future<List<TaskEntity>> getAllTasks({required String orderBy}) async {
     final Database database = await _pladoDatabaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(_tasksTableName, orderBy: orderBy);
+    final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbTaskTableName, orderBy: orderBy);
     final List<TaskEntity> allTasks = resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
     return allTasks;
   }
@@ -23,7 +22,7 @@ class TaskDataRepository implements TaskRepository {
   @override
   Future<TaskEntity> getTaskById({required int taskId}) async {
     final Database database = await _pladoDatabaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(_tasksTableName, where: '${DatabaseValues.dbTaskId} = ?', whereArgs: [taskId]);
+    final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskId} = ?', whereArgs: [taskId]);
     final TaskEntity? taskById = resources.isNotEmpty ? TaskEntity.fromModel(TaskModel.fromMap(resources.first)) : null;
     return taskById!;
   }
@@ -35,9 +34,9 @@ class TaskDataRepository implements TaskRepository {
       DatabaseValues.dbTaskStatusIndex: 2,
       DatabaseValues.dbTaskCompleteDateTime: endTime,
     };
-    await database.update(_tasksTableName, taskStatusMap, where: '${DatabaseValues.dbTaskPeriodIndex} = ? AND ${DatabaseValues.dbTaskEndDateTime} < ?', whereArgs: [endTime, taskPeriodIndex]);
+    await database.update(DatabaseValues.dbTaskTableName, taskStatusMap, where: '${DatabaseValues.dbTaskPeriodIndex} = ? AND ${DatabaseValues.dbTaskEndDateTime} < ?', whereArgs: [endTime, taskPeriodIndex]);
 
-    final List<Map<String, Object?>> resources = await database.query(_tasksTableName, where: '${DatabaseValues.dbTaskPeriodIndex} = ? AND ${DatabaseValues.dbTaskStartDateTime} = ? AND ${DatabaseValues.dbTaskEndDateTime} = ?', whereArgs: [taskPeriodIndex, startTime, endTime], orderBy: 'CASE WHEN ${DatabaseValues.dbTaskStatusIndex} = 1 THEN 1 ELSE 0 END, $orderBy');
+    final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskPeriodIndex} = ? AND ${DatabaseValues.dbTaskStartDateTime} = ? AND ${DatabaseValues.dbTaskEndDateTime} = ?', whereArgs: [taskPeriodIndex, startTime, endTime], orderBy: 'CASE WHEN ${DatabaseValues.dbTaskStatusIndex} = 1 THEN 1 ELSE 0 END, $orderBy');
     final List<TaskEntity> tasksByMode = resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
     return tasksByMode;
   }
@@ -47,19 +46,19 @@ class TaskDataRepository implements TaskRepository {
     final Database database = await _pladoDatabaseService.db;
 
     final List<Map<String, Object?>> inProgress = await database.query(
-      _tasksTableName,
+      DatabaseValues.dbTaskTableName,
       where: '${DatabaseValues.dbTaskStatusIndex} = ? AND ${DatabaseValues.dbTaskPeriodIndex} = ?',
       whereArgs: [0, taskPeriodIndex],
     );
 
     final List<Map<String, Object?>> complete = await database.query(
-      _tasksTableName,
+      DatabaseValues.dbTaskTableName,
       where: '${DatabaseValues.dbTaskStatusIndex} = ? AND ${DatabaseValues.dbTaskPeriodIndex} = ?',
       whereArgs: [1, taskPeriodIndex],
     );
 
     final List<Map<String, Object?>> canceled = await database.query(
-      _tasksTableName,
+      DatabaseValues.dbTaskTableName,
       where: '${DatabaseValues.dbTaskStatusIndex} = ? AND ${DatabaseValues.dbTaskPeriodIndex} = ?',
       whereArgs: [2, taskPeriodIndex],
     );
@@ -74,21 +73,21 @@ class TaskDataRepository implements TaskRepository {
   @override
   Future<int> createTask({required Map<String, dynamic> taskMap}) async {
     final Database database = await _pladoDatabaseService.db;
-    final int createTask = await database.insert(_tasksTableName, taskMap);
+    final int createTask = await database.insert(DatabaseValues.dbTaskTableName, taskMap);
     return createTask;
   }
 
   @override
   Future<int> updateTask({ required int taskId, required Map<String, dynamic> taskMap}) async {
     final Database database = await _pladoDatabaseService.db;
-    final int updateTask = await database.update(_tasksTableName, taskMap, where: '${DatabaseValues.dbTaskId} = ?', whereArgs: [taskId], conflictAlgorithm: ConflictAlgorithm.replace);
+    final int updateTask = await database.update(DatabaseValues.dbTaskTableName, taskMap, where: '${DatabaseValues.dbTaskId} = ?', whereArgs: [taskId], conflictAlgorithm: ConflictAlgorithm.replace);
     return updateTask;
   }
 
   @override
   Future<int> deleteTask({required int taskId}) async {
     final Database database = await _pladoDatabaseService.db;
-    final int deleteTask = await database.delete(_tasksTableName, where: '${DatabaseValues.dbTaskId} = ?', whereArgs: [taskId]);
+    final int deleteTask = await database.delete(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskId} = ?', whereArgs: [taskId]);
     return deleteTask;
   }
 
@@ -102,7 +101,7 @@ class TaskDataRepository implements TaskRepository {
       DatabaseValues.dbTaskCompleteDateTime: completeDateTime,
     };
 
-    final int statusTask = await database.update(_tasksTableName, taskStatusMap, where: '${DatabaseValues.dbTaskId} = ?', whereArgs: [taskId], conflictAlgorithm: ConflictAlgorithm.replace);
+    final int statusTask = await database.update(DatabaseValues.dbTaskTableName, taskStatusMap, where: '${DatabaseValues.dbTaskId} = ?', whereArgs: [taskId], conflictAlgorithm: ConflictAlgorithm.replace);
     return statusTask;
   }
 }
