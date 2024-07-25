@@ -1,9 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
+import '../../../core/routes/name_routes.dart';
+import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
+import '../../../data/models/arguments/habit_model_args.dart';
 import '../../../domain/entities/habit_entity.dart';
 
 class HabitItem extends StatelessWidget {
@@ -16,44 +17,30 @@ class HabitItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final bool isNight = theme.brightness == Brightness.dark ? true : false;
-    final Color habitColor = AppStyles.taskHabitColors[habitModel.habitColorIndex].withOpacity(isNight ? 0.5 : 1);
-    final List<dynamic> jsonList = jsonDecode(habitModel.completedDays);
-    final List<bool> completedDays = jsonList.map((e) => e == 0).toList();
+    final String timeAgo = timeago.format(DateTime.parse(habitModel.createDateTime), locale: 'en');
     return Card(
       elevation: 0,
       margin: AppStyles.paddingBottomMini,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            habitModel.habitTitle,
-            style: TextStyle(
-              color: habitColor,
-              fontSize: 17,
-            ),
+      child: ListTile(
+        onTap: () {
+          Navigator.pushNamed(context, NameRoutes.habitDetailPage, arguments: HabitModelArgs(habitEntity: habitModel));
+        },
+        shape: AppStyles.shapeMini,
+        title: Text(
+          habitModel.habitTitle,
+          style: const TextStyle(fontSize: 17),
+        ),
+        subtitle: Text(
+          '${AppStrings.added} $timeAgo',
+          style: const TextStyle(
+            fontFamily: 'Roboto Slab',
           ),
-          Text(
-            DateFormat('d.M.yyyy H:mm').format(DateTime.parse(habitModel.createDateTime)),
-            style: const TextStyle(
-              fontFamily: 'Roboto Slab',
-            ),
+        ),
+        trailing: CircleAvatar(
+          child: Text(
+            AppStyles.habitPeriodDayList[habitModel.habitPeriodIndex].toString(),
           ),
-          SizedBox(
-            height: 50,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: completedDays.length,
-              itemBuilder: (BuildContext context, int index) {
-                return CircleAvatar(
-                  backgroundColor: habitColor,
-                  child: Text('${index + 1}'),
-                );
-              },
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

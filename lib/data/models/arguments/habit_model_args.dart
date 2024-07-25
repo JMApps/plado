@@ -1,7 +1,7 @@
 import '../../../domain/entities/habit_entity.dart';
 
-class UpdateHabitArgs {
+class HabitModelArgs {
   final HabitEntity habitEntity;
 
-  UpdateHabitArgs({required this.habitEntity});
+  HabitModelArgs({required this.habitEntity});
 }

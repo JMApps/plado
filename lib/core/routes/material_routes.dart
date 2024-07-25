@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+
 import '../../data/models/arguments/create_task_args.dart';
-import '../../data/models/arguments/update_habit_args.dart';
-import '../../data/models/arguments/update_task_args.dart';
+import '../../data/models/arguments/habit_model_args.dart';
+import '../../data/models/arguments/task_model_args.dart';
 import '../../presentation/habit/pages/create_habit_page.dart';
+import '../../presentation/habit/pages/habit_detail_page.dart';
 import '../../presentation/habit/pages/update_habit_page.dart';
 import '../../presentation/task/pages/create_task_page.dart';
 import '../../presentation/task/pages/update_task_page.dart';
@@ -19,18 +21,23 @@ class MaterialRoutes {
           builder: (_) => CreateTaskPage(taskPeriodIndex: createTaskArgs.taskPeriodIndex),
         );
       case NameRoutes.updateTaskPage:
-        final UpdateTaskArgs updateTaskArgs = routeSettings.arguments as UpdateTaskArgs;
+        final TaskModelArgs taskModelArgs = routeSettings.arguments as TaskModelArgs;
         return MaterialPageRoute(
-          builder: (_) => UpdateTaskPage(taskModel: updateTaskArgs.taskEntity),
+          builder: (_) => UpdateTaskPage(taskModel: taskModelArgs.taskEntity),
         );
       case NameRoutes.createHabitPage:
         return MaterialPageRoute(
           builder: (_) => const CreateHabitPage(),
         );
       case NameRoutes.updateHabitPage:
-        final UpdateHabitArgs updateHabitArgs = routeSettings.arguments as UpdateHabitArgs;
+        final HabitModelArgs habitModelArgs = routeSettings.arguments as HabitModelArgs;
         return MaterialPageRoute(
-          builder: (_) => UpdateHabitPage(habitModel: updateHabitArgs.habitEntity),
+          builder: (_) => UpdateHabitPage(habitModel: habitModelArgs.habitEntity),
+        );
+      case NameRoutes.habitDetailPage:
+        final HabitModelArgs habitModelArgs = routeSettings.arguments as HabitModelArgs;
+        return MaterialPageRoute(
+          builder: (_) => HabitDetailPage(habitModel: habitModelArgs.habitEntity),
         );
       default:
         throw Exception('${AppExceptionMessages.invalidRouteException} ${routeSettings.name}');
