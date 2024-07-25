@@ -7,7 +7,7 @@ import '../../../core/routes/name_routes.dart';
 import '../../../core/strings/app_constraints.dart';
 import '../../../core/strings/database_values.dart';
 import '../../../core/styles/app_styles.dart';
-import '../../../data/models/arguments/update_task_args.dart';
+import '../../../data/models/arguments/task_model_args.dart';
 import '../../../data/services/notifications/notification_service.dart';
 import '../../../data/state/task_data_state.dart';
 
@@ -30,7 +30,7 @@ class TaskItem extends StatelessWidget {
       padding: AppStyles.paddingBottomMini,
       child: ListTile(
         onTap: !statusTask ? () {
-          Navigator.pushNamed(context, NameRoutes.updateTaskPage, arguments: UpdateTaskArgs(taskEntity: taskModel));
+          Navigator.pushNamed(context, NameRoutes.updateTaskPage, arguments: TaskModelArgs(taskEntity: taskModel));
         } : null,
         shape: AppStyles.shapeMini,
         visualDensity: const VisualDensity(horizontal: -4, vertical: -4),

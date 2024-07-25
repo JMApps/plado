@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../core/strings/app_constraints.dart';
 import '../../../core/strings/app_strings.dart';
 import '../../../core/strings/database_values.dart';
+import '../../../core/styles/app_styles.dart';
 import '../../../data/services/notifications/notification_service.dart';
 import '../../../data/state/habit_data_state.dart';
 import '../../state/habit/habit_color_state.dart';
@@ -24,7 +25,7 @@ class AddHabitButton extends StatefulWidget {
 }
 
 class _AddHabitButtonState extends State<AddHabitButton> {
-  DateTime _currentDateTime = DateTime.now();
+  final DateTime _currentDateTime = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -32,18 +33,8 @@ class _AddHabitButtonState extends State<AddHabitButton> {
     return IconButton(
       onPressed: () {
         if (Provider.of<HabitTitleState>(context, listen: false).getHabitTitle.trim().isNotEmpty) {
-          if (Provider.of<HabitRemindState>(context, listen: false).getIsRemind) {
-            _currentDateTime = DateTime.now();
-            if (DateTime.parse(Provider.of<HabitNotificationDateState>(context, listen: false).getHabitNotificationDate).isAfter(_currentDateTime)) {
-              Navigator.of(context).pop();
-              _createHabit();
-            } else {
-              _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectDateTime);
-            }
-          } else {
-            Navigator.of(context).pop();
-            _createHabit();
-          }
+          Navigator.of(context).pop();
+          _createHabit();
         } else {
           _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.enterHabitTitle);
         }
@@ -60,6 +51,7 @@ class _AddHabitButtonState extends State<AddHabitButton> {
     final bool habitIsRemind = context.read<HabitRemindState>().getIsRemind;
     int habitNotificationId = context.read<HabitNotificationIdState>().getNotificationId;
     final String habitDateTime = context.read<HabitNotificationDateState>().getHabitNotificationDate;
+    final List<int> completeDays = List.generate(AppStyles.habitPeriodDayList[habitPeriodIndex], (index) => 0);
 
     Map<String, dynamic> restTimePeriods = Provider.of<RestTimesState>(context, listen: false).restHabitDays(habitPeriodIndex);
     DateTime startTime = restTimePeriods[AppConstraints.startHabitDateTime];
@@ -79,6 +71,7 @@ class _AddHabitButtonState extends State<AddHabitButton> {
       DatabaseValues.dbHabitEndDateTime: endTime.toIso8601String(),
       DatabaseValues.dbHabitPeriodIndex: habitPeriodIndex,
       DatabaseValues.dbHabitColorIndex: habitColorIndex,
+      DatabaseValues.dbHabitCompletedDays: completeDays.toString(),
       DatabaseValues.dbHabitNotificationId: habitNotificationId,
       DatabaseValues.dbHabitNotificationDate: habitDateTime,
     };

@@ -1,7 +1,7 @@
 import '../../../domain/entities/task_entity.dart';
 
-class UpdateTaskArgs {
+class TaskModelArgs {
   final TaskEntity taskEntity;
 
-  UpdateTaskArgs({required this.taskEntity});
+  TaskModelArgs({required this.taskEntity});
 }
