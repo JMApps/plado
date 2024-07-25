@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
-import 'habit_order_item.dart';
-import 'habit_sort_item.dart';
+import '../items/habit_order_item.dart';
+import '../items/habit_sort_item.dart';
 
 class HabitSortBottomSheet extends StatelessWidget {
   const HabitSortBottomSheet({super.key});

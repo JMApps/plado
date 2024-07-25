@@ -54,7 +54,7 @@ class _ChangeTaskButtonState extends State<ChangeTaskButton> {
           _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.enterTaskTitle);
         }
       },
-      tooltip: AppStrings.change,
+      tooltip: AppStrings.changingTask,
       icon: const Icon(Icons.check_circle_outlined),
     );
   }
@@ -69,8 +69,8 @@ class _ChangeTaskButtonState extends State<ChangeTaskButton> {
     final String taskDateTime = context.read<TaskNotificationDateState>().getTaskNotificationDate;
 
     Map<String, dynamic> restTimePeriods = Provider.of<RestTimesState>(context, listen: false).restTaskTimes(taskPeriodIndex);
-    DateTime startTime = restTimePeriods[AppConstraints.startDateTime];
-    DateTime endTime = restTimePeriods[AppConstraints.endDateTime];
+    DateTime startTime = restTimePeriods[AppConstraints.startTaskDateTime];
+    DateTime endTime = restTimePeriods[AppConstraints.endTaskDateTime];
 
     if (taskIsRemind) {
       final randomNotificationNumber = Random().nextInt(AppConstraints.randomNotificationNumber);

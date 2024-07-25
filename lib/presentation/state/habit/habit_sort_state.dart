@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/strings/app_constraints.dart';
+import '../../../core/strings/database_values.dart';
 
 class HabitSortState extends ChangeNotifier {
   int _sortIndex = 0;
 
   int get getSortIndex => _sortIndex;
 
-  String _sort = 'habit_id';
+  String _sort = DatabaseValues.dbHabitId;
 
   String get getSort => _sort;
 
@@ -15,13 +16,13 @@ class HabitSortState extends ChangeNotifier {
     _sortIndex = sortIndex;
     switch (_sortIndex) {
       case 0:
-        _sort = 'habit_id';
+        _sort = DatabaseValues.dbHabitId;
         break;
       case 1:
-        _sort = 'habit_title';
+        _sort = DatabaseValues.dbHabitTitle;
         break;
       case 2:
-        _sort = 'habit_color';
+        _sort = DatabaseValues.dbHabitColorIndex;
         break;
     }
     // Save index value

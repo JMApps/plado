@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../data/models/arguments/create_task_args.dart';
+import '../../data/models/arguments/update_habit_args.dart';
 import '../../data/models/arguments/update_task_args.dart';
 import '../../presentation/habit/pages/create_habit_page.dart';
 import '../../presentation/habit/pages/update_habit_page.dart';
@@ -27,8 +28,9 @@ class MaterialRoutes {
           builder: (_) => const CreateHabitPage(),
         );
       case NameRoutes.updateHabitPage:
+        final UpdateHabitArgs updateHabitArgs = routeSettings.arguments as UpdateHabitArgs;
         return MaterialPageRoute(
-          builder: (_) => const UpdateHabitPage(),
+          builder: (_) => UpdateHabitPage(habitModel: updateHabitArgs.habitEntity),
         );
       default:
         throw Exception('${AppExceptionMessages.invalidRouteException} ${routeSettings.name}');

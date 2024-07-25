@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class HabitPeriodState extends ChangeNotifier {
-  int _habitPeriodIndex = 0;
+  HabitPeriodState([int habitPeriodIndex = 0]) : _habitPeriodIndex = habitPeriodIndex;
+
+  late int _habitPeriodIndex;
 
   int get getHabitPeriodIndex => _habitPeriodIndex;
 
