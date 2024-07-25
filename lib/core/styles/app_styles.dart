@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plado/core/enums/habit_period.dart';
 
 import '../../presentation/pages/about_us_page.dart';
 import '../../presentation/pages/graphics_page.dart';
@@ -102,7 +103,14 @@ class AppStyles {
     TaskStatus.canceled,
   ];
 
-  static const habitPeriodList = <int> [
+  static const habitPeriodList = <HabitPeriod> [
+    HabitPeriod.days21,
+    HabitPeriod.days40,
+    HabitPeriod.days66,
+    HabitPeriod.days90,
+  ];
+
+  static const habitPeriodDayList = <int> [
     21,
     40,
     66,

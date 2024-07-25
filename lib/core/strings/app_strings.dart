@@ -58,12 +58,14 @@ class AppStrings {
   static const String addTask = 'Добавить задачу';
   static const String addingTask = 'Добавление задачи';
   static const String changingTask = 'Изменение задачи';
+  static const String changeTask = 'Изменить задачу';
   static const String taskHint = 'Введите название';
 
   static const String addFirstHabit = 'Добавьте первую привычку';
   static const String addHabit = 'Добавить привычку';
   static const String addingHabit = 'Добавление привычки';
   static const String changingHabit = 'Изменение привычки';
+  static const String changeHabit = 'Изменить привычку';
   static const String habitHint = 'Введите название';
   static const String descriptionHabit = 'Описание привычки';
 

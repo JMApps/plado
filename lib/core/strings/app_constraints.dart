@@ -1,8 +1,13 @@
 class AppConstraints {
-  static const String startDateTime = 'start_date_time';
-  static const String remainingTimeString = 'remainingTimeString';
-  static const String elapsedPercentage = 'elapsedPercentage';
-  static const String endDateTime = 'end_date_time';
+  static const String startTaskDateTime = 'start_task_date_time';
+  static const String remainingTaskTimeString = 'remainingTaskTimeString';
+  static const String elapsedTaskPercentage = 'elapsedTaskPercentage';
+  static const String endTaskDateTime = 'end_task_date_time';
+
+  static const String startHabitDateTime = 'start_habit_date_time';
+  static const String remainingHabitTimeString = 'remainingHabitTimeString';
+  static const String elapsedHabitPercentage = 'elapsedHabitPercentage';
+  static const String endHabitDateTime = 'end_habit_date_time';
 
   static const String fontRaleway = 'Raleway';
   static const String fontRobotoSlab = 'Roboto Slab';
