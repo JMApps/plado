@@ -1,4 +1,3 @@
-import '../../core/strings/app_exception_messages.dart';
 import '../entities/habit_entity.dart';
 import '../repositories/habit_repository.dart';
 
@@ -8,42 +7,22 @@ class HabitUseCase {
   HabitUseCase(this._habitRepository);
 
   Future<List<HabitEntity>> getAllHabits({required String orderBy}) async {
-    try {
-      return await _habitRepository.getAllHabits(orderBy: orderBy);
-    } catch (e) {
-      throw Exception('${AppExceptionMessages.getAllHabitException} $e');
-    }
+    return await _habitRepository.getAllHabits(orderBy: orderBy);
   }
 
   Future<HabitEntity> getHabitById({required int habitId}) async {
-    try {
-      return await _habitRepository.getHabitById(habitId: habitId);
-    } catch (e) {
-      throw Exception('${AppExceptionMessages.getHabitByIdException} $e');
-    }
+    return await _habitRepository.getHabitById(habitId: habitId);
   }
 
   Future<int> createHabit({required Map<String, dynamic> habitMap}) async {
-    try {
-      return await _habitRepository.createHabit(habitMap: habitMap);
-    } catch (e) {
-      throw Exception('${AppExceptionMessages.createHabitException} $e');
-    }
+    return await _habitRepository.createHabit(habitMap: habitMap);
   }
 
   Future<int> updateHabit({required Map<String, dynamic> habitMap, required int habitId}) async {
-    try {
-      return await _habitRepository.updateHabit(habitMap: habitMap, habitId: habitId);
-    } catch (e) {
-      throw Exception('${AppExceptionMessages.updateHabitException} $e');
-    }
+    return await _habitRepository.updateHabit(habitMap: habitMap, habitId: habitId);
   }
 
   Future<int> deleteHabit({required int habitId}) async {
-    try {
-      return await _habitRepository.deleteHabit(habitId: habitId);
-    } catch (e) {
-      throw Exception('${AppExceptionMessages.deleteHabitException} $e');
-    }
+    return await _habitRepository.deleteHabit(habitId: habitId);
   }
 }

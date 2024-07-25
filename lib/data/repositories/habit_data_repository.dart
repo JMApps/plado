@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 
+import '../../core/strings/database_values.dart';
 import '../../domain/entities/habit_entity.dart';
 import '../../domain/repositories/habit_repository.dart';
 import '../models/habit_model.dart';
@@ -7,13 +8,11 @@ import '../services/plado_database_service.dart';
 
 class HabitDataRepository implements HabitRepository {
   final PladoDatabaseService _pladoDatabaseService = PladoDatabaseService();
-  final String _tasksTableName = 'Table_of_habits';
-  final String _habitId = 'habit_id';
 
   @override
   Future<List<HabitEntity>> getAllHabits({required String orderBy}) async {
     final Database database = await _pladoDatabaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(_tasksTableName, orderBy: orderBy);
+    final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbHabitTableName, orderBy: orderBy);
     final List<HabitEntity> allHabits = resources.isNotEmpty ? resources.map((e) => HabitEntity.fromModel(HabitModel.fromMap(e))).toList() : [];
     return allHabits;
   }
@@ -21,7 +20,7 @@ class HabitDataRepository implements HabitRepository {
   @override
   Future<HabitEntity> getHabitById({required int habitId}) async {
     final Database database = await _pladoDatabaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(_tasksTableName, where: '$_habitId = ?', whereArgs: [habitId]);
+    final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbHabitTableName, where: '${DatabaseValues.dbHabitId} = ?', whereArgs: [habitId]);
     final HabitEntity? habitById = resources.isNotEmpty ? HabitEntity.fromModel(HabitModel.fromMap(resources.first)) : null;
     return habitById!;
   }
@@ -29,21 +28,21 @@ class HabitDataRepository implements HabitRepository {
   @override
   Future<int> createHabit({required Map<String, dynamic> habitMap}) async {
     final Database database = await _pladoDatabaseService.db;
-    final int createHabit = await database.insert(_tasksTableName, habitMap);
+    final int createHabit = await database.insert(DatabaseValues.dbHabitTableName, habitMap);
     return createHabit;
   }
 
   @override
   Future<int> updateHabit({required Map<String, dynamic> habitMap, required int habitId}) async {
     final Database database = await _pladoDatabaseService.db;
-    final int updateHabit = await database.update(_tasksTableName, habitMap, where: '$_habitId = ?', whereArgs: [habitId]);
+    final int updateHabit = await database.update(DatabaseValues.dbHabitTableName, habitMap, where: '${DatabaseValues.dbHabitId} = ?', whereArgs: [habitId]);
     return updateHabit;
   }
 
   @override
   Future<int> deleteHabit({required int habitId}) async {
     final Database database = await _pladoDatabaseService.db;
-    final int deleteHabit = await database.delete(_tasksTableName, where: '$_habitId = ?', whereArgs: [habitId]);
+    final int deleteHabit = await database.delete(DatabaseValues.dbHabitTableName, where: '${DatabaseValues.dbHabitId} = ?', whereArgs: [habitId]);
     return deleteHabit;
   }
 }
