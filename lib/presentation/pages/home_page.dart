@@ -14,7 +14,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final bottomNavIndexState = Provider.of<BottomNavIndexState>(context);
     return Scaffold(
-      body: AppStyles.mainPages[bottomNavIndexState.getIndex],
+      body: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 250),
+        child: AppStyles.mainPages[bottomNavIndexState.getIndex],
+      ),
       bottomNavigationBar: SalomonBottomBar(
         currentIndex: bottomNavIndexState.getIndex,
         onTap: (index) => bottomNavIndexState.setIndex = index,
