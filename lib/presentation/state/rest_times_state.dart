@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../../core/enums/habit_period.dart';
 import '../../core/enums/season.dart';
 import '../../core/enums/task_period.dart';
 import '../../core/strings/app_constraints.dart';
@@ -32,101 +31,96 @@ class RestTimesState extends ChangeNotifier {
     super.dispose();
   }
 
-  Map<String, dynamic> restHabitDays(int habitPeriodIndex) {
-    final int days;
-    switch (AppStyles.habitPeriodList[habitPeriodIndex]) {
-      case HabitPeriod.days21:
-        days = 21;
-        break;
-      case HabitPeriod.days40:
-        days = 40;
-        break;
-      case HabitPeriod.days66:
-        days = 66;
-        break;
-      case HabitPeriod.days90:
-        days = 90;
-        break;
-    }
-
-    return _calculateHabitPeriod(days);
-  }
-
-  Map<String, dynamic> _calculateHabitPeriod(int days) {
-    final DateTime startDateTime = DateTime(_currentDateTime.year, _currentDateTime.month, _currentDateTime.day);
-    final DateTime endDateTime = startDateTime.add(Duration(days: days));
-    final int elapsedTimeInMinutes = _currentDateTime.difference(startDateTime).inMinutes;
-    final int totalMinutes = endDateTime.difference(startDateTime).inMinutes;
-    final Duration remainingHabitTime = endDateTime.difference(_currentDateTime);
-    final double elapsedHabitPercentage = (elapsedTimeInMinutes / totalMinutes) * 100.0;
-
-    return {
-      AppConstraints.startHabitDateTime: startDateTime,
-      AppConstraints.remainingHabitTimeString: remainingHabitTime,
-      AppConstraints.elapsedHabitPercentage: elapsedHabitPercentage,
-      AppConstraints.endHabitDateTime: endDateTime.add(minusMicro),
-    };
-  }
-
   Map<String, dynamic> restTaskTimes(int taskPeriodIndex) {
-    final Map<String, dynamic> periodData;
+    final Map<String, dynamic> taskPeriodData;
 
     switch (AppStyles.taskPeriodList[taskPeriodIndex]) {
       case TaskPeriod.day:
-        periodData = _calculatePeriodData(
+        taskPeriodData = _calculateTaskPeriodData(
             startTaskPeriod: DateTime(_currentDateTime.year, _currentDateTime.month, _currentDateTime.day),
             duration: const Duration(hours: 24)
         );
         break;
       case TaskPeriod.week:
         final startOfWeek = DateTime(_currentDateTime.year, _currentDateTime.month, _currentDateTime.day - _currentDateTime.weekday + 1);
-        periodData = _calculatePeriodData(
+        taskPeriodData = _calculateTaskPeriodData(
             startTaskPeriod: startOfWeek,
             duration: const Duration(days: 7)
         );
         break;
       case TaskPeriod.month:
         final startOfMonth = DateTime(_currentDateTime.year, _currentDateTime.month);
-        periodData = _calculatePeriodData(
+        taskPeriodData = _calculateTaskPeriodData(
             startTaskPeriod: startOfMonth,
             duration: Duration(days: daysInMonth(_currentDateTime.year, _currentDateTime.month))
         );
         break;
       case TaskPeriod.season:
         final seasonData = _getSeasonPeriodData(_currentDateTime);
-        periodData = _calculatePeriodData(
+        taskPeriodData = _calculateTaskPeriodData(
             startTaskPeriod: seasonData['startSeason'],
             endTaskPeriod: seasonData['endSeason']
         );
         break;
       case TaskPeriod.year:
         final startOfYear = DateTime(_currentDateTime.year);
-        periodData = _calculatePeriodData(
+        taskPeriodData = _calculateTaskPeriodData(
             startTaskPeriod: startOfYear,
             duration: Duration(days: isLeapYear(_currentDateTime.year) ? 366 : 365)
         );
         break;
     }
 
-    return periodData;
+    return taskPeriodData;
   }
 
-  Map<String, dynamic> _calculatePeriodData({
+  Map<String, dynamic> restHabitTimes(int habitPeriodIndex) {
+    final Map<String, dynamic> habitPeriodData;
+    habitPeriodData = _calculateHabitPeriodData(startHabitPeriod: _currentDateTime, duration: Duration(days: AppStyles.habitPeriodDayList[habitPeriodIndex]));
+    return habitPeriodData;
+  }
+
+  Map<String, dynamic> _calculateTaskPeriodData({
     required DateTime startTaskPeriod,
     Duration? duration,
     DateTime? endTaskPeriod,
   }) {
     final DateTime endDateTime = duration != null ? startTaskPeriod.add(duration) : endTaskPeriod!;
-    final int elapsedTimeInMinutes = _currentDateTime.difference(startTaskPeriod).inMinutes;
     final int totalMinutes = endDateTime.difference(startTaskPeriod).inMinutes;
+    final int remaininTimeInMinutes = _currentDateTime.difference(startTaskPeriod).inMinutes;
     final Duration remainingTaskTime = endDateTime.difference(_currentDateTime);
-    final double elapsedTaskPercentage = (elapsedTimeInMinutes / totalMinutes) * 100.0;
+    final double elapsedTaskPercentage = (remaininTimeInMinutes / totalMinutes) * 100.0;
 
     return {
-      AppConstraints.startTaskDateTime: startTaskPeriod,
-      AppConstraints.remainingTaskTimeString: remainingTaskTime,
-      AppConstraints.elapsedTaskPercentage: elapsedTaskPercentage,
-      AppConstraints.endTaskDateTime: endDateTime.add(minusMicro),
+      AppConstraints.taskStartDateTime: startTaskPeriod,
+      AppConstraints.taskRemaininDateTime: remainingTaskTime,
+      AppConstraints.taskElapsedPercentage: elapsedTaskPercentage,
+      AppConstraints.taskEndDateTime: endDateTime.add(minusMicro),
+    };
+  }
+
+  Map<String, dynamic> _calculateHabitPeriodData({
+    required DateTime startHabitPeriod,
+    Duration? duration,
+    DateTime? endTaskPeriod,
+  }) {
+    final DateTime endDateTime = duration != null ? startHabitPeriod.add(duration) : endTaskPeriod!;
+
+    return {
+      AppConstraints.habitStartDateTime: startHabitPeriod,
+      AppConstraints.habitEndDateTime: endDateTime.add(minusMicro),
+    };
+  }
+
+  Map<String, dynamic> restRemainingPercentage({required DateTime startDateTime, required DateTime endDateTime}) {
+    final int totalMinutes = endDateTime.difference(startDateTime).inMinutes;
+    final int remainingTimeInMinutes = endDateTime.difference(_currentDateTime).inMinutes;
+    final Duration remainingTime = Duration(minutes: remainingTimeInMinutes);
+    final double remainingPercentage = (remainingTimeInMinutes / totalMinutes) * 100.0;
+
+    return {
+      AppConstraints.restRemainingDateTime: remainingTime,
+      AppConstraints.restElapsedPercentage: remainingPercentage,
     };
   }
 
