@@ -23,8 +23,8 @@ class _TaskTimeIndicatorState extends State<TaskTimeIndicator> {
     return Consumer2<RestTimesState, TaskPeriodState>(
       builder: (context, restTimeState, taskPeriodState, _) {
         Map<String, dynamic> restTimePeriods = restTimeState.restTaskTimes(taskPeriodState.getTaskPeriodIndex);
-        Duration remainingTime = restTimePeriods[AppConstraints.remainingTaskTimeString];
-        _elapsedPercentage = restTimePeriods[AppConstraints.elapsedTaskPercentage];
+        Duration remainingTime = restTimePeriods[AppConstraints.taskRemaininDateTime];
+        _elapsedPercentage = restTimePeriods[AppConstraints.taskElapsedPercentage];
 
         int days = remainingTime.inDays;
         int hours = remainingTime.inHours % 24;

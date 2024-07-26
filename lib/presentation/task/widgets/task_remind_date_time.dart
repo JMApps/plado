@@ -44,7 +44,7 @@ class _TaskRemindDateTimeState extends State<TaskRemindDateTime> {
                     confirmText: AppStrings.select,
                     initialDate: _currentDateTime,
                     firstDate: _currentDateTime,
-                    lastDate: Provider.of<RestTimesState>(context, listen: false).restTaskTimes(context.read<TaskPeriodState>().getTaskPeriodIndex)[AppConstraints.endTaskDateTime],
+                    lastDate: Provider.of<RestTimesState>(context, listen: false).restTaskTimes(context.read<TaskPeriodState>().getTaskPeriodIndex)[AppConstraints.taskEndDateTime],
                   );
                   if (selectedDate != null) {
                     _argDateTime = selectedDate;

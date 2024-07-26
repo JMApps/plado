@@ -37,8 +37,23 @@ class TaskItem extends StatelessWidget {
         contentPadding: AppStyles.paddingRight,
         horizontalTitleGap: 8,
         tileColor: AppStyles.priorityColors[taskModel.taskPriorityIndex].withOpacity(0.05),
+        title: Text(
+          taskModel.taskTitle,
+          style: TextStyle(
+            fontSize: 18,
+            decoration: taskModel.taskStatusIndex == 0 ? TextDecoration.none : TextDecoration.lineThrough,
+            overflow: TextOverflow.ellipsis,
+          ),
+          maxLines: 1,
+        ),
+        subtitle: Text(
+          timeAgo,
+          style: const TextStyle(
+            fontSize: 14,
+            fontFamily: AppConstraints.fontRobotoSlab,
+          ),
+        ),
         leading: Checkbox(
-          activeColor: taskColor,
           value: statusTask,
           onChanged: (bool? onChanged) {
             Provider.of<TaskDataState>(context, listen: false).changeTaskStatus(taskId: taskModel.taskId, taskStatusIndex: taskModel.taskStatusIndex == 0 ? 1 : 0, completeDateTime: DateTime.now().toIso8601String());
@@ -56,23 +71,7 @@ class TaskItem extends StatelessWidget {
         trailing: Icon(
           statusTask ? Icons.check_circle : Icons.circle_rounded,
           color: taskColor,
-          size: 15,
-        ),
-        title: Text(
-          taskModel.taskTitle,
-          style: TextStyle(
-            fontSize: 18,
-            decoration: taskModel.taskStatusIndex == 0 ? TextDecoration.none : TextDecoration.lineThrough,
-            overflow: TextOverflow.ellipsis,
-          ),
-          maxLines: 1,
-        ),
-        subtitle: Text(
-          timeAgo,
-          style: const TextStyle(
-            fontSize: 14,
-            fontFamily: AppConstraints.fontRobotoSlab,
-          ),
+          size: 20,
         ),
       ),
     );
