@@ -5,8 +5,8 @@ class HabitModel {
   final String habitTitle;
   final String createDateTime;
   final String completeDateTime;
-  final String startDateTime;
-  final String endDateTime;
+  final DateTime startDateTime;
+  final DateTime endDateTime;
   final int habitPeriodIndex;
   final int habitColorIndex;
   final String completedDays;
@@ -33,8 +33,8 @@ class HabitModel {
       habitTitle: map[DatabaseValues.dbHabitTitle] as String,
       createDateTime: map[DatabaseValues.dbHabitCreateDateTime] as String,
       completeDateTime: map[DatabaseValues.dbHabitCompleteDateTime] as String,
-      startDateTime: map[DatabaseValues.dbHabitStartDateTime] as String,
-      endDateTime: map[DatabaseValues.dbHabitEndDateTime] as String,
+      startDateTime: DateTime.parse(map[DatabaseValues.dbHabitStartDateTime]),
+      endDateTime: DateTime.parse(map[DatabaseValues.dbHabitEndDateTime]),
       habitPeriodIndex: map[DatabaseValues.dbHabitPeriodIndex] as int,
       habitColorIndex: map[DatabaseValues.dbHabitColorIndex] as int,
       completedDays: map[DatabaseValues.dbHabitCompletedDays] as String,

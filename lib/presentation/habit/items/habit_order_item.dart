@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/styles/app_styles.dart';
-import '../../state/task/task_sort_state.dart';
+import '../../state/habit/habit_sort_state.dart';
 
 class HabitOrderItem extends StatelessWidget {
   const HabitOrderItem({
@@ -17,7 +17,7 @@ class HabitOrderItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).colorScheme;
-    final sortState = Provider.of<TaskSortState>(context);
+    final sortState = Provider.of<HabitSortState>(context);
     return ListTile(
       visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
       shape: AppStyles.shape,

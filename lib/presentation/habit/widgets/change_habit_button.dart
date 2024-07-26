@@ -66,9 +66,9 @@ class _ChangeHabitButtonState extends State<ChangeHabitButton> {
     int habitNotificationId = context.read<HabitNotificationIdState>().getNotificationId;
     final String habitDateTime = context.read<HabitNotificationDateState>().getHabitNotificationDate;
 
-    Map<String, dynamic> restTimePeriods = Provider.of<RestTimesState>(context, listen: false).restHabitDays(habitPeriodIndex);
-    DateTime startTime = restTimePeriods[AppConstraints.startTaskDateTime];
-    DateTime endTime = restTimePeriods[AppConstraints.endTaskDateTime];
+    Map<String, dynamic> restTimePeriods = Provider.of<RestTimesState>(context, listen: false).restHabitTimes(habitPeriodIndex);
+    DateTime startTime = restTimePeriods[AppConstraints.taskStartDateTime];
+    DateTime endTime = restTimePeriods[AppConstraints.taskEndDateTime];
 
     if (habitIsRemind) {
       final randomNotificationNumber = Random.secure().nextInt(AppConstraints.randomNotificationNumber);

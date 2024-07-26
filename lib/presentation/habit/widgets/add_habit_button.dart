@@ -53,9 +53,9 @@ class _AddHabitButtonState extends State<AddHabitButton> {
     final String habitDateTime = context.read<HabitNotificationDateState>().getHabitNotificationDate;
     final List<int> completeDays = List.generate(AppStyles.habitPeriodDayList[habitPeriodIndex], (index) => 0);
 
-    Map<String, dynamic> restTimePeriods = Provider.of<RestTimesState>(context, listen: false).restHabitDays(habitPeriodIndex);
-    DateTime startTime = restTimePeriods[AppConstraints.startHabitDateTime];
-    DateTime endTime = restTimePeriods[AppConstraints.endHabitDateTime];
+    Map<String, dynamic> restTimePeriods = Provider.of<RestTimesState>(context, listen: false).restHabitTimes(habitPeriodIndex);
+    DateTime startTime = restTimePeriods[AppConstraints.habitStartDateTime];
+    DateTime endTime = restTimePeriods[AppConstraints.habitEndDateTime];
 
     if (habitIsRemind) {
       final randomNotificationNumber = Random.secure().nextInt(AppConstraints.randomNotificationNumber);

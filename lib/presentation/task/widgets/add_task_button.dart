@@ -64,8 +64,8 @@ class _AddTaskButtonState extends State<AddTaskButton> {
     final String taskDateTime = context.read<TaskNotificationDateState>().getTaskNotificationDate;
 
     Map<String, dynamic> restTimePeriods = Provider.of<RestTimesState>(context, listen: false).restTaskTimes(taskPeriodIndex);
-    DateTime startTime = restTimePeriods[AppConstraints.startTaskDateTime];
-    DateTime endTime = restTimePeriods[AppConstraints.endTaskDateTime];
+    DateTime startTime = restTimePeriods[AppConstraints.taskStartDateTime];
+    DateTime endTime = restTimePeriods[AppConstraints.taskEndDateTime];
 
     if (taskIsRemind) {
       final randomNotificationNumber = Random().nextInt(AppConstraints.randomNotificationNumber);

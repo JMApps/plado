@@ -29,7 +29,7 @@ class HabitSortBottomSheet extends StatelessWidget {
           ),
           HabitSortItem(title: AppStrings.sortByAddTime, index: 0),
           HabitSortItem(title: AppStrings.sortByTitle, index: 1),
-          HabitSortItem(title: AppStrings.sortByColor, index: 3),
+          HabitSortItem(title: AppStrings.sortByColor, index: 2),
           ListTile(
             visualDensity: VisualDensity(horizontal: -4, vertical: -4),
             title: Text(

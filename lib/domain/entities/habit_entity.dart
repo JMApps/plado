@@ -5,8 +5,8 @@ class HabitEntity {
   final String habitTitle;
   final String createDateTime;
   final String completeDateTime;
-  final String startDateTime;
-  final String endDateTime;
+  final DateTime startDateTime;
+  final DateTime endDateTime;
   final int habitPeriodIndex;
   final int habitColorIndex;
   final String completedDays;
