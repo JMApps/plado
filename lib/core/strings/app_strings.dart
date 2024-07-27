@@ -72,6 +72,10 @@ class AppStrings {
 
   static const String added = 'Добавлено:';
   static const String remaining = 'Осталось:';
+  static const String start = 'Начало:';
+  static const String end = 'Конец:';
+  static const String remainingDays = 'Осталось дней:';
+  static const String remainingTime = 'Осталось времени:';
 
   static const String remainingDayPercent = 'Остаток дня в %';
   static const String hours = 'Часы';
