@@ -32,12 +32,12 @@ class MaterialRoutes {
       case NameRoutes.updateHabitPage:
         final HabitModelArgs habitModelArgs = routeSettings.arguments as HabitModelArgs;
         return MaterialPageRoute(
-          builder: (_) => UpdateHabitPage(habitModel: habitModelArgs.habitEntity),
+          builder: (_) => UpdateHabitPage(habitModel: habitModelArgs.habitModel),
         );
       case NameRoutes.habitDetailPage:
         final HabitModelArgs habitModelArgs = routeSettings.arguments as HabitModelArgs;
         return MaterialPageRoute(
-          builder: (_) => HabitDetailPage(habitModel: habitModelArgs.habitEntity),
+          builder: (_) => HabitDetailPage(habitModel: habitModelArgs.habitModel),
         );
       default:
         throw Exception('${AppExceptionMessages.invalidRouteException} ${routeSettings.name}');

@@ -62,21 +62,20 @@ class UpdateHabitPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              HabitTextField(),
-              TextDescription(text: AppStrings.dayNumbers),
-              SizedBox(height: 8),
-              HabitPeriodSegment(),
-              SizedBox(height: 16),
-              TextDescription(text: AppStrings.color),
+              HabitTextField(autofocusState: false),
+              Divider(indent: 16, endIndent: 16),
               SizedBox(height: 8),
               HabitColorList(),
-              SizedBox(height: 16),
+              SizedBox(height: 8),
+              Divider(indent: 16, endIndent: 16),
               HabitRemindTime(),
+              Divider(indent: 16, endIndent: 16),
               SizedBox(height: 8),
             ],
           ),
         ),
       ),
+
     );
   }
 }

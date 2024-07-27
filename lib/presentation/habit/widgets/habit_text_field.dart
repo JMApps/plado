@@ -5,7 +5,12 @@ import '../../../core/strings/app_strings.dart';
 import '../../state/habit/habit_title_state.dart';
 
 class HabitTextField extends StatefulWidget {
-  const HabitTextField({super.key});
+  const HabitTextField({
+    super.key,
+    required this.autofocusState,
+  });
+
+  final bool autofocusState;
 
   @override
   State<HabitTextField> createState() => _HabitTextFieldState();
@@ -33,7 +38,7 @@ class _HabitTextFieldState extends State<HabitTextField> {
       builder: (BuildContext context, habitTitleState, _) {
         return TextField(
           controller: _habitTextController,
-          autofocus: true,
+          autofocus: widget.autofocusState,
           textCapitalization: TextCapitalization.sentences,
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.done,

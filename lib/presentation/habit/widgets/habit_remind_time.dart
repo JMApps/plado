@@ -50,7 +50,9 @@ class _HabitRemindTimeState extends State<HabitRemindTime> {
                 habitNotificationDateState.setTaskNotificationDate = _argDateTime.toIso8601String();
               }
             } : null,
-            icon: const Icon(Icons.access_time),
+            icon: const Icon(
+              Icons.access_time,
+            ),
           ),
           trailing: Switch(
             value: habitRemindState.getIsRemind,

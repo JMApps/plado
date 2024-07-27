@@ -11,10 +11,8 @@ import '../../../data/state/habit_data_state.dart';
 import '../../state/habit/habit_color_state.dart';
 import '../../state/habit/habit_notification_date_state.dart';
 import '../../state/habit/habit_notification_id_state.dart';
-import '../../state/habit/habit_period_state.dart';
 import '../../state/habit/habit_remind_state.dart';
 import '../../state/habit/habit_title_state.dart';
-import '../../state/rest_times_state.dart';
 
 class ChangeHabitButton extends StatefulWidget {
   const ChangeHabitButton({

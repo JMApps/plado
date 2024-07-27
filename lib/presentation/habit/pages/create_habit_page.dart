@@ -56,7 +56,7 @@ class CreateHabitPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              HabitTextField(),
+              HabitTextField(autofocusState: true),
               TextDescription(text: AppStrings.dayNumbers),
               SizedBox(height: 8),
               HabitPeriodSegment(),
