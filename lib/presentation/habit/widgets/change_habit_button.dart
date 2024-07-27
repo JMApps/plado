@@ -60,15 +60,10 @@ class _ChangeHabitButtonState extends State<ChangeHabitButton> {
 
   void _createHabit() {
     final String habitTitleState = context.read<HabitTitleState>().getHabitTitle.trim();
-    final int habitPeriodIndex = context.read<HabitPeriodState>().getHabitPeriodIndex;
     final int habitColorIndex = context.read<HabitColorState>().getColorIndex;
     final bool habitIsRemind = context.read<HabitRemindState>().getIsRemind;
     int habitNotificationId = context.read<HabitNotificationIdState>().getNotificationId;
     final String habitDateTime = context.read<HabitNotificationDateState>().getHabitNotificationDate;
-
-    Map<String, dynamic> restTimePeriods = Provider.of<RestTimesState>(context, listen: false).restHabitTimes(habitPeriodIndex);
-    DateTime startTime = restTimePeriods[AppConstraints.taskStartDateTime];
-    DateTime endTime = restTimePeriods[AppConstraints.taskEndDateTime];
 
     if (habitIsRemind) {
       final randomNotificationNumber = Random.secure().nextInt(AppConstraints.randomNotificationNumber);
@@ -78,11 +73,6 @@ class _ChangeHabitButtonState extends State<ChangeHabitButton> {
 
     final Map<String, dynamic> habitMap = {
       DatabaseValues.dbHabitTitle: habitTitleState,
-      DatabaseValues.dbHabitCreateDateTime: _currentDateTime.toIso8601String(),
-      DatabaseValues.dbHabitCompleteDateTime: _currentDateTime.toIso8601String(),
-      DatabaseValues.dbHabitStartDateTime: startTime.toIso8601String(),
-      DatabaseValues.dbHabitEndDateTime: endTime.toIso8601String(),
-      DatabaseValues.dbHabitPeriodIndex: habitPeriodIndex,
       DatabaseValues.dbHabitColorIndex: habitColorIndex,
       DatabaseValues.dbHabitNotificationId: habitNotificationId,
       DatabaseValues.dbHabitNotificationDate: habitDateTime,
