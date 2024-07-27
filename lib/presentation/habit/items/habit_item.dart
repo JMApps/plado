@@ -22,7 +22,7 @@ class HabitItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTheme = Theme.of(context);
-    final String timeAgo = timeago.format(DateTime.parse(habitModel.createDateTime), locale: 'en');
+    final String timeAgo = timeago.format(habitModel.createDateTime, locale: 'en');
     final habitColor = AppStyles.taskHabitColors[habitModel.habitColorIndex].withOpacity(appTheme.brightness == Brightness.dark ? 0.5 : 1);
     final restRemaininPercentage = Provider.of<RestTimesState>(context).restRemainingPercentage(startDateTime: habitModel.startDateTime, endDateTime: habitModel.endDateTime);
     final Duration remaininDays = restRemaininPercentage[AppConstraints.restRemainingDateTime];
@@ -34,7 +34,14 @@ class HabitItem extends StatelessWidget {
           Navigator.pushNamed(
             context,
             NameRoutes.habitDetailPage,
-            arguments: HabitModelArgs(habitEntity: habitModel),
+            arguments: HabitModelArgs(habitModel: habitModel),
+          );
+        },
+        onLongPress: () {
+          Navigator.pushNamed(
+            context,
+            NameRoutes.updateHabitPage,
+            arguments: HabitModelArgs(habitModel: habitModel),
           );
         },
         shape: AppStyles.shapeMini,

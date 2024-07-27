@@ -3,8 +3,8 @@ import '../../data/models/habit_model.dart';
 class HabitEntity {
   final int habitId;
   final String habitTitle;
-  final String createDateTime;
-  final String completeDateTime;
+  final DateTime createDateTime;
+  final DateTime completeDateTime;
   final DateTime startDateTime;
   final DateTime endDateTime;
   final int habitPeriodIndex;

@@ -24,7 +24,7 @@ class TaskItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool statusTask = taskModel.taskStatusIndex == 0 ? false : true;
-    final String timeAgo = timeago.format(DateTime.parse(taskModel.createDateTime), locale: 'en');
+    final String timeAgo = timeago.format(taskModel.createDateTime, locale: 'en');
     final taskColor = AppStyles.taskHabitColors[taskModel.taskColorIndex].withOpacity(Theme.of(context).brightness == Brightness.dark ? 0.5 : 1);
     return Padding(
       padding: AppStyles.paddingBottomMini,

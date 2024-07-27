@@ -3,8 +3,8 @@ import 'package:plado/core/strings/database_values.dart';
 class HabitModel {
   final int habitId;
   final String habitTitle;
-  final String createDateTime;
-  final String completeDateTime;
+  final DateTime createDateTime;
+  final DateTime completeDateTime;
   final DateTime startDateTime;
   final DateTime endDateTime;
   final int habitPeriodIndex;
@@ -31,8 +31,8 @@ class HabitModel {
     return HabitModel(
       habitId: map[DatabaseValues.dbHabitId] as int,
       habitTitle: map[DatabaseValues.dbHabitTitle] as String,
-      createDateTime: map[DatabaseValues.dbHabitCreateDateTime] as String,
-      completeDateTime: map[DatabaseValues.dbHabitCompleteDateTime] as String,
+      createDateTime: DateTime.parse(map[DatabaseValues.dbHabitCreateDateTime]),
+      completeDateTime: DateTime.parse(map[DatabaseValues.dbHabitCompleteDateTime]),
       startDateTime: DateTime.parse(map[DatabaseValues.dbHabitStartDateTime]),
       endDateTime: DateTime.parse(map[DatabaseValues.dbHabitEndDateTime]),
       habitPeriodIndex: map[DatabaseValues.dbHabitPeriodIndex] as int,

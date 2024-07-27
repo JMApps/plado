@@ -3,10 +3,10 @@ import '../../core/strings/database_values.dart';
 class TaskModel {
   final int taskId;
   final String taskTitle;
-  final String createDateTime;
-  final String completeDateTime;
-  final String startDateTime;
-  final String endDateTime;
+  final DateTime createDateTime;
+  final DateTime completeDateTime;
+  final DateTime startDateTime;
+  final DateTime endDateTime;
   final int taskPeriodIndex;
   final int taskPriorityIndex;
   final int taskStatusIndex;
@@ -33,10 +33,10 @@ class TaskModel {
     return TaskModel(
       taskId: map[DatabaseValues.dbTaskId] as int,
       taskTitle: map[DatabaseValues.dbTaskTitle] as String,
-      createDateTime: map[DatabaseValues.dbTaskCreateDateTime] as String,
-      completeDateTime: map[DatabaseValues.dbTaskCompleteDateTime] as String,
-      startDateTime: map[DatabaseValues.dbTaskStartDateTime] as String,
-      endDateTime: map[DatabaseValues.dbTaskEndDateTime] as String,
+      createDateTime: DateTime.parse(map[DatabaseValues.dbTaskCreateDateTime]),
+      completeDateTime: DateTime.parse(map[DatabaseValues.dbTaskCompleteDateTime]),
+      startDateTime: DateTime.parse(map[DatabaseValues.dbTaskStartDateTime]),
+      endDateTime: DateTime.parse(map[DatabaseValues.dbTaskEndDateTime]),
       taskPeriodIndex: map[DatabaseValues.dbTaskPeriodIndex] as int,
       taskPriorityIndex: map[DatabaseValues.dbTaskPriorityIndex] as int,
       taskStatusIndex: map[DatabaseValues.dbTaskStatusIndex] as int,

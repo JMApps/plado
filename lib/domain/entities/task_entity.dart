@@ -3,10 +3,10 @@ import '../../data/models/task_model.dart';
 class TaskEntity {
   final int taskId;
   final String taskTitle;
-  final String startDateTime;
-  final String completeDateTime;
-  final String createDateTime;
-  final String endDateTime;
+  final DateTime startDateTime;
+  final DateTime completeDateTime;
+  final DateTime createDateTime;
+  final DateTime endDateTime;
   final int taskPeriodIndex;
   final int taskPriorityIndex;
   final int taskStatusIndex;
