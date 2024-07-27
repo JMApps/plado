@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plado/data/state/task_data_state.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../core/strings/app_strings.dart';
@@ -31,6 +32,7 @@ class UpdateTaskPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = Theme.of(context).colorScheme;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -57,9 +59,47 @@ class UpdateTaskPage extends StatelessWidget {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(AppStrings.addingTask),
+          title: const Text(AppStrings.changingTask),
           leading: const MainBackButton(),
           actions: [
+            IconButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (_) => AlertDialog(
+                    title: Text(
+                      AppStrings.warning,
+                      style: TextStyle(
+                        color: appColors.error,
+                      ),
+                    ),
+                    content: const Text(
+                      AppStrings.deleteTaskContent,
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                    actions: [
+                      OutlinedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text(AppStrings.cancel),
+                      ),
+                      OutlinedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          Navigator.of(context).pop();
+                          Provider.of<TaskDataState>(context, listen: false).deleteTask(taskId: taskModel.taskId);
+                        },
+                        child: const Text(AppStrings.delete),
+                      ),
+                    ],
+                  ),
+                );
+              },
+              icon: const Icon(Icons.delete_outline_rounded),
+            ),
             ChangeTaskButton(taskId: taskModel.taskId),
           ],
         ),
