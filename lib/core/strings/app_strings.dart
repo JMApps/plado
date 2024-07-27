@@ -39,6 +39,7 @@ class AppStrings {
 
   static const String warning = 'Внимание';
   static const String deleteTaskContent = 'Вы уверены, что хотите безвозвратно удалить эту задачу?';
+  static const String deleteHabitContent = 'Вы уверены, что хотите безвозвратно удалить эту привычку?';
   static const String color = 'Цвет';
   static const String add = 'Добавить';
   static const String addClose = 'Добавить и закрыть';
