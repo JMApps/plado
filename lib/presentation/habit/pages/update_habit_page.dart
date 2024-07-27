@@ -10,11 +10,9 @@ import '../../state/habit/habit_notification_id_state.dart';
 import '../../state/habit/habit_period_state.dart';
 import '../../state/habit/habit_remind_state.dart';
 import '../../state/habit/habit_title_state.dart';
-import '../../task/widgets/text_description.dart';
 import '../../widgets/main_back_button.dart';
 import '../widgets/change_habit_button.dart';
 import '../widgets/habit_color_list.dart';
-import '../widgets/habit_period_segment.dart';
 import '../widgets/habit_remind_time.dart';
 import '../widgets/habit_text_field.dart';
 
