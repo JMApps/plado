@@ -76,7 +76,7 @@ class RestTimesState extends ChangeNotifier {
 
   Map<String, dynamic> restHabitTimes(int habitPeriodIndex) {
     final Map<String, dynamic> habitPeriodData;
-    habitPeriodData = _calculateHabitPeriodData(startHabitPeriod: _currentDateTime, duration: Duration(days: AppStyles.habitPeriodDayList[habitPeriodIndex]));
+    habitPeriodData = _calculateHabitPeriodData(startHabitPeriod: DateTime(_currentDateTime.year, _currentDateTime.month, _currentDateTime.day), duration: Duration(days: AppStyles.habitPeriodDayList[habitPeriodIndex]));
     return habitPeriodData;
   }
 
