@@ -25,6 +25,7 @@ dependencies:
 
   # State management
   provider: ^6.1.2
+  percent_indicator: ^4.2.3
 
   # UI
   salomon_bottom_bar: ^3.3.2
