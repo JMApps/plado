@@ -62,6 +62,9 @@ class HabitItem extends StatelessWidget {
           backgroundColor: appTheme.colorScheme.onSecondary,
           child: Text(
             habitModel.habitId.toString(),
+            style: const TextStyle(
+              fontFamily: AppConstraints.fontRobotoSlab,
+            ),
           ),
         ),
         trailing: Stack(

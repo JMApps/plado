@@ -42,7 +42,7 @@ class DeleteTaskDialog extends StatelessWidget {
               OutlinedButton(
                 onPressed: () {
                   Navigator.pop(context);
-                  Navigator.of(context).pop();
+                  Navigator.pop(context);
                   Provider.of<TaskDataState>(context, listen: false).deleteTask(taskId: taskId);
                 },
                 child: const Text(AppStrings.delete),

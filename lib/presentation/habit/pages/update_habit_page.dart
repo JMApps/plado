@@ -12,6 +12,7 @@ import '../../state/habit/habit_remind_state.dart';
 import '../../state/habit/habit_title_state.dart';
 import '../../widgets/main_back_button.dart';
 import '../widgets/change_habit_button.dart';
+import '../widgets/delete_habit_dialog.dart';
 import '../widgets/habit_color_list.dart';
 import '../widgets/habit_remind_time.dart';
 import '../widgets/habit_text_field.dart';
@@ -52,6 +53,7 @@ class UpdateHabitPage extends StatelessWidget {
           title: const Text(AppStrings.addingHabit),
           leading: const MainBackButton(),
           actions: [
+            DeleteHabitDialog(habitId: habitModel.habitId),
             ChangeHabitButton(habitId: habitModel.habitId),
           ],
         ),

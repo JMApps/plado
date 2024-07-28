@@ -42,7 +42,7 @@ class DeleteHabitDialog extends StatelessWidget {
               OutlinedButton(
                 onPressed: () {
                   Navigator.pop(context);
-                  Navigator.of(context).pop;
+                  Navigator.pop(context);
                   Provider.of<HabitDataState>(context, listen: false).deleteHabit(habitId: habitId);
                 },
                 child: const Text(AppStrings.delete),
