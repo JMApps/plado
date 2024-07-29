@@ -32,4 +32,8 @@ class HabitDataState extends ChangeNotifier {
     notifyListeners();
     return deleteHabit;
   }
+
+  Future<List<bool>> completedDays({required int habitId}) async {
+    return await _habitUseCase.completedDays(habitId: habitId);
+  }
 }

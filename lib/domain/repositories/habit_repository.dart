@@ -10,4 +10,6 @@ abstract class HabitRepository {
   Future<int> updateHabit({required Map<String, dynamic> habitMap, required int habitId});
 
   Future<int> deleteHabit({required int habitId});
+
+  Future<List<bool>> completedDays({required int habitId});
 }

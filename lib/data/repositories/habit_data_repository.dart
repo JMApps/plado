@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:sqflite/sqflite.dart';
 
 import '../../core/strings/database_values.dart';
@@ -44,5 +46,20 @@ class HabitDataRepository implements HabitRepository {
     final Database database = await _pladoDatabaseService.db;
     final int deleteHabit = await database.delete(DatabaseValues.dbHabitTableName, where: '${DatabaseValues.dbHabitId} = ?', whereArgs: [habitId]);
     return deleteHabit;
+  }
+
+  @override
+  Future<List<bool>> completedDays({required int habitId}) async {
+    final Database database = await _pladoDatabaseService.db;
+    final List<Map<String, dynamic>> result = await database.query(DatabaseValues.dbHabitTableName, columns: [DatabaseValues.dbHabitCompletedDays], where: '${DatabaseValues.dbHabitId} = ?', whereArgs: [habitId]);
+
+    if (result.isNotEmpty) {
+      final String completedDaysJson = result.first[DatabaseValues.dbHabitCompletedDays];
+      final List<dynamic> jsonList = jsonDecode(completedDaysJson);
+      final List<bool> completedDays = jsonList.map((e) => e == 1).toList();
+      return completedDays;
+    } else {
+      return [];
+    }
   }
 }

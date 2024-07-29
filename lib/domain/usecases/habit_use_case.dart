@@ -25,4 +25,8 @@ class HabitUseCase {
   Future<int> deleteHabit({required int habitId}) async {
     return await _habitRepository.deleteHabit(habitId: habitId);
   }
+
+  Future<List<bool>> completedDays({required int habitId}) async {
+    return await _habitRepository.completedDays(habitId: habitId);
+  }
 }
