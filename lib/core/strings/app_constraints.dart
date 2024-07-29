@@ -7,8 +7,9 @@ class AppConstraints {
   static const String habitStartDateTime = 'habit_start_date_time';
   static const String habitEndDateTime = 'habit_end_date_time';
 
+  static const String restRemainingDays = 'rest_remainin_days';
+  static const String restElapsedDays = 'rest_elapsed_days';
   static const String restElapsedPercentage = 'rest_elapsed_percentage';
-  static const String restRemainingDateTime = 'rest_remainin_date_time';
 
   static const String fontRaleway = 'Raleway';
   static const String fontRobotoSlab = 'Roboto Slab';

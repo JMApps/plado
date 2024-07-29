@@ -25,7 +25,6 @@ class HabitItem extends StatelessWidget {
     final String timeAgo = timeago.format(habitModel.createDateTime, locale: 'en');
     final habitColor = AppStyles.taskHabitColors[habitModel.habitColorIndex].withOpacity(appTheme.brightness == Brightness.dark ? 0.5 : 1);
     final restRemaininPercentage = Provider.of<RestTimesState>(context).restRemainingPercentage(startDateTime: habitModel.startDateTime, endDateTime: habitModel.endDateTime);
-    final Duration remaininDays = restRemaininPercentage[AppConstraints.restRemainingDateTime];
     return Card(
       elevation: 0,
       margin: AppStyles.paddingBottomMini,
@@ -80,7 +79,7 @@ class HabitItem extends StatelessWidget {
               ),
             ),
             Text(
-              (remaininDays.inDays + 1).toString(),
+              (restRemaininPercentage[AppConstraints.restRemainingDays] + 1).toString(),
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 14,
