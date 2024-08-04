@@ -9,6 +9,7 @@ class AppConstraints {
 
   static const String restRemainingDays = 'rest_remainin_days';
   static const String restElapsedDays = 'rest_elapsed_days';
+  static const String restRemainingPercentage = 'rest_remaining_percentage';
   static const String restElapsedPercentage = 'rest_elapsed_percentage';
 
   static const String fontRaleway = 'Raleway';

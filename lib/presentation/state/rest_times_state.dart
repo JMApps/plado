@@ -114,15 +114,21 @@ class RestTimesState extends ChangeNotifier {
 
   Map<String, dynamic> restRemainingPercentage({required DateTime startDateTime, required DateTime endDateTime}) {
     final int totalMinutes = endDateTime.difference(startDateTime).inMinutes;
+
     final int remainingTimeInMinutes = endDateTime.difference(_currentDateTime).inMinutes;
-    final int remainingTime = Duration(minutes: remainingTimeInMinutes).inDays;
-    final int elapsedDays = _currentDateTime.difference(startDateTime).inDays;
+    final int elapsedTimeInMinutes = _currentDateTime.difference(startDateTime).inMinutes;
+
+    final double elapsedPercentage = (elapsedTimeInMinutes / totalMinutes) * 100.0;
     final double remainingPercentage = (remainingTimeInMinutes / totalMinutes) * 100.0;
 
+    final int remainingDays = Duration(minutes: remainingTimeInMinutes).inDays;
+    final int elapsedDays = _currentDateTime.difference(startDateTime).inDays;
+
     return {
-      AppConstraints.restRemainingDays: remainingTime,
+      AppConstraints.restRemainingDays: remainingDays,
       AppConstraints.restElapsedDays: elapsedDays,
-      AppConstraints.restElapsedPercentage: remainingPercentage,
+      AppConstraints.restElapsedPercentage: elapsedPercentage,
+      AppConstraints.restRemainingPercentage: remainingPercentage,
     };
   }
 
