@@ -26,17 +26,21 @@ class TaskItem extends StatelessWidget {
     final bool statusTask = taskModel.taskStatusIndex == 0 ? false : true;
     final String timeAgo = timeago.format(taskModel.createDateTime, locale: 'en');
     final taskColor = AppStyles.taskHabitColors[taskModel.taskColorIndex].withOpacity(Theme.of(context).brightness == Brightness.dark ? 0.5 : 1);
-    return Padding(
-      padding: AppStyles.paddingBottomMini,
+    return Card(
+      elevation: 0,
+      margin: AppStyles.paddingBottomMini,
       child: ListTile(
         onTap: !statusTask ? () {
-          Navigator.pushNamed(context, NameRoutes.updateTaskPage, arguments: TaskModelArgs(taskEntity: taskModel));
+          Navigator.pushNamed(
+            context,
+            NameRoutes.updateTaskPage,
+            arguments: TaskModelArgs(taskEntity: taskModel),
+          );
         } : null,
-        shape: AppStyles.shapeMini,
+        shape: AppStyles.shape,
         visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
         contentPadding: AppStyles.paddingRight,
         horizontalTitleGap: 8,
-        tileColor: AppStyles.priorityColors[taskModel.taskPriorityIndex].withOpacity(0.05),
         title: Text(
           taskModel.taskTitle,
           style: TextStyle(
@@ -56,7 +60,10 @@ class TaskItem extends StatelessWidget {
         leading: Checkbox(
           value: statusTask,
           onChanged: (bool? onChanged) {
-            Provider.of<TaskDataState>(context, listen: false).changeTaskStatus(taskId: taskModel.taskId, taskStatusIndex: taskModel.taskStatusIndex == 0 ? 1 : 0, completeDateTime: DateTime.now().toIso8601String());
+            Provider.of<TaskDataState>(context, listen: false).changeTaskStatus(
+                taskId: taskModel.taskId,
+                taskStatusIndex: taskModel.taskStatusIndex == 0 ? 1 : 0,
+                completeDateTime: DateTime.now().toIso8601String());
             if (onChanged!) {
               if (taskModel.notificationId > 0) {
                 NotificationService().cancelNotificationWithId(taskModel.notificationId);

@@ -45,7 +45,12 @@ class DeleteHabitDialog extends StatelessWidget {
                   Navigator.pop(context);
                   Provider.of<HabitDataState>(context, listen: false).deleteHabit(habitId: habitId);
                 },
-                child: const Text(AppStrings.delete),
+                child: Text(
+                  AppStrings.delete,
+                  style: TextStyle(
+                    color: appColors.error,
+                  ),
+                ),
               ),
             ],
           ),

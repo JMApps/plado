@@ -29,6 +29,7 @@ class HabitItem extends StatelessWidget {
       elevation: 0,
       margin: AppStyles.paddingBottomMini,
       child: ListTile(
+        shape: AppStyles.shape,
         onTap: () {
           Navigator.pushNamed(
             context,
@@ -43,7 +44,6 @@ class HabitItem extends StatelessWidget {
             arguments: HabitModelArgs(habitModel: habitModel),
           );
         },
-        shape: AppStyles.shapeMini,
         title: Text(
           habitModel.habitTitle,
           style: const TextStyle(

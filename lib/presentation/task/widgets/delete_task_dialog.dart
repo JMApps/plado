@@ -45,7 +45,12 @@ class DeleteTaskDialog extends StatelessWidget {
                   Navigator.pop(context);
                   Provider.of<TaskDataState>(context, listen: false).deleteTask(taskId: taskId);
                 },
-                child: const Text(AppStrings.delete),
+                child: Text(
+                  AppStrings.delete,
+                  style: TextStyle(
+                    color: appColors.error,
+                  ),
+                ),
               ),
             ],
           ),

@@ -29,19 +29,26 @@ class HabitDetailPage extends StatefulWidget {
 }
 
 class _HabitDetailPageState extends State<HabitDetailPage> {
-  late final PageController _completedDaysController;
-  late final Map<String, dynamic> _restRemaininPercentage;
+  final PageController _completedDaysController = PageController(viewportFraction: 0.75);
+
+  @override
+  void dispose() {
+    _completedDaysController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final habitColor = AppStyles.taskHabitColors[widget.habitModel.habitColorIndex];
     final appColors = Theme.of(context).colorScheme;
-    _restRemaininPercentage = Provider.of<RestTimesState>(context).restRemainingPercentage(
+    final Map<String, dynamic> restRemaininPercentage = Provider.of<RestTimesState>(context).restRemainingPercentage(
       startDateTime: widget.habitModel.startDateTime,
       endDateTime: widget.habitModel.endDateTime,
     );
-    final int initialPage = (_restRemaininPercentage[AppConstraints.restElapsedDays] ?? 0);
-    _completedDaysController = PageController(initialPage: initialPage, viewportFraction: 0.75);
+    final int initialPage = (restRemaininPercentage[AppConstraints.restElapsedDays] ?? 0);
+    if (_completedDaysController.hasClients) {
+      _completedDaysController.jumpToPage(initialPage);
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.habitModel.habitTitle),
@@ -72,9 +79,9 @@ class _HabitDetailPageState extends State<HabitDetailPage> {
                         circularStrokeCap: CircularStrokeCap.round,
                         radius: 75,
                         lineWidth: 20,
-                        percent: _restRemaininPercentage[AppConstraints.restElapsedPercentage] / 100,
+                        percent: restRemaininPercentage[AppConstraints.restElapsedPercentage] / 100,
                         center: Text(
-                          '${_restRemaininPercentage[AppConstraints.restRemainingDays] + 1}',
+                          '${restRemaininPercentage[AppConstraints.restRemainingDays] + 1}',
                           style: const TextStyle(
                             fontSize: 35,
                             fontWeight: FontWeight.bold,
