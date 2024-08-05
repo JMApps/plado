@@ -75,7 +75,7 @@ class HabitItem extends StatelessWidget {
               child: CircularProgressIndicator(
                 color: habitColor,
                 strokeCap: StrokeCap.round,
-                value: restRemaininPercentage[AppConstraints.restElapsedPercentage] / 100,
+                value: restRemaininPercentage[AppConstraints.restRemainingPercentage] / 100,
               ),
             ),
             Text(
