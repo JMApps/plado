@@ -9,23 +9,19 @@ class DateTimeItem extends StatelessWidget {
     required this.description,
     required this.dateTime,
     required this.dateFormat,
-    required this.color,
   });
 
   final String description;
   final DateTime dateTime;
   final String dateFormat;
-  final Color color;
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      '$description ${DateFormat(dateFormat).format(dateTime)}',
-      style: TextStyle(
+      '$description\n${DateFormat(dateFormat).format(dateTime)}',
+      style: const TextStyle(
         fontFamily: AppConstraints.fontRobotoSlab,
-        fontSize: 16,
-        color: color,
-        fontWeight: FontWeight.bold,
+        fontSize: 17,
       ),
       textAlign: TextAlign.center,
     );

@@ -74,6 +74,7 @@ class AppStrings {
   static const String remaining = 'Осталось:';
   static const String start = 'Начало:';
   static const String end = 'Конец:';
+  static const String today = 'Сегодня';
   static const String elapsedDays = 'Прошло дней:';
   static const String elapsedTime = 'Прошло времени:';
   static const String remainingDays = 'Осталось дней:';
