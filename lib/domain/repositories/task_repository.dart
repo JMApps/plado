@@ -10,6 +10,8 @@ abstract class TaskRepository {
 
   Future<TaskCountModel> getTasksNumber({required int taskPeriodIndex});
 
+  Future<TaskCountModel> getAllTasksNumber();
+
   Future<int> createTask({required Map<String, dynamic> taskMap});
 
   Future<int> updateTask({required Map<String, dynamic> taskMap, required int taskId});

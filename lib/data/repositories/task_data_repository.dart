@@ -70,6 +70,36 @@ class TaskDataRepository implements TaskRepository {
     );
   }
 
+
+  @override
+  Future<TaskCountModel> getAllTasksNumber() async {
+    final Database database = await _pladoDatabaseService.db;
+
+    final List<Map<String, Object?>> inProgress = await database.query(
+      DatabaseValues.dbTaskTableName,
+      where: '${DatabaseValues.dbTaskStatusIndex} = ?',
+      whereArgs: [0],
+    );
+
+    final List<Map<String, Object?>> complete = await database.query(
+      DatabaseValues.dbTaskTableName,
+      where: '${DatabaseValues.dbTaskStatusIndex} = ?',
+      whereArgs: [1],
+    );
+
+    final List<Map<String, Object?>> canceled = await database.query(
+      DatabaseValues.dbTaskTableName,
+      where: '${DatabaseValues.dbTaskStatusIndex} = ?',
+      whereArgs: [2],
+    );
+
+    return TaskCountModel(
+      inProgress: inProgress.length,
+      complete: complete.length,
+      canceled: canceled.length,
+    );
+  }
+
   @override
   Future<int> createTask({required Map<String, dynamic> taskMap}) async {
     final Database database = await _pladoDatabaseService.db;
