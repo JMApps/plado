@@ -4,6 +4,7 @@ import '../../core/strings/database_values.dart';
 import '../../core/styles/app_styles.dart';
 import '../../domain/entities/task_entity.dart';
 import '../../domain/repositories/task_repository.dart';
+import '../models/all_task_count_model.dart';
 import '../models/task_count_model.dart';
 import '../models/task_model.dart';
 import '../services/plado_database_service.dart';
@@ -72,8 +73,12 @@ class TaskDataRepository implements TaskRepository {
 
 
   @override
-  Future<TaskCountModel> getAllTasksNumber() async {
+  Future<AllTaskCountModel> getAllTasksNumber() async {
     final Database database = await _pladoDatabaseService.db;
+
+    final List<Map<String, Object?>> all = await database.query(
+      DatabaseValues.dbTaskTableName
+    );
 
     final List<Map<String, Object?>> inProgress = await database.query(
       DatabaseValues.dbTaskTableName,
@@ -93,7 +98,8 @@ class TaskDataRepository implements TaskRepository {
       whereArgs: [2],
     );
 
-    return TaskCountModel(
+    return AllTaskCountModel(
+      all: all.length,
       inProgress: inProgress.length,
       complete: complete.length,
       canceled: canceled.length,

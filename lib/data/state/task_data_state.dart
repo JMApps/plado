@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../../domain/entities/task_entity.dart';
 import '../../domain/usecases/task_use_case.dart';
+import '../models/all_task_count_model.dart';
 import '../models/task_count_model.dart';
 import '../repositories/task_data_repository.dart';
 
@@ -26,10 +27,10 @@ class TaskDataState extends ChangeNotifier {
     return taskCountModel;
   }
 
-  Future<TaskCountModel> getAllTasksNumber() async {
-    final TaskCountModel taskCountModel = await _taskUseCase.getAllTasksNumber();
+  Future<AllTaskCountModel> getAllTasksNumber() async {
+    final AllTaskCountModel allTaskCountModel = await _taskUseCase.getAllTasksNumber();
     notifyListeners();
-    return taskCountModel;
+    return allTaskCountModel;
   }
 
   Future<int> createTask({required Map<String, dynamic> taskMap}) async {

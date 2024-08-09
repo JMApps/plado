@@ -50,6 +50,7 @@ class AppStrings {
 
   static const String tasks = 'Задачи';
   static const String tasksNumber = 'Количество задач';
+  static const String tasksIsEmpty = 'Вы пока что не добавляли ни одну задачу';
   static const String habits = 'Привычки';
   static const String graphics = 'Графики';
   static const String settings = 'Настройки';
@@ -71,6 +72,7 @@ class AppStrings {
   static const String descriptionHabit = 'Описание привычки';
 
   static const String added = 'Добавлено:';
+  static const String errorGetData = 'Ошибка при получении данных, попробуйте позже';
   static const String remaining = 'Осталось:';
   static const String start = 'Начало:';
   static const String end = 'Конец:';

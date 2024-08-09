@@ -1,4 +1,5 @@
 
+import '../../data/models/all_task_count_model.dart';
 import '../../data/models/task_count_model.dart';
 import '../entities/task_entity.dart';
 import '../repositories/task_repository.dart';
@@ -20,7 +21,7 @@ class TaskUseCase {
     return await _taskRepository.getTasksByMode(taskPeriodIndex: taskPeriodIndex, startTime: startTime, endTime: endTime, orderBy: orderBy);
   }
 
-  Future<TaskCountModel> getAllTasksNumber() async {
+  Future<AllTaskCountModel> getAllTasksNumber() async {
     return await _taskRepository.getAllTasksNumber();
   }
 

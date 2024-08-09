@@ -1,3 +1,4 @@
+import '../../data/models/all_task_count_model.dart';
 import '../../data/models/task_count_model.dart';
 import '../entities/task_entity.dart';
 
@@ -10,7 +11,7 @@ abstract class TaskRepository {
 
   Future<TaskCountModel> getTasksNumber({required int taskPeriodIndex});
 
-  Future<TaskCountModel> getAllTasksNumber();
+  Future<AllTaskCountModel> getAllTasksNumber();
 
   Future<int> createTask({required Map<String, dynamic> taskMap});
 
