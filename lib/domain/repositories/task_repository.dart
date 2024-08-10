@@ -9,6 +9,8 @@ abstract class TaskRepository {
 
   Future<List<TaskEntity>> getTasksByMode({required int taskPeriodIndex, required String startTime, required String endTime, required String orderBy});
 
+  Future<List<TaskEntity>> getTasksByStatus({required int statusIndex});
+
   Future<TaskCountModel> getTasksNumber({required int taskPeriodIndex});
 
   Future<AllTaskCountModel> getAllTasksNumber();

@@ -43,6 +43,14 @@ class TaskDataRepository implements TaskRepository {
   }
 
   @override
+  Future<List<TaskEntity>> getTasksByStatus({required int statusIndex}) async {
+    final Database database = await _pladoDatabaseService.db;
+    final List<Map<String, Object?>> resources = statusIndex <= 2 ? await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskStatusIndex} = ?', whereArgs: [statusIndex]) : await database.query(DatabaseValues.dbTaskTableName);
+    final List<TaskEntity> tasksByMode = resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
+    return tasksByMode;
+  }
+
+  @override
   Future<TaskCountModel> getTasksNumber({required int taskPeriodIndex}) async {
     final Database database = await _pladoDatabaseService.db;
 

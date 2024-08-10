@@ -21,6 +21,10 @@ class TaskDataState extends ChangeNotifier {
     return await _taskUseCase.getTasksByMode(taskPeriodIndex: taskPeriodIndex, startTime: startTime, endTime: endTime, orderBy: orderBy);
   }
 
+  Future<List<TaskEntity>> getTaskByStatus({required int statusIndex}) async {
+    return await _taskUseCase.getTaskByStatus(statusIndex: statusIndex);
+  }
+
   Future<TaskCountModel> getTasksNumber({required int taskPeriodIndex}) async {
     final TaskCountModel taskCountModel = await _taskUseCase.getTasksNumber(taskPeriodIndex: taskPeriodIndex);
     notifyListeners();

@@ -21,6 +21,10 @@ class TaskUseCase {
     return await _taskRepository.getTasksByMode(taskPeriodIndex: taskPeriodIndex, startTime: startTime, endTime: endTime, orderBy: orderBy);
   }
 
+  Future<List<TaskEntity>> getTaskByStatus({required int statusIndex}) async {
+    return await _taskRepository.getTasksByStatus(statusIndex: statusIndex);
+  }
+
   Future<AllTaskCountModel> getAllTasksNumber() async {
     return await _taskRepository.getAllTasksNumber();
   }
