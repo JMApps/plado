@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 
 import '../../data/models/arguments/create_task_args.dart';
+import '../../data/models/arguments/graphic_task_args.dart';
 import '../../data/models/arguments/habit_model_args.dart';
 import '../../data/models/arguments/task_model_args.dart';
+import '../../presentation/graphic/pages/graphic_list_page.dart';
 import '../../presentation/habit/pages/create_habit_page.dart';
 import '../../presentation/habit/pages/habit_detail_page.dart';
 import '../../presentation/habit/pages/update_habit_page.dart';
@@ -38,6 +40,11 @@ class MaterialRoutes {
         final HabitModelArgs habitModelArgs = routeSettings.arguments as HabitModelArgs;
         return MaterialPageRoute(
           builder: (_) => HabitDetailPage(habitModel: habitModelArgs.habitModel),
+        );
+      case NameRoutes.graphicListPage:
+        final GraphicTaskArgs graphicTaskArgs = routeSettings.arguments as GraphicTaskArgs;
+        return MaterialPageRoute(
+          builder: (_) => GraphicListPage(graphicTaskArgs: graphicTaskArgs),
         );
       default:
         throw Exception('${AppExceptionMessages.invalidRouteException} ${routeSettings.name}');
