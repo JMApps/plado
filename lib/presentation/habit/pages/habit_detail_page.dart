@@ -101,7 +101,7 @@ class _HabitDetailPageState extends State<HabitDetailPage> {
                   child: DateTimeItem(
                     description: AppStrings.start,
                     dateTime: widget.habitModel.startDateTime,
-                    dateFormat: AppConstraints.standardTimeFormat,
+                    dateFormat: AppConstraints.dateFormat,
                   ),
                 ),
                 progressColor: habitColor,
@@ -134,7 +134,7 @@ class _HabitDetailPageState extends State<HabitDetailPage> {
                   child: DateTimeItem(
                     description: AppStrings.end,
                     dateTime: widget.habitModel.endDateTime,
-                    dateFormat: AppConstraints.standardTimeFormat,
+                    dateFormat: AppConstraints.dateFormat,
                   ),
                 ),
                 progressColor: habitColor,
