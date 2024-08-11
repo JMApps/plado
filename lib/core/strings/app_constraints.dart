@@ -20,5 +20,6 @@ class AppConstraints {
   static const String ascSort = 'ASC';
   static const String descSort = 'DESC';
 
-  static const String standardTimeFormat = 'dd.MM.yyyy';
+  static const String dateFormat = 'dd.MM.yyyy';
+  static const String dateTimeFormat = 'dd.MM.yyyy HH.mm';
 }

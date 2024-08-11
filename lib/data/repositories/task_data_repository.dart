@@ -35,7 +35,7 @@ class TaskDataRepository implements TaskRepository {
       DatabaseValues.dbTaskStatusIndex: 2,
       DatabaseValues.dbTaskCompleteDateTime: endTime,
     };
-    await database.update(DatabaseValues.dbTaskTableName, taskStatusMap, where: '${DatabaseValues.dbTaskPeriodIndex} = ? AND ${DatabaseValues.dbTaskEndDateTime} < ?', whereArgs: [endTime, taskPeriodIndex]);
+    await database.update(DatabaseValues.dbTaskTableName, taskStatusMap, where: '${DatabaseValues.dbTaskPeriodIndex} = ? AND ${DatabaseValues.dbTaskEndDateTime} < ?', whereArgs: [taskPeriodIndex, endTime]);
 
     final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskPeriodIndex} = ? AND ${DatabaseValues.dbTaskStartDateTime} = ? AND ${DatabaseValues.dbTaskEndDateTime} = ?', whereArgs: [taskPeriodIndex, startTime, endTime], orderBy: 'CASE WHEN ${DatabaseValues.dbTaskStatusIndex} = 1 THEN 1 ELSE 0 END, $orderBy');
     final List<TaskEntity> tasksByMode = resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
@@ -85,7 +85,7 @@ class TaskDataRepository implements TaskRepository {
     final Database database = await _pladoDatabaseService.db;
 
     final List<Map<String, Object?>> all = await database.query(
-      DatabaseValues.dbTaskTableName
+      DatabaseValues.dbTaskTableName,
     );
 
     final List<Map<String, Object?>> inProgress = await database.query(

@@ -50,7 +50,7 @@ class AppStrings {
 
   static const String tasks = 'Задачи';
   static const String tasksNumber = 'Количество задач';
-  static const String tasksIsEmpty = 'Вы пока что не добавляли ни одну задачу';
+  static const String tasksIsEmpty = 'Список задач пуст';
   static const String habits = 'Привычки';
   static const String graphics = 'Графики';
   static const String settings = 'Настройки';
@@ -89,6 +89,11 @@ class AppStrings {
   static const String cancel = 'Отмена';
   static const String selectCorrectDateTime = 'Выберите корректную дату и время';
   static const String selectCorrectTime = 'Выберите корректное время';
+
+  static const String inProgress = 'В процессе';
+  static const String complete = 'Завершено';
+  static const String canceled = 'Не завершено';
+  static const String allTasks = 'Все задачи';
 
   static const String enterTaskTitle = 'Введите название задачи';
   static const String enterHabitTitle = 'Введите название привычки';
