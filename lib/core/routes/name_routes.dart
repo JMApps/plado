@@ -7,5 +7,5 @@ class NameRoutes {
   static const String updateHabitPage = '/update_habit_page';
   static const String habitDetailPage = '/habit_detail_page';
 
-  static const String graphicListPage = '/graphic_list_page';
+  static const String statisticListPage = '/statistic_list_page';
 }

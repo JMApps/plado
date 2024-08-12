@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:plado/core/enums/habit_period.dart';
 
 import '../../presentation/pages/about_us_page.dart';
-import '../../presentation/pages/graphics_page.dart';
 import '../../presentation/habit/pages/habits_page.dart';
 import '../../presentation/pages/settings_page.dart';
+import '../../presentation/pages/statistic_page.dart';
 import '../../presentation/task/pages/tasks_page.dart';
+import '../enums/habit_period.dart';
 import '../enums/task_period.dart';
 import '../enums/task_priority.dart';
 import '../enums/task_status.dart';
@@ -51,7 +51,7 @@ class AppStyles {
   static const mainPages = <Widget>[
     TasksPage(),
     HabitsPage(),
-    GraphicsPage(),
+    StatisticPage(),
     SettingsPage(),
     AboutUsPage(),
   ];

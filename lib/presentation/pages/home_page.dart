@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
           ),
           SalomonBottomBarItem(
             icon: const Icon(Icons.auto_graph),
-            title: const MainBottomItemText(itemText: AppStrings.graphics),
+            title: const MainBottomItemText(itemText: AppStrings.statistics),
           ),
           SalomonBottomBarItem(
             icon: const Icon(Icons.settings),

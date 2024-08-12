@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../../data/models/arguments/graphic_task_args.dart';
-import '../lists/graphic_tasks_list.dart';
+import '../lists/static_tasks_list.dart';
 
-class GraphicListPage extends StatelessWidget {
-  const GraphicListPage({
+class StatisticListPage extends StatelessWidget {
+  const StatisticListPage({
     super.key,
     required this.graphicTaskArgs,
   });
@@ -17,7 +17,7 @@ class GraphicListPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(graphicTaskArgs.title),
       ),
-      body: GraphicTasksList(taskStatusIndex: graphicTaskArgs.taskStatusIndex),
+      body: StaticTasksList(taskStatusIndex: graphicTaskArgs.taskStatusIndex),
     );
   }
 }

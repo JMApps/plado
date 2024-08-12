@@ -7,10 +7,10 @@ import '../../../data/state/task_data_state.dart';
 import '../../../domain/entities/task_entity.dart';
 import '../../widgets/main_error_text.dart';
 import '../../widgets/time_is_empty.dart';
-import '../items/graphic_task_item.dart';
+import '../items/static_task_item.dart';
 
-class GraphicTasksList extends StatelessWidget {
-  const GraphicTasksList({
+class StaticTasksList extends StatelessWidget {
+  const StaticTasksList({
     super.key,
     required this.taskStatusIndex,
   });

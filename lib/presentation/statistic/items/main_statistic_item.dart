@@ -6,10 +6,10 @@ import '../../../core/styles/app_styles.dart';
 import '../../../data/models/all_task_count_model.dart';
 import '../../../data/state/task_data_state.dart';
 import '../../widgets/main_error_text.dart';
-import 'graphic_item.dart';
+import 'statistic_item.dart';
 
-class MainGraphicItem extends StatelessWidget {
-  const MainGraphicItem({super.key});
+class MainStatisticItem extends StatelessWidget {
+  const MainStatisticItem({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,25 +27,25 @@ class MainGraphicItem extends StatelessWidget {
                 GraphicItem(
                   taskStatusIndex: 3,
                   taskStatus: allTaskCountModel.all,
-                  title: 'Все задачи',
+                  title: AppStrings.allTasks,
                   color: appColors.inversePrimary,
                 ),
                 GraphicItem(
                   taskStatusIndex: 0,
                   taskStatus: allTaskCountModel.inProgress,
-                  title: 'Задачи в процессе',
+                  title: AppStrings.inProgress,
                   color: appColors.secondaryContainer,
                 ),
                 GraphicItem(
                   taskStatusIndex: 1,
                   taskStatus: allTaskCountModel.complete,
-                  title: 'Завершенные задачи',
+                  title: AppStrings.completed,
                   color: appColors.tertiaryContainer,
                 ),
                 GraphicItem(
                   taskStatusIndex: 2,
                   taskStatus: allTaskCountModel.canceled,
-                  title: 'Незавершенные задачи',
+                  title: AppStrings.canceled,
                   color: appColors.errorContainer,
                 ),
               ],

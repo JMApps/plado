@@ -27,7 +27,7 @@ class GraphicItem extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(
           context,
-          NameRoutes.graphicListPage,
+          NameRoutes.statisticListPage,
           arguments: GraphicTaskArgs(
             taskStatusIndex: taskStatusIndex,
             title: title,
