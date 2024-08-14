@@ -101,4 +101,8 @@ class AppStrings {
   static const String shortDay = 'д.';
   static const String shortHour = 'ч.';
   static const String shortMinute = 'м.';
+
+  static const String lightTheme = 'Светлая';
+  static const String darkTheme = 'Темная';
+  static const String systemTheme = 'Системная';
 }
