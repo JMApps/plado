@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:plado/presentation/state/settings_state.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/enums/app_theme.dart';
 import '../../core/strings/app_strings.dart';
 import '../../core/styles/app_styles.dart';
+import '../state/settings_state.dart';
 import '../widgets/description_text.dart';
 
 class SettingsPage extends StatelessWidget {

@@ -105,4 +105,13 @@ class AppStrings {
   static const String lightTheme = 'Светлая';
   static const String darkTheme = 'Темная';
   static const String systemTheme = 'Системная';
+
+  static const String otherApplications = 'Другие приложения';
+  static const String weInSocials = 'Мы в соцсетях';
+  static const String rateApplication = 'Оценить приложение';
+  static const String version = 'Версия';
+  static const String googlePlay = 'Google Play';
+  static const String appStore = 'App Store';
+  static const String telegram = 'Telegram';
+  static const String instagram = 'Instagram';
 }
