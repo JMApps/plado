@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../core/enums/habit_period.dart';
+import '../../../core/enums/habit_period.dart';
 
 class CreateHabitState extends ChangeNotifier {
 
