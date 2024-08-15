@@ -33,6 +33,13 @@ class NotificationService {
     tz.initializeTimeZones();
   }
 
+  Future<void> scheduleDailyNotifications(DateTime startDate, String title, String body, int notificationId, int daysCount) async {
+    for (int i = 0; i < daysCount; i++) {
+      DateTime notificationDate = startDate.add(Duration(days: i));
+      await scheduleNotifications(notificationDate, title, body, notificationId + i);
+    }
+  }
+
   Future<void> scheduleNotifications(DateTime date, String title, String body, int notificationId) async {
     var tzDateNotification = tz.TZDateTime.from(date, tz.local);
     await _flutterLocalNotificationsPlugin.zonedSchedule(
@@ -48,13 +55,6 @@ class NotificationService {
       uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
       matchDateTimeComponents: DateTimeComponents.time,
     );
-  }
-
-  Future<void> scheduleDailyNotifications(DateTime startDate, String title, String body, int notificationId, int daysCount) async {
-    for (int i = 0; i < daysCount; i++) {
-      DateTime notificationDate = startDate.add(Duration(days: i));
-      await scheduleNotifications(notificationDate, title, body, notificationId + i);
-    }
   }
 
   Future<void> cancelNotificationWithId(int id) async {

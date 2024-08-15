@@ -12,6 +12,7 @@ class AboutUsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isThemeLight = Theme.of(context).brightness == Brightness.light ? true : false;
+    final double iconOpacity = isThemeLight ? 1 : 0.75;
     final appColors = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
@@ -31,7 +32,7 @@ class AboutUsPage extends StatelessWidget {
                 Platform.isAndroid ? 'assets/icons/google-play.png' : 'assets/icons/appstore.png',
                 width: 35,
                 height: 35,
-                opacity: AlwaysStoppedAnimation(isThemeLight ? 1 : 0.5),
+                opacity: AlwaysStoppedAnimation(iconOpacity),
               ),
               trailing: const Icon(Icons.arrow_forward_ios_rounded),
             ),
@@ -44,7 +45,7 @@ class AboutUsPage extends StatelessWidget {
                 'assets/icons/telegram.png',
                 width: 35,
                 height: 35,
-                opacity: AlwaysStoppedAnimation(isThemeLight ? 1 : 0.5),
+                opacity: AlwaysStoppedAnimation(iconOpacity),
               ),
               trailing: const Icon(Icons.arrow_forward_ios_rounded),
             ),
@@ -56,7 +57,7 @@ class AboutUsPage extends StatelessWidget {
                 'assets/icons/instagram.png',
                 width: 35,
                 height: 35,
-                opacity: AlwaysStoppedAnimation(isThemeLight ? 1 : 0.5),
+                opacity: AlwaysStoppedAnimation(iconOpacity),
               ),
               trailing: const Icon(Icons.arrow_forward_ios_rounded),
             ),
@@ -65,7 +66,7 @@ class AboutUsPage extends StatelessWidget {
               onTap: () {},
               shape: AppStyles.shape,
               title: const Text(AppStrings.rate),
-              leading: Icon(Icons.star_half_rounded, color: appColors.primary),
+              leading: Icon(Icons.star_half_rounded, color: appColors.primary, size: 35,),
               trailing: const Icon(Icons.arrow_forward_ios_rounded),
             ),
             const DescriptionText(text: AppStrings.version),

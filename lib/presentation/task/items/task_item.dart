@@ -29,6 +29,7 @@ class TaskItem extends StatelessWidget {
     return Card(
       elevation: 0,
       margin: AppStyles.paddingBottomMini,
+      color: AppStyles.priorityColors[taskModel.taskPriorityIndex].withOpacity(0.075),
       child: ListTile(
         onTap: !statusTask ? () {
           Navigator.pushNamed(
