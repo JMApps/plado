@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:plado/core/styles/app_styles.dart';
 
+import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/task_entity.dart';
+import '../widgets/task_static_detail.dart';
 
 class GraphicTaskItem extends StatelessWidget {
   const GraphicTaskItem({
@@ -16,10 +17,16 @@ class GraphicTaskItem extends StatelessWidget {
     return Card(
       elevation: 0,
       child: ListTile(
-        onTap: () {},
+        onTap: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (_) => TaskStaticDetail(taskModel: taskModel),
+          );
+        },
         shape: AppStyles.shape,
         title: Text(taskModel.taskTitle),
-        trailing: _taskStatusIcon(taskModel.taskStatusIndex),
+        leading: _taskStatusIcon(taskModel.taskStatusIndex),
+        trailing: const Icon(Icons.arrow_forward_ios_rounded),
       ),
     );
   }
