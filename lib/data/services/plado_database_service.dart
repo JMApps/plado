@@ -72,5 +72,26 @@ class PladoDatabaseService {
         ${DatabaseValues.dbHabitNotificationDate} TEXT
         );
     ''');
+
+    await db.execute('''
+      CREATE TABLE ${DatabaseValues.dbSettingTableName} (
+        ${DatabaseValues.dbSettingId} INTEGER PRIMARY KEY AUTOINCREMENT,
+        ${DatabaseValues.dbSortTaskIndex} INTEGER,
+        ${DatabaseValues.dbSortOrderTaskIndex} INTEGER,
+        ${DatabaseValues.dbSortHabitIndex} INTEGER,
+        ${DatabaseValues.dbSortOrderHabitIndex} INTEGER,
+        ${DatabaseValues.dbAppThemeIndex} INTEGER,
+        ${DatabaseValues.dbAlwaysDisplayIndex} INTEGER
+        );
+    ''');
+
+    await db.insert(DatabaseValues.dbSettingTableName, {
+      DatabaseValues.dbSortTaskIndex: 0,
+      DatabaseValues.dbSortOrderTaskIndex: 0,
+      DatabaseValues.dbSortHabitIndex: 0,
+      DatabaseValues.dbSortOrderHabitIndex: 0,
+      DatabaseValues.dbAppThemeIndex: 2,
+      DatabaseValues.dbAlwaysDisplayIndex: 1,
+    });
   }
 }

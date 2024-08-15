@@ -2,13 +2,26 @@ import 'package:flutter/material.dart';
 
 import '../../../core/strings/app_constraints.dart';
 import '../../../core/strings/database_values.dart';
+import '../../../data/repositories/setting_data_repository.dart';
+import '../../../domain/usecases/setting_use_case.dart';
 
 class TaskSortState extends ChangeNotifier {
-  int _sortIndex = 0;
+  final SettingUseCase _settingUseCase = SettingUseCase(SettingDataRepository());
+
+  TaskSortState() {
+    loadSettings();
+  }
+
+  Future<void> loadSettings() async {
+    _sortIndex = await _settingUseCase.getSettingIndex(columnName: DatabaseValues.dbSortTaskIndex);
+    _orderIndex = await _settingUseCase.getSettingIndex(columnName: DatabaseValues.dbSortOrderTaskIndex);
+  }
+
+  late int _sortIndex;
 
   int get getSortIndex => _sortIndex;
 
-  String _sort = 'task_id';
+  String _sort = DatabaseValues.dbTaskId;
 
   String get getSort => _sort;
 
@@ -30,11 +43,11 @@ class TaskSortState extends ChangeNotifier {
       default:
         _sort = DatabaseValues.dbTaskId;
     }
-    // Save index value
+    _saveSortValue(DatabaseValues.dbSortTaskIndex, _sortIndex);
     notifyListeners();
   }
 
-  int _orderIndex = 0;
+  late int _orderIndex;
 
   int get getOrderIndex => _orderIndex;
 
@@ -54,7 +67,11 @@ class TaskSortState extends ChangeNotifier {
       default:
         _order = AppConstraints.descSort;
     }
-    // Save index value
+    _saveSortValue(DatabaseValues.dbSortOrderTaskIndex, _orderIndex);
     notifyListeners();
+  }
+
+  Future<void> _saveSortValue(String columnName, int settingIndex) async {
+    await _settingUseCase.saveSettingIndex(columnName: columnName, settingIndex: settingIndex);
   }
 }

@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../core/enums/app_theme.dart';
 import '../../core/strings/app_strings.dart';
 import '../../core/styles/app_styles.dart';
-import '../state/settings_state.dart';
+import '../../data/state/setting_data_state.dart';
 import '../widgets/description_text.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -18,8 +18,8 @@ class SettingsPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         padding: AppStyles.paddingMini,
-        child: Consumer<SettingsState>(
-          builder: (context, settingsPage, _) {
+        child: Consumer<SettingDataState>(
+          builder: (context, settingDataState, _) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -43,9 +43,9 @@ class SettingsPage extends StatelessWidget {
                       tooltip: AppStrings.systemTheme,
                     ),
                   ],
-                  selected: {settingsPage.getThemeIndex},
+                  selected: {settingDataState.getThemeIndex},
                   onSelectionChanged: (newIndex) {
-                    settingsPage.setThemeIndex = newIndex.first;
+                    settingDataState.setThemeIndex = newIndex.first;
                   },
                 ),
                 const SizedBox(height: 8),
@@ -55,9 +55,9 @@ class SettingsPage extends StatelessWidget {
                   title: const Text('Дисплей всегда включен'),
                   leading: const Icon(Icons.lightbulb_outline_rounded),
                   trailing: Switch(
-                    value: settingsPage.getAlwaysOnDisplay,
+                    value: settingDataState.getAlwaysOnDisplay,
                     onChanged: (bool onChanged) {
-                      settingsPage.setAlwaysOnDisplay = onChanged;
+                      settingDataState.setAlwaysOnDisplay = onChanged;
                     },
                   ),
                 ),

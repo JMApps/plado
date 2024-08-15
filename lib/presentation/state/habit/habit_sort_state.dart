@@ -2,9 +2,22 @@ import 'package:flutter/material.dart';
 
 import '../../../core/strings/app_constraints.dart';
 import '../../../core/strings/database_values.dart';
+import '../../../data/repositories/setting_data_repository.dart';
+import '../../../domain/usecases/setting_use_case.dart';
 
 class HabitSortState extends ChangeNotifier {
-  int _sortIndex = 0;
+  final SettingUseCase _settingUseCase = SettingUseCase(SettingDataRepository());
+
+  HabitSortState() {
+    loadSettings();
+  }
+
+  Future<void> loadSettings() async {
+    _sortIndex = await _settingUseCase.getSettingIndex(columnName: DatabaseValues.dbSortHabitIndex);
+    _orderIndex = await _settingUseCase.getSettingIndex(columnName: DatabaseValues.dbSortOrderHabitIndex);
+  }
+
+  late int _sortIndex;
 
   int get getSortIndex => _sortIndex;
 
@@ -25,11 +38,11 @@ class HabitSortState extends ChangeNotifier {
         _sort = DatabaseValues.dbHabitColorIndex;
         break;
     }
-    // Save index value
+    _saveSortValue(DatabaseValues.dbSortHabitIndex, _sortIndex);
     notifyListeners();
   }
 
-  int _orderIndex = 0;
+  late int _orderIndex;
 
   int get getOrderIndex => _orderIndex;
 
@@ -49,7 +62,11 @@ class HabitSortState extends ChangeNotifier {
       default:
         _order = AppConstraints.descSort;
     }
-    // Save index value
+    _saveSortValue(DatabaseValues.dbSortOrderHabitIndex, _orderIndex);
     notifyListeners();
+  }
+
+  Future<void> _saveSortValue(String columnName, int settingIndex) async {
+    await _settingUseCase.saveSettingIndex(columnName: columnName, settingIndex: settingIndex);
   }
 }

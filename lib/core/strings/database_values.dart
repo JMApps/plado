@@ -27,4 +27,14 @@ class DatabaseValues {
   static const String dbHabitCompletedDays = 'completed_days';
   static const String dbHabitNotificationId = 'notification_id';
   static const String dbHabitNotificationDate = 'notification_date';
+
+  static const String dbSettingTableName = 'Table_of_settings';
+
+  static const String dbSettingId = 'setting_id';
+  static const String dbSortTaskIndex = 'sort_task_index';
+  static const String dbSortOrderTaskIndex = 'sort_order_task_index';
+  static const String dbSortHabitIndex = 'sort_habit_index';
+  static const String dbSortOrderHabitIndex = 'sort_order_habit_index';
+  static const String dbAppThemeIndex = 'app_theme_index';
+  static const String dbAlwaysDisplayIndex = 'always_display_index';
 }
