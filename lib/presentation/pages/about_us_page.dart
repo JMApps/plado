@@ -64,8 +64,8 @@ class AboutUsPage extends StatelessWidget {
             ListTile(
               onTap: () {},
               shape: AppStyles.shape,
-              title: const Text(AppStrings.appName),
-              leading: Icon(Icons.star, color: appColors.primary),
+              title: const Text(AppStrings.rate),
+              leading: Icon(Icons.star_half_rounded, color: appColors.primary),
               trailing: const Icon(Icons.arrow_forward_ios_rounded),
             ),
             const DescriptionText(text: AppStrings.version),

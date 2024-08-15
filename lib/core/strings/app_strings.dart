@@ -109,6 +109,7 @@ class AppStrings {
   static const String otherApplications = 'Другие приложения';
   static const String weInSocials = 'Мы в соцсетях';
   static const String rateApplication = 'Оценить приложение';
+  static const String rate = 'Оценить';
   static const String version = 'Версия';
   static const String googlePlay = 'Google Play';
   static const String appStore = 'App Store';
