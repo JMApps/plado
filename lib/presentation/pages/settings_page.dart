@@ -23,6 +23,7 @@ class SettingsPage extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                const Divider(indent: 16, endIndent: 16),
                 const DescriptionText(text: 'Тема'),
                 SegmentedButton(
                   showSelectedIcon: true,
@@ -49,6 +50,7 @@ class SettingsPage extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 8),
+                const Divider(indent: 16, endIndent: 16),
                 const DescriptionText(text: 'Дисплей'),
                 ListTile(
                   visualDensity: VisualDensity.compact,
@@ -61,6 +63,7 @@ class SettingsPage extends StatelessWidget {
                     },
                   ),
                 ),
+                const Divider(indent: 16, endIndent: 16),
               ],
             );
           },

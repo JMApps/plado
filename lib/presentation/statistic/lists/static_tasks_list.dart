@@ -24,9 +24,12 @@ class StaticTasksList extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData && snapshot.data!.isNotEmpty) {
           return Scrollbar(
-            child: ListView.builder(
+            child: ListView.separated(
               padding: AppStyles.paddingMini,
               itemCount: snapshot.data!.length,
+              separatorBuilder: (context, index) {
+                return const Divider(indent: 16, endIndent: 16);
+              },
               itemBuilder: (context, index) {
                 final TaskEntity taskModel = snapshot.data![index];
                 return GraphicTaskItem(taskModel: taskModel);

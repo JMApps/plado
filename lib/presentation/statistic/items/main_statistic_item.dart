@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plado/presentation/widgets/description_text.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/strings/app_strings.dart';
@@ -24,30 +25,35 @@ class MainStatisticItem extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                const DescriptionText(text: AppStrings.tasks),
                 GraphicItem(
                   taskStatusIndex: 3,
                   taskStatus: allTaskCountModel.all,
                   title: AppStrings.allTasks,
                   color: appColors.inversePrimary,
                 ),
+                const Divider(indent: 16, endIndent: 16),
                 GraphicItem(
                   taskStatusIndex: 0,
                   taskStatus: allTaskCountModel.inProgress,
                   title: AppStrings.inProgress,
                   color: appColors.secondaryContainer,
                 ),
+                const Divider(indent: 16, endIndent: 16),
                 GraphicItem(
                   taskStatusIndex: 1,
                   taskStatus: allTaskCountModel.complete,
                   title: AppStrings.completed,
                   color: appColors.tertiaryContainer,
                 ),
+                const Divider(indent: 16, endIndent: 16),
                 GraphicItem(
                   taskStatusIndex: 2,
                   taskStatus: allTaskCountModel.canceled,
                   title: AppStrings.canceled,
                   color: appColors.errorContainer,
                 ),
+                const DescriptionText(text: AppStrings.habits),
               ],
             );
           } else if (snapshot.hasError) {
