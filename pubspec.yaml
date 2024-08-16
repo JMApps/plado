@@ -24,6 +24,7 @@ dependencies:
   timeago: ^3.7.0
   wakelock_plus: ^1.2.8
   url_launcher: ^6.3.0
+  share_plus: ^10.0.2
 
   # State management
   provider: ^6.1.2

@@ -1,4 +1,7 @@
 class AppConstraints {
+  static const String appLinkIOS = 'https://apps.apple.com/app/словарь-pro/id6478140812';
+  static const String appLinkAndroid = 'https://play.google.com/store/apps/details?id=jmapps.project.plado';
+
   static const String taskStartDateTime = 'task_start_date_time';
   static const String taskRemaininDateTime = 'task_remaining_date_time';
   static const String taskElapsedPercentage = 'task_elapsed_percentage';

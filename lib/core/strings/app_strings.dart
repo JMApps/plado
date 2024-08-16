@@ -1,5 +1,6 @@
 class AppStrings {
   static const String appName = 'PlaDo';
+  static const String fullAppName = 'Planner TODO – планируй и действуй!';
 
   static const String sortTasks = 'Сортировка задач';
   static const String sortHabits = 'Сортировка привычек';
@@ -115,4 +116,7 @@ class AppStrings {
   static const String appStore = 'App Store';
   static const String telegram = 'Telegram';
   static const String instagram = 'Instagram';
+  static const String share = 'Поделиться';
+  static const String iOSVersion = 'Версия iOS:';
+  static const String androidVersion = 'Версия Android:';
 }
