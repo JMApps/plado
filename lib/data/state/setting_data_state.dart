@@ -11,6 +11,7 @@ class SettingDataState extends ChangeNotifier {
   Future<void> loadSettings() async {
     _themeIndex = await _settingUseCase.getSettingIndex(columnName: DatabaseValues.dbAppThemeIndex);
     _alwaysOnDisplay = await _settingUseCase.getSettingIndex(columnName: DatabaseValues.dbAlwaysDisplayIndex) == 1;
+    _colorThemeIndex = await _settingUseCase.getSettingIndex(columnName: DatabaseValues.dbColorThemeIndex);
     _updateWakelock();
   }
 
@@ -45,6 +46,16 @@ class SettingDataState extends ChangeNotifier {
     _alwaysOnDisplay = value;
     _saveSettingIndex(DatabaseValues.dbAlwaysDisplayIndex, value ? 1 : 0);
     _updateWakelock();
+    notifyListeners();
+  }
+
+  late int _colorThemeIndex;
+
+  int get getColorThemeIndex => _colorThemeIndex;
+
+  set setColorThemeIndex(int colorIndex) {
+    _colorThemeIndex = colorIndex;
+    _saveSettingIndex(DatabaseValues.dbColorThemeIndex, colorIndex);
     notifyListeners();
   }
 

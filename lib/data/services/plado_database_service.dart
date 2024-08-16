@@ -81,7 +81,8 @@ class PladoDatabaseService {
         ${DatabaseValues.dbSortHabitIndex} INTEGER,
         ${DatabaseValues.dbSortOrderHabitIndex} INTEGER,
         ${DatabaseValues.dbAppThemeIndex} INTEGER,
-        ${DatabaseValues.dbAlwaysDisplayIndex} INTEGER
+        ${DatabaseValues.dbAlwaysDisplayIndex} INTEGER,
+        ${DatabaseValues.dbColorThemeIndex} INTEGER
         );
     ''');
 
@@ -92,6 +93,7 @@ class PladoDatabaseService {
       DatabaseValues.dbSortOrderHabitIndex: 0,
       DatabaseValues.dbAppThemeIndex: 2,
       DatabaseValues.dbAlwaysDisplayIndex: 1,
+      DatabaseValues.dbColorThemeIndex: 0,
     });
   }
 }

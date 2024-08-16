@@ -23,7 +23,6 @@ class SettingsPage extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Divider(indent: 16, endIndent: 16),
                 const DescriptionText(text: 'Тема'),
                 SegmentedButton(
                   showSelectedIcon: true,
@@ -49,8 +48,30 @@ class SettingsPage extends StatelessWidget {
                     settingDataState.setThemeIndex = newIndex.first;
                   },
                 ),
+                const DescriptionText(text: 'Цвет темы'),
                 const SizedBox(height: 8),
-                const Divider(indent: 16, endIndent: 16),
+                GridView.builder(
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: 10,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 10,
+                    crossAxisSpacing: 8,
+                  ),
+                  itemBuilder: (BuildContext context, int index) {
+                    return GestureDetector(
+                      onTap: () {
+                        settingDataState.setColorThemeIndex = index;
+                      },
+                      child: CircleAvatar(
+                        backgroundColor: AppStyles.taskHabitColors[index].withOpacity(Theme.of(context).brightness == Brightness.light ? 1 : 0.5),
+                        child: settingDataState.getColorThemeIndex == index ? const Icon(Icons.check_rounded, color: Colors.black) : const SizedBox(),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 8),
                 const DescriptionText(text: 'Дисплей'),
                 ListTile(
                   visualDensity: VisualDensity.compact,
@@ -63,7 +84,6 @@ class SettingsPage extends StatelessWidget {
                     },
                   ),
                 ),
-                const Divider(indent: 16, endIndent: 16),
               ],
             );
           },

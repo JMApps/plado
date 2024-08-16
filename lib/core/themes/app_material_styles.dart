@@ -4,11 +4,16 @@ import '../strings/app_constraints.dart';
 import '../styles/app_styles.dart';
 
 class AppMaterialStyles {
-  static ThemeData lightTheme = ThemeData(
+
+  final int themeColorIndex;
+
+  AppMaterialStyles({required this.themeColorIndex});
+
+  ThemeData get lightTheme => ThemeData(
     fontFamily: AppConstraints.fontRaleway,
     colorScheme: ColorScheme.fromSeed(
       brightness: Brightness.light,
-      seedColor: Colors.orange,
+      seedColor: AppStyles.taskHabitColors[themeColorIndex],
     ),
     appBarTheme: const AppBarTheme(
       centerTitle: true,
@@ -30,11 +35,11 @@ class AppMaterialStyles {
     ),
   );
 
-  static ThemeData darkTheme = ThemeData(
+  ThemeData get darkTheme => ThemeData(
     fontFamily: AppConstraints.fontRaleway,
     colorScheme: ColorScheme.fromSeed(
       brightness: Brightness.dark,
-      seedColor: Colors.orange,
+      seedColor: AppStyles.taskHabitColors[themeColorIndex],
     ),
     appBarTheme: const AppBarTheme(
       centerTitle: true,

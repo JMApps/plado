@@ -12,13 +12,15 @@ class RootMaterialPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final settingDataState = Provider.of<SettingDataState>(context);
+    final AppMaterialStyles appMaterialStyles = AppMaterialStyles(themeColorIndex: settingDataState.getColorThemeIndex);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: AppStrings.appName,
       locale: const Locale('ru'),
-      theme: AppMaterialStyles.lightTheme,
-      darkTheme: AppMaterialStyles.darkTheme,
-      themeMode: Provider.of<SettingDataState>(context).getThemeMode,
+      theme: appMaterialStyles.lightTheme,
+      darkTheme: appMaterialStyles.darkTheme,
+      themeMode: settingDataState.getThemeMode,
       onGenerateRoute: MaterialRoutes.onGenerateRoute,
       home: const HomePage(),
     );
