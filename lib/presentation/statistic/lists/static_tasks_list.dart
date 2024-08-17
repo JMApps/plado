@@ -32,7 +32,7 @@ class StaticTasksList extends StatelessWidget {
               },
               itemBuilder: (context, index) {
                 final TaskEntity taskModel = snapshot.data![index];
-                return GraphicTaskItem(taskModel: taskModel);
+                return StaticTaskItem(taskModel: taskModel);
               },
             ),
           );

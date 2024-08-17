@@ -25,76 +25,88 @@ class SettingsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text(AppStrings.settings),
       ),
-      body: SingleChildScrollView(
-        padding: AppStyles.paddingMini,
-        child: Consumer<SettingDataState>(
-          builder: (context, settingDataState, _) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const DescriptionText(text: AppStrings.theme),
-                const AppThemeSegment(),
-                const SizedBox(height: 8),
-                const Divider(indent: 16, endIndent: 16),
-                const DescriptionText(text: AppStrings.themeColor),
-                const ColorThemeList(),
-                const SizedBox(height: 16),
-                const Divider(indent: 16, endIndent: 16),
-                const DescriptionText(text: AppStrings.display),
-                const AlwaysDisplaySwitch(),
-                const SizedBox(height: 8),
-                const Divider(indent: 16, endIndent: 16),
-                const DescriptionText(text: AppStrings.otherApplications),
-                SocialListTile(
-                  onSettingTap: () {
-                    _launchUrl(Platform.isAndroid ? AppConstraints.appAndroidStore : AppConstraints.appIOSStore);
-                  },
-                  title: Platform.isAndroid ? AppStrings.googlePlay : AppStrings.appStore,
-                  imagePath: Platform.isAndroid ? AppConstraints.androidIconPath : AppConstraints.iOSIconPath,
-                ),
-                const Divider(indent: 16, endIndent: 16),
-                const DescriptionText(text: AppStrings.weInSocials),
-                SocialListTile(
-                  onSettingTap: () {
-                    _launchUrl(AppConstraints.telegramChannel);
-                  },
-                  title: AppStrings.telegram,
-                  imagePath: AppConstraints.telegramIconPath,
-                ),
-                SocialListTile(
-                  onSettingTap: () {
-                    _launchUrl(AppConstraints.instagramChannel);
-                  },
-                  title: AppStrings.instagram,
-                  imagePath: AppConstraints.instagramIconPath,
-                ),
-                const Divider(indent: 16, endIndent: 16),
-                const DescriptionText(text: AppStrings.rateApplication),
-                ShareRateListTile(
-                  onSettingTap: () {
-                    _launchUrl(Platform.isAndroid ? AppConstraints.appLinkAndroid : AppConstraints.appLinkIOS);
-                  },
-                  title: AppStrings.rate,
-                  icon: Icons.star_half_rounded,
-                ),
-                const Divider(indent: 16, endIndent: 16),
-                const DescriptionText(text: AppStrings.share),
-                ShareRateListTile(
-                  onSettingTap: () {
-                    Share.share(
-                      '${AppStrings.fullAppName}\n\n${AppStrings.iOSVersion}\n${AppConstraints.appLinkIOS}\n\n${AppStrings.androidVersion}\n${AppConstraints.appLinkAndroid}',
-                      sharePositionOrigin: const Rect.fromLTWH(0, 0, 0, 2 / 2),
-                    );
-                  },
-                  title: AppStrings.share,
-                  icon: Icons.ios_share_rounded,
-                ),
-                const Divider(indent: 16, endIndent: 16),
-                const DescriptionText(text: AppStrings.version),
-                const DescriptionText(text: AppConstraints.appVersion),
-              ],
-            );
-          },
+      body: Scrollbar(
+        child: SingleChildScrollView(
+          padding: AppStyles.paddingMini,
+          child: Consumer<SettingDataState>(
+            builder: (context, settingDataState, _) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const DescriptionText(text: AppStrings.theme),
+                  const AppThemeSegment(),
+                  const SizedBox(height: 8),
+                  const Divider(indent: 16, endIndent: 16),
+                  const DescriptionText(text: AppStrings.themeColor),
+                  const ColorThemeList(),
+                  const SizedBox(height: 16),
+                  const Divider(indent: 16, endIndent: 16),
+                  const DescriptionText(text: AppStrings.display),
+                  const AlwaysDisplaySwitch(),
+                  const SizedBox(height: 8),
+                  const Divider(indent: 16, endIndent: 16),
+                  const DescriptionText(text: AppStrings.otherApplications),
+                  SocialListTile(
+                    onSettingTap: () {
+                      _launchUrl(Platform.isAndroid ? AppConstraints.appAndroidStore : AppConstraints.appIOSStore);
+                    },
+                    title: Platform.isAndroid ? AppStrings.googlePlay : AppStrings.appStore,
+                    imagePath: Platform.isAndroid ? AppConstraints.androidIconPath : AppConstraints.iOSIconPath,
+                  ),
+                  const Divider(indent: 16, endIndent: 16),
+                  const DescriptionText(text: AppStrings.weInSocials),
+                  SocialListTile(
+                    onSettingTap: () {
+                      _launchUrl(AppConstraints.telegramChannel);
+                    },
+                    title: AppStrings.telegram,
+                    imagePath: AppConstraints.telegramIconPath,
+                  ),
+                  SocialListTile(
+                    onSettingTap: () {
+                      _launchUrl(AppConstraints.instagramChannel);
+                    },
+                    title: AppStrings.instagram,
+                    imagePath: AppConstraints.instagramIconPath,
+                  ),
+                  const Divider(indent: 16, endIndent: 16),
+                  const DescriptionText(text: AppStrings.rateApplication),
+                  ShareRateListTile(
+                    onSettingTap: () {
+                      _launchUrl(Platform.isAndroid ? AppConstraints.appLinkAndroid : AppConstraints.appLinkIOS);
+                    },
+                    title: AppStrings.rate,
+                    icon: Icons.star_half_rounded,
+                  ),
+                  const Divider(indent: 16, endIndent: 16),
+                  const DescriptionText(text: AppStrings.share),
+                  ShareRateListTile(
+                    onSettingTap: () {
+                      Share.share(
+                        '${AppStrings.fullAppName}\n\n${AppStrings.iOSVersion}\n${AppConstraints.appLinkIOS}\n\n${AppStrings.androidVersion}\n${AppConstraints.appLinkAndroid}',
+                        sharePositionOrigin: const Rect.fromLTWH(0, 0, 0, 2 / 2),
+                      );
+                    },
+                    title: AppStrings.share,
+                    icon: Icons.ios_share_rounded,
+                  ),
+                  const Divider(indent: 16, endIndent: 16),
+                  const DescriptionText(text: AppStrings.version),
+                  const Padding(
+                    padding: AppStyles.paddingHorizontalMini,
+                    child: Text(
+                      AppConstraints.appVersion,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontFamily: AppConstraints.fontRobotoSlab,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  )
+                ],
+              );
+            },
+          ),
         ),
       ),
     );

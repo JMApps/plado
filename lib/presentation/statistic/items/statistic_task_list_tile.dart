@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:plado/core/styles/app_styles.dart';
 
 import '../../../core/routes/name_routes.dart';
 import '../../../core/strings/app_constraints.dart';
+import '../../../core/styles/app_styles.dart';
 import '../../../data/models/arguments/graphic_task_args.dart';
 
-class GraphicItem extends StatelessWidget {
-  const GraphicItem({
+class StaticTaskListTile extends StatelessWidget {
+  const StaticTaskListTile({
     super.key,
     required this.taskStatusIndex,
     required this.taskStatus,

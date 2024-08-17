@@ -4,8 +4,8 @@ import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/task_entity.dart';
 import '../widgets/task_static_detail.dart';
 
-class GraphicTaskItem extends StatelessWidget {
-  const GraphicTaskItem({
+class StaticTaskItem extends StatelessWidget {
+  const StaticTaskItem({
     super.key,
     required this.taskModel,
   });

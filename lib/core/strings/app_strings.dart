@@ -43,7 +43,6 @@ class AppStrings {
   static const String deleteHabitContent = 'Вы уверены, что хотите безвозвратно удалить эту привычку?';
   static const String color = 'Цвет';
   static const String add = 'Добавить';
-  static const String addClose = 'Добавить и закрыть';
   static const String change = 'Изменить';
   static const String delete = 'Удалить';
   static const String deleted = 'Удалено';
@@ -78,9 +77,7 @@ class AppStrings {
   static const String end = 'Конец:';
   static const String today = 'Сегодня';
   static const String elapsedDays = 'Прошло дней:';
-  static const String elapsedTime = 'Прошло времени:';
   static const String remainingDays = 'Осталось дней:';
-  static const String remainingTime = 'Осталось времени:';
 
   static const String remainingDayPercent = 'Остаток дня в %';
   static const String hours = 'Часы';
@@ -88,7 +85,6 @@ class AppStrings {
   static const String select = 'Выбрать';
   static const String cancel = 'Отмена';
   static const String selectCorrectDateTime = 'Выберите корректную дату и время';
-  static const String selectCorrectTime = 'Выберите корректное время';
 
   static const String inProgress = 'В процессе';
   static const String completed = 'Завершено';
