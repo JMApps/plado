@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../presentation/pages/about_us_page.dart';
 import '../../presentation/habit/pages/habits_page.dart';
 import '../../presentation/pages/settings_page.dart';
 import '../../presentation/pages/statistic_page.dart';
@@ -53,7 +52,6 @@ class AppStyles {
     HabitsPage(),
     StatisticPage(),
     SettingsPage(),
-    AboutUsPage(),
   ];
 
   static const taskModeList = <TaskPeriod>[

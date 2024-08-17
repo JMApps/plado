@@ -39,10 +39,6 @@ class HomePage extends StatelessWidget {
             icon: const Icon(Icons.settings),
             title: const MainBottomItemText(itemText: AppStrings.settings),
           ),
-          SalomonBottomBarItem(
-            icon: const Icon(Icons.info_outline),
-            title: const MainBottomItemText(itemText: AppStrings.aboutUs),
-          ),
         ],
       ),
     );

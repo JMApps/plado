@@ -1,6 +1,20 @@
 class AppConstraints {
+  static const String appVersion = '1.0.0';
+
   static const String appLinkIOS = 'https://apps.apple.com/app/словарь-pro/id6478140812';
   static const String appLinkAndroid = 'https://play.google.com/store/apps/details?id=jmapps.project.plado';
+
+  static const String appIOSStore = 'https://apps.apple.com/developer/imanil-binyaminov/id1564920953';
+  static const String appAndroidStore = 'https://play.google.com/store/apps/dev?id=8649252597553656018';
+
+  static const String telegramChannel = 'https://t.me/jmapps';
+  static const String instagramChannel = 'https://www.instagram.com/dev_muslim';
+
+  static const String iOSIconPath = 'assets/icons/appstore.png';
+  static const String androidIconPath = 'assets/icons/google-play.png';
+
+  static const String telegramIconPath = 'assets/icons/telegram.png';
+  static const String instagramIconPath = 'assets/icons/instagram.png';
 
   static const String taskStartDateTime = 'task_start_date_time';
   static const String taskRemaininDateTime = 'task_remaining_date_time';

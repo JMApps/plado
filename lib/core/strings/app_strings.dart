@@ -55,7 +55,6 @@ class AppStrings {
   static const String habits = 'Привычки';
   static const String statistics = 'Статистика';
   static const String settings = 'Настройки';
-  static const String aboutUs = 'О нас';
 
   static const String addFirstTask = 'Добавьте первую задачу';
   static const String addTask = 'Добавить задачу';
@@ -103,20 +102,27 @@ class AppStrings {
   static const String shortHour = 'ч.';
   static const String shortMinute = 'м.';
 
+  static const String theme = 'Тема';
+
   static const String lightTheme = 'Светлая';
   static const String darkTheme = 'Темная';
   static const String systemTheme = 'Системная';
 
+  static const String themeColor = 'Цвет темы';
+  static const String display = 'Дисплей';
+  static const String displayAlwaysOn = 'Дисплей всегда включен';
   static const String otherApplications = 'Другие приложения';
   static const String weInSocials = 'Мы в соцсетях';
   static const String rateApplication = 'Оценить приложение';
   static const String rate = 'Оценить';
+  static const String share = 'Поделиться';
   static const String version = 'Версия';
+
+  static const String iOSVersion = 'Версия iOS:';
+  static const String androidVersion = 'Версия Android:';
+
   static const String googlePlay = 'Google Play';
   static const String appStore = 'App Store';
   static const String telegram = 'Telegram';
   static const String instagram = 'Instagram';
-  static const String share = 'Поделиться';
-  static const String iOSVersion = 'Версия iOS:';
-  static const String androidVersion = 'Версия Android:';
 }
