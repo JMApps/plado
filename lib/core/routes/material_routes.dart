@@ -5,6 +5,7 @@ import '../../data/models/arguments/create_task_args.dart';
 import '../../data/models/arguments/graphic_task_args.dart';
 import '../../data/models/arguments/habit_model_args.dart';
 import '../../data/models/arguments/task_model_args.dart';
+import '../../presentation/backup/backup_detail_page.dart';
 import '../../presentation/habit/pages/create_habit_page.dart';
 import '../../presentation/habit/pages/habit_detail_page.dart';
 import '../../presentation/habit/pages/update_habit_page.dart';
@@ -45,6 +46,10 @@ class MaterialRoutes {
         final GraphicTaskArgs graphicTaskArgs = routeSettings.arguments as GraphicTaskArgs;
         return MaterialPageRoute(
           builder: (_) => StatisticListPage(graphicTaskArgs: graphicTaskArgs),
+        );
+      case NameRoutes.backupDetailPage:
+        return MaterialPageRoute(
+          builder: (_) => const BackupDetailPage(),
         );
       default:
         throw Exception('${AppExceptionMessages.invalidRouteException} ${routeSettings.name}');

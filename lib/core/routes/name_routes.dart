@@ -8,4 +8,5 @@ class NameRoutes {
   static const String habitDetailPage = '/habit_detail_page';
 
   static const String statisticListPage = '/statistic_list_page';
+  static const String backupDetailPage = '/backup_detail_page';
 }
