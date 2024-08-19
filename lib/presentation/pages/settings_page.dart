@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:plado/core/routes/name_routes.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -69,6 +70,14 @@ class SettingsPage extends StatelessWidget {
                     title: AppStrings.instagram,
                     imagePath: AppConstraints.instagramIconPath,
                   ),
+                  const Divider(indent: 16, endIndent: 16),const DescriptionText(text: AppStrings.backup),
+                  ShareRateListTile(
+                    onSettingTap: () {
+                      Navigator.pushNamed(context, NameRoutes.backupDetailPage);
+                    },
+                    title: AppStrings.backup,
+                    icon: Icons.backup_outlined,
+                  ),
                   const Divider(indent: 16, endIndent: 16),
                   const DescriptionText(text: AppStrings.rateApplication),
                   ShareRateListTile(
@@ -76,7 +85,7 @@ class SettingsPage extends StatelessWidget {
                       _launchUrl(Platform.isAndroid ? AppConstraints.appLinkAndroid : AppConstraints.appLinkIOS);
                     },
                     title: AppStrings.rate,
-                    icon: Icons.star_half_rounded,
+                    icon: Icons.star_half_sharp,
                   ),
                   const Divider(indent: 16, endIndent: 16),
                   const DescriptionText(text: AppStrings.share),

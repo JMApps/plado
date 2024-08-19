@@ -111,6 +111,11 @@ class AppStrings {
   static const String weInSocials = 'Мы в соцсетях';
   static const String rateApplication = 'Оценить приложение';
   static const String rate = 'Оценить';
+  static const String backup = 'Резервное копирование';
+  static const String import = 'Импорт';
+  static const String selectImportFile = 'Выбрать файл резервной копии';
+  static const String export = 'Экспорт';
+  static const String selectExportPath = 'Сохранить резервную копию';
   static const String share = 'Поделиться';
   static const String version = 'Версия';
 

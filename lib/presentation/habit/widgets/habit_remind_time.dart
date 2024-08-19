@@ -38,7 +38,7 @@ class _HabitRemindTimeState extends State<HabitRemindTime> {
               final currentTime = TimeOfDay.now();
               final selectedTime = await showTimePicker(
                 context: context,
-                initialTime: TimeOfDay(hour: currentTime.hour, minute: currentTime.minute),
+                initialTime: TimeOfDay(hour: _argDateTime.hour, minute: _argDateTime.minute),
                 helpText: AppStrings.selectTime,
                 hourLabelText: AppStrings.hours,
                 minuteLabelText: AppStrings.minutes,
