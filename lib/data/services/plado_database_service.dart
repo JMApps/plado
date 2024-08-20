@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -37,6 +39,21 @@ class PladoDatabaseService {
     }
 
     return database;
+  }
+
+  Future<void> exportDatabase(String exportPath) async {
+    String databasesPath = await getDatabasesPath();
+    String dbPath = join(databasesPath, _dbName);
+
+    File dbFile = File(dbPath);
+    File exportFile = File(exportPath);
+
+    if (await dbFile.exists()) {
+      await exportFile.writeAsBytes(await dbFile.readAsBytes());
+      print('Database exported successfully to $exportPath');
+    } else {
+      print('Database file not found');
+    }
   }
 
   void _createDb(Database db, int version) async {

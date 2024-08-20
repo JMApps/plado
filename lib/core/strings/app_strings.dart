@@ -115,6 +115,9 @@ class AppStrings {
   static const String import = 'Импорт';
   static const String selectImportFile = 'Выбрать файл резервной копии';
   static const String export = 'Экспорт';
+  static const String storagePermissionMessage = 'Чтобы импортировать или экспортировать файл резервной копии, вы должны предоставить доступ к хранилищу вашего устройства.';
+  static const String storagePermissionMessageDenied = 'Вы отказали в доступе, перейдите в настройки приложения и разрешите доступ';
+  static const String getPermission = 'Запросить доступ';
   static const String selectExportPath = 'Сохранить резервную копию';
   static const String share = 'Поделиться';
   static const String version = 'Версия';
