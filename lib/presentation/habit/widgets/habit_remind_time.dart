@@ -35,7 +35,6 @@ class _HabitRemindTimeState extends State<HabitRemindTime> {
           ),
           leading: IconButton(
             onPressed: habitRemindState.getIsRemind ? () async {
-              final currentTime = TimeOfDay.now();
               final selectedTime = await showTimePicker(
                 context: context,
                 initialTime: TimeOfDay(hour: _argDateTime.hour, minute: _argDateTime.minute),

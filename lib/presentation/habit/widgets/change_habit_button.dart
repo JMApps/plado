@@ -27,7 +27,6 @@ class ChangeHabitButton extends StatefulWidget {
 }
 
 class _ChangeHabitButtonState extends State<ChangeHabitButton> {
-  DateTime _currentDateTime = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -35,18 +34,8 @@ class _ChangeHabitButtonState extends State<ChangeHabitButton> {
     return IconButton(
       onPressed: () {
         if (Provider.of<HabitTitleState>(context, listen: false).getHabitTitle.trim().isNotEmpty) {
-          if (Provider.of<HabitRemindState>(context, listen: false).getIsRemind) {
-            _currentDateTime = DateTime.now();
-            if (DateTime.parse(Provider.of<HabitNotificationDateState>(context, listen: false).getHabitNotificationDate).isAfter(_currentDateTime)) {
-              Navigator.of(context).pop();
-              _createHabit();
-            } else {
-              _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectDateTime);
-            }
-          } else {
-            Navigator.of(context).pop();
-            _createHabit();
-          }
+          Navigator.of(context).pop();
+          _updateHabit();
         } else {
           _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.enterHabitTitle);
         }
@@ -56,7 +45,7 @@ class _ChangeHabitButtonState extends State<ChangeHabitButton> {
     );
   }
 
-  void _createHabit() {
+  void _updateHabit() {
     final String habitTitleState = context.read<HabitTitleState>().getHabitTitle.trim();
     final int habitColorIndex = context.read<HabitColorState>().getColorIndex;
     final bool habitIsRemind = context.read<HabitRemindState>().getIsRemind;
