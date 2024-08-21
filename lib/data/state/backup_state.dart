@@ -1,54 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'dart:io';
 
 class BackupState extends ChangeNotifier {
-  late PermissionStatus _status;
+  bool _isGranted = false;
 
-  BackupState() {
-   _checkPermission();
-  }
+  bool get getIsGranted => _isGranted;
 
-  _checkPermission() async {
-    _status = await Permission.mediaLibrary.request();
-    _storagePermission = true;
-    _storageDenied = false;
-    notifyListeners();
-  }
+  bool _isDenied = false;
 
-  bool _storagePermission = false;
-  bool _storageDenied = false;
+  bool get getIsDenied => _isDenied;
 
-  bool get getStoragePermission => _storagePermission;
-  bool get getStorageDenied => _storageDenied;
+  bool _isPermanentlyDenied = false;
+
+  bool get getIsPermanentlyDenied => _isPermanentlyDenied;
 
   Future<void> requestStoragePermission() async {
+    PermissionStatus status = await Permission.storage.request();
 
-    if (Platform.isAndroid) {
-      if (await Permission.mediaLibrary.isGranted) {
-        _storagePermission = true;
-        _storageDenied = false;
-      } else {
-        _status = await Permission.mediaLibrary.request();
-        if (_status.isGranted) {
-          _storagePermission = true;
-          _storageDenied = false;
-        } else {
-          _storagePermission = false;
-          _storageDenied = _status.isDenied;
-        }
-      }
-    } else {
-      _status = await Permission.storage.request();
-      if (_status.isGranted) {
-        _storagePermission = true;
-        _storageDenied = false;
-      } else {
-        _storagePermission = false;
-        _storageDenied = _status.isDenied;
-      }
+    switch (status) {
+      case PermissionStatus.granted:
+        _isGranted = true;
+        _isDenied = false;
+        _isPermanentlyDenied = false;
+        break;
+      case PermissionStatus.denied:
+        _isGranted = false;
+        _isDenied = true;
+        _isPermanentlyDenied = false;
+        break;
+      case PermissionStatus.permanentlyDenied:
+        _isGranted = false;
+        _isDenied = false;
+        _isPermanentlyDenied = true;
+        break;
+      default:
+        break;
     }
-
     notifyListeners();
   }
 }

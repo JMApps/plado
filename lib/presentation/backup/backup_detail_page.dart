@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 
 import '../../core/strings/app_strings.dart';
 import '../../core/styles/app_styles.dart';
@@ -29,37 +29,31 @@ class BackupDetailPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   ListTile(
-                    onTap: backupState.getStoragePermission ? () {
-                    } : null,
+                    onTap: backupState.getIsGranted ? () {} : null,
                     shape: AppStyles.shape,
                     title: const Text(AppStrings.import),
                     subtitle: const Text(AppStrings.selectImportFile),
                   ),
                   ListTile(
-                    onTap: backupState.getStoragePermission ? () {
-                    } : null,
+                    onTap: backupState.getIsGranted ? () {} : null,
                     shape: AppStyles.shape,
                     title: const Text(AppStrings.export),
                     subtitle: const Text(AppStrings.selectExportPath),
                   ),
-                  const SizedBox(height: 16),
-                  backupState.getStorageDenied
-                      ? const Text(AppStrings.storagePermissionMessageDenied)
-                      : !backupState.getStoragePermission
-                      ? const Text(AppStrings.storagePermissionMessage)
-                      : const SizedBox(),
-                  !backupState.getStoragePermission ? const SizedBox(height: 16) : const SizedBox(),
-                  !backupState.getStoragePermission
-                      ? OutlinedButton(
+                  backupState.getIsGranted ? const SizedBox() : !backupState.getIsDenied || !backupState.getIsPermanentlyDenied ? const Text(AppStrings.storagePermissionMessage) : const SizedBox(),
+                  const SizedBox(height: 8),
+                  OutlinedButton(
                     onPressed: () async {
-                      if (backupState.getStorageDenied) {
+                      if (backupState.getIsPermanentlyDenied) {
                         openAppSettings();
+                      } else if(backupState.getIsDenied) {
+                        backupState.requestStoragePermission();
                       } else {
-                        await backupState.requestStoragePermission();
+                        backupState.requestStoragePermission();
                       }
                     },
                     child: const Text(AppStrings.getPermission),
-                  ) : const SizedBox(),
+                  ),
                 ],
               );
             },
