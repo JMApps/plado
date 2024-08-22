@@ -1,8 +1,7 @@
-import 'dart:io';
-
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../../core/strings/app_constraints.dart';
 import '../../core/strings/database_values.dart';
 
 class PladoDatabaseService {
@@ -13,8 +12,6 @@ class PladoDatabaseService {
   PladoDatabaseService.internal();
 
   static Database? _db;
-  static const int _dbVersion = 1;
-  static const String _dbName = 'plado.db';
 
   Future<Database> get db async {
     if (_db != null) {
@@ -26,34 +23,19 @@ class PladoDatabaseService {
 
   Future<Database> initializeDatabase() async {
     String databasesPath = await getDatabasesPath();
-    String dbPath = join(databasesPath, _dbName);
+    String dbPath = join(databasesPath, AppConstraints.dbName);
 
     bool dbExists = await databaseExists(dbPath);
     Database database;
 
     if (!dbExists) {
-      database = await openDatabase(dbPath, version: _dbVersion, onCreate: _createDb);
+      database = await openDatabase(dbPath, version: AppConstraints.dbVersion, onCreate: _createDb);
     } else {
       database = await openDatabase(dbPath);
-      database.setVersion(_dbVersion);
+      database.setVersion(AppConstraints.dbVersion);
     }
 
     return database;
-  }
-
-  Future<void> exportDatabase(String exportPath) async {
-    String databasesPath = await getDatabasesPath();
-    String dbPath = join(databasesPath, _dbName);
-
-    File dbFile = File(dbPath);
-    File exportFile = File(exportPath);
-
-    if (await dbFile.exists()) {
-      await exportFile.writeAsBytes(await dbFile.readAsBytes());
-      print('Database exported successfully to $exportPath');
-    } else {
-      print('Database file not found');
-    }
   }
 
   void _createDb(Database db, int version) async {

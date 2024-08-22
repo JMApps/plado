@@ -1,4 +1,6 @@
 class AppConstraints {
+  static const int dbVersion = 1;
+  static const String dbName = 'plado.db';
   static const String appVersion = '1.0.0';
 
   static const String appLinkIOS = 'https://apps.apple.com/app/словарь-pro/id6478140812';
