@@ -82,6 +82,7 @@ class AppStrings {
   static const String today = 'Сегодня';
   static const String elapsedDays = 'Прошло дней:';
   static const String remainingDays = 'Осталось дней:';
+  static const String allDays = 'Все дни';
 
   static const String remainingDayPercent = 'Остаток дня в %';
   static const String hours = 'Часы';
