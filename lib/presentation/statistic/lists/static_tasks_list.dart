@@ -42,7 +42,9 @@ class StaticTasksList extends StatelessWidget {
           return Container(
             alignment: Alignment.center,
             padding: AppStyles.padding,
-            child: const TimeIsEmpty(title: AppStrings.tasksIsEmpty),
+            child: const TimeIsEmpty(
+              title: AppStrings.tasksIsEmpty,
+            ),
           );
         }
       },

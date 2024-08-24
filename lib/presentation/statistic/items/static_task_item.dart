@@ -40,7 +40,7 @@ class StaticTaskItem extends StatelessWidget {
         icon = const Icon(Icons.check_circle_outline_rounded, color: Colors.teal);
         break;
       case 2:
-        icon = const Icon(Icons.blur_circular_rounded, color: Colors.red);
+        icon = const Icon(Icons.auto_delete_outlined, color: Colors.red);
         break;
     }
     return icon;

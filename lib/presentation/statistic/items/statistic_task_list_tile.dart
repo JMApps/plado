@@ -27,7 +27,7 @@ class StaticTaskListTile extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(
           context,
-          NameRoutes.statisticListPage,
+          NameRoutes.statisticTaskListPage,
           arguments: GraphicTaskArgs(
             taskStatusIndex: taskStatusIndex,
             title: title,
