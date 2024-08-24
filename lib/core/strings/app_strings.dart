@@ -51,7 +51,11 @@ class AppStrings {
   static const String tasks = 'Задачи';
   static const String tasksNumber = 'Количество задач';
   static const String tasksIsEmpty = 'Список задач пуст';
+
   static const String habits = 'Привычки';
+  static const String habitNumber = 'Количество привычек';
+  static const String habitsIsEmpty = 'Список привычек пуст';
+
   static const String statistics = 'Статистика';
   static const String settings = 'Настройки';
 
@@ -71,7 +75,7 @@ class AppStrings {
   static const String descriptionHabit = 'Описание привычки';
 
   static const String added = 'Добавлено:';
-  static const String errorGetData = 'Ошибка при получении данных, попробуйте позже';
+  static const String errorGetData = 'Ошибка при получении данных.';
   static const String remaining = 'Осталось:';
   static const String start = 'Начало:';
   static const String end = 'Конец:';
@@ -90,6 +94,7 @@ class AppStrings {
   static const String completed = 'Завершено';
   static const String canceled = 'Не завершено';
   static const String allTasks = 'Все задачи';
+  static const String allHabits = 'Все привычки';
 
   static const String enterTaskTitle = 'Введите название задачи';
   static const String enterHabitTitle = 'Введите название привычки';

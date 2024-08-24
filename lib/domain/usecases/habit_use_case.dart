@@ -1,3 +1,4 @@
+import '../../data/models/all_habit_count_model.dart';
 import '../entities/habit_entity.dart';
 import '../repositories/habit_repository.dart';
 
@@ -12,6 +13,10 @@ class HabitUseCase {
 
   Future<HabitEntity> getHabitById({required int habitId}) async {
     return await _habitRepository.getHabitById(habitId: habitId);
+  }
+
+  Future<AllHabitCountModel> getAllHabitsNumber() async {
+    return await _habitRepository.getAllHabitsNumber();
   }
 
   Future<int> createHabit({required Map<String, dynamic> habitMap}) async {

@@ -9,7 +9,9 @@ import '../../presentation/backup/backup_detail_page.dart';
 import '../../presentation/habit/pages/create_habit_page.dart';
 import '../../presentation/habit/pages/habit_detail_page.dart';
 import '../../presentation/habit/pages/update_habit_page.dart';
-import '../../presentation/statistic/pages/statistic_list_page.dart';
+import '../../presentation/statistic/pages/habit_static_detail_page.dart';
+import '../../presentation/statistic/pages/statistic_habit_list_page.dart';
+import '../../presentation/statistic/pages/statistic_task_list_page.dart';
 import '../../presentation/task/pages/create_task_page.dart';
 import '../../presentation/task/pages/update_task_page.dart';
 import '../strings/app_exception_messages.dart';
@@ -42,10 +44,19 @@ class MaterialRoutes {
         return MaterialPageRoute(
           builder: (_) => HabitDetailPage(habitModel: habitModelArgs.habitModel),
         );
-      case NameRoutes.statisticListPage:
+      case NameRoutes.statisticTaskListPage:
         final GraphicTaskArgs graphicTaskArgs = routeSettings.arguments as GraphicTaskArgs;
         return MaterialPageRoute(
-          builder: (_) => StatisticListPage(graphicTaskArgs: graphicTaskArgs),
+          builder: (_) => StatisticTaskListPage(graphicTaskArgs: graphicTaskArgs),
+        );
+      case NameRoutes.statisticHabitListPage:
+        return MaterialPageRoute(
+          builder: (_) => const StatisticHabitListPage(),
+        );
+      case NameRoutes.habitStaticDetailPage:
+        final HabitModelArgs habitModelArgs = routeSettings.arguments as HabitModelArgs;
+        return MaterialPageRoute(
+          builder: (_) => HabitStaticDetailPage(habitModel: habitModelArgs.habitModel),
         );
       case NameRoutes.backupDetailPage:
         return MaterialPageRoute(

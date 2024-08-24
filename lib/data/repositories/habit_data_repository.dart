@@ -5,6 +5,7 @@ import 'package:sqflite/sqflite.dart';
 import '../../core/strings/database_values.dart';
 import '../../domain/entities/habit_entity.dart';
 import '../../domain/repositories/habit_repository.dart';
+import '../models/all_habit_count_model.dart';
 import '../models/habit_model.dart';
 import '../services/plado_database_service.dart';
 
@@ -25,6 +26,19 @@ class HabitDataRepository implements HabitRepository {
     final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbHabitTableName, where: '${DatabaseValues.dbHabitId} = ?', whereArgs: [habitId]);
     final HabitEntity? habitById = resources.isNotEmpty ? HabitEntity.fromModel(HabitModel.fromMap(resources.first)) : null;
     return habitById!;
+  }
+
+  @override
+  Future<AllHabitCountModel> getAllHabitsNumber() async {
+    final Database database = await _pladoDatabaseService.db;
+
+    final List<Map<String, Object?>> all = await database.query(
+      DatabaseValues.dbHabitTableName,
+    );
+
+    return AllHabitCountModel(
+      all: all.length,
+    );
   }
 
   @override

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../../domain/entities/habit_entity.dart';
 import '../../domain/usecases/habit_use_case.dart';
+import '../models/all_habit_count_model.dart';
 import '../repositories/habit_data_repository.dart';
 
 class HabitDataState extends ChangeNotifier {
@@ -13,6 +14,10 @@ class HabitDataState extends ChangeNotifier {
 
   Future<HabitEntity> getHabitById({required int habitId}) async {
     return await _habitUseCase.getHabitById(habitId: habitId);
+  }
+
+  Future<AllHabitCountModel> getAllHabitsNumber() async {
+    return await _habitUseCase.getAllHabitsNumber();
   }
 
   Future<int> createHabit({required Map<String, dynamic> habitMap}) async {
