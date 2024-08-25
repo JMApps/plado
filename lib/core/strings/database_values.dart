@@ -37,5 +37,6 @@ class DatabaseValues {
   static const String dbSortOrderHabitIndex = 'sort_order_habit_index';
   static const String dbAppThemeIndex = 'app_theme_index';
   static const String dbAlwaysDisplayIndex = 'always_display_index';
+  static const String dbLocaleIndex = 'locale_index';
   static const String dbColorThemeIndex = 'color_theme_index';
 }

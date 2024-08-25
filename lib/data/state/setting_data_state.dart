@@ -14,19 +14,21 @@ class SettingDataState extends ChangeNotifier {
     timeago.setLocaleMessages('en', timeago.EnMessages());
     timeago.setLocaleMessages('tr', timeago.TrMessages());
 
+    _localeIndex = await _settingUseCase.getSettingIndex(columnName: DatabaseValues.dbLocaleIndex);
     _themeIndex = await _settingUseCase.getSettingIndex(columnName: DatabaseValues.dbAppThemeIndex);
     _alwaysOnDisplay = await _settingUseCase.getSettingIndex(columnName: DatabaseValues.dbAlwaysDisplayIndex) == 1;
     _colorThemeIndex = await _settingUseCase.getSettingIndex(columnName: DatabaseValues.dbColorThemeIndex);
     _updateWakelock();
   }
 
-  int _localeIndex = 0;
+  late int _localeIndex;
 
   int get getLocaleIndex => _localeIndex;
 
   set setLocaleIndex(int localeIndex) {
     if (_localeIndex != localeIndex) {
       _localeIndex = localeIndex;
+      _saveSettingIndex(DatabaseValues.dbLocaleIndex, _localeIndex);
       notifyListeners();
     }
   }

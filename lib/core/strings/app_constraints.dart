@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 class AppConstraints {
   static const int dbVersion = 1;
   static const String dbName = 'plado.db';

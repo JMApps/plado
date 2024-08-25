@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:plado/core/styles/app_styles.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/routes/material_routes.dart';
@@ -19,6 +20,7 @@ class RootMaterialPage extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       onGenerateTitle: (context) => AppLocalizations.of(context)!.appName,
+      locale: AppStyles.appLocales[settingDataState.getLocaleIndex],
       theme: appMaterialStyles.lightTheme,
       darkTheme: appMaterialStyles.darkTheme,
       themeMode: settingDataState.getThemeMode,
