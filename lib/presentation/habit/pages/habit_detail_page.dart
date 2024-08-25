@@ -5,10 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/routes/name_routes.dart';
 import '../../../core/strings/app_constraints.dart';
 import '../../../core/strings/app_strings.dart';
 import '../../../core/strings/database_values.dart';
 import '../../../core/styles/app_styles.dart';
+import '../../../data/models/arguments/habit_model_args.dart';
 import '../../../data/state/habit_data_state.dart';
 import '../../../domain/entities/habit_entity.dart';
 import '../../state/rest_times_state.dart';
@@ -70,135 +72,146 @@ class _HabitDetailPageState extends State<HabitDetailPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.habitModel.habitTitle),
-      ),
-      body: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CircularPercentIndicator(
-                circularStrokeCap: CircularStrokeCap.round,
-                radius: 75,
-                lineWidth: 20,
-                percent: _restRemaininPercentage[AppConstraints.restElapsedPercentage] / 100,
-                header: const Padding(
-                  padding: AppStyles.paddingBottom,
-                  child: Text(
-                    AppStrings.elapsedDays,
-                    style: TextStyle(fontSize: 17),
-                  ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                NameRoutes.habitStaticDetailPage,
+                arguments: HabitModelArgs(
+                  habitModel: widget.habitModel,
                 ),
-                center: Text(
-                  '$_elapsedDays',
-                  style: const TextStyle(
-                    fontSize: 50,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: AppConstraints.fontRobotoSlab,
-                  ),
-                ),
-                footer: Padding(
-                  padding: AppStyles.paddingTopMini,
-                  child: DateTimeItem(
-                    description: AppStrings.start,
-                    dateTime: widget.habitModel.startDateTime,
-                    dateFormat: AppConstraints.dateFormat,
-                  ),
-                ),
-                progressColor: habitColor,
-                backgroundColor: habitColor.withOpacity(0.15),
-              ),
-              const SizedBox(width: 16),
-              CircularPercentIndicator(
-                reverse: true,
-                circularStrokeCap: CircularStrokeCap.round,
-                radius: 75,
-                lineWidth: 20,
-                percent: _restRemaininPercentage[AppConstraints.restRemainingPercentage] / 100,
-                header: const Padding(
-                  padding: AppStyles.paddingBottom,
-                  child: Text(
-                    AppStrings.remainingDays,
-                    style: TextStyle(fontSize: 17),
-                  ),
-                ),
-                center: Text(
-                  '${_remainingDays + 1}',
-                  style: const TextStyle(
-                    fontSize: 50,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: AppConstraints.fontRobotoSlab,
-                  ),
-                ),
-                footer: Padding(
-                  padding: AppStyles.paddingTopMini,
-                  child: DateTimeItem(
-                    description: AppStrings.end,
-                    dateTime: widget.habitModel.endDateTime,
-                    dateFormat: AppConstraints.dateFormat,
-                  ),
-                ),
-                progressColor: habitColor,
-                backgroundColor: habitColor.withOpacity(0.15),
-              ),
-            ],
+              );
+            },
+            icon: const Icon(Icons.auto_graph_rounded),
           ),
-          Expanded(
-            flex: 2,
-            child: Consumer<HabitDataState>(
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularPercentIndicator(
+                  circularStrokeCap: CircularStrokeCap.round,
+                  radius: 75,
+                  lineWidth: 20,
+                  percent: _restRemaininPercentage[AppConstraints.restElapsedPercentage] / 100,
+                  header: const Padding(
+                    padding: AppStyles.paddingBottom,
+                    child: Text(
+                      AppStrings.elapsedDays,
+                      style: TextStyle(fontSize: 17),
+                    ),
+                  ),
+                  center: Text(
+                    '$_elapsedDays',
+                    style: const TextStyle(
+                      fontSize: 50,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: AppConstraints.fontRobotoSlab,
+                    ),
+                  ),
+                  footer: Padding(
+                    padding: AppStyles.paddingTopMini,
+                    child: DateTimeItem(
+                      description: AppStrings.start,
+                      dateTime: widget.habitModel.startDateTime,
+                      dateFormat: AppConstraints.dateFormat,
+                    ),
+                  ),
+                  progressColor: habitColor,
+                  backgroundColor: habitColor.withOpacity(0.15),
+                ),
+                const SizedBox(width: 16),
+                CircularPercentIndicator(
+                  reverse: true,
+                  circularStrokeCap: CircularStrokeCap.round,
+                  radius: 75,
+                  lineWidth: 20,
+                  percent: _restRemaininPercentage[AppConstraints.restRemainingPercentage] / 100,
+                  header: const Padding(
+                    padding: AppStyles.paddingBottom,
+                    child: Text(
+                      AppStrings.remainingDays,
+                      style: TextStyle(fontSize: 17),
+                    ),
+                  ),
+                  center: Text(
+                    '${_remainingDays + 1}',
+                    style: const TextStyle(
+                      fontSize: 50,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: AppConstraints.fontRobotoSlab,
+                    ),
+                  ),
+                  footer: Padding(
+                    padding: AppStyles.paddingTopMini,
+                    child: DateTimeItem(
+                      description: AppStrings.end,
+                      dateTime: widget.habitModel.endDateTime,
+                      dateFormat: AppConstraints.dateFormat,
+                    ),
+                  ),
+                  progressColor: habitColor,
+                  backgroundColor: habitColor.withOpacity(0.15),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              widget.habitModel.endDateTime.isAfter(DateTime.now()) ? AppStrings.today : AppStrings.completed,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Consumer<HabitDataState>(
               builder: (BuildContext context, habitDataState, _) {
                 return FutureBuilder<List<bool>>(
                   future: habitDataState.completedDays(habitId: widget.habitModel.habitId),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       final List<bool> completedDays = snapshot.data!;
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const SizedBox(height: 48),
-                          const Text(
-                            AppStrings.today,
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Expanded(
-                            child: PageView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              controller: _completedDaysController,
-                              itemCount: snapshot.data!.length,
-                              itemBuilder: (context, index) {
-                                return AnimatedSwitcher(
-                                  duration: const Duration(milliseconds: 300),
-                                  child: GestureDetector(
-                                    onTap: _elapsedDays == index ? () {
-                                      completedDays[index] = !completedDays[index];
-                                      if (completedDays[index]) {
-                                        HapticFeedback.vibrate();
-                                      }
-                                      final completedDaysMap = {
-                                        DatabaseValues.dbHabitCompletedDays: jsonEncode(completedDays.map((e) => e ? 1 : 0).toList()),
-                                      };
-                                      Provider.of<HabitDataState>(context, listen: false).updateHabit(
-                                        habitMap: completedDaysMap,
-                                        habitId: widget.habitModel.habitId,
-                                      );
-                                    } : null,
-                                    child: Icon(completedDays[index] ? Icons.check_circle_rounded : Icons.circle_outlined,
-                                      color: !completedDays[index] ? appColors.inversePrimary : habitColor,
-                                      size: 275,
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ],
+                      return SizedBox(
+                        height: 250,
+                        child: PageView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          controller: _completedDaysController,
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: (context, index) {
+                            return AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 300),
+                              child: GestureDetector(
+                                onTap: _elapsedDays == index ? () {
+                                  completedDays[index] = !completedDays[index];
+                                  if (completedDays[index]) {
+                                    HapticFeedback.vibrate();
+                                  }
+                                  final completedDaysMap = {
+                                    DatabaseValues.dbHabitCompletedDays: jsonEncode(completedDays.map((e) => e ? 1 : 0).toList()),
+                                  };
+                                  Provider.of<HabitDataState>(context, listen: false).updateHabit(
+                                    habitMap: completedDaysMap,
+                                    habitId: widget.habitModel.habitId,
+                                  );
+                                }
+                                : null,
+                                child: Icon(
+                                  completedDays[index] ? Icons.check_circle_rounded : Icons.circle_outlined,
+                                  color: completedDays[index] ? habitColor : index < _elapsedDays ? appColors.surfaceContainerHigh : appColors.inversePrimary,
+                                  size: 275,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
                       );
                     } else if (snapshot.hasError) {
                       return MainErrorText(
-                          errorText: snapshot.error.toString());
+                        errorText: snapshot.error.toString(),
+                      );
                     } else {
                       return const Center(
                         child: CircularProgressIndicator.adaptive(),
@@ -208,11 +221,8 @@ class _HabitDetailPageState extends State<HabitDetailPage> {
                 );
               },
             ),
-          ),
-          const Expanded(
-            child: SizedBox(),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -67,79 +67,79 @@ class _HabitStaticDetailPageState extends State<HabitStaticDetailPage> {
       appBar: AppBar(
         title: Text(widget.habitModel.habitTitle),
       ),
-      body: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CircularPercentIndicator(
-                circularStrokeCap: CircularStrokeCap.round,
-                radius: 75,
-                lineWidth: 20,
-                percent: _restRemaininPercentage[AppConstraints.restElapsedPercentage] / 100,
-                header: const Padding(
-                  padding: AppStyles.paddingBottom,
-                  child: Text(
-                    AppStrings.elapsedDays,
-                    style: TextStyle(fontSize: 17),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularPercentIndicator(
+                  circularStrokeCap: CircularStrokeCap.round,
+                  radius: 75,
+                  lineWidth: 20,
+                  percent: _restRemaininPercentage[AppConstraints.restElapsedPercentage] / 100,
+                  header: const Padding(
+                    padding: AppStyles.paddingBottom,
+                    child: Text(
+                      AppStrings.elapsedDays,
+                      style: TextStyle(fontSize: 17),
+                    ),
                   ),
-                ),
-                center: Text(
-                  '$_elapsedDays',
-                  style: const TextStyle(
-                    fontSize: 50,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: AppConstraints.fontRobotoSlab,
+                  center: Text(
+                    '$_elapsedDays',
+                    style: const TextStyle(
+                      fontSize: 50,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: AppConstraints.fontRobotoSlab,
+                    ),
                   ),
-                ),
-                footer: Padding(
-                  padding: AppStyles.paddingTopMini,
-                  child: DateTimeItem(
-                    description: AppStrings.start,
-                    dateTime: widget.habitModel.startDateTime,
-                    dateFormat: AppConstraints.dateFormat,
+                  footer: Padding(
+                    padding: AppStyles.paddingTopMini,
+                    child: DateTimeItem(
+                      description: AppStrings.start,
+                      dateTime: widget.habitModel.startDateTime,
+                      dateFormat: AppConstraints.dateFormat,
+                    ),
                   ),
+                  progressColor: habitColor,
+                  backgroundColor: habitColor.withOpacity(0.15),
                 ),
-                progressColor: habitColor,
-                backgroundColor: habitColor.withOpacity(0.15),
-              ),
-              const SizedBox(width: 16),
-              CircularPercentIndicator(
-                reverse: true,
-                circularStrokeCap: CircularStrokeCap.round,
-                radius: 75,
-                lineWidth: 20,
-                percent: _restRemaininPercentage[AppConstraints.restRemainingPercentage] / 100,
-                header: const Padding(
-                  padding: AppStyles.paddingBottom,
-                  child: Text(
-                    AppStrings.remainingDays,
-                    style: TextStyle(fontSize: 17),
+                const SizedBox(width: 16),
+                CircularPercentIndicator(
+                  reverse: true,
+                  circularStrokeCap: CircularStrokeCap.round,
+                  radius: 75,
+                  lineWidth: 20,
+                  percent: _restRemaininPercentage[AppConstraints.restRemainingPercentage] / 100,
+                  header: const Padding(
+                    padding: AppStyles.paddingBottom,
+                    child: Text(
+                      AppStrings.remainingDays,
+                      style: TextStyle(fontSize: 17),
+                    ),
                   ),
-                ),
-                center: Text(
-                  '${_remainingDays + 1}',
-                  style: const TextStyle(
-                    fontSize: 50,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: AppConstraints.fontRobotoSlab,
+                  center: Text(
+                    '${_remainingDays + 1}',
+                    style: const TextStyle(
+                      fontSize: 50,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: AppConstraints.fontRobotoSlab,
+                    ),
                   ),
-                ),
-                footer: Padding(
-                  padding: AppStyles.paddingTopMini,
-                  child: DateTimeItem(
-                    description: AppStrings.end,
-                    dateTime: widget.habitModel.endDateTime,
-                    dateFormat: AppConstraints.dateFormat,
+                  footer: Padding(
+                    padding: AppStyles.paddingTopMini,
+                    child: DateTimeItem(
+                      description: AppStrings.end,
+                      dateTime: widget.habitModel.endDateTime,
+                      dateFormat: AppConstraints.dateFormat,
+                    ),
                   ),
+                  progressColor: habitColor,
+                  backgroundColor: habitColor.withOpacity(0.15),
                 ),
-                progressColor: habitColor,
-                backgroundColor: habitColor.withOpacity(0.15),
-              ),
-            ],
-          ),
-          Expanded(
-            child: Consumer<HabitDataState>(
+              ],
+            ),
+            Consumer<HabitDataState>(
               builder: (BuildContext context, habitDataState, _) {
                 return FutureBuilder<List<bool>>(
                   future: habitDataState.completedDays(
@@ -153,45 +153,45 @@ class _HabitStaticDetailPageState extends State<HabitStaticDetailPage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const SizedBox(height: 16),
-                          const Text(
-                            AppStrings.allDays,
-                            style: TextStyle(
+                          Text(
+                            widget.habitModel.endDateTime.isAfter(DateTime.now()) ? AppStrings.inProgress : AppStrings.completed,
+                            style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(height: 16),
-                          Expanded(
-                            child: GridView.builder(
-                              padding: AppStyles.paddingMini,
-                              itemCount: completedDays.length,
-                              itemBuilder: (context, index) {
-                                return Card(
-                                  elevation: 0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: AppStyles.border,
-                                    side: BorderSide(
-                                      width: 2.5,
-                                      color: index == _elapsedDays ? appColors.onTertiaryContainer : Colors.transparent,
-                                    )
-                                  ),
-                                  color: completedDays[index] ? habitColor : index < _elapsedDays ? appColors.surfaceContainerHigh : appColors.inversePrimary,
-                                  child: Center(
-                                    child: Text(
-                                      (index + 1).toString(),
-                                      style: const TextStyle(
-                                        fontSize: 18,
-                                        fontFamily: AppConstraints.fontRobotoSlab,
-                                      ),
+                          const SizedBox(height: 8),
+                          GridView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            padding: AppStyles.paddingMini,
+                            itemCount: completedDays.length,
+                            itemBuilder: (context, index) {
+                              return Card(
+                                elevation: 0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: AppStyles.border,
+                                  side: BorderSide(
+                                    width: 2.5,
+                                    color: index == _elapsedDays ? appColors.onTertiaryContainer : Colors.transparent,
+                                  )
+                                ),
+                                color: completedDays[index] ? habitColor : index < _elapsedDays ? appColors.surfaceContainerHigh : appColors.inversePrimary,
+                                child: Center(
+                                  child: Text(
+                                    (index + 1).toString(),
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      fontFamily: AppConstraints.fontRobotoSlab,
                                     ),
                                   ),
-                                );
-                              },
-                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 5,
-                                crossAxisSpacing: 8,
-                                mainAxisSpacing: 8,
-                              ),
+                                ),
+                              );
+                            },
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 5,
+                              crossAxisSpacing: 8,
+                              mainAxisSpacing: 8,
                             ),
                           ),
                         ],
@@ -209,8 +209,8 @@ class _HabitStaticDetailPageState extends State<HabitStaticDetailPage> {
                 );
               },
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
