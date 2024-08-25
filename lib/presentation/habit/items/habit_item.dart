@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/routes/name_routes.dart';
 import '../../../core/strings/app_constraints.dart';
@@ -21,8 +22,9 @@ class HabitItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final appTheme = Theme.of(context);
-    final String timeAgo = timeago.format(habitModel.createDateTime, locale: 'en');
+    final String timeAgo = timeago.format(habitModel.createDateTime, locale: appLocale.localeName);
     final habitColor = AppStyles.taskHabitColors[habitModel.habitColorIndex].withOpacity(appTheme.brightness == Brightness.dark ? 0.5 : 1);
     final restRemaininPercentage = Provider.of<RestTimesState>(context).restRemainingPercentage(startDateTime: habitModel.startDateTime, endDateTime: habitModel.endDateTime);
     return Card(

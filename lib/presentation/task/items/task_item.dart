@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../domain/entities/task_entity.dart';
 import '../../../core/routes/name_routes.dart';
@@ -23,8 +24,9 @@ class TaskItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final bool statusTask = taskModel.taskStatusIndex == 0 ? false : true;
-    final String timeAgo = timeago.format(taskModel.createDateTime, locale: 'en');
+    final String timeAgo = timeago.format(taskModel.createDateTime, locale: appLocale.localeName);
     final taskColor = AppStyles.taskHabitColors[taskModel.taskColorIndex].withOpacity(Theme.of(context).brightness == Brightness.dark ? 0.5 : 1);
     return Card(
       elevation: 0,

@@ -33,8 +33,8 @@ class HabitPeriodSegment extends StatelessWidget {
             ),
             ButtonSegment(
               value: HabitPeriod.days90.index,
-              label: Text(appLocale.daya90),
-              tooltip: appLocale.daya90,
+              label: Text(appLocale.days90),
+              tooltip: appLocale.days90,
             ),
           ],
           selected: {habitPeriodState.getHabitPeriodIndex},

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../core/styles/app_styles.dart';
 import '../../../core/enums/task_period.dart';
 import '../../../core/routes/name_routes.dart';
