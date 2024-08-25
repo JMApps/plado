@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/enums/habit_period.dart';
-import '../../../core/strings/app_strings.dart';
 import '../../state/habit/habit_period_state.dart';
 
 class HabitPeriodSegment extends StatelessWidget {
@@ -10,6 +10,7 @@ class HabitPeriodSegment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return Consumer<HabitPeriodState>(
       builder: (context, habitPeriodState, _) {
         return SegmentedButton(
@@ -17,23 +18,23 @@ class HabitPeriodSegment extends StatelessWidget {
           segments: [
             ButtonSegment(
               value: HabitPeriod.days21.index,
-              label: const Text(AppStrings.days21),
-              tooltip: AppStrings.days21,
+              label: Text(appLocale.days21),
+              tooltip: appLocale.days21,
             ),
             ButtonSegment(
               value: HabitPeriod.days40.index,
-              label: const Text(AppStrings.days40),
-              tooltip: AppStrings.days40,
+              label: Text(appLocale.days40),
+              tooltip: appLocale.days40,
             ),
             ButtonSegment(
               value: HabitPeriod.days66.index,
-              label: const Text(AppStrings.days66),
-              tooltip: AppStrings.days66,
+              label: Text(appLocale.days66),
+              tooltip: appLocale.days66,
             ),
             ButtonSegment(
               value: HabitPeriod.days90.index,
-              label: const Text(AppStrings.daya90),
-              tooltip: AppStrings.daya90,
+              label: Text(appLocale.daya90),
+              tooltip: appLocale.daya90,
             ),
           ],
           selected: {habitPeriodState.getHabitPeriodIndex},

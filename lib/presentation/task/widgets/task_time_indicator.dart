@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/strings/app_constraints.dart';
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../state/rest_times_state.dart';
 import '../../state/task/task_period_state.dart';
@@ -19,6 +19,7 @@ class _TaskTimeIndicatorState extends State<TaskTimeIndicator> {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
     return Consumer2<RestTimesState, TaskPeriodState>(
       builder: (context, restTimeState, taskPeriodState, _) {
@@ -32,9 +33,9 @@ class _TaskTimeIndicatorState extends State<TaskTimeIndicator> {
 
         List<String> parts = [];
 
-        if (days > 0) parts.add('$days ${AppStrings.shortDay}');
-        if (hours > 0) parts.add('$hours ${AppStrings.shortHour}');
-        if (minutes > 0) parts.add('$minutes ${AppStrings.shortMinute}');
+        if (days > 0) parts.add('$days ${appLocale.shortDay}');
+        if (hours > 0) parts.add('$hours ${appLocale.shortHour}');
+        if (minutes > 0) parts.add('$minutes ${appLocale.shortMinute}');
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -48,7 +49,7 @@ class _TaskTimeIndicatorState extends State<TaskTimeIndicator> {
                       ),
                       children: [
                         TextSpan(
-                          text: '${AppStrings.remaining} ',
+                          text: '${appLocale.remaining} ',
                           style: TextStyle(
                             color: appColors.onSurface,
                             fontSize: 17,
@@ -67,7 +68,7 @@ class _TaskTimeIndicatorState extends State<TaskTimeIndicator> {
                   ),
                 ),
                 Tooltip(
-                  message: AppStrings.remainingDayPercent,
+                  message: appLocale.remainingDayPercent,
                   child: Card(
                     color: Theme.of(context).colorScheme.inversePrimary,
                     child: Padding(

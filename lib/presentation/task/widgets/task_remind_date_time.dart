@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/strings/app_constraints.dart';
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../state/rest_times_state.dart';
 import '../../state/task/task_notification_date_state.dart';
@@ -29,6 +29,7 @@ class _TaskRemindDateTimeState extends State<TaskRemindDateTime> {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
     return Consumer2<TaskRemindState, TaskNotificationDateState>(
       builder: (context, remindState, dateState, _) {
@@ -37,7 +38,7 @@ class _TaskRemindDateTimeState extends State<TaskRemindDateTime> {
             SwitchListTile(
               shape: AppStyles.shape,
               visualDensity: VisualDensity.comfortable,
-              title: const DescriptionText(text: AppStrings.remind),
+              title: DescriptionText(text: appLocale.remind),
               value: remindState.getIsRemind,
               onChanged: (bool onChanged) {
                 remindState.setIsRemind = onChanged;
@@ -50,9 +51,9 @@ class _TaskRemindDateTimeState extends State<TaskRemindDateTime> {
                   onPressed: remindState.getIsRemind ? () async {
                     final selectedDate = await showDatePicker(
                       context: context,
-                      helpText: AppStrings.selectDate,
-                      cancelText: AppStrings.cancel,
-                      confirmText: AppStrings.select,
+                      helpText: appLocale.selectDate,
+                      cancelText: appLocale.cancel,
+                      confirmText: appLocale.select,
                       initialDate: _currentDateTime,
                       firstDate: _currentDateTime,
                       lastDate: Provider.of<RestTimesState>(context, listen: false).restTaskTimes(context.read<TaskPeriodState>().getTaskPeriodIndex)[AppConstraints.taskEndDateTime],);
@@ -61,8 +62,8 @@ class _TaskRemindDateTimeState extends State<TaskRemindDateTime> {
                     }
                   } : null,
                   icon: const Icon(Icons.date_range),
-                  label: const Text(AppStrings.selectDate,
-                    style: TextStyle(fontSize: 16),
+                  label: Text(appLocale.selectDate,
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ),
                 TextButton.icon(
@@ -70,11 +71,11 @@ class _TaskRemindDateTimeState extends State<TaskRemindDateTime> {
                     final selectedTime = await showTimePicker(
                       context: context,
                       initialTime: TimeOfDay(hour: _argDateTime.hour, minute: _argDateTime.minute),
-                      helpText: AppStrings.selectTime,
-                      hourLabelText: AppStrings.hours,
-                      minuteLabelText: AppStrings.minutes,
-                      cancelText: AppStrings.cancel,
-                      confirmText: AppStrings.select,
+                      helpText: appLocale.selectTime,
+                      hourLabelText: appLocale.hours,
+                      minuteLabelText: appLocale.minutes,
+                      cancelText: appLocale.cancel,
+                      confirmText: appLocale.select,
                     );
                     if (selectedTime != null) {
                       _argDateTime = DateTime(_argDateTime.year, _argDateTime.month, _argDateTime.day, selectedTime.hour, selectedTime.minute);
@@ -82,11 +83,11 @@ class _TaskRemindDateTimeState extends State<TaskRemindDateTime> {
                     }
                     if (_argDateTime.isBefore(_currentDateTime)) {
                       if (!context.mounted) return;
-                      _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectDateTime);}
+                      _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, appLocale.selectCorrectDateTime);}
                   } : null,
                   icon: const Icon(Icons.access_time),
-                  label: const Text(AppStrings.selectTime,
-                  style: TextStyle(fontSize: 16),
+                  label: Text(appLocale.selectTime,
+                  style: const TextStyle(fontSize: 16),
                   ),
                 ),
               ],

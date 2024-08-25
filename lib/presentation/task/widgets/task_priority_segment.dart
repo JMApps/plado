@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/enums/task_priority.dart';
-import '../../../core/strings/app_strings.dart';
 import '../../state/task/task_priority_state.dart';
 
 class TaskPrioritySegment extends StatelessWidget {
@@ -10,24 +10,25 @@ class TaskPrioritySegment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return Consumer<TaskPriorityState>(
       builder: (context, taskPriorityState, _) {
         return SegmentedButton(
           segments: [
             ButtonSegment(
               value: TaskPriority.low.index,
-              label: const Text(AppStrings.low),
-              tooltip: AppStrings.low,
+              label: Text(appLocale.low),
+              tooltip: appLocale.low,
             ),
             ButtonSegment(
               value: TaskPriority.medium.index,
-              label: const Text(AppStrings.medium),
-              tooltip: AppStrings.medium,
+              label: Text(appLocale.medium),
+              tooltip: appLocale.medium,
             ),
             ButtonSegment(
               value: TaskPriority.high.index,
-              label: const Text(AppStrings.high),
-              tooltip: AppStrings.high,
+              label: Text(appLocale.high),
+              tooltip: appLocale.high,
             ),
           ],
           selected: {taskPriorityState.getTaskPriorityIndex},

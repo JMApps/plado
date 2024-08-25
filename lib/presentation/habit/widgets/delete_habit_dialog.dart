@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../../data/state/habit_data_state.dart';
 
 class DeleteHabitDialog extends StatelessWidget {
@@ -14,6 +14,7 @@ class DeleteHabitDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
     return IconButton(
       onPressed: () {
@@ -21,14 +22,14 @@ class DeleteHabitDialog extends StatelessWidget {
           context: context,
           builder: (_) => AlertDialog(
             title: Text(
-              AppStrings.warning,
+              appLocale.warning,
               style: TextStyle(
                 color: appColors.error,
               ),
             ),
-            content: const Text(
-              AppStrings.deleteHabitContent,
-              style: TextStyle(
+            content: Text(
+              appLocale.deleteHabitContent,
+              style: const TextStyle(
                 fontSize: 16,
               ),
             ),
@@ -37,7 +38,7 @@ class DeleteHabitDialog extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text(AppStrings.cancel),
+                child: Text(appLocale.cancel),
               ),
               OutlinedButton(
                 onPressed: () {
@@ -46,7 +47,7 @@ class DeleteHabitDialog extends StatelessWidget {
                   Provider.of<HabitDataState>(context, listen: false).deleteHabit(habitId: habitId);
                 },
                 child: Text(
-                  AppStrings.delete,
+                  appLocale.delete,
                   style: TextStyle(
                     color: appColors.error,
                   ),

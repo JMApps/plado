@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../core/strings/app_strings.dart';
 import '../../core/styles/app_styles.dart';
 import '../../data/state/backup_state.dart';
 
@@ -10,6 +10,7 @@ class BackupDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -18,7 +19,7 @@ class BackupDetailPage extends StatelessWidget {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(AppStrings.backup),
+          title: Text(appLocale.backup),
         ),
         body: SingleChildScrollView(
           padding: AppStyles.padding,
@@ -32,16 +33,16 @@ class BackupDetailPage extends StatelessWidget {
 
                     },
                     shape: AppStyles.shape,
-                    title: const Text(AppStrings.import),
-                    subtitle: const Text(AppStrings.selectImportFile),
+                    title: Text(appLocale.import),
+                    subtitle: Text(appLocale.selectImportFile),
                   ),
                   ListTile(
                     onTap: () async {
 
                     },
                     shape: AppStyles.shape,
-                    title: const Text(AppStrings.export),
-                    subtitle: const Text(AppStrings.selectExportPath),
+                    title: Text(appLocale.export),
+                    subtitle: Text(appLocale.selectExportPath),
                   ),
                 ],
               );

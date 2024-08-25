@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../core/strings/app_strings.dart';
 import '../statistic/items/main_statistic_item.dart';
 
 class StatisticPage extends StatelessWidget {
@@ -8,9 +8,10 @@ class StatisticPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppStrings.statistics),
+        title: Text(appLocale.statistics),
       ),
       body: const MainStatisticItem(),
     );

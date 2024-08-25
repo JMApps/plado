@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../state/task/task_title_state.dart';
 
 class TaskTextField extends StatefulWidget {
@@ -28,6 +28,7 @@ class _TaskTextFieldState extends State<TaskTextField> {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return Consumer<TaskTitleState>(
       builder: (context, taskTitleState, _) {
         return TextField(
@@ -37,8 +38,8 @@ class _TaskTextFieldState extends State<TaskTextField> {
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.done,
           maxLength: 75,
-          decoration: const InputDecoration(
-            hintText: AppStrings.taskHint,
+          decoration: InputDecoration(
+            hintText: appLocale.taskHint,
           ),
           onChanged: (String inputValue) {
             taskTitleState.setTaskTitle = inputValue;

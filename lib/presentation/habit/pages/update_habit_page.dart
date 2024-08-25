@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/habit_entity.dart';
 import '../../state/habit/habit_color_state.dart';
@@ -27,6 +27,7 @@ class UpdateHabitPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -50,7 +51,7 @@ class UpdateHabitPage extends StatelessWidget {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(AppStrings.addingHabit),
+          title: Text(appLocale.addingHabit),
           leading: const MainBackButton(),
           actions: [
             DeleteHabitDialog(habitId: habitModel.habitId),

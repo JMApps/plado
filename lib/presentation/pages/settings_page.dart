@@ -1,13 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:plado/core/routes/name_routes.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../core/routes/name_routes.dart';
 import '../../core/strings/app_constraints.dart';
-import '../../core/strings/app_strings.dart';
 import '../../core/styles/app_styles.dart';
 import '../../data/state/setting_data_state.dart';
 import '../settings/widgets/always_display_switch.dart';
@@ -22,9 +22,10 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppStrings.settings),
+        title: Text(appLocale.settings),
       ),
       body: Scrollbar(
         child: SingleChildScrollView(
@@ -34,74 +35,74 @@ class SettingsPage extends StatelessWidget {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const DescriptionText(text: AppStrings.theme),
+                  DescriptionText(text: appLocale.theme),
                   const AppThemeSegment(),
                   const SizedBox(height: 8),
                   const Divider(indent: 16, endIndent: 16),
-                  const DescriptionText(text: AppStrings.themeColor),
+                  DescriptionText(text: appLocale.themeColor),
                   const ColorThemeList(),
                   const SizedBox(height: 16),
                   const Divider(indent: 16, endIndent: 16),
-                  const DescriptionText(text: AppStrings.display),
+                  DescriptionText(text: appLocale.display),
                   const AlwaysDisplaySwitch(),
                   const SizedBox(height: 8),
                   const Divider(indent: 16, endIndent: 16),
-                  const DescriptionText(text: AppStrings.otherApplications),
+                  DescriptionText(text: appLocale.otherApplications),
                   SocialListTile(
                     onSettingTap: () {
                       _launchUrl(Platform.isAndroid ? AppConstraints.appAndroidStore : AppConstraints.appIOSStore);
                     },
-                    title: Platform.isAndroid ? AppStrings.googlePlay : AppStrings.appStore,
+                    title: Platform.isAndroid ? appLocale.googlePlay : appLocale.appStore,
                     imagePath: Platform.isAndroid ? AppConstraints.androidIconPath : AppConstraints.iOSIconPath,
                   ),
                   const Divider(indent: 16, endIndent: 16),
-                  const DescriptionText(text: AppStrings.weInSocials),
+                  DescriptionText(text: appLocale.weInSocials),
                   SocialListTile(
                     onSettingTap: () {
                       _launchUrl(AppConstraints.telegramChannel);
                     },
-                    title: AppStrings.telegram,
+                    title: appLocale.telegram,
                     imagePath: AppConstraints.telegramIconPath,
                   ),
                   SocialListTile(
                     onSettingTap: () {
                       _launchUrl(AppConstraints.instagramChannel);
                     },
-                    title: AppStrings.instagram,
+                    title: appLocale.instagram,
                     imagePath: AppConstraints.instagramIconPath,
                   ),
                   const Divider(indent: 16, endIndent: 16),
-                  const DescriptionText(text: AppStrings.backup),
+                  DescriptionText(text: appLocale.backup),
                   ShareRateListTile(
                     onSettingTap: () {
                       Navigator.pushNamed(context, NameRoutes.backupDetailPage);
                     },
-                    title: AppStrings.backup,
+                    title: appLocale.backup,
                     icon: Icons.backup_outlined,
                   ),
                   const Divider(indent: 16, endIndent: 16),
-                  const DescriptionText(text: AppStrings.rateApplication),
+                  DescriptionText(text: appLocale.rateApplication),
                   ShareRateListTile(
                     onSettingTap: () {
                       _launchUrl(Platform.isAndroid ? AppConstraints.appLinkAndroid : AppConstraints.appLinkIOS);
                     },
-                    title: AppStrings.rate,
+                    title: appLocale.rate,
                     icon: Icons.star_half_sharp,
                   ),
                   const Divider(indent: 16, endIndent: 16),
-                  const DescriptionText(text: AppStrings.share),
+                  DescriptionText(text: appLocale.share),
                   ShareRateListTile(
                     onSettingTap: () {
                       Share.share(
-                        '${AppStrings.fullAppName}\n\n${AppStrings.iOSVersion}\n${AppConstraints.appLinkIOS}\n\n${AppStrings.androidVersion}\n${AppConstraints.appLinkAndroid}',
+                        '${appLocale.fullAppName}\n\n${appLocale.iOSVersion}\n${AppConstraints.appLinkIOS}\n\n${appLocale.androidVersion}\n${AppConstraints.appLinkAndroid}',
                         sharePositionOrigin: const Rect.fromLTWH(0, 0, 0, 2 / 2),
                       );
                     },
-                    title: AppStrings.share,
+                    title: appLocale.share,
                     icon: Icons.ios_share_rounded,
                   ),
                   const Divider(indent: 16, endIndent: 16),
-                  const DescriptionText(text: AppStrings.version),
+                  DescriptionText(text: appLocale.version),
                   const Padding(
                     padding: AppStyles.paddingHorizontalMini,
                     child: Text(

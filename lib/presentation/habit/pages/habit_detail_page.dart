@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/routes/name_routes.dart';
 import '../../../core/strings/app_constraints.dart';
-import '../../../core/strings/app_strings.dart';
 import '../../../core/strings/database_values.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/models/arguments/habit_model_args.dart';
@@ -67,6 +67,7 @@ class _HabitDetailPageState extends State<HabitDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
     final habitColor = AppStyles.taskHabitColors[widget.habitModel.habitColorIndex];
     return Scaffold(
@@ -98,11 +99,11 @@ class _HabitDetailPageState extends State<HabitDetailPage> {
                   radius: 75,
                   lineWidth: 20,
                   percent: _restRemaininPercentage[AppConstraints.restElapsedPercentage] / 100,
-                  header: const Padding(
+                  header: Padding(
                     padding: AppStyles.paddingBottom,
                     child: Text(
-                      AppStrings.elapsedDays,
-                      style: TextStyle(fontSize: 17),
+                      appLocale.elapsedDays,
+                      style: const TextStyle(fontSize: 17),
                     ),
                   ),
                   center: Text(
@@ -116,7 +117,7 @@ class _HabitDetailPageState extends State<HabitDetailPage> {
                   footer: Padding(
                     padding: AppStyles.paddingTopMini,
                     child: DateTimeItem(
-                      description: AppStrings.start,
+                      description: appLocale.start,
                       dateTime: widget.habitModel.startDateTime,
                       dateFormat: AppConstraints.dateFormat,
                     ),
@@ -131,11 +132,11 @@ class _HabitDetailPageState extends State<HabitDetailPage> {
                   radius: 75,
                   lineWidth: 20,
                   percent: _restRemaininPercentage[AppConstraints.restRemainingPercentage] / 100,
-                  header: const Padding(
+                  header: Padding(
                     padding: AppStyles.paddingBottom,
                     child: Text(
-                      AppStrings.remainingDays,
-                      style: TextStyle(fontSize: 17),
+                      appLocale.remainingDays,
+                      style: const TextStyle(fontSize: 17),
                     ),
                   ),
                   center: Text(
@@ -149,7 +150,7 @@ class _HabitDetailPageState extends State<HabitDetailPage> {
                   footer: Padding(
                     padding: AppStyles.paddingTopMini,
                     child: DateTimeItem(
-                      description: AppStrings.end,
+                      description: appLocale.end,
                       dateTime: widget.habitModel.endDateTime,
                       dateFormat: AppConstraints.dateFormat,
                     ),
@@ -161,7 +162,7 @@ class _HabitDetailPageState extends State<HabitDetailPage> {
             ),
             const SizedBox(height: 16),
             Text(
-              widget.habitModel.endDateTime.isAfter(DateTime.now()) ? AppStrings.today : AppStrings.completed,
+              widget.habitModel.endDateTime.isAfter(DateTime.now()) ? appLocale.today : appLocale.completed,
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,

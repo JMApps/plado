@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../lists/static_habits_list.dart';
 
 class StatisticHabitListPage extends StatelessWidget {
@@ -10,9 +10,10 @@ class StatisticHabitListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppStrings.allHabits),
+        title: Text(appLocale.allHabits),
       ),
       body: const StaticHabitsList(),
     );

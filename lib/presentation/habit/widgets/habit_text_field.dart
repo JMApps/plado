@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../state/habit/habit_title_state.dart';
 
 class HabitTextField extends StatefulWidget {
@@ -34,6 +34,7 @@ class _HabitTextFieldState extends State<HabitTextField> {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return Consumer<HabitTitleState>(
       builder: (BuildContext context, habitTitleState, _) {
         return TextField(
@@ -43,8 +44,8 @@ class _HabitTextFieldState extends State<HabitTextField> {
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.done,
           maxLength: 75,
-          decoration: const InputDecoration(
-            hintText: AppStrings.habitHint,
+          decoration: InputDecoration(
+            hintText: appLocale.habitHint,
           ),
           onChanged: (String inputValue) {
             habitTitleState.setTaskTitle = inputValue;

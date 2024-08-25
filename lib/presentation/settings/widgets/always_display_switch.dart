@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../../data/state/setting_data_state.dart';
 
 class AlwaysDisplaySwitch extends StatelessWidget {
@@ -9,11 +9,12 @@ class AlwaysDisplaySwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return Consumer<SettingDataState>(
       builder: (context, settingDataState, _) {
         return ListTile(
           visualDensity: VisualDensity.compact,
-          title: const Text(AppStrings.displayAlwaysOn),
+          title: Text(appLocale.displayAlwaysOn),
           leading: const Icon(Icons.lightbulb_outline_rounded),
           trailing: Switch(
             value: settingDataState.getAlwaysOnDisplay,

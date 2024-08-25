@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/models/all_habit_count_model.dart';
 import '../../../data/models/all_task_count_model.dart';
@@ -17,6 +17,7 @@ class MainStatisticItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
     return SingleChildScrollView(
       padding: AppStyles.paddingMini,
@@ -30,43 +31,43 @@ class MainStatisticItem extends StatelessWidget {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const DescriptionText(text: AppStrings.tasks),
+                    DescriptionText(text: appLocale.tasks),
                     StaticTaskListTile(
                       taskStatusIndex: 3,
                       taskStatus: allTaskCountModel.all,
-                      title: AppStrings.allTasks,
+                      title: appLocale.allTasks,
                       color: appColors.inversePrimary,
                     ),
                     const Divider(indent: 16, endIndent: 16),
                     StaticTaskListTile(
                       taskStatusIndex: 0,
                       taskStatus: allTaskCountModel.inProgress,
-                      title: AppStrings.inProgress,
+                      title: appLocale.inProgress,
                       color: appColors.secondaryContainer,
                     ),
                     const Divider(indent: 16, endIndent: 16),
                     StaticTaskListTile(
                       taskStatusIndex: 1,
                       taskStatus: allTaskCountModel.complete,
-                      title: AppStrings.completed,
+                      title: appLocale.completed,
                       color: appColors.tertiaryContainer,
                     ),
                     const Divider(indent: 16, endIndent: 16),
                     StaticTaskListTile(
                       taskStatusIndex: 2,
                       taskStatus: allTaskCountModel.canceled,
-                      title: AppStrings.canceled,
+                      title: appLocale.canceled,
                       color: appColors.errorContainer,
                     ),
                   ],
                 );
               } else if (snapshot.hasError) {
-                return const MainErrorText(errorText: AppStrings.errorGetData);
+                return MainErrorText(errorText: appLocale.errorGetData);
               } else {
                 return Container(
                   padding: AppStyles.padding,
                   alignment: Alignment.center,
-                  child: const Text(AppStrings.tasksIsEmpty),
+                  child: Text(appLocale.tasksIsEmpty),
                 );
               }
             },
@@ -79,21 +80,21 @@ class MainStatisticItem extends StatelessWidget {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const DescriptionText(text: AppStrings.habits),
+                    DescriptionText(text: appLocale.habits),
                     StaticHabitListTile(
                       taskStatus: allHabitCountModel.all,
-                      title: AppStrings.allHabits,
+                      title: appLocale.allHabits,
                       color: appColors.inversePrimary,
                     ),
                   ],
                 );
               } else if (snapshot.hasError) {
-                return const MainErrorText(errorText: AppStrings.errorGetData);
+                return MainErrorText(errorText: appLocale.errorGetData);
               } else {
                 return Container(
                   padding: AppStyles.padding,
                   alignment: Alignment.center,
-                  child: const Text(AppStrings.habitsIsEmpty),
+                  child: Text(appLocale.habitsIsEmpty),
                 );
               }
             },

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../core/strings/app_strings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/task_entity.dart';
 import '../../state/task/task_color_state.dart';
@@ -32,6 +32,7 @@ class UpdateTaskPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -58,36 +59,36 @@ class UpdateTaskPage extends StatelessWidget {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(AppStrings.changingTask),
+          title: Text(appLocale.changingTask),
           leading: const MainBackButton(),
           actions: [
             DeleteTaskDialog(taskId: taskModel.taskId),
             ChangeTaskButton(taskId: taskModel.taskId),
           ],
         ),
-        body: const SingleChildScrollView(
+        body: SingleChildScrollView(
           padding: AppStyles.padding,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              TaskTimeIndicator(),
-              SizedBox(height: 16),
-              TaskTextField(),
-              TextDescription(text: AppStrings.timeInterval),
-              SizedBox(height: 8),
-              TaskPeriodSegment(),
-              SizedBox(height: 16),
-              TextDescription(text: AppStrings.priority),
-              SizedBox(height: 8),
-              TaskPrioritySegment(),
-              SizedBox(height: 16),
-              TextDescription(text: AppStrings.color),
-              SizedBox(height: 8),
-              TaskColorList(),
-              SizedBox(height: 16),
-              TextDescription(text: AppStrings.remind),
-              TaskRemindDateTime(),
-              SizedBox(height: 8),
+              const TaskTimeIndicator(),
+              const SizedBox(height: 16),
+              const TaskTextField(),
+              TextDescription(text: appLocale.timeInterval),
+              const SizedBox(height: 8),
+              const TaskPeriodSegment(),
+              const SizedBox(height: 16),
+              TextDescription(text: appLocale.priority),
+              const SizedBox(height: 8),
+              const TaskPrioritySegment(),
+              const SizedBox(height: 16),
+              TextDescription(text: appLocale.color),
+              const SizedBox(height: 8),
+              const TaskColorList(),
+              const SizedBox(height: 16),
+              TextDescription(text: appLocale.remind),
+              const TaskRemindDateTime(),
+              const SizedBox(height: 8),
             ],
           ),
         ),

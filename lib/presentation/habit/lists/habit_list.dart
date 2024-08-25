@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/state/habit_data_state.dart';
 import '../../../domain/entities/habit_entity.dart';
@@ -15,6 +15,7 @@ class HabitList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final sortState = Provider.of<HabitSortState>(context);
     return FutureBuilder<List<HabitEntity>>(
       future: Provider.of<HabitDataState>(context).getAllHabits(
@@ -35,8 +36,8 @@ class HabitList extends StatelessWidget {
         } else if (snapshot.hasError) {
           return MainErrorText(errorText: snapshot.error.toString());
         } else {
-          return const SafeArea(
-            child: TimeIsEmpty(title: AppStrings.addFirstHabit),
+          return SafeArea(
+            child: TimeIsEmpty(title: appLocale.addFirstHabit),
           );
         }
       },

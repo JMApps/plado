@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../state/habit/habit_color_state.dart';
 import '../../state/habit/habit_notification_date_state.dart';
@@ -22,6 +22,7 @@ class CreateHabitPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -45,29 +46,29 @@ class CreateHabitPage extends StatelessWidget {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(AppStrings.addingHabit),
+          title: Text(appLocale.addingHabit),
           leading: const MainBackButton(),
           actions: const [
             AddHabitButton(),
           ],
         ),
-        body: const SingleChildScrollView(
+        body: SingleChildScrollView(
           padding: AppStyles.padding,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              HabitTextField(autofocusState: true),
-              TextDescription(text: AppStrings.dayNumbers),
-              SizedBox(height: 8),
-              HabitPeriodSegment(),
-              SizedBox(height: 16),
-              Divider(indent: 16, endIndent: 16),
-              SizedBox(height: 8),
-              HabitColorList(),
-              SizedBox(height: 8),
-              Divider(indent: 16, endIndent: 16),
-              HabitRemindTime(),
-              Divider(indent: 16, endIndent: 16),
+              const HabitTextField(autofocusState: true),
+              TextDescription(text: appLocale.dayNumbers),
+              const SizedBox(height: 8),
+              const HabitPeriodSegment(),
+              const SizedBox(height: 16),
+              const Divider(indent: 16, endIndent: 16),
+              const SizedBox(height: 8),
+              const HabitColorList(),
+              const SizedBox(height: 8),
+              const Divider(indent: 16, endIndent: 16),
+              const HabitRemindTime(),
+              const Divider(indent: 16, endIndent: 16),
             ],
           ),
         ),

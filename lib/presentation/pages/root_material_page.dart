@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/routes/material_routes.dart';
-import '../../../../core/strings/app_strings.dart';
 import '../../../../core/themes/app_material_styles.dart';
 import '../../data/state/setting_data_state.dart';
 import 'home_page.dart';
@@ -16,8 +16,9 @@ class RootMaterialPage extends StatelessWidget {
     final AppMaterialStyles appMaterialStyles = AppMaterialStyles(themeColorIndex: settingDataState.getColorThemeIndex);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: AppStrings.appName,
-      locale: const Locale('ru'),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      onGenerateTitle: (context) => AppLocalizations.of(context)!.appName,
       theme: appMaterialStyles.lightTheme,
       darkTheme: appMaterialStyles.darkTheme,
       themeMode: settingDataState.getThemeMode,

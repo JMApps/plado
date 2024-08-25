@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/strings/app_constraints.dart';
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/state/task_data_state.dart';
 
@@ -13,13 +13,14 @@ class TasksNumberText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
     return FutureBuilder(
       future: Provider.of<TaskDataState>(context).getTasksNumber(taskPeriodIndex: taskPeriodIndex),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Tooltip(
-            message: AppStrings.tasksNumber,
+            message: appLocale.tasksNumber,
             child: Padding(
               padding: AppStyles.paddingLeftMini,
               child: Text.rich(

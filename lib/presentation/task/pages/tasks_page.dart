@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/strings/app_strings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../../core/styles/app_styles.dart';
 import '../../../core/enums/task_period.dart';
 import '../../../core/routes/name_routes.dart';
@@ -33,9 +33,10 @@ class _TasksPageState extends State<TasksPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppStrings.appName),
+        title: Text(appLocale.appName),
         actions: [
           IconButton(
             onPressed: () {
@@ -45,7 +46,7 @@ class _TasksPageState extends State<TasksPage> with TickerProviderStateMixin {
                 builder: (_) => const TaskSortBottomSheet(),
               );
             },
-            tooltip: AppStrings.sortTasks,
+            tooltip: appLocale.sortTasks,
             icon: const Icon(Icons.sort),
           ),
         ],
@@ -60,12 +61,12 @@ class _TasksPageState extends State<TasksPage> with TickerProviderStateMixin {
           ),
           tabAlignment: TabAlignment.center,
           isScrollable: true,
-          tabs: const [
-            Text(AppStrings.day),
-            Text(AppStrings.week),
-            Text(AppStrings.month),
-            Text(AppStrings.season),
-            Text(AppStrings.year),
+          tabs: [
+            Text(appLocale.day),
+            Text(appLocale.week),
+            Text(appLocale.month),
+            Text(appLocale.season),
+            Text(appLocale.year),
           ],
         ),
       ),
@@ -81,7 +82,7 @@ class _TasksPageState extends State<TasksPage> with TickerProviderStateMixin {
       ),
       floatingActionButton: FloatingActionButton(
         elevation: 0,
-        tooltip: AppStrings.addTask,
+        tooltip: appLocale.addTask,
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         child: const Icon(Icons.add),
         onPressed: () {

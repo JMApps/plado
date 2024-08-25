@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../items/task_order_item.dart';
 import '../items/task_sort_item.dart';
@@ -10,40 +10,41 @@ class TaskSortBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
+    final appLocale = AppLocalizations.of(context)!;
+    return SingleChildScrollView(
       padding: AppStyles.paddingWithoutTopMini,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           ListTile(
-            visualDensity: VisualDensity(horizontal: -4, vertical: -4),
+            visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
             title: Text(
-              AppStrings.sortTasks,
-              style: TextStyle(
+              appLocale.sortTasks,
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            leading: Icon(Icons.sort),
+            leading: const Icon(Icons.sort),
           ),
-          TaskSortItem(title: AppStrings.sortByAddTime, index: 0),
-          TaskSortItem(title: AppStrings.sortByTitle, index: 1),
-          TaskSortItem(title: AppStrings.sortByPriority, index: 2),
-          TaskSortItem(title: AppStrings.sortByColor, index: 3),
+          TaskSortItem(title: appLocale.sortByAddTime, index: 0),
+          TaskSortItem(title: appLocale.sortByTitle, index: 1),
+          TaskSortItem(title: appLocale.sortByPriority, index: 2),
+          TaskSortItem(title: appLocale.sortByColor, index: 3),
           ListTile(
-            visualDensity: VisualDensity(horizontal: -4, vertical: -4),
+            visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
             title: Text(
-              AppStrings.order,
-              style: TextStyle(
+              appLocale.order,
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            leading: Icon(Icons.sort_by_alpha),
+            leading: const Icon(Icons.sort_by_alpha),
           ),
-          TaskOrderItem(title: AppStrings.firstNew, orderIndex: 0),
-          TaskOrderItem(title: AppStrings.firstOld, orderIndex: 1),
+          TaskOrderItem(title: appLocale.firstNew, orderIndex: 0),
+          TaskOrderItem(title: appLocale.firstOld, orderIndex: 1),
         ],
       ),
     );

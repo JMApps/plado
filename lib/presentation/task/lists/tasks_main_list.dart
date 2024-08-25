@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../core/strings/app_strings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../../data/state/task_data_state.dart';
 import '../../../../../domain/entities/task_entity.dart';
 import '../../../core/styles/app_styles.dart';
@@ -24,6 +24,7 @@ class TasksMainList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final taskSortState = Provider.of<TaskSortState>(context);
     return FutureBuilder<List<TaskEntity>>(
       future: Provider.of<TaskDataState>(context).getTasksByMode(
@@ -50,8 +51,8 @@ class TasksMainList extends StatelessWidget {
         } else if (snapshot.hasError) {
           return MainErrorText(errorText: snapshot.error.toString());
         } else {
-          return const SafeArea(
-            child: TimeIsEmpty(title: AppStrings.addFirstTask),
+          return SafeArea(
+            child: TimeIsEmpty(title: appLocale.addFirstTask),
           );
         }
       },

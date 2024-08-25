@@ -2,10 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/enums/task_status.dart';
 import '../../../core/strings/app_constraints.dart';
-import '../../../core/strings/app_strings.dart';
 import '../../../core/strings/database_values.dart';
 import '../../../data/services/notifications/notification_service.dart';
 import '../../../data/state/task_data_state.dart';
@@ -30,6 +30,7 @@ class _AddTaskButtonState extends State<AddTaskButton> {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
     return IconButton(
       onPressed: () {
@@ -38,23 +39,23 @@ class _AddTaskButtonState extends State<AddTaskButton> {
             _currentDateTime = DateTime.now();
             if (DateTime.parse(Provider.of<TaskNotificationDateState>(context, listen: false).getTaskNotificationDate).isAfter(_currentDateTime)) {
               Navigator.of(context).pop();
-              _createTask();
+              _createTask(appLocale.appName);
             } else {
-              _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.selectCorrectDateTime);
+              _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, appLocale.selectCorrectDateTime);
             }
           } else {
             Navigator.of(context).pop();
-            _createTask();
+            _createTask(appLocale.appName);
           }
         } else {
-          _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, AppStrings.enterTaskTitle);
+          _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, appLocale.enterTaskTitle);
         }
       },
-      tooltip: AppStrings.addTask,
+      tooltip: appLocale.addTask,
       icon: const Icon(Icons.check_circle_outlined),
     );
   }
-  void _createTask() {
+  void _createTask(String appName) {
     final String taskTitleState = context.read<TaskTitleState>().getTaskTitle.trim();
     final int taskPeriodIndex = context.read<TaskPeriodState>().getTaskPeriodIndex;
     final int taskPriorityIndex = context.read<TaskPriorityState>().getTaskPriorityIndex;
@@ -70,7 +71,7 @@ class _AddTaskButtonState extends State<AddTaskButton> {
     if (taskIsRemind) {
       final randomNotificationNumber = Random().nextInt(AppConstraints.randomNotificationNumber);
       taskNotificationId = randomNotificationNumber;
-      NotificationService().scheduleNotifications(DateTime.parse(taskDateTime), AppStrings.appName, taskTitleState, randomNotificationNumber);
+      NotificationService().scheduleNotifications(DateTime.parse(taskDateTime), appName, taskTitleState, randomNotificationNumber);
     }
 
     final Map<String, dynamic> taskMap = {

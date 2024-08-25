@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/enums/app_theme.dart';
-import '../../../core/strings/app_strings.dart';
 import '../../../data/state/setting_data_state.dart';
 
 class AppThemeSegment extends StatelessWidget {
@@ -10,6 +10,7 @@ class AppThemeSegment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return Consumer<SettingDataState>(
       builder: (context, settingDataState, _) {
         return SegmentedButton(
@@ -17,18 +18,18 @@ class AppThemeSegment extends StatelessWidget {
           segments: [
             ButtonSegment(
               value: AppTheme.light.index,
-              label: const Text(AppStrings.lightTheme),
-              tooltip: AppStrings.lightTheme,
+              label: Text(appLocale.lightTheme),
+              tooltip: appLocale.lightTheme,
             ),
             ButtonSegment(
               value: AppTheme.dark.index,
-              label: const Text(AppStrings.darkTheme),
-              tooltip: AppStrings.darkTheme,
+              label: Text(appLocale.darkTheme),
+              tooltip: appLocale.darkTheme,
             ),
             ButtonSegment(
               value: AppTheme.system.index,
-              label: const Text(AppStrings.systemTheme),
-              tooltip: AppStrings.systemTheme,
+              label: Text(appLocale.systemTheme),
+              tooltip: appLocale.systemTheme,
             ),
           ],
           selected: {settingDataState.getThemeIndex},

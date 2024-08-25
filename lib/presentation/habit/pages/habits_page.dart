@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/routes/name_routes.dart';
-import '../../../core/strings/app_strings.dart';
 import '../lists/habit_list.dart';
 import '../widgets/habit_sort_bottom_sheet.dart';
 
@@ -10,9 +10,10 @@ class HabitsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppStrings.habits),
+        title: Text(appLocale.habits),
         actions: [
           IconButton(
             onPressed: () {
@@ -22,7 +23,7 @@ class HabitsPage extends StatelessWidget {
                 builder: (_) => const HabitSortBottomSheet(),
               );
             },
-            tooltip: AppStrings.sortHabits,
+            tooltip: appLocale.sortHabits,
             icon: const Icon(Icons.sort),
           ),
         ],
@@ -30,7 +31,7 @@ class HabitsPage extends StatelessWidget {
       body: const HabitList(),
       floatingActionButton: FloatingActionButton(
         elevation: 0,
-        tooltip: AppStrings.addingHabit,
+        tooltip: appLocale.addingHabit,
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         child: const Icon(Icons.add),
         onPressed: () {

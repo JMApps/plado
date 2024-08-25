@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/state/task_data_state.dart';
 import '../../../domain/entities/task_entity.dart';
@@ -19,6 +19,7 @@ class StaticTasksList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return FutureBuilder(
       future: Provider.of<TaskDataState>(context).getTaskByStatus(statusIndex: taskStatusIndex),
       builder: (context, snapshot) {
@@ -42,8 +43,8 @@ class StaticTasksList extends StatelessWidget {
           return Container(
             alignment: Alignment.center,
             padding: AppStyles.padding,
-            child: const TimeIsEmpty(
-              title: AppStrings.tasksIsEmpty,
+            child: TimeIsEmpty(
+              title: appLocale.tasksIsEmpty,
             ),
           );
         }

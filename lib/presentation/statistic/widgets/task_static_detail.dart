@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/strings/app_constraints.dart';
-import '../../../core/strings/app_strings.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/task_entity.dart';
 
@@ -16,13 +16,14 @@ class TaskStaticDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return SingleChildScrollView(
       padding: AppStyles.paddingWithoutTop,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            '${AppStrings.added} ${DateFormat(AppConstraints.dateTimeFormat).format(taskModel.createDateTime)}',
+            '${appLocale.added} ${DateFormat(AppConstraints.dateTimeFormat).format(taskModel.createDateTime)}',
             style: const TextStyle(
               fontSize: 17,
               fontFamily: AppConstraints.fontRobotoSlab,
@@ -30,7 +31,7 @@ class TaskStaticDetail extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           Text(
-            _taskStatus(taskModel.taskStatusIndex),
+            _taskStatus(taskModel.taskStatusIndex, context),
             style: const TextStyle(
               fontSize: 17,
               fontFamily: AppConstraints.fontRobotoSlab,
@@ -42,17 +43,18 @@ class TaskStaticDetail extends StatelessWidget {
     );
   }
 
-  String _taskStatus(int taskStatus) {
+  String _taskStatus(int taskStatus, BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     late String statusMessage;
     switch (taskStatus) {
       case 0:
-        statusMessage = AppStrings.inProgress;
+        statusMessage = appLocale.inProgress;
         break;
       case 1:
-        statusMessage = '${AppStrings.completed}: ${DateFormat(AppConstraints.dateTimeFormat).format(taskModel.completeDateTime)}';
+        statusMessage = '${appLocale.completed}: ${DateFormat(AppConstraints.dateTimeFormat).format(taskModel.completeDateTime)}';
         break;
       case 2:
-        statusMessage = AppStrings.canceled;
+        statusMessage = appLocale.canceled;
     }
     return statusMessage;
   }

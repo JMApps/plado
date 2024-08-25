@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/strings/app_constraints.dart';
-import '../../../core/strings/app_strings.dart';
 import '../../../core/strings/database_values.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/state/habit_data_state.dart';
@@ -18,6 +18,7 @@ class StaticHabitsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return FutureBuilder(
       future: Provider.of<HabitDataState>(context).getAllHabits(orderBy: '${DatabaseValues.dbHabitId} ${AppConstraints.descSort}'),
       builder: (context, snapshot) {
@@ -41,8 +42,8 @@ class StaticHabitsList extends StatelessWidget {
           return Container(
             alignment: Alignment.center,
             padding: AppStyles.padding,
-            child: const TimeIsEmpty(
-              title: AppStrings.habitsIsEmpty,
+            child: TimeIsEmpty(
+              title: appLocale.habitsIsEmpty,
             ),
           );
         }
