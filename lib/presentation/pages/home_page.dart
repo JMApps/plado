@@ -24,19 +24,19 @@ class HomePage extends StatelessWidget {
         selectedItemColor: Theme.of(context).colorScheme.primary,
         items: [
           SalomonBottomBarItem(
-            icon: const Icon(Icons.add_alarm_outlined),
+            icon: const Icon(Icons.check_circle_outline_rounded),
             title: const MainBottomItemText(itemText: AppStrings.tasks),
           ),
           SalomonBottomBarItem(
-            icon: const Icon(Icons.task_alt_rounded),
+            icon: const Icon(Icons.access_time),
             title: const MainBottomItemText(itemText: AppStrings.habits),
           ),
           SalomonBottomBarItem(
-            icon: const Icon(Icons.auto_graph),
+            icon: const Icon(Icons.query_stats_outlined),
             title: const MainBottomItemText(itemText: AppStrings.statistics),
           ),
           SalomonBottomBarItem(
-            icon: const Icon(Icons.settings),
+            icon: const Icon(Icons.settings_outlined),
             title: const MainBottomItemText(itemText: AppStrings.settings),
           ),
         ],

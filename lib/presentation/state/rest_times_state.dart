@@ -10,7 +10,7 @@ import '../../core/styles/app_styles.dart';
 class RestTimesState extends ChangeNotifier {
   DateTime _currentDateTime = DateTime.now();
   Timer? _timer;
-  static const Duration minusMicro = Duration(microseconds: -1);
+  final Duration _minusMicro = const Duration(microseconds: -1);
 
   RestTimesState() {
     _startTimer();
@@ -58,8 +58,8 @@ class RestTimesState extends ChangeNotifier {
       case TaskPeriod.season:
         final seasonData = _getSeasonPeriodData(_currentDateTime);
         taskPeriodData = _calculateTaskPeriodData(
-            startTaskPeriod: seasonData['startSeason'],
-            endTaskPeriod: seasonData['endSeason']
+            startTaskPeriod: seasonData[AppConstraints.startSeason],
+            endTaskPeriod: seasonData[AppConstraints.endSeason]
         );
         break;
       case TaskPeriod.year:
@@ -95,7 +95,7 @@ class RestTimesState extends ChangeNotifier {
       AppConstraints.taskStartDateTime: startTaskPeriod,
       AppConstraints.taskRemaininDateTime: remainingTaskTime,
       AppConstraints.taskElapsedPercentage: elapsedTaskPercentage,
-      AppConstraints.taskEndDateTime: endDateTime.add(minusMicro),
+      AppConstraints.taskEndDateTime: endDateTime.add(_minusMicro),
     };
   }
 
@@ -108,7 +108,7 @@ class RestTimesState extends ChangeNotifier {
 
     return {
       AppConstraints.habitStartDateTime: startHabitPeriod,
-      AppConstraints.habitEndDateTime: endDateTime.add(minusMicro),
+      AppConstraints.habitEndDateTime: endDateTime.add(_minusMicro),
     };
   }
 
@@ -162,8 +162,8 @@ class RestTimesState extends ChangeNotifier {
     final endSeason = DateTime(_getCurrentSeason(currentDateTime.month) == Season.winter ? previousYear : currentYear, endSeasonMonth + 1, 1);
 
     return {
-      'startSeason': startSeason,
-      'endSeason': endSeason,
+      AppConstraints.startSeason: startSeason,
+      AppConstraints.endSeason: endSeason,
     };
   }
 

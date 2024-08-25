@@ -72,7 +72,7 @@ class AppStyles {
     Colors.blueGrey,
     Colors.pinkAccent,
     Colors.teal,
-    Colors.yellow,
+    Colors.brown,
   ];
 
   static const priorityColors = <Color>[

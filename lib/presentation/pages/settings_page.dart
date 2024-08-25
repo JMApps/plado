@@ -70,7 +70,8 @@ class SettingsPage extends StatelessWidget {
                     title: AppStrings.instagram,
                     imagePath: AppConstraints.instagramIconPath,
                   ),
-                  const Divider(indent: 16, endIndent: 16),const DescriptionText(text: AppStrings.backup),
+                  const Divider(indent: 16, endIndent: 16),
+                  const DescriptionText(text: AppStrings.backup),
                   ShareRateListTile(
                     onSettingTap: () {
                       Navigator.pushNamed(context, NameRoutes.backupDetailPage);
