@@ -25,7 +25,7 @@
   "days21": "21 день",
   "days40": "40 дней",
   "days66": "66 дней",
-  "daya90": "90 дней",
+  "days90": "90 дней",
   "priority": "Приоритет",
   "low": "Обычный",
   "medium": "Средний",
@@ -85,6 +85,7 @@
   "shortDay": "д.",
   "shortHour": "ч.",
   "shortMinute": "м.",
+  "language": "Язык",
   "theme": "Тема",
   "lightTheme": "Светлая",
   "darkTheme": "Темная",
@@ -106,9 +107,5 @@
   "share": "Поделиться",
   "version": "Версия",
   "iOSVersion": "Версия iOS:",
-  "androidVersion": "Версия Android:",
-  "googlePlay": "Google Play",
-  "appStore": "App Store",
-  "telegram": "Telegram",
-  "instagram": "Instagram"
+  "androidVersion": "Версия Android:"
 }

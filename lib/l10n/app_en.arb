@@ -85,6 +85,7 @@
   "shortDay": "d.",
   "shortHour": "h.",
   "shortMinute": "m.",
+  "language": "Language",
   "theme": "Theme",
   "lightTheme": "Light",
   "darkTheme": "Dark",
@@ -106,9 +107,5 @@
   "share": "Share",
   "version": "Version",
   "iOSVersion": "iOS Version:",
-  "androidVersion": "Android Version:",
-  "googlePlay": "Google Play",
-  "appStore": "App Store",
-  "telegram": "Telegram",
-  "instagram": "Instagram"
+  "androidVersion": "Android Version:"
 }
