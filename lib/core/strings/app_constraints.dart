@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 class AppConstraints {
   static const int dbVersion = 1;
   static const String dbName = 'plado.db';
@@ -44,4 +46,15 @@ class AppConstraints {
 
   static const String startSeason = 'start_season';
   static const String endSeason = 'end_season';
+
+  static const String googlePlay = 'Google Play';
+  static const String appStore = 'App Store';
+  static const String telegram = 'Telegram';
+  static const String instagram = 'Instagram';
+
+  static const List<String> appLanguages = [
+    'Русский',
+    'English',
+    'Türkiye',
+  ];
 }

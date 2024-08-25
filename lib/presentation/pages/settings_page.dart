@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:plado/presentation/settings/widgets/app_lang_drop_button.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -35,6 +36,9 @@ class SettingsPage extends StatelessWidget {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  DescriptionText(text: appLocale.language),
+                  const AppLangDropButton(),
+                  const Divider(indent: 16, endIndent: 16),
                   DescriptionText(text: appLocale.theme),
                   const AppThemeSegment(),
                   const SizedBox(height: 8),
@@ -52,7 +56,7 @@ class SettingsPage extends StatelessWidget {
                     onSettingTap: () {
                       _launchUrl(Platform.isAndroid ? AppConstraints.appAndroidStore : AppConstraints.appIOSStore);
                     },
-                    title: Platform.isAndroid ? appLocale.googlePlay : appLocale.appStore,
+                    title: Platform.isAndroid ? AppConstraints.googlePlay : AppConstraints.appStore,
                     imagePath: Platform.isAndroid ? AppConstraints.androidIconPath : AppConstraints.iOSIconPath,
                   ),
                   const Divider(indent: 16, endIndent: 16),
@@ -61,14 +65,14 @@ class SettingsPage extends StatelessWidget {
                     onSettingTap: () {
                       _launchUrl(AppConstraints.telegramChannel);
                     },
-                    title: appLocale.telegram,
+                    title: AppConstraints.telegram,
                     imagePath: AppConstraints.telegramIconPath,
                   ),
                   SocialListTile(
                     onSettingTap: () {
                       _launchUrl(AppConstraints.instagramChannel);
                     },
-                    title: appLocale.instagram,
+                    title: AppConstraints.instagram,
                     imagePath: AppConstraints.instagramIconPath,
                   ),
                   const Divider(indent: 16, endIndent: 16),

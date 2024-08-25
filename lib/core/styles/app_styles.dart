@@ -114,4 +114,10 @@ class AppStyles {
     66,
     90,
   ];
+
+  static const List<Locale> appLocales = [
+    Locale('ru', 'RU'),
+    Locale('en', 'EN'),
+    Locale('tr', 'TR'),
+  ];
 }

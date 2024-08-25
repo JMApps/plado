@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 import '../../core/strings/database_values.dart';
 import '../../domain/usecases/setting_use_case.dart';
@@ -9,10 +10,25 @@ class SettingDataState extends ChangeNotifier {
   final SettingUseCase _settingUseCase = SettingUseCase(SettingDataRepository());
 
   Future<void> loadSettings() async {
+    timeago.setLocaleMessages('ru', timeago.RuMessages());
+    timeago.setLocaleMessages('en', timeago.EnMessages());
+    timeago.setLocaleMessages('tr', timeago.TrMessages());
+
     _themeIndex = await _settingUseCase.getSettingIndex(columnName: DatabaseValues.dbAppThemeIndex);
     _alwaysOnDisplay = await _settingUseCase.getSettingIndex(columnName: DatabaseValues.dbAlwaysDisplayIndex) == 1;
     _colorThemeIndex = await _settingUseCase.getSettingIndex(columnName: DatabaseValues.dbColorThemeIndex);
     _updateWakelock();
+  }
+
+  int _localeIndex = 0;
+
+  int get getLocaleIndex => _localeIndex;
+
+  set setLocaleIndex(int localeIndex) {
+    if (_localeIndex != localeIndex) {
+      _localeIndex = localeIndex;
+      notifyListeners();
+    }
   }
 
   late int _themeIndex;
