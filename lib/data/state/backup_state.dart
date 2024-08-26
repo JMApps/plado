@@ -22,30 +22,30 @@ class BackupState extends ChangeNotifier {
 
     String newFileName = 'plado_database_$formattedDate';
 
-    Directory? appDir = await getExternalStorageDirectory();
+    Directory? appDir = Platform.isAndroid ? await getExternalStorageDirectory() : await getApplicationDocumentsDirectory();
     String tempFilePath = join(appDir!.path, '$newFileName.plado');
 
     await File(dbPath).copy(tempFilePath);
 
     final XFile dbFile = XFile(tempFilePath);
-    await Share.shareXFiles([dbFile], text: 'Backup');
+    await Share.shareXFiles([dbFile]);
 
     await File(tempFilePath).delete();
   }
 
   Future<String?> importBackupFile() async {
-    if (Platform.isAndroid) {
-      FilePickerResult? result = await FilePicker.platform.pickFiles();
-      if (result != null) {
-        String? filePath = result.files.single.path;
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    if (result != null) {
+      String? filePath = result.files.single.path;
 
-        Directory? externalDir = await getExternalStorageDirectory();
+      if (filePath != null && filePath.endsWith('.plado')) {
+        Directory? externalDir = Platform.isAndroid ? await getExternalStorageDirectory() : await getApplicationDocumentsDirectory();
 
         if (externalDir != null) {
           String newFileName = AppConstraints.dbName;
           String tempFilePath = join(externalDir.path, newFileName);
 
-          await File(filePath!).copy(tempFilePath);
+          await File(filePath).copy(tempFilePath);
 
           String databasesPath = await getDatabasesPath();
           String dbPath = join(databasesPath, AppConstraints.dbName);
@@ -56,6 +56,8 @@ class BackupState extends ChangeNotifier {
 
           return dbPath;
         }
+      } else {
+        throw Exception('Invalid path');
       }
     }
     return null;

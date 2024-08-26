@@ -63,7 +63,7 @@ class UpdateHabitPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              HabitTextField(autofocusState: false),
+              HabitTextField(),
               Divider(indent: 16, endIndent: 16),
               SizedBox(height: 8),
               HabitColorList(),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/enums/app_theme.dart';
 import '../../../data/state/setting_data_state.dart';
@@ -18,17 +18,26 @@ class AppThemeSegment extends StatelessWidget {
           segments: [
             ButtonSegment(
               value: AppTheme.light.index,
-              label: Text(appLocale.lightTheme),
+              label: Text(
+                appLocale.lightTheme,
+                overflow: TextOverflow.fade,
+              ),
               tooltip: appLocale.lightTheme,
             ),
             ButtonSegment(
               value: AppTheme.dark.index,
-              label: Text(appLocale.darkTheme),
+              label: Text(
+                appLocale.darkTheme,
+                overflow: TextOverflow.fade,
+              ),
               tooltip: appLocale.darkTheme,
             ),
             ButtonSegment(
               value: AppTheme.system.index,
-              label: Text(appLocale.systemTheme),
+              label: Text(
+                appLocale.systemTheme,
+                overflow: TextOverflow.fade,
+              ),
               tooltip: appLocale.systemTheme,
             ),
           ],

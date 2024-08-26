@@ -33,7 +33,7 @@ class _TaskTextFieldState extends State<TaskTextField> {
       builder: (context, taskTitleState, _) {
         return TextField(
           controller: _taskTitleController,
-          autofocus: true,
+          autofocus: context.read<TaskTitleState>().getTaskTitle.isEmpty ? true : false,
           textCapitalization: TextCapitalization.sentences,
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.done,

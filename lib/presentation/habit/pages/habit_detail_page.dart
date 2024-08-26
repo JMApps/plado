@@ -176,7 +176,7 @@ class _HabitDetailPageState extends State<HabitDetailPage> {
                     if (snapshot.hasData) {
                       final List<bool> completedDays = snapshot.data!;
                       return SizedBox(
-                        height: 250,
+                        height: 350,
                         child: PageView.builder(
                           physics: const NeverScrollableScrollPhysics(),
                           controller: _completedDaysController,

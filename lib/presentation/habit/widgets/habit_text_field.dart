@@ -7,10 +7,7 @@ import '../../state/habit/habit_title_state.dart';
 class HabitTextField extends StatefulWidget {
   const HabitTextField({
     super.key,
-    required this.autofocusState,
   });
-
-  final bool autofocusState;
 
   @override
   State<HabitTextField> createState() => _HabitTextFieldState();
@@ -22,8 +19,7 @@ class _HabitTextFieldState extends State<HabitTextField> {
   @override
   void initState() {
     super.initState();
-    _habitTextController = TextEditingController(
-        text: context.read<HabitTitleState>().getHabitTitle);
+    _habitTextController = TextEditingController(text: context.read<HabitTitleState>().getHabitTitle);
   }
 
   @override
@@ -39,7 +35,7 @@ class _HabitTextFieldState extends State<HabitTextField> {
       builder: (BuildContext context, habitTitleState, _) {
         return TextField(
           controller: _habitTextController,
-          autofocus: widget.autofocusState,
+          autofocus: context.read<HabitTitleState>().getHabitTitle.isEmpty ? true : false,
           textCapitalization: TextCapitalization.sentences,
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.done,
