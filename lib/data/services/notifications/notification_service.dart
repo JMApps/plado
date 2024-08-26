@@ -51,7 +51,7 @@ class NotificationService {
         android: _androidDailyNotificationDetails,
         iOS: _iOSDailyNotificationDetails,
       ),
-      androidScheduleMode: AndroidScheduleMode.alarmClock,
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
       matchDateTimeComponents: DateTimeComponents.time,
     );
