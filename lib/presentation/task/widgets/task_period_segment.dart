@@ -28,7 +28,7 @@ class TaskPeriodSegment extends StatelessWidget {
               value: TaskPeriod.week.index,
               label: Text(
                 appLocale.week,
-                overflow: TextOverflow.fade,
+                overflow: TextOverflow.clip,
               ),
               tooltip: appLocale.week,
             ),
@@ -36,7 +36,7 @@ class TaskPeriodSegment extends StatelessWidget {
               value: TaskPeriod.month.index,
               label: Text(
                 appLocale.month,
-                overflow: TextOverflow.fade,
+                overflow: TextOverflow.clip,
               ),
               tooltip: appLocale.month,
             ),
@@ -44,7 +44,7 @@ class TaskPeriodSegment extends StatelessWidget {
               value: TaskPeriod.season.index,
               label: Text(
                 appLocale.season,
-                overflow: TextOverflow.fade,
+                overflow: TextOverflow.clip,
               ),
               tooltip: appLocale.season,
             ),
@@ -52,7 +52,7 @@ class TaskPeriodSegment extends StatelessWidget {
               value: TaskPeriod.year.index,
               label: Text(
                 appLocale.year,
-                overflow: TextOverflow.ellipsis,
+                overflow: TextOverflow.clip,
               ),
               tooltip: appLocale.year,
             ),

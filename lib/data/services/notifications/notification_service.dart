@@ -4,12 +4,15 @@ import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class NotificationService {
+  static const String _logoName = 'ic_stat_notification';
+
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   static const AndroidNotificationDetails _androidDailyNotificationDetails = AndroidNotificationDetails(
     'PlaDo notification channel ID',
     'Notifications',
     channelDescription: 'PlaDo notifications',
+    icon: _logoName,
     importance: Importance.max,
     priority: Priority.max,
   );
@@ -21,7 +24,7 @@ class NotificationService {
       _flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.requestNotificationsPermission();
     }
 
-    const AndroidInitializationSettings androidInitializationSettings = AndroidInitializationSettings('@drawable/ic_notification');
+    const AndroidInitializationSettings androidInitializationSettings = AndroidInitializationSettings(_logoName);
     const DarwinInitializationSettings iOSInitializationSettings = DarwinInitializationSettings();
 
     const InitializationSettings initializationSettings = InitializationSettings(
@@ -52,8 +55,8 @@ class NotificationService {
         iOS: _iOSDailyNotificationDetails,
       ),
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
       matchDateTimeComponents: DateTimeComponents.time,
+      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
     );
   }
 

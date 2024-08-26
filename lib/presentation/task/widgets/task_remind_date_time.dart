@@ -37,7 +37,7 @@ class _TaskRemindDateTimeState extends State<TaskRemindDateTime> {
           children: [
             SwitchListTile(
               shape: AppStyles.shape,
-              visualDensity: VisualDensity.comfortable,
+              visualDensity: const VisualDensity(vertical: -4, horizontal: -4),
               title: DescriptionText(text: appLocale.remind),
               value: remindState.getIsRemind,
               onChanged: (bool onChanged) {
