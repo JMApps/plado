@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plado/data/state/setting_data_state.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -30,7 +31,7 @@ class BackupDetailPage extends StatelessWidget {
                 children: [
                   ListTile(
                     onTap: () async {
-
+                      backupState.importBackupFile();
                     },
                     shape: AppStyles.shape,
                     title: Text(appLocale.import),
@@ -38,7 +39,7 @@ class BackupDetailPage extends StatelessWidget {
                   ),
                   ListTile(
                     onTap: () async {
-
+                      backupState.exportBackupFile();
                     },
                     shape: AppStyles.shape,
                     title: Text(appLocale.export),
