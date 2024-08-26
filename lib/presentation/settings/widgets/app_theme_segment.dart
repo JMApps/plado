@@ -20,7 +20,7 @@ class AppThemeSegment extends StatelessWidget {
               value: AppTheme.light.index,
               label: Text(
                 appLocale.lightTheme,
-                overflow: TextOverflow.clip,
+                overflow: TextOverflow.ellipsis,
               ),
               tooltip: appLocale.lightTheme,
             ),
@@ -28,7 +28,7 @@ class AppThemeSegment extends StatelessWidget {
               value: AppTheme.dark.index,
               label: Text(
                 appLocale.darkTheme,
-                overflow: TextOverflow.clip,
+                overflow: TextOverflow.ellipsis,
               ),
               tooltip: appLocale.darkTheme,
             ),
@@ -36,7 +36,7 @@ class AppThemeSegment extends StatelessWidget {
               value: AppTheme.system.index,
               label: Text(
                 appLocale.systemTheme,
-                overflow: TextOverflow.clip,
+                overflow: TextOverflow.ellipsis,
               ),
               tooltip: appLocale.systemTheme,
             ),

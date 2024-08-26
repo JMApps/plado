@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/enums/task_priority.dart';
 import '../../state/task/task_priority_state.dart';
@@ -17,17 +17,26 @@ class TaskPrioritySegment extends StatelessWidget {
           segments: [
             ButtonSegment(
               value: TaskPriority.low.index,
-              label: Text(appLocale.low),
+              label: Text(
+                appLocale.low,
+                overflow: TextOverflow.ellipsis,
+              ),
               tooltip: appLocale.low,
             ),
             ButtonSegment(
               value: TaskPriority.medium.index,
-              label: Text(appLocale.medium),
+              label: Text(
+                appLocale.medium,
+                overflow: TextOverflow.ellipsis,
+              ),
               tooltip: appLocale.medium,
             ),
             ButtonSegment(
               value: TaskPriority.high.index,
-              label: Text(appLocale.high),
+              label: Text(
+                appLocale.high,
+                overflow: TextOverflow.ellipsis,
+              ),
               tooltip: appLocale.high,
             ),
           ],
