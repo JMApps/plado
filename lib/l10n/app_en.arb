@@ -105,5 +105,6 @@
   "share": "Share",
   "version": "Version",
   "iOSVersion": "iOS version:",
-  "androidVersion": "Android version:"
+  "androidVersion": "Android version:",
+  "backupWarning": "Attention! After importing the backup, it is necessary to reschedule notifications."
 }

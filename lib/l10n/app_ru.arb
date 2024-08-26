@@ -105,5 +105,6 @@
   "share": "Поделиться",
   "version": "Версия",
   "iOSVersion": "Версия iOS:",
-  "androidVersion": "Версия Android:"
+  "androidVersion": "Версия Android:",
+  "backupWarning": "Внимание! После импорта резервной копии необходимо перепланировать уведомления."
 }

@@ -105,5 +105,6 @@
   "share": "Paylaş",
   "version": "Sürüm",
   "iOSVersion": "iOS Sürümü:",
-  "androidVersion": "Android sürümü:"
+  "androidVersion": "Android sürümü:",
+  "backupWarning": "Dikkat! Yedekleme dosyası içe aktarıldıktan sonra bildirimlerin yeniden planlanması gerekmektedir."
 }
