@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
-import '../../../data/state/setting_data_state.dart';
+import '../../state/setting_data_state.dart';
 
 class AppLangDropButton extends StatefulWidget {
   const AppLangDropButton({super.key});

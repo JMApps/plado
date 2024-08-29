@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/styles/app_styles.dart';
-import '../../../data/state/setting_data_state.dart';
+import '../../state/setting_data_state.dart';
 
 class ColorThemeList extends StatelessWidget {
   const ColorThemeList({super.key});

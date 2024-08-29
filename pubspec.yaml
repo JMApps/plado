@@ -17,6 +17,7 @@ dependencies:
 
   # Database
   sqflite: ^2.3.3+1
+  hive_flutter: ^1.1.0
 
   # System
   path: ^1.9.0
@@ -30,7 +31,6 @@ dependencies:
   share_plus: ^10.0.2
   file_picker: ^8.1.2
   permission_handler: ^11.3.1
-  flutter_phoenix: ^1.1.1
 
   # State management
   provider: ^6.1.2

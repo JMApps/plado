@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../../data/state/task_data_state.dart';
 import '../../../../../domain/entities/task_entity.dart';
 import '../../../core/styles/app_styles.dart';
@@ -32,7 +32,7 @@ class TasksMainList extends StatelessWidget {
             taskPeriodIndex: taskPeriodIndex,
             startTime: startDate.toIso8601String(),
             endTime: endDate.toIso8601String(),
-            orderBy: '${AppStyles.taskSortList[taskSortState.getSortIndex]} ${AppStyles.taskOrderList[taskSortState.getOrderIndex]}',
+            orderBy: '${AppStyles.taskSortList[taskSortState.getSortIndex]} ${AppStyles.orderList[taskSortState.getOrderIndex]}',
           ),
           builder: (context, snapshot) {
             if (snapshot.hasData && snapshot.data!.isNotEmpty) {

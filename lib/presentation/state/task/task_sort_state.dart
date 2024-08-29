@@ -1,42 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 
-import '../../../core/strings/database_values.dart';
-import '../../../data/repositories/setting_data_repository.dart';
-import '../../../domain/usecases/setting_use_case.dart';
+import '../../../core/strings/app_constraints.dart';
 
 class TaskSortState extends ChangeNotifier {
-  final SettingUseCase _settingUseCase = SettingUseCase(SettingDataRepository());
+  final Box _mainSettingsBox = Hive.box(AppConstraints.keyMainAppSettingsBox);
 
   TaskSortState() {
-    loadSettings();
+    _sortIndex = _mainSettingsBox.get(AppConstraints.keyTaskSortIndex, defaultValue: 0);
+    _orderIndex = _mainSettingsBox.get(AppConstraints.keyTaskOrderIndex, defaultValue: 0);
   }
 
-  Future<void> loadSettings() async {
-    _sortIndex = await _settingUseCase.getSettingIndex(columnName: DatabaseValues.dbSortTaskIndex);
-    _orderIndex = await _settingUseCase.getSettingIndex(columnName: DatabaseValues.dbSortOrderTaskIndex);
-  }
-
-  int _sortIndex = 0;
+  late int _sortIndex;
 
   int get getSortIndex => _sortIndex;
 
   set setSortIndex(int sortIndex) {
     _sortIndex = sortIndex;
-    _saveSortValue(DatabaseValues.dbSortTaskIndex, _sortIndex);
+    _saveSetting(AppConstraints.keyTaskSortIndex, sortIndex);
     notifyListeners();
   }
 
-  int _orderIndex = 0;
+  late int _orderIndex;
 
   int get getOrderIndex => _orderIndex;
 
   set setOrderIndex(int orderIndex) {
     _orderIndex = orderIndex;
-    _saveSortValue(DatabaseValues.dbSortOrderTaskIndex, _orderIndex);
+    _saveSetting(AppConstraints.keyTaskOrderIndex, orderIndex);
     notifyListeners();
   }
 
-  Future<void> _saveSortValue(String columnName, int settingIndex) async {
-    await _settingUseCase.saveSettingIndex(columnName: columnName, settingIndex: settingIndex);
+  Future<void> _saveSetting(String key, int value) async {
+    await _mainSettingsBox.put(key, value);
   }
 }

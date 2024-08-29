@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/styles/app_styles.dart';
@@ -39,9 +38,6 @@ class _BackupDetailPageState extends State<BackupDetailPage> {
                   ListTile(
                     onTap: () async {
                       await backupState.importBackupFile();
-                      if (context.mounted) {
-                        Phoenix.rebirth(context);
-                      }
                     },
                     shape: AppStyles.shape,
                     title: Text(appLocale.import),

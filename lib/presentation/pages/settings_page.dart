@@ -10,7 +10,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../core/routes/name_routes.dart';
 import '../../core/strings/app_constraints.dart';
 import '../../core/styles/app_styles.dart';
-import '../../data/state/setting_data_state.dart';
+import '../state/setting_data_state.dart';
 import '../settings/widgets/always_display_switch.dart';
 import '../settings/widgets/app_theme_segment.dart';
 import '../settings/widgets/color_theme_list.dart';

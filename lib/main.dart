@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 
+import 'core/strings/app_constraints.dart';
 import 'data/services/notifications/notification_service.dart';
 import 'data/services/plado_database_service.dart';
 import 'data/state/habit_data_state.dart';
-import 'data/state/setting_data_state.dart';
+import 'presentation/state/setting_data_state.dart';
 import 'data/state/task_data_state.dart';
 import 'presentation/pages/root_material_page.dart';
 import 'presentation/state/bottom_nav_index_state.dart';
@@ -16,6 +18,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PladoDatabaseService().initializeDatabase();
   await NotificationService().setupNotification();
+  await Hive.initFlutter();
+  await Hive.openBox(AppConstraints.keyMainAppSettingsBox);
 
   runApp(
     MultiProvider(

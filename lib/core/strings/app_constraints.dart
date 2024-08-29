@@ -55,4 +55,16 @@ class AppConstraints {
     'English',
     'Türkiye',
   ];
+
+  static const String keyMainAppSettingsBox = 'key_main_app_settings_box';
+  static const String keyLocaleIndex = 'key_locale_index';
+  static const String keyThemeIndex = 'key_theme_index';
+  static const String keyAlwaysOnDisplay = 'key_always_on_display';
+  static const String keyColorThemeIndex = 'key_color_theme_index';
+
+  static const String keyTaskSortIndex = 'key_task_sort_index';
+  static const String keyTaskOrderIndex = 'key_task_order_index';
+
+  static const String keyHabitSortIndex = 'key_habit_sort_index';
+  static const String keyHabitOrderIndex = 'key_habit_order_index';
 }

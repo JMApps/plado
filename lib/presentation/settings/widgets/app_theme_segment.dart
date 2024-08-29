@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/enums/app_theme.dart';
-import '../../../data/state/setting_data_state.dart';
+import '../../state/setting_data_state.dart';
 
 class AppThemeSegment extends StatelessWidget {
   const AppThemeSegment({super.key});

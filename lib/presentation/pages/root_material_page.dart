@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/routes/material_routes.dart';
 import '../../../../core/themes/app_material_styles.dart';
-import '../../data/state/setting_data_state.dart';
+import '../state/setting_data_state.dart';
 import 'home_page.dart';
 
 class RootMaterialPage extends StatelessWidget {

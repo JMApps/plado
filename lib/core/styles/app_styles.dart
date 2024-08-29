@@ -98,7 +98,13 @@ class AppStyles {
     DatabaseValues.dbTaskColorIndex,
   ];
 
-  static const taskOrderList = <String> [
+  static const habitSortList = <String> [
+    DatabaseValues.dbHabitId,
+    DatabaseValues.dbHabitTitle,
+    DatabaseValues.dbHabitColorIndex,
+  ];
+
+  static const orderList = <String> [
     AppConstraints.descSort,
     AppConstraints.ascSort,
   ];

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../data/state/setting_data_state.dart';
+import '../../state/setting_data_state.dart';
 
 class AlwaysDisplaySwitch extends StatelessWidget {
   const AlwaysDisplaySwitch({super.key});

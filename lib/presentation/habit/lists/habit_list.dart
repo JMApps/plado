@@ -16,33 +16,36 @@ class HabitList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
-    final sortState = Provider.of<HabitSortState>(context);
-    return FutureBuilder<List<HabitEntity>>(
-      future: Provider.of<HabitDataState>(context).getAllHabits(
-        orderBy: '${sortState.getSort} ${sortState.getOrder}',
-      ),
-      builder: (context, snapshot) {
-        if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-          return Scrollbar(
-            child: ListView.builder(
-              padding: AppStyles.paddingMini,
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                final HabitEntity habitModel = snapshot.data![index];
-                return HabitItem(
-                  habitModel: habitModel,
-                  habitIndex: index,
-                );
-              },
-            ),
-          );
-        } else if (snapshot.hasError) {
-          return MainErrorText(errorText: snapshot.error.toString());
-        } else {
-          return SafeArea(
-            child: TimeIsEmpty(title: appLocale.addFirstHabit),
-          );
-        }
+    return Consumer<HabitSortState>(
+      builder: (BuildContext context, habitSortState, _) {
+        return FutureBuilder<List<HabitEntity>>(
+          future: Provider.of<HabitDataState>(context).getAllHabits(
+            orderBy: '${AppStyles.habitSortList[habitSortState.getSortIndex]} ${AppStyles.orderList[habitSortState.getOrderIndex]}',
+          ),
+          builder: (context, snapshot) {
+            if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+              return Scrollbar(
+                child: ListView.builder(
+                  padding: AppStyles.paddingMini,
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, index) {
+                    final HabitEntity habitModel = snapshot.data![index];
+                    return HabitItem(
+                      habitModel: habitModel,
+                      habitIndex: index,
+                    );
+                  },
+                ),
+              );
+            } else if (snapshot.hasError) {
+              return MainErrorText(errorText: snapshot.error.toString());
+            } else {
+              return SafeArea(
+                child: TimeIsEmpty(title: appLocale.addFirstHabit),
+              );
+            }
+          },
+        );
       },
     );
   }

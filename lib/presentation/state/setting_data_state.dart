@@ -1,27 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:wakelock_plus/wakelock_plus.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:wakelock_plus/wakelock_plus.dart';
 
+import '../../core/strings/app_constraints.dart';
 import '../../core/strings/database_values.dart';
-import '../../domain/usecases/setting_use_case.dart';
-import '../repositories/setting_data_repository.dart';
 
 class SettingDataState extends ChangeNotifier {
-  final SettingUseCase _settingUseCase = SettingUseCase(SettingDataRepository());
+  final Box _mainSettingsBox = Hive.box(AppConstraints.keyMainAppSettingsBox);
 
   SettingDataState() {
-    loadSettings();
-  }
-
-  Future<void> loadSettings() async {
     timeago.setLocaleMessages('ru', timeago.RuMessages());
     timeago.setLocaleMessages('en', timeago.EnMessages());
     timeago.setLocaleMessages('tr', timeago.TrMessages());
 
-    _localeIndex = await _settingUseCase.getSettingIndex(columnName: DatabaseValues.dbLocaleIndex);
-    _themeIndex = await _settingUseCase.getSettingIndex(columnName: DatabaseValues.dbAppThemeIndex);
-    _alwaysOnDisplay = await _settingUseCase.getSettingIndex(columnName: DatabaseValues.dbAlwaysDisplayIndex) == 1;
-    _colorThemeIndex = await _settingUseCase.getSettingIndex(columnName: DatabaseValues.dbColorThemeIndex);
+    _localeIndex = _mainSettingsBox.get(AppConstraints.keyLocaleIndex, defaultValue: 0);
+    _themeIndex = _mainSettingsBox.get(AppConstraints.keyThemeIndex, defaultValue: 2);
+    _alwaysOnDisplay = _mainSettingsBox.get(AppConstraints.keyAlwaysOnDisplay, defaultValue: true);
+    _colorThemeIndex = _mainSettingsBox.get(AppConstraints.keyColorThemeIndex, defaultValue: 0);
     _updateWakelock();
   }
 
@@ -32,7 +28,7 @@ class SettingDataState extends ChangeNotifier {
   set setLocaleIndex(int localeIndex) {
     if (_localeIndex != localeIndex) {
       _localeIndex = localeIndex;
-      _saveSettingIndex(DatabaseValues.dbLocaleIndex, _localeIndex);
+      _saveSetting(DatabaseValues.dbLocaleIndex, localeIndex);
       notifyListeners();
     }
   }
@@ -41,9 +37,9 @@ class SettingDataState extends ChangeNotifier {
 
   int get getThemeIndex => _themeIndex;
 
-  set setThemeIndex(int index) {
-    _themeIndex = index;
-    _saveSettingIndex(DatabaseValues.dbAppThemeIndex, _themeIndex);
+  set setThemeIndex(int themeIndex) {
+    _themeIndex = themeIndex;
+    _saveSetting(DatabaseValues.dbAppThemeIndex, themeIndex);
     notifyListeners();
   }
 
@@ -66,7 +62,7 @@ class SettingDataState extends ChangeNotifier {
 
   set setAlwaysOnDisplay(bool value) {
     _alwaysOnDisplay = value;
-    _saveSettingIndex(DatabaseValues.dbAlwaysDisplayIndex, value ? 1 : 0);
+    _saveSetting(DatabaseValues.dbAlwaysDisplayIndex, value);
     _updateWakelock();
     notifyListeners();
   }
@@ -77,12 +73,12 @@ class SettingDataState extends ChangeNotifier {
 
   set setColorThemeIndex(int colorIndex) {
     _colorThemeIndex = colorIndex;
-    _saveSettingIndex(DatabaseValues.dbColorThemeIndex, colorIndex);
+    _saveSetting(DatabaseValues.dbColorThemeIndex, colorIndex);
     notifyListeners();
   }
 
-  Future<void> _saveSettingIndex(String columnName, int settingIndex) async {
-    await _settingUseCase.saveSettingIndex(columnName: columnName, settingIndex: settingIndex);
+  Future<void> _saveSetting(String key, dynamic value) async {
+    await _mainSettingsBox.put(key, value);
   }
 
   void _updateWakelock() {
