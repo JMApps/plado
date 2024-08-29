@@ -25,16 +25,27 @@ class PladoDatabaseService {
     String databasesPath = await getDatabasesPath();
     String dbPath = join(databasesPath, AppConstraints.dbName);
 
-    bool dbExists = await databaseExists(dbPath);
     Database database;
 
-    if (!dbExists) {
-      database = await openDatabase(dbPath, version: AppConstraints.dbVersion, onCreate: _createDb);
-    } else {
+    bool dbExists = await databaseExists(dbPath);
+    if (dbExists) {
       database = await openDatabase(dbPath);
-      database.setVersion(AppConstraints.dbVersion);
+      int currentVersion = await database.getVersion();
+      if (currentVersion < AppConstraints.dbVersion) {
+        await database.close();
+        await deleteDatabase(dbPath);
+        database = await _createNewDatabase(dbPath);
+      }
+    } else {
+      database = await _createNewDatabase(dbPath);
     }
 
+    return database;
+  }
+
+  Future<Database> _createNewDatabase(String dbPath) async {
+    Database database = await openDatabase(dbPath, version: AppConstraints.dbVersion, onCreate: _createDb);
+    await database.setVersion(AppConstraints.dbVersion);
     return database;
   }
 
@@ -53,7 +64,7 @@ class PladoDatabaseService {
         ${DatabaseValues.dbTaskColorIndex} INTEGER,
         ${DatabaseValues.dbTaskNotificationId} INTEGER,
         ${DatabaseValues.dbTaskNotificationDate} TEXT
-        );
+      );
     ''');
 
     await db.execute('''
@@ -69,7 +80,7 @@ class PladoDatabaseService {
         ${DatabaseValues.dbHabitCompletedDays} TEXT,
         ${DatabaseValues.dbHabitNotificationId} INTEGER,
         ${DatabaseValues.dbHabitNotificationDate} TEXT
-        );
+      );
     ''');
   }
 }
