@@ -42,8 +42,7 @@ class BackupState extends ChangeNotifier {
         Directory? externalDir = Platform.isAndroid ? await getExternalStorageDirectory() : await getApplicationDocumentsDirectory();
 
         if (externalDir != null) {
-          String newFileName = AppConstraints.dbName;
-          String tempFilePath = join(externalDir.path, newFileName);
+          String tempFilePath = join(externalDir.path, AppConstraints.dbName);
 
           await File(filePath).copy(tempFilePath);
 
@@ -51,13 +50,12 @@ class BackupState extends ChangeNotifier {
           String dbPath = join(databasesPath, AppConstraints.dbName);
 
           await File(tempFilePath).copy(dbPath);
-
           await File(tempFilePath).delete();
 
           return dbPath;
         }
       } else {
-        throw Exception('Invalid path');
+        throw Exception('Invalid file path or file type.');
       }
     }
     return null;
