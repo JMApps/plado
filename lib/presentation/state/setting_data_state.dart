@@ -4,7 +4,6 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:wakelock_plus/wakelock_plus.dart';
 
 import '../../core/strings/app_constraints.dart';
-import '../../core/strings/database_values.dart';
 
 class SettingDataState extends ChangeNotifier {
   final Box _mainSettingsBox = Hive.box(AppConstraints.keyMainAppSettingsBox);
@@ -28,7 +27,7 @@ class SettingDataState extends ChangeNotifier {
   set setLocaleIndex(int localeIndex) {
     if (_localeIndex != localeIndex) {
       _localeIndex = localeIndex;
-      _saveSetting(DatabaseValues.dbLocaleIndex, localeIndex);
+      _saveSetting(AppConstraints.keyLocaleIndex, localeIndex);
       notifyListeners();
     }
   }
@@ -39,7 +38,7 @@ class SettingDataState extends ChangeNotifier {
 
   set setThemeIndex(int themeIndex) {
     _themeIndex = themeIndex;
-    _saveSetting(DatabaseValues.dbAppThemeIndex, themeIndex);
+    _saveSetting(AppConstraints.keyThemeIndex, themeIndex);
     notifyListeners();
   }
 
@@ -62,7 +61,7 @@ class SettingDataState extends ChangeNotifier {
 
   set setAlwaysOnDisplay(bool value) {
     _alwaysOnDisplay = value;
-    _saveSetting(DatabaseValues.dbAlwaysDisplayIndex, value);
+    _saveSetting(AppConstraints.keyAlwaysOnDisplay, value);
     _updateWakelock();
     notifyListeners();
   }
@@ -73,7 +72,7 @@ class SettingDataState extends ChangeNotifier {
 
   set setColorThemeIndex(int colorIndex) {
     _colorThemeIndex = colorIndex;
-    _saveSetting(DatabaseValues.dbColorThemeIndex, colorIndex);
+    _saveSetting(AppConstraints.keyColorThemeIndex, colorIndex);
     notifyListeners();
   }
 
