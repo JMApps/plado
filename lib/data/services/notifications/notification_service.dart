@@ -56,7 +56,8 @@ class NotificationService {
   Future<void> scheduleDailyNotifications(int daysCount, DateTime date, String title, String body, int notificationId) async {
     for(int i = 0; i < daysCount; i++) {
       final DateTime timeNotification = date.add(Duration(days: i));
-      await scheduleDateTimeNotifications(timeNotification, title, body, notificationId + i);
+      final int cycleNotificationId = notificationId + i;
+      await scheduleDateTimeNotifications(timeNotification, title, body, cycleNotificationId);
     }
   }
 
