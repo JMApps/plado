@@ -1,6 +1,6 @@
 class AppConstraints {
   static const int dbVersion = 2;
-  static const String dbName = 'plado_database.plado.';
+  static const String dbName = 'plado_database.plado';
   static const String appVersion = '1.0.0+2';
 
   static const String appLinkIOS = 'https://apps.apple.com/app/plado/id0000000000';

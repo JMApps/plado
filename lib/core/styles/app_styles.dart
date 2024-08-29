@@ -139,5 +139,14 @@ class AppStyles {
     Locale('ru', 'RU'),
     Locale('en', 'EN'),
     Locale('tr', 'TR'),
+    Locale('id', 'ID'),
+    Locale('az', 'AZ'),
+    Locale('fr', 'FR'),
+    Locale('it', 'IT'),
+    Locale('uz', 'UZ'),
+    Locale('kk', 'KK'),
+    Locale('tg', 'TG'),
+    Locale('ka', 'KA'),
+    Locale('uk', 'UK'),
   ];
 }

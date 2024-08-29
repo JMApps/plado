@@ -12,6 +12,15 @@ class SettingDataState extends ChangeNotifier {
     timeago.setLocaleMessages('ru', timeago.RuMessages());
     timeago.setLocaleMessages('en', timeago.EnMessages());
     timeago.setLocaleMessages('tr', timeago.TrMessages());
+    timeago.setLocaleMessages('id', timeago.TrMessages());
+    timeago.setLocaleMessages('az', timeago.TrMessages());
+    timeago.setLocaleMessages('fr', timeago.TrMessages());
+    timeago.setLocaleMessages('it', timeago.TrMessages());
+    timeago.setLocaleMessages('uz', timeago.TrMessages());
+    timeago.setLocaleMessages('kk', timeago.TrMessages());
+    timeago.setLocaleMessages('tg', timeago.TrMessages());
+    timeago.setLocaleMessages('ka', timeago.TrMessages());
+    timeago.setLocaleMessages('uk', timeago.TrMessages());
 
     _localeIndex = _mainSettingsBox.get(AppConstraints.keyLocaleIndex, defaultValue: 0);
     _themeIndex = _mainSettingsBox.get(AppConstraints.keyThemeIndex, defaultValue: 2);
