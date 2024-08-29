@@ -11,38 +11,60 @@ import '../../core/strings/app_constraints.dart';
 
 class BackupState extends ChangeNotifier {
   Future<void> exportBackupFile() async {
-    String databasesPath = await getDatabasesPath();
-    String dbPath = join(databasesPath, AppConstraints.dbName);
+    try {
+      String databasesPath = await getDatabasesPath();
+      String dbPath = join(databasesPath, AppConstraints.dbName);
 
-    String formattedDate = DateTime.now().toString()
-        .replaceAll(':', '_')
-        .replaceAll(' ', '_')
-        .replaceAll('.', '_')
-        .replaceAll('-', '_');
+      if (!await File(dbPath).exists()) {
+        throw Exception('Database file does not exist at $dbPath');
+      }
 
-    String newFileName = 'plado_database_$formattedDate';
+      String formattedDate = DateTime.now()
+          .toString()
+          .replaceAll(':', '_')
+          .replaceAll(' ', '_')
+          .replaceAll('.', '_')
+          .replaceAll('-', '_');
 
-    Directory? appDir = Platform.isAndroid ? await getExternalStorageDirectory() : await getApplicationDocumentsDirectory();
-    String tempFilePath = join(appDir!.path, '$newFileName.plado');
+      String newFileName = 'plado_database_$formattedDate';
 
-    await File(dbPath).copy(tempFilePath);
+      Directory? appDir = Platform.isAndroid
+          ? await getExternalStorageDirectory()
+          : await getApplicationDocumentsDirectory();
 
-    final XFile dbFile = XFile(tempFilePath);
-    await Share.shareXFiles([dbFile]);
+      if (appDir == null) {
+        throw Exception('Failed to get application directory.');
+      }
 
-    await File(tempFilePath).delete();
+      String tempFilePath = join(appDir.path, '$newFileName.plado');
+
+      await File(dbPath).copy(tempFilePath);
+
+      final XFile dbFile = XFile(tempFilePath);
+      await Share.shareXFiles([dbFile]);
+
+      await File(tempFilePath).delete();
+    } catch (e) {
+      debugPrint('Error during backup export: $e');
+    }
   }
 
   Future<String?> importBackupFile() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
-    if (result != null) {
-      String? filePath = result.files.single.path;
+    try {
+      FilePickerResult? result = await FilePicker.platform.pickFiles();
+      if (result != null) {
+        String? filePath = result.files.single.path;
 
-      if (filePath != null && filePath.endsWith('.plado')) {
-        Directory? externalDir = Platform.isAndroid ? await getExternalStorageDirectory() : await getApplicationDocumentsDirectory();
+        if (filePath != null && filePath.endsWith('.plado')) {
+          Directory? externalDir = Platform.isAndroid
+              ? await getExternalStorageDirectory()
+              : await getApplicationDocumentsDirectory();
 
-        if (externalDir != null) {
-          String tempFilePath = join(externalDir.path, AppConstraints.dbName);
+          if (externalDir == null) {
+            throw Exception('Failed to get external directory.');
+          }
+
+          String tempFilePath = join(externalDir.path, 'plado_database.plado');
 
           await File(filePath).copy(tempFilePath);
 
@@ -53,11 +75,14 @@ class BackupState extends ChangeNotifier {
           await File(tempFilePath).delete();
 
           return dbPath;
+        } else {
+          throw Exception('Invalid file path or file type.');
         }
-      } else {
-        throw Exception('Invalid file path or file type.');
       }
+      return null;
+    } catch (e) {
+      debugPrint('Error during backup import: $e');
+      return null;
     }
-    return null;
   }
 }
