@@ -53,7 +53,16 @@ class AppConstraints {
   static const List<String> appLanguages = [
     'Русский',
     'English',
-    'Türkiye',
+    'Türkçe',
+    'Indonesian',
+    'Azərbaycan dili',
+    'Français',
+    'Italiano',
+    'Oʻzbekcha',
+    'Қазақша',
+    'Тоҷикӣ',
+    'ქართული',
+    'Українська',
   ];
 
   static const String keyMainAppSettingsBox = 'key_main_app_settings_box';
