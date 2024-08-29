@@ -81,4 +81,10 @@ class NotificationService {
   Future<void> cancelNotificationWithId(int id) async {
     await _flutterLocalNotificationsPlugin.cancel(id);
   }
+
+  Future<void> cancelNotificationWithCount(int id, int daysCount) async {
+    for(int i = 0; i < daysCount; i++) {
+      await _flutterLocalNotificationsPlugin.cancel(id + i);
+    }
+  }
 }

@@ -63,7 +63,7 @@ class _ChangeHabitButtonState extends State<ChangeHabitButton> {
     } else if (habitIsRemind && habitNotificationId > 0) {
       _notificationService.scheduleDailyNotifications(AppStyles.habitPeriodDayList[widget.habitModel.habitPeriodIndex], DateTime.parse(habitNotificationDateTime), habits, habitTitleState, habitNotificationId);
     } else {
-      _notificationService.cancelNotificationWithId(habitNotificationId);
+      _notificationService.cancelNotificationWithCount(habitNotificationId, AppStyles.habitPeriodDayList[widget.habitModel.habitPeriodIndex]);
     }
 
     final Map<String, dynamic> habitMap = {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plado/core/styles/app_styles.dart';
 import 'package:plado/domain/entities/habit_entity.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -47,7 +48,7 @@ class DeleteHabitDialog extends StatelessWidget {
                   Navigator.pop(context);
                   Navigator.pop(context);
                   if (habitModel.notificationId > 0) {
-                    NotificationService().cancelNotificationWithId(habitModel.notificationId);
+                    NotificationService().cancelNotificationWithCount(habitModel.notificationId, AppStyles.habitPeriodDayList[habitModel.habitPeriodIndex]);
                   }
                   Provider.of<HabitDataState>(context, listen: false).deleteHabit(habitId: habitModel.habitId);
                 },
