@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:plado/domain/entities/task_entity.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../data/services/notifications/notification_service.dart';
 import '../../../data/state/task_data_state.dart';
-import '../../state/task/task_notification_id_state.dart';
-import '../../state/task/task_title_state.dart';
+import '../../../domain/entities/task_entity.dart';
 
 class DeleteTaskDialog extends StatefulWidget {
   const DeleteTaskDialog({

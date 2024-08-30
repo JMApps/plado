@@ -29,15 +29,15 @@ class TaskDataRepository implements TaskRepository {
   }
 
   @override
-  Future<List<TaskEntity>> getTasksByMode({required int taskPeriodIndex, required String startTime, required String endTime, required String orderBy}) async {
+  Future<List<TaskEntity>> getTasksByMode({required int taskPeriodIndex, required String startTime, required String endTime, required String orderBy,}) async {
     final Database database = await _pladoDatabaseService.db;
+    final currentDateTime = DateTime.now().toIso8601String();
     final Map<String, dynamic> taskStatusMap = {
       DatabaseValues.dbTaskStatusIndex: 2,
-      DatabaseValues.dbTaskCompleteDateTime: endTime,
+      DatabaseValues.dbTaskCompleteDateTime: currentDateTime,
     };
-    await database.update(DatabaseValues.dbTaskTableName, taskStatusMap, where: '${DatabaseValues.dbTaskPeriodIndex} = ? AND ${DatabaseValues.dbTaskEndDateTime} < ?', whereArgs: [taskPeriodIndex, endTime]);
-
-    final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskPeriodIndex} = ? AND ${DatabaseValues.dbTaskStartDateTime} = ? AND ${DatabaseValues.dbTaskEndDateTime} = ?', whereArgs: [taskPeriodIndex, startTime, endTime], orderBy: 'CASE WHEN ${DatabaseValues.dbTaskStatusIndex} = 1 THEN 1 ELSE 0 END, $orderBy');
+    await database.update(DatabaseValues.dbTaskTableName, taskStatusMap, where: '${DatabaseValues.dbTaskPeriodIndex} = ? AND ${DatabaseValues.dbTaskEndDateTime} < ? AND ${DatabaseValues.dbTaskStatusIndex} != 1', whereArgs: [taskPeriodIndex, currentDateTime]);
+    final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskPeriodIndex} = ? AND ${DatabaseValues.dbTaskStartDateTime} <= ? AND ${DatabaseValues.dbTaskEndDateTime} >= ?', whereArgs: [taskPeriodIndex, currentDateTime, currentDateTime], orderBy: 'CASE WHEN ${DatabaseValues.dbTaskStatusIndex} = 1 THEN 1 ELSE 0 END, $orderBy');
     final List<TaskEntity> tasksByMode = resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
     return tasksByMode;
   }
