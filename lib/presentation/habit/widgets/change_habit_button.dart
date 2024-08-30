@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:plado/core/styles/app_styles.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -8,6 +9,7 @@ import '../../../core/strings/app_constraints.dart';
 import '../../../core/strings/database_values.dart';
 import '../../../data/services/notifications/notification_service.dart';
 import '../../../data/state/habit_data_state.dart';
+import '../../../domain/entities/habit_entity.dart';
 import '../../state/habit/habit_color_state.dart';
 import '../../state/habit/habit_notification_date_state.dart';
 import '../../state/habit/habit_notification_id_state.dart';
@@ -17,16 +19,17 @@ import '../../state/habit/habit_title_state.dart';
 class ChangeHabitButton extends StatefulWidget {
   const ChangeHabitButton({
     super.key,
-    required this.habitId,
+    required this.habitModel,
   });
 
-  final int habitId;
+  final HabitEntity habitModel;
 
   @override
   State<ChangeHabitButton> createState() => _ChangeHabitButtonState();
 }
 
 class _ChangeHabitButtonState extends State<ChangeHabitButton> {
+  final NotificationService _notificationService = NotificationService();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +39,7 @@ class _ChangeHabitButtonState extends State<ChangeHabitButton> {
       onPressed: () {
         if (Provider.of<HabitTitleState>(context, listen: false).getHabitTitle.trim().isNotEmpty) {
           Navigator.of(context).pop();
-          _updateHabit(appLocale.appName);
+          _updateHabit(appLocale.habits);
         } else {
           _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, appLocale.enterHabitTitle);
         }
@@ -46,27 +49,31 @@ class _ChangeHabitButtonState extends State<ChangeHabitButton> {
     );
   }
 
-  void _updateHabit(String appName) {
+  void _updateHabit(String habits) {
     final String habitTitleState = context.read<HabitTitleState>().getHabitTitle.trim();
     final int habitColorIndex = context.read<HabitColorState>().getColorIndex;
     final bool habitIsRemind = context.read<HabitRemindState>().getIsRemind;
     int habitNotificationId = context.read<HabitNotificationIdState>().getNotificationId;
-    final String habitDateTime = context.read<HabitNotificationDateState>().getHabitNotificationDate;
+    final String habitNotificationDateTime = context.read<HabitNotificationDateState>().getHabitNotificationDate;
 
-    if (habitIsRemind) {
-      final randomNotificationNumber = Random.secure().nextInt(AppConstraints.randomNotificationNumber);
+    if (habitIsRemind && habitNotificationId == 0) {
+      final randomNotificationNumber = Random().nextInt(AppConstraints.randomNotificationNumber);
       habitNotificationId = randomNotificationNumber;
-      NotificationService().scheduleNotifications(DateTime.parse(habitDateTime), appName, habitTitleState, randomNotificationNumber);
+      _notificationService.scheduleDailyNotifications(AppStyles.habitPeriodDayList[widget.habitModel.habitPeriodIndex], DateTime.parse(habitNotificationDateTime), habits, habitTitleState, randomNotificationNumber);
+    } else if (habitIsRemind && habitNotificationId > 0) {
+      _notificationService.scheduleDailyNotifications(AppStyles.habitPeriodDayList[widget.habitModel.habitPeriodIndex], DateTime.parse(habitNotificationDateTime), habits, habitTitleState, habitNotificationId);
+    } else {
+      _notificationService.cancelNotificationWithId(habitNotificationId);
     }
 
     final Map<String, dynamic> habitMap = {
       DatabaseValues.dbHabitTitle: habitTitleState,
       DatabaseValues.dbHabitColorIndex: habitColorIndex,
       DatabaseValues.dbHabitNotificationId: habitNotificationId,
-      DatabaseValues.dbHabitNotificationDate: habitDateTime,
+      DatabaseValues.dbHabitNotificationDate: habitNotificationDateTime,
     };
 
-    Provider.of<HabitDataState>(context, listen: false).updateHabit(habitId: widget.habitId, habitMap: habitMap);
+    Provider.of<HabitDataState>(context, listen: false).updateHabit(habitId: widget.habitModel.habitId, habitMap: habitMap);
   }
 
   void _showScaffoldMessage(Color color, Color textColor, String message) {

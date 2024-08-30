@@ -17,14 +17,11 @@ void main() async {
   await PladoDatabaseService().initializeDatabase();
   await NotificationService().setupNotification();
 
-  final settingDataState = SettingDataState();
-  await settingDataState.loadSettings();
-
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => settingDataState,
+          create: (_) => SettingDataState(),
         ),
         ChangeNotifierProvider(
           create: (_) => BottomNavIndexState(),

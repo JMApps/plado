@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:plado/domain/entities/task_entity.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../data/services/notifications/notification_service.dart';
 import '../../../data/state/task_data_state.dart';
+import '../../state/task/task_notification_id_state.dart';
+import '../../state/task/task_title_state.dart';
 
-class DeleteTaskDialog extends StatelessWidget {
+class DeleteTaskDialog extends StatefulWidget {
   const DeleteTaskDialog({
     super.key,
-    required this.taskId,
+    required this.taskModel,
   });
 
-  final int taskId;
+  final TaskEntity taskModel;
 
+  @override
+  State<DeleteTaskDialog> createState() => _DeleteTaskDialogState();
+}
+
+class _DeleteTaskDialogState extends State<DeleteTaskDialog> {
   @override
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
@@ -44,7 +53,10 @@ class DeleteTaskDialog extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context);
                   Navigator.pop(context);
-                  Provider.of<TaskDataState>(context, listen: false).deleteTask(taskId: taskId);
+                  if (widget.taskModel.notificationId > 0) {
+                    NotificationService().cancelNotificationWithId(widget.taskModel.notificationId);
+                  }
+                  Provider.of<TaskDataState>(context, listen: false).deleteTask(taskId: widget.taskModel.taskId);
                 },
                 child: Text(
                   appLocale.delete,

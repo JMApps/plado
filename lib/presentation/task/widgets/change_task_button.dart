@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:plado/domain/entities/task_entity.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -20,10 +21,10 @@ import '../../state/task/task_title_state.dart';
 class ChangeTaskButton extends StatefulWidget {
   const ChangeTaskButton({
     super.key,
-    required this.taskId,
+    required this.taskModel,
   });
 
-  final int taskId;
+  final TaskEntity taskModel;
 
   @override
   State<ChangeTaskButton> createState() => _ChangeTaskButtonState();
@@ -31,6 +32,7 @@ class ChangeTaskButton extends StatefulWidget {
 
 class _ChangeTaskButtonState extends State<ChangeTaskButton> {
   DateTime _currentDateTime = DateTime.now();
+  final NotificationService _notificationService = NotificationService();
 
   @override
   Widget build(BuildContext context) {
@@ -43,13 +45,13 @@ class _ChangeTaskButtonState extends State<ChangeTaskButton> {
             _currentDateTime = DateTime.now();
             if (DateTime.parse(Provider.of<TaskNotificationDateState>(context, listen: false).getTaskNotificationDate).isAfter(_currentDateTime)) {
               Navigator.of(context).pop();
-              _createTask(appLocale.appName);
+              _updateTask(appLocale.tasks);
             } else {
               _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, appLocale.selectCorrectDateTime);
             }
           } else {
             Navigator.of(context).pop();
-            _createTask(appLocale.appName);
+            _updateTask(appLocale.tasks);
           }
         } else {
           _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, appLocale.enterTaskTitle);
@@ -60,23 +62,27 @@ class _ChangeTaskButtonState extends State<ChangeTaskButton> {
     );
   }
 
-  void _createTask(String appName) {
+  void _updateTask(String tasks) {
     final String taskTitleState = context.read<TaskTitleState>().getTaskTitle.trim();
     final int taskPeriodIndex = context.read<TaskPeriodState>().getTaskPeriodIndex;
     final int taskPriorityIndex = context.read<TaskPriorityState>().getTaskPriorityIndex;
     final int taskColorIndex = context.read<TaskColorState>().getColorIndex;
     final bool taskIsRemind = context.read<TaskRemindState>().getIsRemind;
     int taskNotificationId = context.read<TaskNotificationIdState>().getNotificationId;
-    final String taskDateTime = context.read<TaskNotificationDateState>().getTaskNotificationDate;
+    final String taskNotificationDateTime = context.read<TaskNotificationDateState>().getTaskNotificationDate;
 
     Map<String, dynamic> restTimePeriods = Provider.of<RestTimesState>(context, listen: false).restTaskTimes(taskPeriodIndex);
     DateTime startTime = restTimePeriods[AppConstraints.taskStartDateTime];
     DateTime endTime = restTimePeriods[AppConstraints.taskEndDateTime];
 
-    if (taskIsRemind) {
+    if (taskIsRemind && taskNotificationId == 0) {
       final randomNotificationNumber = Random().nextInt(AppConstraints.randomNotificationNumber);
       taskNotificationId = randomNotificationNumber;
-      NotificationService().scheduleNotifications(DateTime.parse(taskDateTime), appName, taskTitleState, randomNotificationNumber);
+      _notificationService.scheduleTimeNotifications(DateTime.parse(taskNotificationDateTime), tasks, taskTitleState, randomNotificationNumber);
+    } else if (taskIsRemind && taskNotificationId > 0) {
+      _notificationService.scheduleTimeNotifications(DateTime.parse(taskNotificationDateTime), tasks, taskTitleState, taskNotificationId);
+    } else {
+      _notificationService.cancelNotificationWithId(taskNotificationId);
     }
 
     final Map<String, dynamic> taskMap = {
@@ -87,10 +93,10 @@ class _ChangeTaskButtonState extends State<ChangeTaskButton> {
       DatabaseValues.dbTaskPriorityIndex: taskPriorityIndex,
       DatabaseValues.dbTaskColorIndex: taskColorIndex,
       DatabaseValues.dbTaskNotificationId: taskNotificationId,
-      DatabaseValues.dbTaskNotificationDate: taskDateTime,
+      DatabaseValues.dbTaskNotificationDate: taskNotificationDateTime,
     };
 
-    Provider.of<TaskDataState>(context, listen: false).updateTask(taskId: widget.taskId, taskMap: taskMap);
+    Provider.of<TaskDataState>(context, listen: false).updateTask(taskId: widget.taskModel.taskId, taskMap: taskMap);
   }
 
   void _showScaffoldMessage(Color color, Color textColor, String message) {

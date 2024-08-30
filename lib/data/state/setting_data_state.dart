@@ -9,6 +9,10 @@ import '../repositories/setting_data_repository.dart';
 class SettingDataState extends ChangeNotifier {
   final SettingUseCase _settingUseCase = SettingUseCase(SettingDataRepository());
 
+  SettingDataState() {
+    loadSettings();
+  }
+
   Future<void> loadSettings() async {
     timeago.setLocaleMessages('ru', timeago.RuMessages());
     timeago.setLocaleMessages('en', timeago.EnMessages());

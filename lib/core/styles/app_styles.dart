@@ -8,6 +8,8 @@ import '../enums/habit_period.dart';
 import '../enums/task_period.dart';
 import '../enums/task_priority.dart';
 import '../enums/task_status.dart';
+import '../strings/app_constraints.dart';
+import '../strings/database_values.dart';
 
 class AppStyles {
   static const padding = EdgeInsets.all(16);
@@ -87,6 +89,18 @@ class AppStyles {
     TaskPeriod.month,
     TaskPeriod.season,
     TaskPeriod.year,
+  ];
+
+  static const taskSortList = <String> [
+    DatabaseValues.dbTaskId,
+    DatabaseValues.dbTaskTitle,
+    DatabaseValues.dbTaskPriorityIndex,
+    DatabaseValues.dbTaskColorIndex,
+  ];
+
+  static const taskOrderList = <String> [
+    AppConstraints.descSort,
+    AppConstraints.ascSort,
   ];
 
   static const taskPriorityList = <TaskPriority> [

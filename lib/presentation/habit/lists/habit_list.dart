@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/styles/app_styles.dart';
 import '../../../data/state/habit_data_state.dart';
@@ -29,7 +29,10 @@ class HabitList extends StatelessWidget {
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 final HabitEntity habitModel = snapshot.data![index];
-                return HabitItem(habitModel: habitModel);
+                return HabitItem(
+                  habitModel: habitModel,
+                  habitIndex: index,
+                );
               },
             ),
           );

@@ -62,8 +62,8 @@ class UpdateTaskPage extends StatelessWidget {
           title: Text(appLocale.changingTask),
           leading: const MainBackButton(),
           actions: [
-            DeleteTaskDialog(taskId: taskModel.taskId),
-            ChangeTaskButton(taskId: taskModel.taskId),
+            DeleteTaskDialog(taskModel: taskModel),
+            ChangeTaskButton(taskModel: taskModel),
           ],
         ),
         body: SingleChildScrollView(
@@ -86,7 +86,6 @@ class UpdateTaskPage extends StatelessWidget {
               const SizedBox(height: 8),
               const TaskColorList(),
               const SizedBox(height: 16),
-              TextDescription(text: appLocale.remind),
               const TaskRemindDateTime(),
               const SizedBox(height: 8),
             ],

@@ -39,13 +39,13 @@ class _AddTaskButtonState extends State<AddTaskButton> {
             _currentDateTime = DateTime.now();
             if (DateTime.parse(Provider.of<TaskNotificationDateState>(context, listen: false).getTaskNotificationDate).isAfter(_currentDateTime)) {
               Navigator.of(context).pop();
-              _createTask(appLocale.appName);
+              _createTask(appLocale.tasks);
             } else {
               _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, appLocale.selectCorrectDateTime);
             }
           } else {
             Navigator.of(context).pop();
-            _createTask(appLocale.appName);
+            _createTask(appLocale.tasks);
           }
         } else {
           _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, appLocale.enterTaskTitle);
@@ -55,7 +55,7 @@ class _AddTaskButtonState extends State<AddTaskButton> {
       icon: const Icon(Icons.check_circle_outlined),
     );
   }
-  void _createTask(String appName) {
+  void _createTask(String tasks) {
     final String taskTitleState = context.read<TaskTitleState>().getTaskTitle.trim();
     final int taskPeriodIndex = context.read<TaskPeriodState>().getTaskPeriodIndex;
     final int taskPriorityIndex = context.read<TaskPriorityState>().getTaskPriorityIndex;
@@ -71,7 +71,7 @@ class _AddTaskButtonState extends State<AddTaskButton> {
     if (taskIsRemind) {
       final randomNotificationNumber = Random().nextInt(AppConstraints.randomNotificationNumber);
       taskNotificationId = randomNotificationNumber;
-      NotificationService().scheduleNotifications(DateTime.parse(taskDateTime), appName, taskTitleState, randomNotificationNumber);
+      NotificationService().scheduleTimeNotifications(DateTime.parse(taskDateTime), tasks, taskTitleState, randomNotificationNumber);
     }
 
     final Map<String, dynamic> taskMap = {

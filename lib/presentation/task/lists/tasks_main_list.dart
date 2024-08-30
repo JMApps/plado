@@ -25,36 +25,39 @@ class TasksMainList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
-    final taskSortState = Provider.of<TaskSortState>(context);
-    return FutureBuilder<List<TaskEntity>>(
-      future: Provider.of<TaskDataState>(context).getTasksByMode(
-        taskPeriodIndex: taskPeriodIndex,
-        startTime: startDate.toIso8601String(),
-        endTime: endDate.toIso8601String(),
-        orderBy: '${taskSortState.getSort} ${taskSortState.getOrder}',
-      ),
-      builder: (context, snapshot) {
-        if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-          return Scrollbar(
-            child: ListView.builder(
-              padding: AppStyles.paddingWithoutBottomMini,
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                final TaskEntity taskModel = snapshot.data![index];
-                return TaskItem(
-                  taskModel: taskModel,
-                  index: index,
-                );
-              },
-            ),
-          );
-        } else if (snapshot.hasError) {
-          return MainErrorText(errorText: snapshot.error.toString());
-        } else {
-          return SafeArea(
-            child: TimeIsEmpty(title: appLocale.addFirstTask),
-          );
-        }
+    return Consumer<TaskSortState>(
+      builder: (BuildContext context, taskSortState, _) {
+        return FutureBuilder<List<TaskEntity>>(
+          future: Provider.of<TaskDataState>(context).getTasksByMode(
+            taskPeriodIndex: taskPeriodIndex,
+            startTime: startDate.toIso8601String(),
+            endTime: endDate.toIso8601String(),
+            orderBy: '${AppStyles.taskSortList[taskSortState.getSortIndex]} ${AppStyles.taskOrderList[taskSortState.getOrderIndex]}',
+          ),
+          builder: (context, snapshot) {
+            if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+              return Scrollbar(
+                child: ListView.builder(
+                  padding: AppStyles.paddingWithoutBottomMini,
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, index) {
+                    final TaskEntity taskModel = snapshot.data![index];
+                    return TaskItem(
+                      taskModel: taskModel,
+                      index: index,
+                    );
+                  },
+                ),
+              );
+            } else if (snapshot.hasError) {
+              return MainErrorText(errorText: snapshot.error.toString());
+            } else {
+              return SafeArea(
+                child: TimeIsEmpty(title: appLocale.addFirstTask),
+              );
+            }
+          },
+        );
       },
     );
   }

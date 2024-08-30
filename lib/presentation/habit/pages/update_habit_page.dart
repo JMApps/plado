@@ -54,8 +54,8 @@ class UpdateHabitPage extends StatelessWidget {
           title: Text(appLocale.addingHabit),
           leading: const MainBackButton(),
           actions: [
-            DeleteHabitDialog(habitId: habitModel.habitId),
-            ChangeHabitButton(habitId: habitModel.habitId),
+            DeleteHabitDialog(habitModel: habitModel),
+            ChangeHabitButton(habitModel: habitModel),
           ],
         ),
         body: const SingleChildScrollView(

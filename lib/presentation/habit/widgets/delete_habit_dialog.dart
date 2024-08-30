@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:plado/domain/entities/habit_entity.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../data/services/notifications/notification_service.dart';
 import '../../../data/state/habit_data_state.dart';
 
 class DeleteHabitDialog extends StatelessWidget {
   const DeleteHabitDialog({
     super.key,
-    required this.habitId,
+    required this.habitModel,
   });
 
-  final int habitId;
+  final HabitEntity habitModel;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,10 @@ class DeleteHabitDialog extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context);
                   Navigator.pop(context);
-                  Provider.of<HabitDataState>(context, listen: false).deleteHabit(habitId: habitId);
+                  if (habitModel.notificationId > 0) {
+                    NotificationService().cancelNotificationWithId(habitModel.notificationId);
+                  }
+                  Provider.of<HabitDataState>(context, listen: false).deleteHabit(habitId: habitModel.habitId);
                 },
                 child: Text(
                   appLocale.delete,

@@ -16,9 +16,11 @@ class HabitItem extends StatelessWidget {
   const HabitItem({
     super.key,
     required this.habitModel,
+    required this.habitIndex,
   });
 
   final HabitEntity habitModel;
+  final int habitIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +41,6 @@ class HabitItem extends StatelessWidget {
             arguments: HabitModelArgs(habitModel: habitModel),
           );
         },
-        onLongPress: () {
-          Navigator.pushNamed(
-            context,
-            NameRoutes.updateHabitPage,
-            arguments: HabitModelArgs(habitModel: habitModel),
-          );
-        },
         title: Text(
           habitModel.habitTitle,
           style: const TextStyle(
@@ -59,16 +54,17 @@ class HabitItem extends StatelessWidget {
             fontFamily: AppConstraints.fontRobotoSlab,
           ),
         ),
-        leading: CircleAvatar(
-          backgroundColor: appTheme.colorScheme.onSecondary,
-          child: Text(
-            habitModel.habitId.toString(),
-            style: const TextStyle(
-              fontFamily: AppConstraints.fontRobotoSlab,
-            ),
-          ),
+        trailing: IconButton(
+          onPressed: () {
+            Navigator.pushNamed(
+              context,
+              NameRoutes.updateHabitPage,
+              arguments: HabitModelArgs(habitModel: habitModel),
+            );
+          },
+          icon: const Icon(Icons.info_outline),
         ),
-        trailing: Stack(
+        leading: Stack(
           alignment: Alignment.center,
           children: [
             Transform(

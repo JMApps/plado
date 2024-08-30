@@ -36,14 +36,7 @@ class NotificationService {
     tz.initializeTimeZones();
   }
 
-  Future<void> scheduleDailyNotifications(DateTime startDate, String title, String body, int notificationId, int daysCount) async {
-    for (int i = 0; i < daysCount; i++) {
-      DateTime notificationDate = startDate.add(Duration(days: i));
-      await scheduleNotifications(notificationDate, title, body, notificationId + i);
-    }
-  }
-
-  Future<void> scheduleNotifications(DateTime date, String title, String body, int notificationId) async {
+  Future<void> scheduleTimeNotifications(DateTime date, String title, String body, int notificationId) async {
     var tzDateNotification = tz.TZDateTime.from(date, tz.local);
     await _flutterLocalNotificationsPlugin.zonedSchedule(
       notificationId,
@@ -56,6 +49,30 @@ class NotificationService {
       ),
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       matchDateTimeComponents: DateTimeComponents.time,
+      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+    );
+  }
+
+  Future<void> scheduleDailyNotifications(int daysCount, DateTime date, String title, String body, int notificationId) async {
+    for(int i = 0; i < daysCount; i++) {
+      final DateTime timeNotification = date.add(Duration(days: i));
+      await scheduleDateTimeNotifications(timeNotification, title, body, notificationId + i);
+    }
+  }
+
+  Future<void> scheduleDateTimeNotifications(DateTime date, String title, String body, int notificationId) async {
+    var tzDateNotification = tz.TZDateTime.from(DateTime(date.year, date.month, date.day, date.hour, date.minute), tz.local);
+    await _flutterLocalNotificationsPlugin.zonedSchedule(
+      notificationId,
+      title,
+      body,
+      tzDateNotification,
+      const NotificationDetails(
+        android: _androidDailyNotificationDetails,
+        iOS: _iOSDailyNotificationDetails,
+      ),
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      matchDateTimeComponents: DateTimeComponents.dateAndTime,
       uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
     );
   }

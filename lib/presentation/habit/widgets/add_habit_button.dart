@@ -35,7 +35,7 @@ class _AddHabitButtonState extends State<AddHabitButton> {
       onPressed: () {
         if (Provider.of<HabitTitleState>(context, listen: false).getHabitTitle.trim().isNotEmpty) {
           Navigator.of(context).pop();
-          _createHabit(appLocale.appName);
+          _createHabit(appLocale.habits);
         } else {
           _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, appLocale.enterHabitTitle);
         }
@@ -45,7 +45,7 @@ class _AddHabitButtonState extends State<AddHabitButton> {
     );
   }
 
-  void _createHabit(String appName) {
+  void _createHabit(String habits) {
     final String habitTitleState = context.read<HabitTitleState>().getHabitTitle.trim();
     final int habitPeriodIndex = context.read<HabitPeriodState>().getHabitPeriodIndex;
     final int habitColorIndex = context.read<HabitColorState>().getColorIndex;
@@ -61,7 +61,7 @@ class _AddHabitButtonState extends State<AddHabitButton> {
     if (habitIsRemind) {
       final randomNotificationNumber = Random.secure().nextInt(AppConstraints.randomNotificationNumber);
       habitNotificationId = randomNotificationNumber;
-      NotificationService().scheduleNotifications(DateTime.parse(habitDateTime), appName, habitTitleState, randomNotificationNumber);
+      NotificationService().scheduleDailyNotifications(AppStyles.habitPeriodDayList[habitPeriodIndex], DateTime.parse(habitDateTime), habits, habitTitleState, randomNotificationNumber);
     }
 
     final Map<String, dynamic> habitMap = {
