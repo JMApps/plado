@@ -5,8 +5,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
-import '../../../data/state/habit_data_state.dart';
 import '../../../domain/entities/habit_entity.dart';
+import '../../../domain/usecases/habit_use_case.dart';
 import '../../habit/items/date_time_item.dart';
 import '../../state/rest_times_state.dart';
 import '../../widgets/main_error_text.dart';
@@ -63,7 +63,7 @@ class _HabitStaticDetailPageState extends State<HabitStaticDetailPage> {
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
-    final habitColor = AppStyles.taskHabitColors[widget.habitModel.habitColorIndex];
+    final habitColor = AppStyles.appColorList[widget.habitModel.habitColorIndex];
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.habitModel.habitTitle),
@@ -140,7 +140,7 @@ class _HabitStaticDetailPageState extends State<HabitStaticDetailPage> {
                 ),
               ],
             ),
-            Consumer<HabitDataState>(
+            Consumer<HabitUseCase>(
               builder: (BuildContext context, habitDataState, _) {
                 return FutureBuilder<List<bool>>(
                   future: habitDataState.completedDays(

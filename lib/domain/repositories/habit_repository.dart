@@ -1,5 +1,5 @@
-import 'package:plado/data/models/all_habit_count_model.dart';
-
+import '../../data/models/all_habit_count_model.dart';
+import '../../data/models/habit_model.dart';
 import '../entities/habit_entity.dart';
 
 abstract class HabitRepository {
@@ -9,11 +9,11 @@ abstract class HabitRepository {
 
   Future<AllHabitCountModel> getAllHabitsNumber();
 
-  Future<int> createHabit({required Map<String, dynamic> habitMap});
+  Future<List<bool>> completedDays({required int habitId});
+
+  Future<int> createHabit({required HabitModel habitModel});
 
   Future<int> updateHabit({required Map<String, dynamic> habitMap, required int habitId});
 
   Future<int> deleteHabit({required int habitId});
-
-  Future<List<bool>> completedDays({required int habitId});
 }

@@ -1,4 +1,4 @@
-import 'package:plado/core/strings/database_values.dart';
+import '../../core/strings/database_values.dart';
 
 class HabitModel {
   final int habitId;
@@ -43,9 +43,8 @@ class HabitModel {
     );
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> habitToMap() {
     return {
-      DatabaseValues.dbHabitId: habitId,
       DatabaseValues.dbHabitTitle: habitTitle,
       DatabaseValues.dbHabitCreateDateTime: createDateTime,
       DatabaseValues.dbHabitCompleteDateTime: completeDateTime,

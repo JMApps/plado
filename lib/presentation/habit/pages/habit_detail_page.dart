@@ -11,8 +11,8 @@ import '../../../core/strings/app_constraints.dart';
 import '../../../core/strings/database_values.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/models/arguments/habit_model_args.dart';
-import '../../../data/state/habit_data_state.dart';
 import '../../../domain/entities/habit_entity.dart';
+import '../../../domain/usecases/habit_use_case.dart';
 import '../../state/rest_times_state.dart';
 import '../../widgets/main_error_text.dart';
 import '../items/date_time_item.dart';
@@ -69,7 +69,7 @@ class _HabitDetailPageState extends State<HabitDetailPage> {
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
-    final habitColor = AppStyles.taskHabitColors[widget.habitModel.habitColorIndex];
+    final habitColor = AppStyles.appColorList[widget.habitModel.habitColorIndex];
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.habitModel.habitTitle),
@@ -168,7 +168,7 @@ class _HabitDetailPageState extends State<HabitDetailPage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Consumer<HabitDataState>(
+            Consumer<HabitUseCase>(
               builder: (BuildContext context, habitDataState, _) {
                 return FutureBuilder<List<bool>>(
                   future: habitDataState.completedDays(habitId: widget.habitModel.habitId),
@@ -193,7 +193,7 @@ class _HabitDetailPageState extends State<HabitDetailPage> {
                                   final completedDaysMap = {
                                     DatabaseValues.dbHabitCompletedDays: jsonEncode(completedDays.map((e) => e ? 1 : 0).toList()),
                                   };
-                                  Provider.of<HabitDataState>(context, listen: false).updateHabit(
+                                  Provider.of<HabitUseCase>(context, listen: false).updateHabit(
                                     habitMap: completedDaysMap,
                                     habitId: widget.habitModel.habitId,
                                   );

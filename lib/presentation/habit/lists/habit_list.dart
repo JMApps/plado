@@ -3,8 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/styles/app_styles.dart';
-import '../../../data/state/habit_data_state.dart';
 import '../../../domain/entities/habit_entity.dart';
+import '../../../domain/usecases/habit_use_case.dart';
 import '../../state/habit/habit_sort_state.dart';
 import '../../widgets/main_error_text.dart';
 import '../../widgets/time_is_empty.dart';
@@ -19,7 +19,7 @@ class HabitList extends StatelessWidget {
     return Consumer<HabitSortState>(
       builder: (BuildContext context, habitSortState, _) {
         return FutureBuilder<List<HabitEntity>>(
-          future: Provider.of<HabitDataState>(context).getAllHabits(
+          future: Provider.of<HabitUseCase>(context).getAllHabits(
             orderBy: '${AppStyles.habitSortList[habitSortState.getSortIndex]} ${AppStyles.orderList[habitSortState.getOrderIndex]}',
           ),
           builder: (context, snapshot) {

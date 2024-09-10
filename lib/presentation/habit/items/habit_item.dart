@@ -27,7 +27,7 @@ class HabitItem extends StatelessWidget {
     final appLocale = AppLocalizations.of(context)!;
     final appTheme = Theme.of(context);
     final String timeAgo = timeago.format(habitModel.createDateTime, locale: appLocale.localeName);
-    final habitColor = AppStyles.taskHabitColors[habitModel.habitColorIndex].withOpacity(appTheme.brightness == Brightness.dark ? 0.5 : 1);
+    final habitColor = AppStyles.appColorList[habitModel.habitColorIndex].withOpacity(appTheme.brightness == Brightness.dark ? 0.5 : 1);
     final restRemaininPercentage = Provider.of<RestTimesState>(context).restRemainingPercentage(startDateTime: habitModel.startDateTime, endDateTime: habitModel.endDateTime);
     return Card(
       elevation: 0,

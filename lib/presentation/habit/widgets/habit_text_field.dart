@@ -41,7 +41,7 @@ class _HabitTextFieldState extends State<HabitTextField> {
           textInputAction: TextInputAction.done,
           maxLength: 75,
           decoration: InputDecoration(
-            hintText: appLocale.habitHint,
+            hintText: appLocale.enterTitle,
           ),
           onChanged: (String inputValue) {
             habitTitleState.setTaskTitle = inputValue;

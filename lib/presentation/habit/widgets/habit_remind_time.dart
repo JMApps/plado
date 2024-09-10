@@ -31,7 +31,7 @@ class _HabitRemindTimeState extends State<HabitRemindTime> {
           contentPadding: EdgeInsets.zero,
           visualDensity: const VisualDensity(vertical: -4, horizontal: -4),
           title: Text(
-            appLocale.dailyHabitNotification,
+            appLocale.remindDaily,
             style: const TextStyle(fontSize: 17),
           ),
           leading: IconButton(
