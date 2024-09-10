@@ -71,6 +71,7 @@ class PladoDatabaseService {
         ${DatabaseValues.dbTaskPriorityIndex} INTEGER,
         ${DatabaseValues.dbTaskStatusIndex} INTEGER,
         ${DatabaseValues.dbTaskColorIndex} INTEGER,
+        ${DatabaseValues.dbTaskSampleBy} INTEGER,
         ${DatabaseValues.dbTaskNotificationId} INTEGER,
         ${DatabaseValues.dbTaskNotificationDate} TEXT
       );
