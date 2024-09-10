@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../presentation/category/pages/categories_page.dart';
 import '../../presentation/habit/pages/habits_page.dart';
 import '../../presentation/pages/settings_page.dart';
 import '../../presentation/pages/statistic_page.dart';
-import '../../presentation/task/pages/tasks_page.dart';
 import '../enums/habit_period.dart';
 import '../enums/task_period.dart';
 import '../enums/task_priority.dart';
@@ -33,6 +33,7 @@ class AppStyles {
 
   static const paddingBottom = EdgeInsets.only(bottom: 16);
   static const paddingBottomMini = EdgeInsets.only(bottom: 8);
+  static const paddingBottomMicro = EdgeInsets.only(bottom: 4);
 
   static const paddingLeft = EdgeInsets.only(left: 16);
   static const paddingLeftMini = EdgeInsets.only(left: 8);
@@ -49,8 +50,12 @@ class AppStyles {
   static const shape = RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16)));
   static const shapeMini = RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8)));
 
+  static const mainText = TextStyle(fontSize: 18, fontFamily: AppConstraints.fontRaleway);
+  static const mainTextRoboto = TextStyle(fontSize: 18, fontFamily: AppConstraints.fontRobotoSlab);
+  static const mainTextBold = TextStyle(fontSize: 18, fontFamily: AppConstraints.fontRaleway, fontWeight: FontWeight.bold);
+
   static const mainPages = <Widget>[
-    TasksPage(),
+    CategoriesPage(),
     HabitsPage(),
     StatisticPage(),
     SettingsPage(),
@@ -64,7 +69,7 @@ class AppStyles {
     TaskPeriod.year,
   ];
 
-  static const taskHabitColors = <Color>[
+  static const appColorList = <Color>[
     Colors.orange,
     Colors.blue,
     Colors.green,
@@ -96,6 +101,11 @@ class AppStyles {
     DatabaseValues.dbTaskTitle,
     DatabaseValues.dbTaskPriorityIndex,
     DatabaseValues.dbTaskColorIndex,
+  ];
+
+  static const categorySortList = <String> [
+    DatabaseValues.dbCategoryId,
+    DatabaseValues.dbCategoryColorIndex,
   ];
 
   static const habitSortList = <String> [
@@ -133,20 +143,5 @@ class AppStyles {
     40,
     66,
     90,
-  ];
-
-  static const List<Locale> appLocales = [
-    Locale('ru', 'RU'),
-    Locale('en', 'EN'),
-    Locale('tr', 'TR'),
-    Locale('id', 'ID'),
-    Locale('az', 'AZ'),
-    Locale('fr', 'FR'),
-    Locale('it', 'IT'),
-    Locale('uz', 'UZ'),
-    Locale('kk', 'KK'),
-    Locale('tg', 'TG'),
-    Locale('ka', 'KA'),
-    Locale('uk', 'UK'),
   ];
 }

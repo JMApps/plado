@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import '../strings/app_constraints.dart';
 import '../styles/app_styles.dart';
 
-class AppMaterialStyles {
+class AppThemes {
 
   final int themeColorIndex;
 
-  AppMaterialStyles({required this.themeColorIndex});
+  AppThemes({required this.themeColorIndex});
 
   ThemeData get lightTheme => ThemeData(
     fontFamily: AppConstraints.fontRaleway,
     colorScheme: ColorScheme.fromSeed(
       brightness: Brightness.light,
-      seedColor: AppStyles.taskHabitColors[themeColorIndex],
+      seedColor: AppStyles.appColorList[themeColorIndex],
     ),
     appBarTheme: const AppBarTheme(
       centerTitle: true,
@@ -24,14 +24,15 @@ class AppMaterialStyles {
       floatingLabelAlignment: FloatingLabelAlignment.center,
       border: OutlineInputBorder(
         borderRadius: AppStyles.border,
-        borderSide: BorderSide(
-          width: 0.5,
-        ),
+        borderSide: BorderSide(width: 0.5),
       ),
     ),
     bottomSheetTheme: const BottomSheetThemeData(
       showDragHandle: true,
       dragHandleSize: Size(48, 3),
+    ),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      elevation: 0,
     ),
   );
 
@@ -39,7 +40,7 @@ class AppMaterialStyles {
     fontFamily: AppConstraints.fontRaleway,
     colorScheme: ColorScheme.fromSeed(
       brightness: Brightness.dark,
-      seedColor: AppStyles.taskHabitColors[themeColorIndex],
+      seedColor: AppStyles.appColorList[themeColorIndex],
     ),
     appBarTheme: const AppBarTheme(
       centerTitle: true,
@@ -50,14 +51,15 @@ class AppMaterialStyles {
       floatingLabelAlignment: FloatingLabelAlignment.center,
       border: OutlineInputBorder(
         borderRadius: AppStyles.border,
-        borderSide: BorderSide(
-          width: 0.5,
-        ),
+        borderSide: BorderSide(width: 0.5),
       ),
     ),
     bottomSheetTheme: const BottomSheetThemeData(
       showDragHandle: true,
       dragHandleSize: Size(48, 3),
+    ),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      elevation: 0,
     ),
   );
 }
