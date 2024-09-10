@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/strings/app_constraints.dart';
 import '../../data/models/category_model.dart';
 import '../entities/category_entity.dart';
-import '../repositories/task_category_repository.dart';
+import '../repositories/category_repository.dart';
 
 class CategoryUseCase extends ChangeNotifier {
   final CategoryRepository _categoryRepository;

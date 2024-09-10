@@ -2,7 +2,7 @@ import 'package:sqflite/sqflite.dart';
 
 import '../../core/strings/database_values.dart';
 import '../../domain/entities/category_entity.dart';
-import '../../domain/repositories/task_category_repository.dart';
+import '../../domain/repositories/category_repository.dart';
 import '../models/category_model.dart';
 import '../services/plado_database_service.dart';
 
