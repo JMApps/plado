@@ -51,6 +51,15 @@ class PladoDatabaseService {
 
   void _createDb(Database db, int version) async {
     await db.execute('''
+      CREATE TABLE ${DatabaseValues.dbCategoryTableName} (
+        ${DatabaseValues.dbCategoryId} INTEGER PRIMARY KEY AUTOINCREMENT,
+        ${DatabaseValues.dbCategoryTitle} TEXT,
+        ${DatabaseValues.dbCategoryColorIndex} INTEGER,
+        ${DatabaseValues.dbCategoryPeriodIndex} INTEGER
+      );
+    ''');
+
+    await db.execute('''
       CREATE TABLE ${DatabaseValues.dbTaskTableName} (
         ${DatabaseValues.dbTaskId} INTEGER PRIMARY KEY AUTOINCREMENT,
         ${DatabaseValues.dbTaskTitle} TEXT,
