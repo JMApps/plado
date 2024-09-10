@@ -18,7 +18,6 @@ class SettingDataState extends ChangeNotifier {
     timeago.setLocaleMessages('it', timeago.TrMessages());
     timeago.setLocaleMessages('uz', timeago.TrMessages());
     timeago.setLocaleMessages('kk', timeago.TrMessages());
-    timeago.setLocaleMessages('tg', timeago.TrMessages());
     timeago.setLocaleMessages('ka', timeago.TrMessages());
     timeago.setLocaleMessages('uk', timeago.TrMessages());
 

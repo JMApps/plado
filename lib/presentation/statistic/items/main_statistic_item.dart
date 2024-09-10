@@ -5,8 +5,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/models/all_habit_count_model.dart';
 import '../../../data/models/all_task_count_model.dart';
-import '../../../data/state/habit_data_state.dart';
-import '../../../data/state/task_data_state.dart';
+import '../../../domain/usecases/habit_use_case.dart';
+import '../../../domain/usecases/task_use_case.dart';
 import '../../widgets/description_text.dart';
 import '../../widgets/main_error_text.dart';
 import 'statistic_habit_list_tile.dart';
@@ -24,7 +24,7 @@ class MainStatisticItem extends StatelessWidget {
       child: Column(
         children: [
           FutureBuilder<AllTaskCountModel>(
-            future: Provider.of<TaskDataState>(context).getAllTasksNumber(),
+            future: Provider.of<TaskUseCase>(context).getAllTasksNumber(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 final AllTaskCountModel allTaskCountModel = snapshot.data!;
@@ -73,7 +73,7 @@ class MainStatisticItem extends StatelessWidget {
             },
           ),
           FutureBuilder<AllHabitCountModel>(
-            future: Provider.of<HabitDataState>(context).getAllHabitsNumber(),
+            future: Provider.of<HabitUseCase>(context).getAllHabitsNumber(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 final AllHabitCountModel allHabitCountModel = snapshot.data!;
