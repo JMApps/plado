@@ -10,7 +10,7 @@ import '../../../core/strings/database_values.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/models/arguments/task_model_args.dart';
 import '../../../data/services/notifications/notification_service.dart';
-import '../../../data/state/task_data_state.dart';
+import '../../../domain/usecases/task_use_case.dart';
 
 class TaskItem extends StatelessWidget {
   const TaskItem({
@@ -27,7 +27,7 @@ class TaskItem extends StatelessWidget {
     final appLocale = AppLocalizations.of(context)!;
     final bool statusTask = taskModel.taskStatusIndex == 0 ? false : true;
     final String timeAgo = timeago.format(taskModel.createDateTime, locale: appLocale.localeName);
-    final taskColor = AppStyles.taskHabitColors[taskModel.taskColorIndex].withOpacity(Theme.of(context).brightness == Brightness.dark ? 0.5 : 1);
+    final taskColor = AppStyles.appColorList[taskModel.taskColorIndex].withOpacity(Theme.of(context).brightness == Brightness.dark ? 0.5 : 1);
     return Card(
       elevation: 0,
       margin: AppStyles.paddingBottomMini,
@@ -63,7 +63,7 @@ class TaskItem extends StatelessWidget {
         leading: Checkbox(
           value: statusTask,
           onChanged: (bool? onChanged) {
-            Provider.of<TaskDataState>(context, listen: false).changeTaskStatus(
+            Provider.of<TaskUseCase>(context, listen: false).changeTaskStatus(
                 taskId: taskModel.taskId,
                 taskStatusIndex: taskModel.taskStatusIndex == 0 ? 1 : 0,
                 completeDateTime: DateTime.now().toIso8601String());
@@ -73,7 +73,7 @@ class TaskItem extends StatelessWidget {
                 final Map<String, dynamic> taskMap = {
                   DatabaseValues.dbTaskNotificationId: 0,
                 };
-                Provider.of<TaskDataState>(context, listen: false).updateTask(taskId: taskModel.taskId, taskMap: taskMap);
+                Provider.of<TaskUseCase>(context, listen: false).updateTask(taskId: taskModel.taskId, taskMap: taskMap);
               }
             }
           },

@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
-import '../../../data/state/task_data_state.dart';
+import '../../../domain/usecases/task_use_case.dart';
 
 class TasksNumberText extends StatelessWidget {
   const TasksNumberText({super.key, required this.taskPeriodIndex});
@@ -16,7 +16,7 @@ class TasksNumberText extends StatelessWidget {
     final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
     return FutureBuilder(
-      future: Provider.of<TaskDataState>(context).getTasksNumber(taskPeriodIndex: taskPeriodIndex),
+      future: Provider.of<TaskUseCase>(context).getTasksNumber(taskPeriodIndex: taskPeriodIndex),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Tooltip(

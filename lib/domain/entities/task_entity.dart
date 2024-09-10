@@ -11,6 +11,7 @@ class TaskEntity {
   final int taskPriorityIndex;
   final int taskStatusIndex;
   final int taskColorIndex;
+  final int taskSampleBy;
   final int notificationId;
   final String notificationDate;
 
@@ -25,6 +26,7 @@ class TaskEntity {
     required this.taskPriorityIndex,
     required this.taskStatusIndex,
     required this.taskColorIndex,
+    required this.taskSampleBy,
     required this.notificationId,
     required this.notificationDate,
   });
@@ -41,6 +43,7 @@ class TaskEntity {
       taskPriorityIndex: model.taskPriorityIndex,
       taskStatusIndex: model.taskStatusIndex,
       taskColorIndex: model.taskColorIndex,
+      taskSampleBy: model.taskSampleBy,
       notificationId: model.notificationId,
       notificationDate: model.notificationDate,
     );

@@ -10,7 +10,9 @@ import '../models/task_model.dart';
 import '../services/plado_database_service.dart';
 
 class TaskDataRepository implements TaskRepository {
-  final PladoDatabaseService _pladoDatabaseService = PladoDatabaseService();
+  final PladoDatabaseService _pladoDatabaseService;
+
+  TaskDataRepository(this._pladoDatabaseService);
 
   @override
   Future<List<TaskEntity>> getAllTasks({required String orderBy}) async {
@@ -115,27 +117,6 @@ class TaskDataRepository implements TaskRepository {
   }
 
   @override
-  Future<int> createTask({required Map<String, dynamic> taskMap}) async {
-    final Database database = await _pladoDatabaseService.db;
-    final int createTask = await database.insert(DatabaseValues.dbTaskTableName, taskMap);
-    return createTask;
-  }
-
-  @override
-  Future<int> updateTask({ required int taskId, required Map<String, dynamic> taskMap}) async {
-    final Database database = await _pladoDatabaseService.db;
-    final int updateTask = await database.update(DatabaseValues.dbTaskTableName, taskMap, where: '${DatabaseValues.dbTaskId} = ?', whereArgs: [taskId], conflictAlgorithm: ConflictAlgorithm.replace);
-    return updateTask;
-  }
-
-  @override
-  Future<int> deleteTask({required int taskId}) async {
-    final Database database = await _pladoDatabaseService.db;
-    final int deleteTask = await database.delete(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskId} = ?', whereArgs: [taskId]);
-    return deleteTask;
-  }
-
-  @override
   Future<int> changeTaskStatus({required int taskId, required int taskStatusIndex, required String completeDateTime}) async {
     final Database database = await _pladoDatabaseService.db;
 
@@ -147,5 +128,26 @@ class TaskDataRepository implements TaskRepository {
 
     final int statusTask = await database.update(DatabaseValues.dbTaskTableName, taskStatusMap, where: '${DatabaseValues.dbTaskId} = ?', whereArgs: [taskId], conflictAlgorithm: ConflictAlgorithm.replace);
     return statusTask;
+  }
+
+  @override
+  Future<int> createTask({required TaskModel taskModel}) async {
+    final Database database = await _pladoDatabaseService.db;
+    final int createTask = await database.insert(DatabaseValues.dbTaskTableName, taskModel.taskToMap());
+    return createTask;
+  }
+
+  @override
+  Future<int> updateTask({required Map<String ,dynamic> taskMap, required int taskId, }) async {
+    final Database database = await _pladoDatabaseService.db;
+    final int updateTask = await database.update(DatabaseValues.dbTaskTableName, taskMap, where: '${DatabaseValues.dbTaskId} = ?', whereArgs: [taskId], conflictAlgorithm: ConflictAlgorithm.replace);
+    return updateTask;
+  }
+
+  @override
+  Future<int> deleteTask({required int taskId}) async {
+    final Database database = await _pladoDatabaseService.db;
+    final int deleteTask = await database.delete(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskId} = ?', whereArgs: [taskId]);
+    return deleteTask;
   }
 }

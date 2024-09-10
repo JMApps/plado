@@ -28,7 +28,7 @@ class TaskOrderItem extends StatelessWidget {
           color: sortState.getOrderIndex == orderIndex ? appColors.primary : appColors.onSurface,
         ),
       ),
-      trailing: sortState.getOrderIndex == orderIndex ? const Icon(Icons.check_rounded) : const SizedBox(),
+      trailing: sortState.getOrderIndex == orderIndex ? Icon(Icons.check_rounded, color: appColors.primary) : const SizedBox(),
       onTap: () {
         sortState.setOrderIndex = orderIndex;
       },

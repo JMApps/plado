@@ -39,7 +39,7 @@ class _TaskTextFieldState extends State<TaskTextField> {
           textInputAction: TextInputAction.done,
           maxLength: 75,
           decoration: InputDecoration(
-            hintText: appLocale.taskHint,
+            hintText: appLocale.enterTitle,
           ),
           onChanged: (String inputValue) {
             taskTitleState.setTaskTitle = inputValue;

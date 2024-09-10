@@ -11,6 +11,7 @@ class TaskModel {
   final int taskPriorityIndex;
   final int taskStatusIndex;
   final int taskColorIndex;
+  final int taskSampleBy;
   final int notificationId;
   final String notificationDate;
 
@@ -25,6 +26,7 @@ class TaskModel {
     required this.taskPriorityIndex,
     required this.taskStatusIndex,
     required this.taskColorIndex,
+    required this.taskSampleBy,
     required this.notificationId,
     required this.notificationDate,
   });
@@ -41,12 +43,13 @@ class TaskModel {
       taskPriorityIndex: map[DatabaseValues.dbTaskPriorityIndex] as int,
       taskStatusIndex: map[DatabaseValues.dbTaskStatusIndex] as int,
       taskColorIndex: map[DatabaseValues.dbTaskColorIndex] as int,
+      taskSampleBy: map[DatabaseValues.dbTaskSampleBy] as int,
       notificationId: map[DatabaseValues.dbTaskNotificationId] as int,
       notificationDate: map[DatabaseValues.dbTaskNotificationDate] as String,
     );
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> taskToMap() {
     return {
       DatabaseValues.dbTaskId: taskTitle,
       DatabaseValues.dbTaskTitle: createDateTime,
@@ -57,6 +60,7 @@ class TaskModel {
       DatabaseValues.dbTaskPeriodIndex: taskPriorityIndex,
       DatabaseValues.dbTaskPriorityIndex: taskStatusIndex,
       DatabaseValues.dbTaskStatusIndex: taskColorIndex,
+      DatabaseValues.dbTaskSampleBy: taskSampleBy,
       DatabaseValues.dbTaskColorIndex: notificationId,
       DatabaseValues.dbTaskNotificationId: notificationDate,
     };

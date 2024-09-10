@@ -1,14 +1,15 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:plado/data/models/task_model.dart';
+import 'package:plado/domain/usecases/task_use_case.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/enums/task_status.dart';
 import '../../../core/strings/app_constraints.dart';
 import '../../../core/strings/database_values.dart';
 import '../../../data/services/notifications/notification_service.dart';
-import '../../../data/state/task_data_state.dart';
 import '../../state/rest_times_state.dart';
 import '../../state/task/task_color_state.dart';
 import '../../state/task/task_notification_date_state.dart';
@@ -34,61 +35,85 @@ class _AddTaskButtonState extends State<AddTaskButton> {
     final appColors = Theme.of(context).colorScheme;
     return IconButton(
       onPressed: () {
-        if (Provider.of<TaskTitleState>(context, listen: false).getTaskTitle.trim().isNotEmpty) {
-          if (Provider.of<TaskRemindState>(context, listen: false).getIsRemind) {
+        if (Provider.of<TaskTitleState>(context, listen: false)
+            .getTaskTitle
+            .trim()
+            .isNotEmpty) {
+          if (Provider.of<TaskRemindState>(context, listen: false)
+              .getIsRemind) {
             _currentDateTime = DateTime.now();
-            if (DateTime.parse(Provider.of<TaskNotificationDateState>(context, listen: false).getTaskNotificationDate).isAfter(_currentDateTime)) {
+            if (DateTime.parse(Provider.of<TaskNotificationDateState>(context,
+                        listen: false)
+                    .getTaskNotificationDate)
+                .isAfter(_currentDateTime)) {
               Navigator.of(context).pop();
               _createTask(appLocale.tasks);
             } else {
-              _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, appLocale.selectCorrectDateTime);
+              _showScaffoldMessage(appColors.inversePrimary,
+                  appColors.onSurface, appLocale.selectCorrectDateTime);
             }
           } else {
             Navigator.of(context).pop();
             _createTask(appLocale.tasks);
           }
         } else {
-          _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, appLocale.enterTaskTitle);
+          _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface,
+              appLocale.enterTitle);
         }
       },
       tooltip: appLocale.addTask,
       icon: const Icon(Icons.check_circle_outlined),
     );
   }
+
   void _createTask(String tasks) {
-    final String taskTitleState = context.read<TaskTitleState>().getTaskTitle.trim();
-    final int taskPeriodIndex = context.read<TaskPeriodState>().getTaskPeriodIndex;
-    final int taskPriorityIndex = context.read<TaskPriorityState>().getTaskPriorityIndex;
+    final String taskTitleState =
+        context.read<TaskTitleState>().getTaskTitle.trim();
+    final int taskPeriodIndex =
+        context.read<TaskPeriodState>().getTaskPeriodIndex;
+    final int taskPriorityIndex =
+        context.read<TaskPriorityState>().getTaskPriorityIndex;
     final int taskColorIndex = context.read<TaskColorState>().getColorIndex;
     final bool taskIsRemind = context.read<TaskRemindState>().getIsRemind;
-    int taskNotificationId = context.read<TaskNotificationIdState>().getNotificationId;
-    final String taskDateTime = context.read<TaskNotificationDateState>().getTaskNotificationDate;
+    int taskNotificationId =
+        context.read<TaskNotificationIdState>().getNotificationId;
+    final String taskDateTime =
+        context.read<TaskNotificationDateState>().getTaskNotificationDate;
 
-    Map<String, dynamic> restTimePeriods = Provider.of<RestTimesState>(context, listen: false).restTaskTimes(taskPeriodIndex);
+    Map<String, dynamic> restTimePeriods =
+        Provider.of<RestTimesState>(context, listen: false)
+            .restTaskTimes(taskPeriodIndex);
     DateTime startTime = restTimePeriods[AppConstraints.taskStartDateTime];
     DateTime endTime = restTimePeriods[AppConstraints.taskEndDateTime];
 
     if (taskIsRemind) {
-      final randomNotificationNumber = Random().nextInt(AppConstraints.randomNotificationNumber);
+      final randomNotificationNumber =
+          Random().nextInt(AppConstraints.randomNotificationNumber);
       taskNotificationId = randomNotificationNumber;
-      NotificationService().scheduleTimeNotifications(DateTime.parse(taskDateTime), tasks, taskTitleState, randomNotificationNumber);
+      NotificationService().scheduleTimeNotifications(
+          DateTime.parse(taskDateTime),
+          tasks,
+          taskTitleState,
+          randomNotificationNumber);
     }
 
-    final Map<String, dynamic> taskMap = {
-      DatabaseValues.dbTaskTitle: taskTitleState,
-      DatabaseValues.dbTaskCreateDateTime: _currentDateTime.toIso8601String(),
-      DatabaseValues.dbTaskCompleteDateTime: _currentDateTime.toIso8601String(),
-      DatabaseValues.dbTaskStartDateTime: startTime.toIso8601String(),
-      DatabaseValues.dbTaskEndDateTime: endTime.toIso8601String(),
-      DatabaseValues.dbTaskPeriodIndex: taskPeriodIndex,
-      DatabaseValues.dbTaskPriorityIndex: taskPriorityIndex,
-      DatabaseValues.dbTaskStatusIndex: TaskStatus.inProgress.index,
-      DatabaseValues.dbTaskColorIndex: taskColorIndex,
-      DatabaseValues.dbTaskNotificationId: taskNotificationId,
-      DatabaseValues.dbTaskNotificationDate: taskDateTime,
-    };
+    final TaskModel taskModel = TaskModel(
+      taskId: 0,
+      taskTitle: taskTitleState,
+      createDateTime: _currentDateTime,
+      completeDateTime: _currentDateTime,
+      startDateTime: startTime,
+      endDateTime: endTime,
+      taskPeriodIndex: taskPeriodIndex,
+      taskPriorityIndex: taskPriorityIndex,
+      taskStatusIndex: TaskStatus.inProgress.index,
+      taskColorIndex: taskColorIndex,
+      taskSampleBy: 0,
+      notificationId: taskNotificationId,
+      notificationDate: taskDateTime,
+    );
 
-    Provider.of<TaskDataState>(context, listen: false).createTask(taskMap: taskMap);
+    Provider.of<TaskUseCase>(context, listen: false).createTask(taskModel: taskModel);
   }
 
   void _showScaffoldMessage(Color color, Color textColor, String message) {

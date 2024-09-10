@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../data/state/task_data_state.dart';
 import '../../../../../domain/entities/task_entity.dart';
 import '../../../core/styles/app_styles.dart';
+import '../../../domain/usecases/task_use_case.dart';
 import '../../state/task/task_sort_state.dart';
 import '../../widgets/main_error_text.dart';
 import '../../widgets/time_is_empty.dart';
@@ -28,7 +28,7 @@ class TasksMainList extends StatelessWidget {
     return Consumer<TaskSortState>(
       builder: (BuildContext context, taskSortState, _) {
         return FutureBuilder<List<TaskEntity>>(
-          future: Provider.of<TaskDataState>(context).getTasksByMode(
+          future: Provider.of<TaskUseCase>(context).getTasksByMode(
             taskPeriodIndex: taskPeriodIndex,
             startTime: startDate.toIso8601String(),
             endTime: endDate.toIso8601String(),
