@@ -1,15 +1,15 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:plado/core/styles/app_styles.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/strings/app_constraints.dart';
 import '../../../core/strings/database_values.dart';
+import '../../../core/styles/app_styles.dart';
 import '../../../data/services/notifications/notification_service.dart';
-import '../../../data/state/habit_data_state.dart';
 import '../../../domain/entities/habit_entity.dart';
+import '../../../domain/usecases/habit_use_case.dart';
 import '../../state/habit/habit_color_state.dart';
 import '../../state/habit/habit_notification_date_state.dart';
 import '../../state/habit/habit_notification_id_state.dart';
@@ -41,7 +41,7 @@ class _ChangeHabitButtonState extends State<ChangeHabitButton> {
           Navigator.of(context).pop();
           _updateHabit(appLocale.habits);
         } else {
-          _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, appLocale.enterHabitTitle);
+          _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, appLocale.enterTitle);
         }
       },
       tooltip: appLocale.changingHabit,
@@ -73,7 +73,7 @@ class _ChangeHabitButtonState extends State<ChangeHabitButton> {
       DatabaseValues.dbHabitNotificationDate: habitNotificationDateTime,
     };
 
-    Provider.of<HabitDataState>(context, listen: false).updateHabit(habitId: widget.habitModel.habitId, habitMap: habitMap);
+    Provider.of<HabitUseCase>(context, listen: false).updateHabit(habitId: widget.habitModel.habitId, habitMap: habitMap);
   }
 
   void _showScaffoldMessage(Color color, Color textColor, String message) {

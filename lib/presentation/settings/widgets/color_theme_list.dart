@@ -27,7 +27,7 @@ class ColorThemeList extends StatelessWidget {
                 settingDataState.setColorThemeIndex = index;
               },
               child: CircleAvatar(
-                backgroundColor: AppStyles.taskHabitColors[index].withOpacity(isThemeLight ? 1 : 0.5),
+                backgroundColor: AppStyles.appColorList[index].withOpacity(isThemeLight ? 1 : 0.5),
                 child: settingDataState.getColorThemeIndex == index ? const Icon(Icons.check_rounded, color: Colors.black) : const SizedBox(),
               ),
             );

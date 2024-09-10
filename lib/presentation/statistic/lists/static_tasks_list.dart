@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/styles/app_styles.dart';
-import '../../../data/state/task_data_state.dart';
 import '../../../domain/entities/task_entity.dart';
+import '../../../domain/usecases/task_use_case.dart';
 import '../../widgets/main_error_text.dart';
 import '../../widgets/time_is_empty.dart';
 import '../items/static_task_item.dart';
@@ -21,7 +21,7 @@ class StaticTasksList extends StatelessWidget {
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
     return FutureBuilder(
-      future: Provider.of<TaskDataState>(context).getTaskByStatus(statusIndex: taskStatusIndex),
+      future: Provider.of<TaskUseCase>(context).getTaskByStatus(statusIndex: taskStatusIndex),
       builder: (context, snapshot) {
         if (snapshot.hasData && snapshot.data!.isNotEmpty) {
           return Scrollbar(

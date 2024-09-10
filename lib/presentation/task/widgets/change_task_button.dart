@@ -1,14 +1,14 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:plado/domain/entities/task_entity.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/strings/app_constraints.dart';
 import '../../../core/strings/database_values.dart';
 import '../../../data/services/notifications/notification_service.dart';
-import '../../../data/state/task_data_state.dart';
+import '../../../domain/entities/task_entity.dart';
+import '../../../domain/usecases/task_use_case.dart';
 import '../../state/rest_times_state.dart';
 import '../../state/task/task_color_state.dart';
 import '../../state/task/task_notification_date_state.dart';
@@ -54,7 +54,7 @@ class _ChangeTaskButtonState extends State<ChangeTaskButton> {
             _updateTask(appLocale.tasks);
           }
         } else {
-          _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, appLocale.enterTaskTitle);
+          _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, appLocale.enterTitle);
         }
       },
       tooltip: appLocale.changingTask,
@@ -96,7 +96,7 @@ class _ChangeTaskButtonState extends State<ChangeTaskButton> {
       DatabaseValues.dbTaskNotificationDate: taskNotificationDateTime,
     };
 
-    Provider.of<TaskDataState>(context, listen: false).updateTask(taskId: widget.taskModel.taskId, taskMap: taskMap);
+    Provider.of<TaskUseCase>(context, listen: false).updateTask(taskId: widget.taskModel.taskId, taskMap: taskMap);
   }
 
   void _showScaffoldMessage(Color color, Color textColor, String message) {
