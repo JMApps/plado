@@ -6,7 +6,7 @@ abstract class CategoryRepository {
 
   Future<int> createCategory({required CategoryModel categoryModel});
 
-  Future<int> updateCategory({required CategoryModel categoryModel, required int categoryId});
+  Future<int> updateCategory({required Map<String, dynamic> categoryMap, required int categoryId});
 
   Future<int> deleteCategory({required int categoryId});
 }

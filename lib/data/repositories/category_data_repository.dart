@@ -14,7 +14,7 @@ class CategoryDataRepository implements CategoryRepository {
   @override
   Future<List<CategoryEntity>> getCategoriesByPeriod({required int periodIndex, required String orderBy}) async {
     final Database database = await _pladoDatabaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbCategoryTableName, orderBy: orderBy);
+    final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbCategoryTableName, where: '${DatabaseValues.dbCategoryPeriodIndex} = ?', whereArgs: [periodIndex], orderBy: orderBy);
     final List<CategoryEntity> taskCategoriesByPeriod = resources.isNotEmpty ? resources.map((e) => CategoryEntity.fromModel(CategoryModel.fromMap(e))).toList() : [];
     return taskCategoriesByPeriod;
   }
@@ -26,9 +26,9 @@ class CategoryDataRepository implements CategoryRepository {
   }
 
   @override
-  Future<int> updateCategory({required CategoryModel categoryModel, required int categoryId}) async {
+  Future<int> updateCategory({required Map<String, dynamic> categoryMap, required int categoryId}) async {
     final Database database = await _pladoDatabaseService.db;
-    return await database.update(DatabaseValues.dbCategoryTableName, categoryModel.categoryToMap(), where: '${DatabaseValues.dbCategoryId} = ?', whereArgs: [categoryId]);
+    return await database.update(DatabaseValues.dbCategoryTableName, categoryMap, where: '${DatabaseValues.dbCategoryId} = ?', whereArgs: [categoryId]);
   }
 
   @override

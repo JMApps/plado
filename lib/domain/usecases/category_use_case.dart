@@ -34,9 +34,9 @@ class CategoryUseCase extends ChangeNotifier {
     }
   }
 
-  Future<int> updateTaskCategory({required CategoryModel categoryModel, required int categoryId}) async {
+  Future<int> updateTaskCategory({required Map<String, dynamic> categoryMap, required int categoryId}) async {
     try {
-      final int updateCategory = await _categoryRepository.updateCategory(categoryModel: categoryModel, categoryId: categoryId);
+      final int updateCategory = await _categoryRepository.updateCategory(categoryMap: categoryMap, categoryId: categoryId);
       notifyListeners();
       return updateCategory;
     } catch (e) {
