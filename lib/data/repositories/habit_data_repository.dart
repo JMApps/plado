@@ -10,7 +10,9 @@ import '../models/habit_model.dart';
 import '../services/plado_database_service.dart';
 
 class HabitDataRepository implements HabitRepository {
-  final PladoDatabaseService _pladoDatabaseService = PladoDatabaseService();
+  final PladoDatabaseService _pladoDatabaseService;
+
+  HabitDataRepository(this._pladoDatabaseService);
 
   @override
   Future<List<HabitEntity>> getAllHabits({required String orderBy}) async {
@@ -42,9 +44,20 @@ class HabitDataRepository implements HabitRepository {
   }
 
   @override
-  Future<int> createHabit({required Map<String, dynamic> habitMap}) async {
+  Future<List<bool>> completedDays({required int habitId}) async {
     final Database database = await _pladoDatabaseService.db;
-    final int createHabit = await database.insert(DatabaseValues.dbHabitTableName, habitMap);
+    final List<Map<String, dynamic>> result = await database.query(DatabaseValues.dbHabitTableName, columns: [DatabaseValues.dbHabitCompletedDays], where: '${DatabaseValues.dbHabitId} = ?', whereArgs: [habitId]);
+
+    final String completedDaysJson = result.first[DatabaseValues.dbHabitCompletedDays];
+    final List<dynamic> jsonList = jsonDecode(completedDaysJson);
+    final List<bool> completedDays = jsonList.map((e) => e == 1).toList();
+    return completedDays;
+  }
+
+  @override
+  Future<int> createHabit({required HabitModel habitModel}) async {
+    final Database database = await _pladoDatabaseService.db;
+    final int createHabit = await database.insert(DatabaseValues.dbHabitTableName, habitModel.habitToMap());
     return createHabit;
   }
 
@@ -60,16 +73,5 @@ class HabitDataRepository implements HabitRepository {
     final Database database = await _pladoDatabaseService.db;
     final int deleteHabit = await database.delete(DatabaseValues.dbHabitTableName, where: '${DatabaseValues.dbHabitId} = ?', whereArgs: [habitId]);
     return deleteHabit;
-  }
-
-  @override
-  Future<List<bool>> completedDays({required int habitId}) async {
-    final Database database = await _pladoDatabaseService.db;
-    final List<Map<String, dynamic>> result = await database.query(DatabaseValues.dbHabitTableName, columns: [DatabaseValues.dbHabitCompletedDays], where: '${DatabaseValues.dbHabitId} = ?', whereArgs: [habitId]);
-
-    final String completedDaysJson = result.first[DatabaseValues.dbHabitCompletedDays];
-    final List<dynamic> jsonList = jsonDecode(completedDaysJson);
-    final List<bool> completedDays = jsonList.map((e) => e == 1).toList();
-    return completedDays;
   }
 }
