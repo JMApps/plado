@@ -6,6 +6,8 @@ class DatabaseValues {
   static const String dbCategoryTitle = 'category_title';
   static const String dbCategoryColorIndex = 'category_color_index';
   static const String dbCategoryPeriodIndex = 'category_period_index';
+  static const String dbCategoryStartDateTime = 'category_start_date_time';
+  static const String dbCategoryEndDateTime = 'category_end_date_time';
 
   // Tasks
   static const String dbTaskTableName = 'Table_of_tasks';
@@ -14,15 +16,12 @@ class DatabaseValues {
   static const String dbTaskTitle = 'task_title';
   static const String dbTaskCreateDateTime = 'create_date_time';
   static const String dbTaskCompleteDateTime = 'complete_date_time';
-  static const String dbTaskStartDateTime = 'start_date_time';
-  static const String dbTaskEndDateTime = 'end_date_time';
-  static const String dbTaskPeriodIndex = 'task_period_index';
   static const String dbTaskPriorityIndex = 'task_priority_index';
   static const String dbTaskStatusIndex = 'task_status_index';
   static const String dbTaskColorIndex = 'task_color_index';
+  static const String dbTaskSampleBy = 'task_sample_by';
   static const String dbTaskNotificationId = 'notification_id';
   static const String dbTaskNotificationDate = 'notification_date';
-  static const String dbTaskSampleBy = 'task_sample_by';
 
   // Habits
   static const String dbHabitTableName = 'Table_of_habits';

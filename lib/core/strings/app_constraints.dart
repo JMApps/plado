@@ -20,10 +20,11 @@ class AppConstraints {
   static const String telegramIconPath = 'assets/icons/telegram.png';
   static const String instagramIconPath = 'assets/icons/instagram.png';
 
-  static const String taskStartDateTime = 'task_start_date_time';
+  static const String startDateTime = 'start_date_time';
+  static const String endDateTime = 'end_date_time';
+
   static const String taskRemaininDateTime = 'task_remaining_date_time';
   static const String taskElapsedPercentage = 'task_elapsed_percentage';
-  static const String taskEndDateTime = 'task_end_date_time';
 
   static const String habitStartDateTime = 'habit_start_date_time';
   static const String habitEndDateTime = 'habit_end_date_time';

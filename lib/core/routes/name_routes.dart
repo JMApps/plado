@@ -1,4 +1,5 @@
 class NameRoutes {
+  static const String taskCategoryPage = '/task_category_page';
   static const String createTaskPage = '/create_task_page';
   static const String updateTaskPage = '/update_task_page';
 

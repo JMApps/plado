@@ -55,6 +55,8 @@ class PladoDatabaseService {
         ${DatabaseValues.dbCategoryId} INTEGER PRIMARY KEY AUTOINCREMENT,
         ${DatabaseValues.dbCategoryTitle} TEXT,
         ${DatabaseValues.dbCategoryColorIndex} INTEGER,
+        ${DatabaseValues.dbCategoryStartDateTime} TEXT,
+        ${DatabaseValues.dbCategoryEndDateTime} TEXT,
         ${DatabaseValues.dbCategoryPeriodIndex} INTEGER
       );
     ''');
@@ -65,9 +67,6 @@ class PladoDatabaseService {
         ${DatabaseValues.dbTaskTitle} TEXT,
         ${DatabaseValues.dbTaskCreateDateTime} TEXT,
         ${DatabaseValues.dbTaskCompleteDateTime} TEXT,
-        ${DatabaseValues.dbTaskStartDateTime} TEXT,
-        ${DatabaseValues.dbTaskEndDateTime} TEXT,
-        ${DatabaseValues.dbTaskPeriodIndex} INTEGER,
         ${DatabaseValues.dbTaskPriorityIndex} INTEGER,
         ${DatabaseValues.dbTaskStatusIndex} INTEGER,
         ${DatabaseValues.dbTaskColorIndex} INTEGER,

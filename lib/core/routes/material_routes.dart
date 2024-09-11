@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-import '../../data/models/arguments/create_task_args.dart';
+import '../../data/models/arguments/category_model_args.dart';
 import '../../data/models/arguments/graphic_task_args.dart';
 import '../../data/models/arguments/habit_model_args.dart';
 import '../../data/models/arguments/task_model_args.dart';
@@ -13,6 +13,7 @@ import '../../presentation/statistic/pages/habit_static_detail_page.dart';
 import '../../presentation/statistic/pages/statistic_habit_list_page.dart';
 import '../../presentation/statistic/pages/statistic_task_list_page.dart';
 import '../../presentation/task/pages/create_task_page.dart';
+import '../../presentation/task/pages/task_category_page.dart';
 import '../../presentation/task/pages/update_task_page.dart';
 import '../strings/app_exception_messages.dart';
 import 'name_routes.dart';
@@ -20,15 +21,20 @@ import 'name_routes.dart';
 class MaterialRoutes {
   static Route onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
-      case NameRoutes.createTaskPage:
-        final CreateTaskArgs createTaskArgs = routeSettings.arguments as CreateTaskArgs;
+      case NameRoutes.taskCategoryPage:
+        final CategoryModelArgs categoryModelArgs = routeSettings.arguments as CategoryModelArgs;
         return MaterialPageRoute(
-          builder: (_) => CreateTaskPage(taskPeriodIndex: createTaskArgs.taskPeriodIndex),
+          builder: (_) => TaskCategoryPage(categoryModel: categoryModelArgs.categoryModel),
+        );
+      case NameRoutes.createTaskPage:
+        final CategoryModelArgs categoryModelArgs = routeSettings.arguments as CategoryModelArgs;
+        return MaterialPageRoute(
+          builder: (_) => CreateTaskPage(categoryModel: categoryModelArgs.categoryModel),
         );
       case NameRoutes.updateTaskPage:
         final TaskModelArgs taskModelArgs = routeSettings.arguments as TaskModelArgs;
         return MaterialPageRoute(
-          builder: (_) => UpdateTaskPage(taskModel: taskModelArgs.taskEntity),
+          builder: (_) => UpdateTaskPage(taskModel: taskModelArgs.taskModel),
         );
       case NameRoutes.createHabitPage:
         return MaterialPageRoute(

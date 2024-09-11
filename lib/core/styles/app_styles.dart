@@ -4,8 +4,8 @@ import '../../presentation/category/pages/categories_page.dart';
 import '../../presentation/habit/pages/habits_page.dart';
 import '../../presentation/pages/settings_page.dart';
 import '../../presentation/pages/statistic_page.dart';
+import '../enums/category_period.dart';
 import '../enums/habit_period.dart';
-import '../enums/task_period.dart';
 import '../enums/task_priority.dart';
 import '../enums/task_status.dart';
 import '../strings/app_constraints.dart';
@@ -61,12 +61,12 @@ class AppStyles {
     SettingsPage(),
   ];
 
-  static const taskModeList = <TaskPeriod>[
-    TaskPeriod.day,
-    TaskPeriod.week,
-    TaskPeriod.month,
-    TaskPeriod.season,
-    TaskPeriod.year,
+  static const taskModeList = <CategoryPeriod>[
+    CategoryPeriod.day,
+    CategoryPeriod.week,
+    CategoryPeriod.month,
+    CategoryPeriod.season,
+    CategoryPeriod.year,
   ];
 
   static const appColorList = <Color>[
@@ -88,12 +88,12 @@ class AppStyles {
     Colors.red,
   ];
 
-  static const taskPeriodList = <TaskPeriod> [
-    TaskPeriod.day,
-    TaskPeriod.week,
-    TaskPeriod.month,
-    TaskPeriod.season,
-    TaskPeriod.year,
+  static const categoryPeriodList = <CategoryPeriod> [
+    CategoryPeriod.day,
+    CategoryPeriod.week,
+    CategoryPeriod.month,
+    CategoryPeriod.season,
+    CategoryPeriod.year,
   ];
 
   static const taskSortList = <String> [
