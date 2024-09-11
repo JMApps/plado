@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:plado/presentation/settings/widgets/app_lang_drop_button.dart';
+import 'package:plado/presentation/widgets/text_description_bold.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -16,7 +17,6 @@ import '../settings/widgets/app_theme_segment.dart';
 import '../settings/widgets/color_theme_list.dart';
 import '../settings/widgets/share_rate_list_tile.dart';
 import '../settings/widgets/social_list_tile.dart';
-import '../widgets/description_text.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -36,22 +36,22 @@ class SettingsPage extends StatelessWidget {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  DescriptionText(text: appLocale.language),
+                  TextDescriptionBold(text: appLocale.language),
                   const AppLangDropButton(),
                   const Divider(indent: 16, endIndent: 16),
-                  DescriptionText(text: appLocale.theme),
+                  TextDescriptionBold(text: appLocale.theme),
                   const AppThemeSegment(),
                   const SizedBox(height: 8),
                   const Divider(indent: 16, endIndent: 16),
-                  DescriptionText(text: appLocale.themeColor),
+                  TextDescriptionBold(text: appLocale.themeColor),
                   const ColorThemeList(),
                   const SizedBox(height: 16),
                   const Divider(indent: 16, endIndent: 16),
-                  DescriptionText(text: appLocale.display),
+                  TextDescriptionBold(text: appLocale.display),
                   const AlwaysDisplaySwitch(),
                   const SizedBox(height: 8),
                   const Divider(indent: 16, endIndent: 16),
-                  DescriptionText(text: appLocale.otherApplications),
+                  TextDescriptionBold(text: appLocale.otherApplications),
                   SocialListTile(
                     onSettingTap: () {
                       _launchUrl(Platform.isAndroid ? AppConstraints.appAndroidStore : AppConstraints.appIOSStore);
@@ -60,7 +60,7 @@ class SettingsPage extends StatelessWidget {
                     imagePath: Platform.isAndroid ? AppConstraints.androidIconPath : AppConstraints.iOSIconPath,
                   ),
                   const Divider(indent: 16, endIndent: 16),
-                  DescriptionText(text: appLocale.weInSocials),
+                  TextDescriptionBold(text: appLocale.weInSocials),
                   SocialListTile(
                     onSettingTap: () {
                       _launchUrl(AppConstraints.telegramChannel);
@@ -76,7 +76,7 @@ class SettingsPage extends StatelessWidget {
                     imagePath: AppConstraints.instagramIconPath,
                   ),
                   const Divider(indent: 16, endIndent: 16),
-                  Platform.isAndroid ? DescriptionText(text: appLocale.backup) : const SizedBox(),
+                  Platform.isAndroid ? TextDescriptionBold(text: appLocale.backup) : const SizedBox(),
                   Platform.isAndroid ? ShareRateListTile(
                     onSettingTap: () {
                       Navigator.pushNamed(context, NameRoutes.backupDetailPage);
@@ -85,7 +85,7 @@ class SettingsPage extends StatelessWidget {
                     icon: Icons.backup_outlined,
                   ) : const SizedBox(),
                   Platform.isAndroid ? const Divider(indent: 16, endIndent: 16) : const SizedBox(),
-                  DescriptionText(text: appLocale.rateApplication),
+                  TextDescriptionBold(text: appLocale.rateApplication),
                   ShareRateListTile(
                     onSettingTap: () {
                       _launchUrl(Platform.isAndroid ? AppConstraints.appLinkAndroid : AppConstraints.appLinkIOS);
@@ -94,7 +94,7 @@ class SettingsPage extends StatelessWidget {
                     icon: Icons.star_half_sharp,
                   ),
                   const Divider(indent: 16, endIndent: 16),
-                  DescriptionText(text: appLocale.share),
+                  TextDescriptionBold(text: appLocale.share),
                   ShareRateListTile(
                     onSettingTap: () {
                       Share.share(
@@ -106,7 +106,7 @@ class SettingsPage extends StatelessWidget {
                     icon: Icons.ios_share_rounded,
                   ),
                   const Divider(indent: 16, endIndent: 16),
-                  DescriptionText(text: appLocale.version),
+                  TextDescriptionBold(text: appLocale.version),
                   const Padding(
                     padding: AppStyles.paddingHorizontalMini,
                     child: Text(

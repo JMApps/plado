@@ -21,7 +21,7 @@ class StaticTasksList extends StatelessWidget {
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
     return FutureBuilder(
-      future: Provider.of<TaskUseCase>(context).getTaskByStatus(statusIndex: taskStatusIndex),
+      future: Provider.of<TaskUseCase>(context).fetchTaskByStatus(statusIndex: taskStatusIndex),
       builder: (context, snapshot) {
         if (snapshot.hasData && snapshot.data!.isNotEmpty) {
           return Scrollbar(

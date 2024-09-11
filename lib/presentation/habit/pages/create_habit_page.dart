@@ -9,7 +9,7 @@ import '../../state/habit/habit_notification_id_state.dart';
 import '../../state/habit/habit_period_state.dart';
 import '../../state/habit/habit_remind_state.dart';
 import '../../state/habit/habit_title_state.dart';
-import '../../task/widgets/text_description.dart';
+import '../../widgets/text_description.dart';
 import '../../widgets/main_back_button.dart';
 import '../widgets/add_habit_button.dart';
 import '../widgets/habit_color_list.dart';

@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../core/styles/app_styles.dart';
 import '../../data/state/backup_state.dart';
-import '../widgets/description_text.dart';
+import '../widgets/text_description_bold.dart';
 
 class BackupDetailPage extends StatefulWidget {
   const BackupDetailPage({super.key});
@@ -34,7 +34,7 @@ class _BackupDetailPageState extends State<BackupDetailPage> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  DescriptionText(text: appLocale.backupWarning),
+                  TextDescriptionBold(text: appLocale.backupWarning),
                   ListTile(
                     onTap: () async {
                       await backupState.importBackupFile();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plado/presentation/widgets/text_description_bold.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -7,7 +8,6 @@ import '../../../data/models/all_habit_count_model.dart';
 import '../../../data/models/all_task_count_model.dart';
 import '../../../domain/usecases/habit_use_case.dart';
 import '../../../domain/usecases/task_use_case.dart';
-import '../../widgets/description_text.dart';
 import '../../widgets/main_error_text.dart';
 import 'statistic_habit_list_tile.dart';
 import 'statistic_task_list_tile.dart';
@@ -24,14 +24,14 @@ class MainStatisticItem extends StatelessWidget {
       child: Column(
         children: [
           FutureBuilder<AllTaskCountModel>(
-            future: Provider.of<TaskUseCase>(context).getAllTasksNumber(),
+            future: Provider.of<TaskUseCase>(context).fetchAllTaskCount(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 final AllTaskCountModel allTaskCountModel = snapshot.data!;
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    DescriptionText(text: appLocale.tasks),
+                    TextDescriptionBold(text: appLocale.tasks),
                     StaticTaskListTile(
                       taskStatusIndex: 3,
                       taskStatus: allTaskCountModel.all,
@@ -80,7 +80,7 @@ class MainStatisticItem extends StatelessWidget {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    DescriptionText(text: appLocale.habits),
+                    TextDescriptionBold(text: appLocale.habits),
                     StaticHabitListTile(
                       taskStatus: allHabitCountModel.all,
                       title: appLocale.allHabits,
