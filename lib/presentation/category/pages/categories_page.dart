@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/enums/category_period.dart';
 import '../../../core/styles/app_styles.dart';
-import '../addchange/add_category_button.dart';
+import '../addchange/add_category_bottom_sheet.dart';
 import '../lists/task_categories_list.dart';
 import '../widgets/sort_category_button.dart';
 
@@ -31,11 +31,26 @@ class _CategoriesPageState extends State<CategoriesPage> with TickerProviderStat
 
   @override
   Widget build(BuildContext context) {
+    final appColors = Theme.of(context).colorScheme;
     final appLocale = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         title: Text(appLocale.appName),
+        // leading: IconButton(
+        //   onPressed: () {},
+        //   icon: Icon(
+        //     Icons.sell_outlined,
+        //     color: appColors.primary,
+        //   ),
+        // ),
         actions: const [
+          // IconButton(
+          //   onPressed: () {},
+          //   icon: Icon(
+          //     Icons.today_rounded,
+          //     color: appColors.primary,
+          //   ),
+          // ),
           SortCategoryButton(),
         ],
         bottom: TabBar(
@@ -65,7 +80,23 @@ class _CategoriesPageState extends State<CategoriesPage> with TickerProviderStat
           TaskCategoriesList(taskPeriodIndex: CategoryPeriod.year.index),
         ],
       ),
-      floatingActionButton: const AddCategoryButton()
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            builder: (context) => AnimatedPadding(
+              padding: MediaQuery.of(context).viewInsets,
+              duration: const Duration(milliseconds: 250),
+              curve: Curves.decelerate,
+              child: AddCategoryBottomSheet(
+                periodIndex: _tabController.index,
+              ),
+            ),
+          );
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

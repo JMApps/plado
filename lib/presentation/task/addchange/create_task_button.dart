@@ -10,6 +10,7 @@ import '../../../data/models/task_model.dart';
 import '../../../data/services/notifications/notification_service.dart';
 import '../../../domain/entities/category_entity.dart';
 import '../../../domain/usecases/task_use_case.dart';
+import '../../state/rest_times_state.dart';
 import '../../state/task/task_color_state.dart';
 import '../../state/task/task_notification_date_state.dart';
 import '../../state/task/task_notification_id_state.dart';
@@ -74,12 +75,19 @@ class _CreateTaskButtonState extends State<CreateTaskButton> {
       NotificationService().scheduleTimeNotifications(DateTime.parse(taskNotificationDate), tasks, taskTitleState, randomNotificationNumber);
     }
 
+    Map<String, dynamic> restTimePeriods = Provider.of<RestTimesState>(context, listen: false).restCategoryTimes(widget.categoryModel.categoryPeriodIndex);
+    DateTime startTime = restTimePeriods[AppConstraints.startDateTime];
+    DateTime endTime = restTimePeriods[AppConstraints.endDateTime];
+
     final TaskModel taskModel = TaskModel(
       taskId: 0,
       taskTitle: taskTitleState,
       createDateTime: _currentDateTime,
       completeDateTime: _currentDateTime,
+      startDateTime: startTime,
+      endDateTime: endTime,
       taskPriorityIndex: taskPriorityIndex,
+      taskPeriodIndex: widget.categoryModel.categoryPeriodIndex,
       taskStatusIndex: TaskStatus.inProgress.index,
       taskColorIndex: taskColorIndex,
       taskSampleBy: widget.categoryModel.categoryId,

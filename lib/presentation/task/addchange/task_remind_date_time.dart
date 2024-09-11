@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
+import '../../state/rest_times_state.dart';
 import '../../state/task/task_notification_date_state.dart';
 import '../../state/task/task_remind_state.dart';
 import '../../widgets/text_description_bold.dart';
 
 class TaskRemindDateTime extends StatefulWidget {
-  const TaskRemindDateTime({super.key});
+  const TaskRemindDateTime({super.key, required this.periodIndex,});
+
+  final int periodIndex;
 
   @override
   State<TaskRemindDateTime> createState() => _TaskRemindDateTimeState();
@@ -53,7 +57,7 @@ class _TaskRemindDateTimeState extends State<TaskRemindDateTime> {
                       confirmText: appLocale.select,
                       initialDate: _currentDateTime,
                       firstDate: _currentDateTime,
-                      lastDate: _currentDateTime,
+                      lastDate: Provider.of<RestTimesState>(context, listen: false).restCategoryTimes(widget.periodIndex)[AppConstraints.endDateTime],
                     );
                     if (selectedDate != null) {
                       _argDateTime = selectedDate;dateState.setTaskNotificationDate = selectedDate.toIso8601String();
@@ -81,7 +85,8 @@ class _TaskRemindDateTimeState extends State<TaskRemindDateTime> {
                     }
                     if (_argDateTime.isBefore(_currentDateTime)) {
                       if (!context.mounted) return;
-                      _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, appLocale.selectCorrectDateTime);}
+                      _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, appLocale.selectCorrectDateTime);
+                    }
                   } : null,
                   icon: const Icon(Icons.access_time),
                   label: Text(appLocale.selectTime,

@@ -6,13 +6,18 @@ import '../../../core/styles/app_styles.dart';
 import '../../state/category/category_color_state.dart';
 import '../../state/category/category_period_state.dart';
 import '../../state/category/category_title_state.dart';
-import 'add_category.dart';
+import 'add_category_button.dart';
 import 'category_color_list.dart';
 import 'category_period_segment.dart';
 import 'category_text_field.dart';
 
 class AddCategoryBottomSheet extends StatelessWidget {
-  const AddCategoryBottomSheet({super.key});
+  const AddCategoryBottomSheet({
+    super.key,
+    required this.periodIndex,
+  });
+
+  final int periodIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +31,7 @@ class AddCategoryBottomSheet extends StatelessWidget {
           create: (_) => CategoryColorState(),
         ),
         ChangeNotifierProvider(
-          create: (_) => CategoryPeriodState(0),
+          create: (_) => CategoryPeriodState(periodIndex),
         ),
       ],
       child: SingleChildScrollView(
@@ -53,7 +58,7 @@ class AddCategoryBottomSheet extends StatelessWidget {
             const SizedBox(height: 4),
             const Divider(indent: 16, endIndent: 16),
             const SizedBox(height: 4),
-            const AddCategory(),
+            const AddCategoryButton(),
             const SizedBox(height: 16),
           ],
         ),

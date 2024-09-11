@@ -64,7 +64,7 @@ class CreateTaskPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const TaskTimeIndicator(),
+              TaskTimeIndicator(periodIndex: categoryModel.categoryPeriodIndex),
               const SizedBox(height: 8),
               const Divider(indent: 16, endIndent: 16),
               const SizedBox(height: 8),
@@ -78,7 +78,7 @@ class CreateTaskPage extends StatelessWidget {
               const TaskColorList(),
               const SizedBox(height: 8),
               const Divider(indent: 16, endIndent: 16),
-              const TaskRemindDateTime(),
+              TaskRemindDateTime(periodIndex: categoryModel.categoryPeriodIndex),
               const Divider(indent: 16, endIndent: 16),
             ],
           ),
