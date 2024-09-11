@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import '../../core/enums/category_period.dart';
 import '../../core/enums/season.dart';
-import '../../core/enums/task_period.dart';
 import '../../core/strings/app_constraints.dart';
 import '../../core/styles/app_styles.dart';
 
@@ -31,47 +31,47 @@ class RestTimesState extends ChangeNotifier {
     super.dispose();
   }
 
-  Map<String, dynamic> restTaskTimes(int taskPeriodIndex) {
-    final Map<String, dynamic> taskPeriodData;
+  Map<String, dynamic> restCategoryTimes(int periodIndex) {
+    final Map<String, dynamic> categoryPeriodData;
 
-    switch (AppStyles.taskPeriodList[taskPeriodIndex]) {
-      case TaskPeriod.day:
-        taskPeriodData = _calculateTaskPeriodData(
-            startTaskPeriod: DateTime(_currentDateTime.year, _currentDateTime.month, _currentDateTime.day),
+    switch (AppStyles.categoryPeriodList[periodIndex]) {
+      case CategoryPeriod.day:
+        categoryPeriodData = _calculateCategoryPeriodData(
+            startPeriod: DateTime(_currentDateTime.year, _currentDateTime.month, _currentDateTime.day),
             duration: const Duration(hours: 24)
         );
         break;
-      case TaskPeriod.week:
+      case CategoryPeriod.week:
         final startOfWeek = DateTime(_currentDateTime.year, _currentDateTime.month, _currentDateTime.day - _currentDateTime.weekday + 1);
-        taskPeriodData = _calculateTaskPeriodData(
-            startTaskPeriod: startOfWeek,
+        categoryPeriodData = _calculateCategoryPeriodData(
+            startPeriod: startOfWeek,
             duration: const Duration(days: 7)
         );
         break;
-      case TaskPeriod.month:
+      case CategoryPeriod.month:
         final startOfMonth = DateTime(_currentDateTime.year, _currentDateTime.month);
-        taskPeriodData = _calculateTaskPeriodData(
-            startTaskPeriod: startOfMonth,
+        categoryPeriodData = _calculateCategoryPeriodData(
+            startPeriod: startOfMonth,
             duration: Duration(days: daysInMonth(_currentDateTime.year, _currentDateTime.month))
         );
         break;
-      case TaskPeriod.season:
+      case CategoryPeriod.season:
         final seasonData = _getSeasonPeriodData(_currentDateTime);
-        taskPeriodData = _calculateTaskPeriodData(
-            startTaskPeriod: seasonData[AppConstraints.startSeason],
-            endTaskPeriod: seasonData[AppConstraints.endSeason]
+        categoryPeriodData = _calculateCategoryPeriodData(
+            startPeriod: seasonData[AppConstraints.startSeason],
+            endPeriod: seasonData[AppConstraints.endSeason]
         );
         break;
-      case TaskPeriod.year:
+      case CategoryPeriod.year:
         final startOfYear = DateTime(_currentDateTime.year);
-        taskPeriodData = _calculateTaskPeriodData(
-            startTaskPeriod: startOfYear,
+        categoryPeriodData = _calculateCategoryPeriodData(
+            startPeriod: startOfYear,
             duration: Duration(days: isLeapYear(_currentDateTime.year) ? 366 : 365)
         );
         break;
     }
 
-    return taskPeriodData;
+    return categoryPeriodData;
   }
 
   Map<String, dynamic> restHabitTimes(int habitPeriodIndex) {
@@ -80,22 +80,22 @@ class RestTimesState extends ChangeNotifier {
     return habitPeriodData;
   }
 
-  Map<String, dynamic> _calculateTaskPeriodData({
-    required DateTime startTaskPeriod,
+  Map<String, dynamic> _calculateCategoryPeriodData({
+    required DateTime startPeriod,
     Duration? duration,
-    DateTime? endTaskPeriod,
+    DateTime? endPeriod,
   }) {
-    final DateTime endDateTime = duration != null ? startTaskPeriod.add(duration) : endTaskPeriod!;
-    final int totalMinutes = endDateTime.difference(startTaskPeriod).inMinutes;
-    final int remaininTimeInMinutes = _currentDateTime.difference(startTaskPeriod).inMinutes;
+    final DateTime endDateTime = duration != null ? startPeriod.add(duration) : endPeriod!;
+    final int totalMinutes = endDateTime.difference(startPeriod).inMinutes;
+    final int remaininTimeInMinutes = _currentDateTime.difference(startPeriod).inMinutes;
     final Duration remainingTaskTime = endDateTime.difference(_currentDateTime);
     final double elapsedTaskPercentage = (remaininTimeInMinutes / totalMinutes) * 100.0;
 
     return {
-      AppConstraints.taskStartDateTime: startTaskPeriod,
+      AppConstraints.startDateTime: startPeriod,
+      AppConstraints.endDateTime: endDateTime.add(_minusMicro),
       AppConstraints.taskRemaininDateTime: remainingTaskTime,
       AppConstraints.taskElapsedPercentage: elapsedTaskPercentage,
-      AppConstraints.taskEndDateTime: endDateTime.add(_minusMicro),
     };
   }
 

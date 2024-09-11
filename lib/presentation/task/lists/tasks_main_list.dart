@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../../domain/entities/task_entity.dart';
 import '../../../core/styles/app_styles.dart';
+import '../../../domain/entities/category_entity.dart';
 import '../../../domain/usecases/task_use_case.dart';
 import '../../state/task/task_sort_state.dart';
 import '../../widgets/main_error_text.dart';
@@ -13,14 +14,10 @@ import '../items/task_item.dart';
 class TasksMainList extends StatelessWidget {
   const TasksMainList({
     super.key,
-    required this.taskPeriodIndex,
-    required this.startDate,
-    required this.endDate,
+    required this.categoryModel,
   });
 
-  final int taskPeriodIndex;
-  final DateTime startDate;
-  final DateTime endDate;
+  final CategoryEntity categoryModel;
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +25,8 @@ class TasksMainList extends StatelessWidget {
     return Consumer<TaskSortState>(
       builder: (BuildContext context, taskSortState, _) {
         return FutureBuilder<List<TaskEntity>>(
-          future: Provider.of<TaskUseCase>(context).getTasksByMode(
-            taskPeriodIndex: taskPeriodIndex,
-            startTime: startDate.toIso8601String(),
-            endTime: endDate.toIso8601String(),
+          future: Provider.of<TaskUseCase>(context).fetchTaskByCategoryId(
+            categoryId: categoryModel.categoryId,
             orderBy: '${AppStyles.taskSortList[taskSortState.getSortIndex]} ${AppStyles.orderList[taskSortState.getOrderIndex]}',
           ),
           builder: (context, snapshot) {

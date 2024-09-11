@@ -4,19 +4,17 @@ import '../../data/models/task_model.dart';
 import '../entities/task_entity.dart';
 
 abstract class TaskRepository {
-  Future<List<TaskEntity>> getAllTasks({required String orderBy});
-
   Future<TaskEntity> getTaskById({required int taskId});
 
-  Future<List<TaskEntity>> getTasksByMode({required int taskPeriodIndex, required String startTime, required String endTime, required String orderBy});
+  Future<List<TaskEntity>> getTaskByCategoryId({required int categoryId, required String orderBy});
 
-  Future<List<TaskEntity>> getTasksByStatus({required int statusIndex});
+  Future<List<TaskEntity>> getTaskByStatus({required int statusIndex});
 
-  Future<TaskCountModel> getTasksNumber({required int taskPeriodIndex});
+  Future<TaskCountModel> getTaskCategoryCount({required int categoryId});
 
-  Future<AllTaskCountModel> getAllTasksNumber();
+  Future<AllTaskCountModel> getAllTaskCount();
 
-  Future<int> changeTaskStatus({required int taskId, required int taskStatusIndex, required String completeDateTime});
+  Future<int> taskStatus({required int taskId, required int taskStatusIndex, required String completeDateTime});
 
   Future<int> createTask({required TaskModel taskModel});
 

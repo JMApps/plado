@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
-import '../../state/rest_times_state.dart';
 import '../../state/task/task_notification_date_state.dart';
-import '../../state/task/task_period_state.dart';
 import '../../state/task/task_remind_state.dart';
-import '../../widgets/description_text.dart';
+import '../../widgets/text_description_bold.dart';
 
 class TaskRemindDateTime extends StatefulWidget {
   const TaskRemindDateTime({super.key});
@@ -38,7 +35,7 @@ class _TaskRemindDateTimeState extends State<TaskRemindDateTime> {
             SwitchListTile(
               shape: AppStyles.shape,
               visualDensity: const VisualDensity(vertical: -4, horizontal: -4),
-              title: DescriptionText(text: appLocale.remind),
+              title: TextDescriptionBold(text: appLocale.remind),
               value: remindState.getIsRemind,
               onChanged: (bool onChanged) {
                 remindState.setIsRemind = onChanged;
@@ -56,7 +53,8 @@ class _TaskRemindDateTimeState extends State<TaskRemindDateTime> {
                       confirmText: appLocale.select,
                       initialDate: _currentDateTime,
                       firstDate: _currentDateTime,
-                      lastDate: Provider.of<RestTimesState>(context, listen: false).restTaskTimes(context.read<TaskPeriodState>().getTaskPeriodIndex)[AppConstraints.taskEndDateTime],);
+                      lastDate: _currentDateTime,
+                    );
                     if (selectedDate != null) {
                       _argDateTime = selectedDate;dateState.setTaskNotificationDate = selectedDate.toIso8601String();
                     }

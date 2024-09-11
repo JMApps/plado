@@ -12,71 +12,52 @@ class TaskUseCase extends ChangeNotifier {
 
   TaskUseCase(this._taskRepository);
 
-  String _errorMessage = '';
-
-  String get getErrorMessage => _errorMessage;
-
-  Future<List<TaskEntity>> getAllTasks({required String orderBy}) async {
-    try {
-      return await _taskRepository.getAllTasks(orderBy: orderBy);
-    } catch (e) {
-      _errorMessage = e.toString();
-      throw Exception('${AppConstraints.errorMessage} $e');
-    }
-  }
-
-  Future<TaskEntity> getTaskById({required int taskId}) async {
+  Future<TaskEntity> fetchTaskById({required int taskId}) async {
     try {
       return await _taskRepository.getTaskById(taskId: taskId);
     } catch (e) {
-      _errorMessage = e.toString();
       throw Exception('${AppConstraints.errorMessage} $e');
     }
   }
 
-  Future<List<TaskEntity>> getTasksByMode({required int taskPeriodIndex, required String startTime, required String endTime, required String orderBy}) async {
+  Future<List<TaskEntity>> fetchTaskByCategoryId({required int categoryId, required String orderBy}) async {
     try {
-      return await _taskRepository.getTasksByMode(taskPeriodIndex: taskPeriodIndex, startTime: startTime, endTime: endTime, orderBy: orderBy);
+      return await _taskRepository.getTaskByCategoryId(categoryId: categoryId, orderBy: orderBy);
     } catch (e) {
-      _errorMessage = e.toString();
       throw Exception('${AppConstraints.errorMessage} $e');
     }
   }
 
-  Future<List<TaskEntity>> getTaskByStatus({required int statusIndex}) async {
+  Future<List<TaskEntity>> fetchTaskByStatus({required int statusIndex}) async {
     try {
-      return await _taskRepository.getTasksByStatus(statusIndex: statusIndex);
+      return await _taskRepository.getTaskByStatus(statusIndex: statusIndex);
     } catch (e) {
-      _errorMessage = e.toString();
       throw Exception('${AppConstraints.errorMessage} $e');
     }
   }
 
-  Future<AllTaskCountModel> getAllTasksNumber() async {
+  Future<TaskCountModel> fetchTaskCategoryCount({required int categoryId}) async {
     try {
-      return await _taskRepository.getAllTasksNumber();
+      return await _taskRepository.getTaskCategoryCount(categoryId: categoryId);
     } catch (e) {
-      _errorMessage = e.toString();
       throw Exception('${AppConstraints.errorMessage} $e');
     }
   }
 
-  Future<TaskCountModel> getTasksNumber({required int taskPeriodIndex}) async {
+  Future<AllTaskCountModel> fetchAllTaskCount() async {
     try {
-      return await _taskRepository.getTasksNumber(taskPeriodIndex: taskPeriodIndex);
+      return await _taskRepository.getAllTaskCount();
     } catch (e) {
-      _errorMessage = e.toString();
       throw Exception('${AppConstraints.errorMessage} $e');
     }
   }
 
-  Future<int> changeTaskStatus({required int taskId, required int taskStatusIndex, required String completeDateTime}) async {
+  Future<int> fetchTaskStatus({required int taskId, required int taskStatusIndex, required String completeDateTime}) async {
     try {
-      final int changeTaskStatus = await _taskRepository.changeTaskStatus(taskId: taskId, taskStatusIndex: taskStatusIndex, completeDateTime: completeDateTime);
+      final int changeTaskStatus = await _taskRepository.taskStatus(taskId: taskId, taskStatusIndex: taskStatusIndex, completeDateTime: completeDateTime);
       notifyListeners();
       return changeTaskStatus;
     } catch (e) {
-      _errorMessage = e.toString();
       throw Exception('${AppConstraints.errorMessage} $e');
     }
   }
@@ -87,7 +68,6 @@ class TaskUseCase extends ChangeNotifier {
       notifyListeners();
       return createTask;
     } catch (e) {
-      _errorMessage = e.toString();
       throw Exception('${AppConstraints.errorMessage} $e');
     }
   }
@@ -98,7 +78,6 @@ class TaskUseCase extends ChangeNotifier {
       notifyListeners();
       return updateTask;
     } catch (e) {
-      _errorMessage = e.toString();
       throw Exception('${AppConstraints.errorMessage} $e');
     }
   }
@@ -109,7 +88,6 @@ class TaskUseCase extends ChangeNotifier {
       notifyListeners();
       return deleteTask;
     } catch (e) {
-      _errorMessage = e.toString();
       throw Exception('${AppConstraints.errorMessage} $e');
     }
   }

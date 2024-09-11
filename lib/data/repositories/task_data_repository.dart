@@ -15,14 +15,6 @@ class TaskDataRepository implements TaskRepository {
   TaskDataRepository(this._pladoDatabaseService);
 
   @override
-  Future<List<TaskEntity>> getAllTasks({required String orderBy}) async {
-    final Database database = await _pladoDatabaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbTaskTableName, orderBy: orderBy);
-    final List<TaskEntity> allTasks = resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
-    return allTasks;
-  }
-
-  @override
   Future<TaskEntity> getTaskById({required int taskId}) async {
     final Database database = await _pladoDatabaseService.db;
     final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskId} = ?', whereArgs: [taskId]);
@@ -31,21 +23,15 @@ class TaskDataRepository implements TaskRepository {
   }
 
   @override
-  Future<List<TaskEntity>> getTasksByMode({required int taskPeriodIndex, required String startTime, required String endTime, required String orderBy,}) async {
+  Future<List<TaskEntity>> getTaskByCategoryId({required int categoryId, required String orderBy}) async {
     final Database database = await _pladoDatabaseService.db;
-    final currentDateTime = DateTime.now().toIso8601String();
-    final Map<String, dynamic> taskStatusMap = {
-      DatabaseValues.dbTaskStatusIndex: 2,
-      DatabaseValues.dbTaskCompleteDateTime: currentDateTime,
-    };
-    await database.update(DatabaseValues.dbTaskTableName, taskStatusMap, where: '${DatabaseValues.dbTaskPeriodIndex} = ? AND ${DatabaseValues.dbTaskEndDateTime} < ? AND ${DatabaseValues.dbTaskStatusIndex} != 1', whereArgs: [taskPeriodIndex, currentDateTime]);
-    final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskPeriodIndex} = ? AND ${DatabaseValues.dbTaskStartDateTime} <= ? AND ${DatabaseValues.dbTaskEndDateTime} >= ?', whereArgs: [taskPeriodIndex, currentDateTime, currentDateTime], orderBy: 'CASE WHEN ${DatabaseValues.dbTaskStatusIndex} = 1 THEN 1 ELSE 0 END, $orderBy');
-    final List<TaskEntity> tasksByMode = resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
-    return tasksByMode;
+    final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskSampleBy} = ?', whereArgs: [categoryId], orderBy: 'CASE WHEN ${DatabaseValues.dbTaskStatusIndex} = 1 THEN 1 ELSE 0 END, $orderBy');
+    final List<TaskEntity> taskByCategoryId = resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
+    return taskByCategoryId;
   }
 
   @override
-  Future<List<TaskEntity>> getTasksByStatus({required int statusIndex}) async {
+  Future<List<TaskEntity>> getTaskByStatus({required int statusIndex}) async {
     final Database database = await _pladoDatabaseService.db;
     final List<Map<String, Object?>> resources = statusIndex <= 2 ? await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskStatusIndex} = ?', whereArgs: [statusIndex], orderBy: '${DatabaseValues.dbTaskId} DESC') : await database.query(DatabaseValues.dbTaskTableName, orderBy: '${DatabaseValues.dbTaskStatusIndex} ASC, ${DatabaseValues.dbTaskId} DESC');
     final List<TaskEntity> tasksByMode = resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
@@ -53,25 +39,25 @@ class TaskDataRepository implements TaskRepository {
   }
 
   @override
-  Future<TaskCountModel> getTasksNumber({required int taskPeriodIndex}) async {
+  Future<TaskCountModel> getTaskCategoryCount({required int categoryId}) async {
     final Database database = await _pladoDatabaseService.db;
 
     final List<Map<String, Object?>> inProgress = await database.query(
       DatabaseValues.dbTaskTableName,
-      where: '${DatabaseValues.dbTaskStatusIndex} = ? AND ${DatabaseValues.dbTaskPeriodIndex} = ?',
-      whereArgs: [0, taskPeriodIndex],
+      where: '${DatabaseValues.dbTaskStatusIndex} = ? AND ${DatabaseValues.dbTaskSampleBy} = ?',
+      whereArgs: [0, categoryId],
     );
 
     final List<Map<String, Object?>> complete = await database.query(
       DatabaseValues.dbTaskTableName,
-      where: '${DatabaseValues.dbTaskStatusIndex} = ? AND ${DatabaseValues.dbTaskPeriodIndex} = ?',
-      whereArgs: [1, taskPeriodIndex],
+      where: '${DatabaseValues.dbTaskStatusIndex} = ? AND ${DatabaseValues.dbTaskSampleBy} = ?',
+      whereArgs: [1, categoryId],
     );
 
     final List<Map<String, Object?>> canceled = await database.query(
       DatabaseValues.dbTaskTableName,
-      where: '${DatabaseValues.dbTaskStatusIndex} = ? AND ${DatabaseValues.dbTaskPeriodIndex} = ?',
-      whereArgs: [2, taskPeriodIndex],
+      where: '${DatabaseValues.dbTaskStatusIndex} = ? AND ${DatabaseValues.dbTaskSampleBy} = ?',
+      whereArgs: [2, categoryId],
     );
 
     return TaskCountModel(
@@ -83,7 +69,7 @@ class TaskDataRepository implements TaskRepository {
 
 
   @override
-  Future<AllTaskCountModel> getAllTasksNumber() async {
+  Future<AllTaskCountModel> getAllTaskCount() async {
     final Database database = await _pladoDatabaseService.db;
 
     final List<Map<String, Object?>> all = await database.query(
@@ -117,7 +103,7 @@ class TaskDataRepository implements TaskRepository {
   }
 
   @override
-  Future<int> changeTaskStatus({required int taskId, required int taskStatusIndex, required String completeDateTime}) async {
+  Future<int> taskStatus({required int taskId, required int taskStatusIndex, required String completeDateTime}) async {
     final Database database = await _pladoDatabaseService.db;
 
     final getTaskStatusIndex = AppStyles.taskStatusList[taskStatusIndex].index;
