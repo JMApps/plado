@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/routes/name_routes.dart';
 import '../../../core/styles/app_styles.dart';
+import '../../../data/models/arguments/category_model_args.dart';
 import '../../../domain/entities/category_entity.dart';
 import '../addchange/category_options.dart';
 
@@ -21,7 +23,13 @@ class CategoryItem extends StatelessWidget {
       margin: AppStyles.paddingBottomMini,
       child: ListTile(
         onTap: () {
-          // Open task list page
+          Navigator.pushNamed(
+            context,
+            NameRoutes.taskCategoryPage,
+            arguments: CategoryModelArgs(
+              categoryModel: categoryModel,
+            ),
+          );
         },
         onLongPress: () {
           showModalBottomSheet(

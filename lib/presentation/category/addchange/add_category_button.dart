@@ -7,7 +7,7 @@ class AddCategoryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
+    return FloatingActionButton(
       onPressed: () {
         showModalBottomSheet(
           context: context,
@@ -20,7 +20,7 @@ class AddCategoryButton extends StatelessWidget {
           ),
         );
       },
-      icon: const Icon(Icons.add_circle_outline_rounded),
+      child: const Icon(Icons.add),
     );
   }
 }

@@ -1,4 +1,4 @@
-enum TaskPeriod {
+enum CategoryPeriod {
   day,
   week,
   month,

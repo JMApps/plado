@@ -5,12 +5,16 @@ class CategoryModel {
   final String categoryTitle;
   final int categoryColorIndex;
   final int categoryPeriodIndex;
+  final DateTime startDateTime;
+  final DateTime endDateTime;
 
   CategoryModel({
     required this.categoryId,
     required this.categoryTitle,
     required this.categoryColorIndex,
     required this.categoryPeriodIndex,
+    required this.startDateTime,
+    required this.endDateTime,
   });
 
   factory CategoryModel.fromMap(Map<String, dynamic> map) {
@@ -19,6 +23,8 @@ class CategoryModel {
       categoryTitle: map[DatabaseValues.dbCategoryTitle] as String,
       categoryColorIndex: map[DatabaseValues.dbCategoryColorIndex] as int,
       categoryPeriodIndex: map[DatabaseValues.dbCategoryPeriodIndex] as int,
+      startDateTime: DateTime.parse(map[DatabaseValues.dbCategoryStartDateTime]),
+      endDateTime: DateTime.parse(map[DatabaseValues.dbCategoryEndDateTime]),
     );
   }
 
@@ -27,6 +33,8 @@ class CategoryModel {
       DatabaseValues.dbCategoryTitle: categoryTitle,
       DatabaseValues.dbCategoryColorIndex: categoryColorIndex,
       DatabaseValues.dbCategoryPeriodIndex: categoryPeriodIndex,
+      DatabaseValues.dbCategoryStartDateTime: startDateTime.toIso8601String(),
+      DatabaseValues.dbCategoryEndDateTime: endDateTime.toIso8601String(),
     };
   }
 }

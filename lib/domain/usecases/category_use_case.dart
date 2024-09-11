@@ -10,15 +10,10 @@ class CategoryUseCase extends ChangeNotifier {
 
   CategoryUseCase(this._categoryRepository);
 
-  String _errorMessage = '';
-
-  String get getErrorMessage => _errorMessage;
-
   Future<List<CategoryEntity>> fetchCategoriesByPeriod({required int periodIndex, required String orderBy}) async {
     try {
       return await _categoryRepository.getCategoriesByPeriod(periodIndex: periodIndex, orderBy: orderBy);
     } catch (e) {
-      _errorMessage = e.toString();
       throw Exception('${AppConstraints.errorMessage} $e');
     }
   }
@@ -29,7 +24,6 @@ class CategoryUseCase extends ChangeNotifier {
       notifyListeners();
       return createCategory;
     } catch (e) {
-      _errorMessage = e.toString();
       throw Exception('${AppConstraints.errorMessage} $e');
     }
   }
@@ -40,7 +34,6 @@ class CategoryUseCase extends ChangeNotifier {
       notifyListeners();
       return updateCategory;
     } catch (e) {
-      _errorMessage = e.toString();
       throw Exception('${AppConstraints.errorMessage} $e');
     }
   }
@@ -51,7 +44,6 @@ class CategoryUseCase extends ChangeNotifier {
       notifyListeners();
       return deleteCategory;
     } catch (e) {
-      _errorMessage = e.toString();
       throw Exception('${AppConstraints.errorMessage} $e');
     }
   }

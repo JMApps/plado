@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/enums/task_period.dart';
-import '../../../core/routes/name_routes.dart';
+import '../../../core/enums/category_period.dart';
 import '../../../core/styles/app_styles.dart';
-import '../../../data/models/arguments/create_task_args.dart';
 import '../addchange/add_category_button.dart';
 import '../lists/task_categories_list.dart';
 import '../widgets/sort_category_button.dart';
@@ -38,7 +36,6 @@ class _CategoriesPageState extends State<CategoriesPage> with TickerProviderStat
       appBar: AppBar(
         title: Text(appLocale.appName),
         actions: const [
-          AddCategoryButton(),
           SortCategoryButton(),
         ],
         bottom: TabBar(
@@ -61,26 +58,14 @@ class _CategoriesPageState extends State<CategoriesPage> with TickerProviderStat
       body: TabBarView(
         controller: _tabController,
         children: [
-          TaskCategoriesList(taskPeriodIndex: TaskPeriod.day.index),
-          TaskCategoriesList(taskPeriodIndex: TaskPeriod.week.index),
-          TaskCategoriesList(taskPeriodIndex: TaskPeriod.month.index),
-          TaskCategoriesList(taskPeriodIndex: TaskPeriod.season.index),
-          TaskCategoriesList(taskPeriodIndex: TaskPeriod.year.index),
+          TaskCategoriesList(taskPeriodIndex: CategoryPeriod.day.index),
+          TaskCategoriesList(taskPeriodIndex: CategoryPeriod.week.index),
+          TaskCategoriesList(taskPeriodIndex: CategoryPeriod.month.index),
+          TaskCategoriesList(taskPeriodIndex: CategoryPeriod.season.index),
+          TaskCategoriesList(taskPeriodIndex: CategoryPeriod.year.index),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        tooltip: appLocale.addTask,
-        child: const Icon(Icons.add),
-        onPressed: () {
-          Navigator.pushNamed(
-            context,
-            NameRoutes.createTaskPage,
-            arguments: CreateTaskArgs(
-              taskPeriodIndex: _tabController.index,
-            ),
-          );
-        },
-      ),
+      floatingActionButton: const AddCategoryButton()
     );
   }
 }

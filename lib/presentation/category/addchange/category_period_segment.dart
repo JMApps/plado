@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/enums/task_period.dart';
+import '../../../core/enums/category_period.dart';
 import '../../state/category/category_period_state.dart';
 
 class CategoryPeriodSegment extends StatelessWidget {
@@ -17,7 +17,7 @@ class CategoryPeriodSegment extends StatelessWidget {
           showSelectedIcon: false,
           segments: [
             ButtonSegment(
-              value: TaskPeriod.day.index,
+              value: CategoryPeriod.day.index,
               label: Text(
                 appLocale.day,
                 overflow: TextOverflow.ellipsis,
@@ -25,7 +25,7 @@ class CategoryPeriodSegment extends StatelessWidget {
               tooltip: appLocale.day,
             ),
             ButtonSegment(
-              value: TaskPeriod.week.index,
+              value: CategoryPeriod.week.index,
               label: Text(
                 appLocale.week,
                 overflow: TextOverflow.ellipsis,
@@ -33,7 +33,7 @@ class CategoryPeriodSegment extends StatelessWidget {
               tooltip: appLocale.week,
             ),
             ButtonSegment(
-              value: TaskPeriod.month.index,
+              value: CategoryPeriod.month.index,
               label: Text(
                 appLocale.month,
                 overflow: TextOverflow.ellipsis,
@@ -41,7 +41,7 @@ class CategoryPeriodSegment extends StatelessWidget {
               tooltip: appLocale.month,
             ),
             ButtonSegment(
-              value: TaskPeriod.season.index,
+              value: CategoryPeriod.season.index,
               label: Text(
                 appLocale.season,
                 overflow: TextOverflow.clip,
@@ -49,7 +49,7 @@ class CategoryPeriodSegment extends StatelessWidget {
               tooltip: appLocale.season,
             ),
             ButtonSegment(
-              value: TaskPeriod.year.index,
+              value: CategoryPeriod.year.index,
               label: Text(
                 appLocale.year,
                 overflow: TextOverflow.clip,

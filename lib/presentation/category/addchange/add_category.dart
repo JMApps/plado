@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../data/models/category_model.dart';
 import '../../../domain/usecases/category_use_case.dart';
 import '../../state/category/category_color_state.dart';
 import '../../state/category/category_period_state.dart';
 import '../../state/category/category_title_state.dart';
+import '../../state/rest_times_state.dart';
 
 class AddCategory extends StatelessWidget {
   const AddCategory({super.key});
@@ -21,11 +23,17 @@ class AddCategory extends StatelessWidget {
         final int categoryColorIndex = Provider.of<CategoryColorState>(context, listen: false).getColorIndex;
         final int categoryPeriodIndex = Provider.of<CategoryPeriodState>(context, listen: false).getCategoryPeriodIndex;
 
+        Map<String, dynamic> restTimePeriods = Provider.of<RestTimesState>(context, listen: false).restCategoryTimes(categoryPeriodIndex);
+        DateTime startTime = restTimePeriods[AppConstraints.startDateTime];
+        DateTime endTime = restTimePeriods[AppConstraints.endDateTime];
+
         final CategoryModel categoryModel = CategoryModel(
           categoryId: 0,
           categoryTitle: categoryTitle,
           categoryColorIndex: categoryColorIndex,
           categoryPeriodIndex: categoryPeriodIndex,
+          startDateTime: startTime,
+          endDateTime: endTime,
         );
 
         if (categoryTitle.isNotEmpty) {
