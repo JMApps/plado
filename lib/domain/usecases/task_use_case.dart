@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../core/strings/app_constraints.dart';
 import '../../data/models/all_task_count_model.dart';
-import '../../data/models/task_count_model.dart';
 import '../../data/models/task_model.dart';
 import '../entities/task_entity.dart';
 import '../repositories/task_repository.dart';
@@ -12,14 +11,6 @@ class TaskUseCase extends ChangeNotifier {
 
   TaskUseCase(this._taskRepository);
 
-  Future<TaskEntity> fetchTaskById({required int taskId}) async {
-    try {
-      return await _taskRepository.getTaskById(taskId: taskId);
-    } catch (e) {
-      throw Exception('${AppConstraints.errorMessage} $e');
-    }
-  }
-
   Future<List<TaskEntity>> fetchTaskByCategoryId({required int categoryId, required String orderBy}) async {
     try {
       return await _taskRepository.getTaskByCategoryId(categoryId: categoryId, orderBy: orderBy);
@@ -28,17 +19,9 @@ class TaskUseCase extends ChangeNotifier {
     }
   }
 
-  Future<List<TaskEntity>> fetchTaskByStatus({required int statusIndex}) async {
+  Future<TaskEntity> fetchTaskById({required int taskId}) async {
     try {
-      return await _taskRepository.getTaskByStatus(statusIndex: statusIndex);
-    } catch (e) {
-      throw Exception('${AppConstraints.errorMessage} $e');
-    }
-  }
-
-  Future<TaskCountModel> fetchTaskCategoryCount({required int categoryId}) async {
-    try {
-      return await _taskRepository.getTaskCategoryCount(categoryId: categoryId);
+      return await _taskRepository.getTaskById(taskId: taskId);
     } catch (e) {
       throw Exception('${AppConstraints.errorMessage} $e');
     }
@@ -52,11 +35,9 @@ class TaskUseCase extends ChangeNotifier {
     }
   }
 
-  Future<int> fetchTaskStatus({required int taskId, required int taskStatusIndex, required String completeDateTime}) async {
+  Future<int> fetchTaskCountByCategoryId({required int categoryId}) async {
     try {
-      final int changeTaskStatus = await _taskRepository.taskStatus(taskId: taskId, taskStatusIndex: taskStatusIndex, completeDateTime: completeDateTime);
-      notifyListeners();
-      return changeTaskStatus;
+      return await _taskRepository.getTaskCountByCategoryId(categoryId: categoryId);
     } catch (e) {
       throw Exception('${AppConstraints.errorMessage} $e');
     }

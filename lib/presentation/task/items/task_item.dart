@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../domain/entities/task_entity.dart';
 import '../../../core/routes/name_routes.dart';
@@ -48,8 +48,7 @@ class TaskItem extends StatelessWidget {
           taskModel.taskTitle,
           style: TextStyle(
             fontSize: 18,
-            decoration: taskModel.taskStatusIndex == 0 ? TextDecoration.none : TextDecoration.lineThrough,
-            overflow: TextOverflow.ellipsis,
+            decoration: taskModel.taskStatusIndex == 0 ? TextDecoration.none : TextDecoration.lineThrough, overflow: TextOverflow.ellipsis,
           ),
           maxLines: 1,
         ),
@@ -63,17 +62,21 @@ class TaskItem extends StatelessWidget {
         leading: Checkbox(
           value: statusTask,
           onChanged: (bool? onChanged) {
-            Provider.of<TaskUseCase>(context, listen: false).fetchTaskStatus(
-                taskId: taskModel.taskId,
-                taskStatusIndex: taskModel.taskStatusIndex == 0 ? 1 : 0,
-                completeDateTime: DateTime.now().toIso8601String());
+            final Map<String, dynamic> taskMap = {
+              DatabaseValues.dbTaskStatusIndex: taskModel.taskStatusIndex == 0 ? 1 : 0,
+              DatabaseValues.dbHabitCompleteDateTime: DateTime.now().toIso8601String(),
+            };
+            Provider.of<TaskUseCase>(context, listen: false).updateTask(
+              taskMap: taskMap,
+              taskId: taskModel.taskId,
+            );
             if (onChanged!) {
               if (taskModel.notificationId > 0) {
                 NotificationService().cancelNotificationWithId(taskModel.notificationId);
-                final Map<String, dynamic> taskMap = {
-                  DatabaseValues.dbTaskNotificationId: 0,
-                };
-                Provider.of<TaskUseCase>(context, listen: false).updateTask(taskId: taskModel.taskId, taskMap: taskMap);
+              }
+            } else {
+              if (taskModel.notificationId > 0) {
+                NotificationService().scheduleTimeNotifications(DateTime.parse(taskModel.notificationDate), appLocale.tasks, taskModel.taskTitle, taskModel.notificationId);
               }
             }
           },
@@ -81,7 +84,7 @@ class TaskItem extends StatelessWidget {
         trailing: Icon(
           statusTask ? Icons.check_circle : Icons.circle_rounded,
           color: taskColor,
-          size: 20,
+          size: 22.5,
         ),
       ),
     );
