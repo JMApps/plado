@@ -1,5 +1,5 @@
 class CreateTaskArgs {
-  final int taskPeriodIndex;
+  final int categoryId;
 
-  CreateTaskArgs({required this.taskPeriodIndex});
+  CreateTaskArgs({required this.categoryId});
 }
