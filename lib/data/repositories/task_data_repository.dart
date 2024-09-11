@@ -14,7 +14,6 @@ class TaskDataRepository implements TaskRepository {
 
   @override
   Future<List<TaskEntity>> getTaskByCategoryId({required int categoryId, required String orderBy}) async {
-    final String currentDateTime = DateTime.now().toIso8601String();
     final Database database = await _pladoDatabaseService.db;
     final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskSampleBy} = ?', whereArgs: [categoryId], orderBy: 'CASE WHEN ${DatabaseValues.dbTaskStatusIndex} = 1 THEN 1 ELSE 0 END, $orderBy');
     final List<TaskEntity> taskByCategoryId = resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
