@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../core/styles/app_styles.dart';
 
-class DescriptionText extends StatelessWidget {
-  const DescriptionText({
+class TextDescriptionBold extends StatelessWidget {
+  const TextDescriptionBold({
     super.key,
     required this.text,
   });

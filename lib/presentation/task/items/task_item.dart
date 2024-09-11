@@ -37,7 +37,7 @@ class TaskItem extends StatelessWidget {
           Navigator.pushNamed(
             context,
             NameRoutes.updateTaskPage,
-            arguments: TaskModelArgs(taskEntity: taskModel),
+            arguments: TaskModelArgs(taskModel: taskModel),
           );
         } : null,
         shape: AppStyles.shape,
@@ -63,7 +63,7 @@ class TaskItem extends StatelessWidget {
         leading: Checkbox(
           value: statusTask,
           onChanged: (bool? onChanged) {
-            Provider.of<TaskUseCase>(context, listen: false).changeTaskStatus(
+            Provider.of<TaskUseCase>(context, listen: false).fetchTaskStatus(
                 taskId: taskModel.taskId,
                 taskStatusIndex: taskModel.taskStatusIndex == 0 ? 1 : 0,
                 completeDateTime: DateTime.now().toIso8601String());

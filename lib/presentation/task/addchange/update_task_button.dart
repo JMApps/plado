@@ -1,25 +1,23 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/strings/app_constraints.dart';
 import '../../../core/strings/database_values.dart';
 import '../../../data/services/notifications/notification_service.dart';
 import '../../../domain/entities/task_entity.dart';
 import '../../../domain/usecases/task_use_case.dart';
-import '../../state/rest_times_state.dart';
 import '../../state/task/task_color_state.dart';
 import '../../state/task/task_notification_date_state.dart';
 import '../../state/task/task_notification_id_state.dart';
-import '../../state/task/task_period_state.dart';
 import '../../state/task/task_priority_state.dart';
 import '../../state/task/task_remind_state.dart';
 import '../../state/task/task_title_state.dart';
 
-class ChangeTaskButton extends StatefulWidget {
-  const ChangeTaskButton({
+class UpdateTaskButton extends StatefulWidget {
+  const UpdateTaskButton({
     super.key,
     required this.taskModel,
   });
@@ -27,10 +25,10 @@ class ChangeTaskButton extends StatefulWidget {
   final TaskEntity taskModel;
 
   @override
-  State<ChangeTaskButton> createState() => _ChangeTaskButtonState();
+  State<UpdateTaskButton> createState() => _UpdateTaskButtonState();
 }
 
-class _ChangeTaskButtonState extends State<ChangeTaskButton> {
+class _UpdateTaskButtonState extends State<UpdateTaskButton> {
   DateTime _currentDateTime = DateTime.now();
   final NotificationService _notificationService = NotificationService();
 
@@ -64,16 +62,11 @@ class _ChangeTaskButtonState extends State<ChangeTaskButton> {
 
   void _updateTask(String tasks) {
     final String taskTitleState = context.read<TaskTitleState>().getTaskTitle.trim();
-    final int taskPeriodIndex = context.read<TaskPeriodState>().getTaskPeriodIndex;
     final int taskPriorityIndex = context.read<TaskPriorityState>().getTaskPriorityIndex;
     final int taskColorIndex = context.read<TaskColorState>().getColorIndex;
     final bool taskIsRemind = context.read<TaskRemindState>().getIsRemind;
     int taskNotificationId = context.read<TaskNotificationIdState>().getNotificationId;
     final String taskNotificationDateTime = context.read<TaskNotificationDateState>().getTaskNotificationDate;
-
-    Map<String, dynamic> restTimePeriods = Provider.of<RestTimesState>(context, listen: false).restTaskTimes(taskPeriodIndex);
-    DateTime startTime = restTimePeriods[AppConstraints.taskStartDateTime];
-    DateTime endTime = restTimePeriods[AppConstraints.taskEndDateTime];
 
     if (taskIsRemind && taskNotificationId == 0) {
       final randomNotificationNumber = Random().nextInt(AppConstraints.randomNotificationNumber);
@@ -87,16 +80,13 @@ class _ChangeTaskButtonState extends State<ChangeTaskButton> {
 
     final Map<String, dynamic> taskMap = {
       DatabaseValues.dbTaskTitle: taskTitleState,
-      DatabaseValues.dbTaskStartDateTime: startTime.toIso8601String(),
-      DatabaseValues.dbTaskEndDateTime: endTime.toIso8601String(),
-      DatabaseValues.dbTaskPeriodIndex: taskPeriodIndex,
       DatabaseValues.dbTaskPriorityIndex: taskPriorityIndex,
       DatabaseValues.dbTaskColorIndex: taskColorIndex,
       DatabaseValues.dbTaskNotificationId: taskNotificationId,
       DatabaseValues.dbTaskNotificationDate: taskNotificationDateTime,
     };
 
-    Provider.of<TaskUseCase>(context, listen: false).updateTask(taskId: widget.taskModel.taskId, taskMap: taskMap);
+    Provider.of<TaskUseCase>(context, listen: false).updateTask(taskMap: taskMap, taskId: widget.taskModel.taskId);
   }
 
   void _showScaffoldMessage(Color color, Color textColor, String message) {

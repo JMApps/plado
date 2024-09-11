@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
+import '../../core/styles/app_styles.dart';
+
 class TextDescription extends StatelessWidget {
   const TextDescription({
     super.key,
@@ -12,7 +14,7 @@ class TextDescription extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: const TextStyle(fontSize: 17),
+      style: AppStyles.mainText,
     );
   }
 }

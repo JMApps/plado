@@ -5,7 +5,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../state/rest_times_state.dart';
-import '../../state/task/task_period_state.dart';
 
 class TaskTimeIndicator extends StatefulWidget {
   const TaskTimeIndicator({super.key});
@@ -21,9 +20,9 @@ class _TaskTimeIndicatorState extends State<TaskTimeIndicator> {
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
     final appColors = Theme.of(context).colorScheme;
-    return Consumer2<RestTimesState, TaskPeriodState>(
-      builder: (context, restTimeState, taskPeriodState, _) {
-        Map<String, dynamic> restTimePeriods = restTimeState.restTaskTimes(taskPeriodState.getTaskPeriodIndex);
+    return Consumer<RestTimesState>(
+      builder: (context, restTimeState, _) {
+        Map<String, dynamic> restTimePeriods = restTimeState.restCategoryTimes(0);
         Duration remainingTime = restTimePeriods[AppConstraints.taskRemaininDateTime];
         _elapsedPercentage = restTimePeriods[AppConstraints.taskElapsedPercentage];
 

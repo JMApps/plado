@@ -7,20 +7,18 @@ import '../../../domain/entities/task_entity.dart';
 import '../../state/task/task_color_state.dart';
 import '../../state/task/task_notification_date_state.dart';
 import '../../state/task/task_notification_id_state.dart';
-import '../../state/task/task_period_state.dart';
 import '../../state/task/task_priority_state.dart';
 import '../../state/task/task_remind_state.dart';
 import '../../state/task/task_title_state.dart';
 import '../../widgets/main_back_button.dart';
-import '../widgets/change_task_button.dart';
-import '../widgets/delete_task_dialog.dart';
-import '../widgets/task_color_list.dart';
-import '../widgets/task_period_segment.dart';
-import '../widgets/task_priority_segment.dart';
-import '../widgets/task_remind_date_time.dart';
-import '../widgets/task_text_field.dart';
+import '../addchange/delete_task_dialog.dart';
+import '../addchange/task_color_list.dart';
+import '../addchange/task_priority_segment.dart';
+import '../addchange/task_remind_date_time.dart';
+import '../addchange/task_text_field.dart';
+import '../addchange/update_task_button.dart';
 import '../widgets/task_time_indicator.dart';
-import '../widgets/text_description.dart';
+import '../../widgets/text_description.dart';
 
 class UpdateTaskPage extends StatelessWidget {
   const UpdateTaskPage({
@@ -37,9 +35,6 @@ class UpdateTaskPage extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (_) => TaskTitleState(taskModel.taskTitle),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => TaskPeriodState(taskModel.taskPeriodIndex),
         ),
         ChangeNotifierProvider(
           create: (_) => TaskPriorityState(taskModel.taskPriorityIndex),
@@ -63,7 +58,7 @@ class UpdateTaskPage extends StatelessWidget {
           leading: const MainBackButton(),
           actions: [
             DeleteTaskDialog(taskModel: taskModel),
-            ChangeTaskButton(taskModel: taskModel),
+            UpdateTaskButton(taskModel: taskModel),
           ],
         ),
         body: SingleChildScrollView(
@@ -74,10 +69,6 @@ class UpdateTaskPage extends StatelessWidget {
               const TaskTimeIndicator(),
               const SizedBox(height: 16),
               const TaskTextField(),
-              TextDescription(text: appLocale.timeInterval),
-              const SizedBox(height: 8),
-              const TaskPeriodSegment(),
-              const SizedBox(height: 16),
               TextDescription(text: appLocale.priority),
               const SizedBox(height: 8),
               const TaskPrioritySegment(),
