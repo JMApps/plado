@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/styles/app_styles.dart';
-import '../items/task_order_item.dart';
-import '../items/task_sort_item.dart';
+import 'task_order_item.dart';
+import 'task_sort_item.dart';
 
 class TaskSortBottomSheet extends StatelessWidget {
   const TaskSortBottomSheet({super.key});

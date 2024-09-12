@@ -1,4 +1,4 @@
-import '../../data/models/all_task_count_model.dart';
+import '../../data/models/counts/all_task_count_model.dart';
 import '../../data/models/task_model.dart';
 import '../entities/task_entity.dart';
 

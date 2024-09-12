@@ -33,6 +33,10 @@ class TaskItem extends StatelessWidget {
       margin: AppStyles.paddingBottomMini,
       color: AppStyles.priorityColors[taskModel.taskPriorityIndex].withOpacity(0.075),
       child: ListTile(
+        shape: AppStyles.shape,
+        visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+        contentPadding: AppStyles.paddingRight,
+        horizontalTitleGap: 8,
         onTap: !statusTask ? () {
           Navigator.pushNamed(
             context,
@@ -40,22 +44,18 @@ class TaskItem extends StatelessWidget {
             arguments: TaskModelArgs(taskModel: taskModel),
           );
         } : null,
-        shape: AppStyles.shape,
-        visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
-        contentPadding: AppStyles.paddingRight,
-        horizontalTitleGap: 8,
         title: Text(
           taskModel.taskTitle,
           style: TextStyle(
             fontSize: 18,
-            decoration: taskModel.taskStatusIndex == 0 ? TextDecoration.none : TextDecoration.lineThrough, overflow: TextOverflow.ellipsis,
+            decoration: taskModel.taskStatusIndex == 0 ? TextDecoration.none : TextDecoration.lineThrough,
           ),
-          maxLines: 1,
+          maxLines: 3,
         ),
         subtitle: Text(
           timeAgo,
           style: const TextStyle(
-            fontSize: 14,
+            fontSize: 12,
             fontFamily: AppConstraints.fontRobotoSlab,
           ),
         ),
