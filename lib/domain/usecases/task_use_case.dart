@@ -43,6 +43,14 @@ class TaskUseCase extends ChangeNotifier {
     }
   }
 
+  Future<List<TaskEntity>> fetchTaskByStatus({required int taskStatusIndex}) async {
+    try {
+      return await _taskRepository.getTaskByStatus(taskStatusIndex: taskStatusIndex);
+    } catch (e) {
+      throw Exception('${AppConstraints.errorMessage} $e');
+    }
+  }
+
   Future<int> createTask({required TaskModel taskModel}) async {
     try {
       final int createTask = await _taskRepository.createTask(taskModel: taskModel);

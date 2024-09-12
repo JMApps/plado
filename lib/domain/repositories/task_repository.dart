@@ -11,6 +11,8 @@ abstract class TaskRepository {
 
   Future<int> getTaskCountByCategoryId({required int categoryId});
 
+  Future<List<TaskEntity>> getTaskByStatus({required int taskStatusIndex});
+
   Future<int> createTask({required TaskModel taskModel});
 
   Future<int> updateTask({required Map<String, dynamic> taskMap, required int taskId});
