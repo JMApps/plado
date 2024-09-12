@@ -1,22 +1,23 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:plado/presentation/settings/widgets/app_lang_drop_button.dart';
-import 'package:plado/presentation/widgets/text_description_bold.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../core/routes/name_routes.dart';
 import '../../core/strings/app_constraints.dart';
 import '../../core/styles/app_styles.dart';
-import '../state/setting_data_state.dart';
+import '../../data/services/notifications/notification_service.dart';
 import '../settings/widgets/always_display_switch.dart';
+import '../settings/widgets/app_lang_drop_button.dart';
 import '../settings/widgets/app_theme_segment.dart';
 import '../settings/widgets/color_theme_list.dart';
 import '../settings/widgets/share_rate_list_tile.dart';
 import '../settings/widgets/social_list_tile.dart';
+import '../state/setting_data_state.dart';
+import '../widgets/text_description_bold.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -76,11 +77,26 @@ class SettingsPage extends StatelessWidget {
                     imagePath: AppConstraints.instagramIconPath,
                   ),
                   const Divider(indent: 16, endIndent: 16),
+                  TextDescriptionBold(text: appLocale.notifications),
+                  ListTile(
+                    onTap: () {
+                      NotificationService().cancelAllNotification();
+                    },
+                    shape: AppStyles.shape,
+                    title: Text(appLocale.cancelAllNotifications),
+                    leading: Icon(
+                      Icons.notifications_off_outlined,
+                      size: 30,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                  const Divider(indent: 16, endIndent: 16),
                   Platform.isAndroid ? TextDescriptionBold(text: appLocale.backup) : const SizedBox(),
                   Platform.isAndroid ? ShareRateListTile(
                     onSettingTap: () {
-                      Navigator.pushNamed(context, NameRoutes.backupDetailPage);
-                    },
+                      Navigator.pushNamed(
+                          context, NameRoutes.backupDetailPage);
+                      },
                     title: appLocale.backup,
                     icon: Icons.backup_outlined,
                   ) : const SizedBox(),
@@ -97,8 +113,7 @@ class SettingsPage extends StatelessWidget {
                   TextDescriptionBold(text: appLocale.share),
                   ShareRateListTile(
                     onSettingTap: () {
-                      Share.share(
-                        '${appLocale.fullAppName}\n\n${appLocale.iOSVersion}\n${AppConstraints.appLinkIOS}\n\n${appLocale.androidVersion}\n${AppConstraints.appLinkAndroid}',
+                      Share.share('${appLocale.fullAppName}\n\n${appLocale.iOSVersion}\n${AppConstraints.appLinkIOS}\n\n${appLocale.androidVersion}\n${AppConstraints.appLinkAndroid}',
                         sharePositionOrigin: const Rect.fromLTWH(0, 0, 0, 2 / 2),
                       );
                     },
