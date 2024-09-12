@@ -33,15 +33,11 @@ class _AddHabitButtonState extends State<AddHabitButton> {
     final appColors = Theme.of(context).colorScheme;
     return IconButton(
       onPressed: () {
-        if (Provider.of<HabitTitleState>(context, listen: false)
-            .getHabitTitle
-            .trim()
-            .isNotEmpty) {
+        if (Provider.of<HabitTitleState>(context, listen: false).getHabitTitle.trim().isNotEmpty) {
           Navigator.of(context).pop();
           _createHabit(appLocale.habits);
         } else {
-          _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface,
-              appLocale.enterTitle);
+          _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, appLocale.enterTitle);
         }
       },
       tooltip: appLocale.addHabit,
@@ -50,35 +46,22 @@ class _AddHabitButtonState extends State<AddHabitButton> {
   }
 
   void _createHabit(String habits) {
-    final String habitTitleState =
-        context.read<HabitTitleState>().getHabitTitle.trim();
-    final int habitPeriodIndex =
-        context.read<HabitPeriodState>().getHabitPeriodIndex;
+    final String habitTitleState = context.read<HabitTitleState>().getHabitTitle.trim();
+    final int habitPeriodIndex = context.read<HabitPeriodState>().getHabitPeriodIndex;
     final int habitColorIndex = context.read<HabitColorState>().getColorIndex;
     final bool habitIsRemind = context.read<HabitRemindState>().getIsRemind;
-    int habitNotificationId =
-        context.read<HabitNotificationIdState>().getNotificationId;
-    final String habitDateTime =
-        context.read<HabitNotificationDateState>().getHabitNotificationDate;
-    final List<int> completeDays = List.generate(
-        AppStyles.habitPeriodDayList[habitPeriodIndex], (index) => 0);
+    int habitNotificationId = context.read<HabitNotificationIdState>().getNotificationId;
+    final String habitNotificationDate = context.read<HabitNotificationDateState>().getHabitNotificationDate;
+    final List<int> completeDays = List.generate(AppStyles.habitPeriodDayList[habitPeriodIndex], (index) => 0);
 
-    Map<String, dynamic> restTimePeriods =
-        Provider.of<RestTimesState>(context, listen: false)
-            .restHabitTimes(habitPeriodIndex);
+    Map<String, dynamic> restTimePeriods = Provider.of<RestTimesState>(context, listen: false).restHabitTimes(habitPeriodIndex);
     DateTime startTime = restTimePeriods[AppConstraints.habitStartDateTime];
     DateTime endTime = restTimePeriods[AppConstraints.habitEndDateTime];
 
     if (habitIsRemind) {
-      final randomNotificationNumber =
-          Random.secure().nextInt(AppConstraints.randomNotificationNumber);
+      final randomNotificationNumber = Random.secure().nextInt(AppConstraints.randomNotificationNumber);
       habitNotificationId = randomNotificationNumber;
-      NotificationService().scheduleDailyNotifications(
-          AppStyles.habitPeriodDayList[habitPeriodIndex],
-          DateTime.parse(habitDateTime),
-          habits,
-          habitTitleState,
-          randomNotificationNumber);
+      NotificationService().scheduleDailyNotifications(AppStyles.habitPeriodDayList[habitPeriodIndex], DateTime.parse(habitNotificationDate), habits, habitTitleState, randomNotificationNumber);
     }
 
     final HabitModel habitModel = HabitModel(
@@ -92,7 +75,7 @@ class _AddHabitButtonState extends State<AddHabitButton> {
       habitColorIndex: habitColorIndex,
       completedDays: completeDays.toString(),
       notificationId: habitNotificationId,
-      notificationDate: habitDateTime,
+      notificationDate: habitNotificationDate,
     );
 
     Provider.of<HabitUseCase>(context, listen: false).createHabit(habitModel: habitModel);
@@ -106,7 +89,7 @@ class _AddHabitButtonState extends State<AddHabitButton> {
         content: Text(
           message,
           style: TextStyle(
-            fontSize: 17,
+            fontSize: 18,
             color: textColor,
           ),
         ),

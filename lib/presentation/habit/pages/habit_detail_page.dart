@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/routes/name_routes.dart';
 import '../../../core/strings/app_constraints.dart';
@@ -72,7 +72,7 @@ class _HabitDetailPageState extends State<HabitDetailPage> {
     final habitColor = AppStyles.appColorList[widget.habitModel.habitColorIndex];
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.habitModel.habitTitle),
+        title: Text(appLocale.habits),
         actions: [
           IconButton(
             onPressed: () {
@@ -91,13 +91,27 @@ class _HabitDetailPageState extends State<HabitDetailPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            Card(
+              elevation: 0,
+              margin: AppStyles.paddingMini,
+              child: Container(
+                alignment: Alignment.center,
+                padding: AppStyles.padding,
+                child: Text(
+                  widget.habitModel.habitTitle,
+                  style: AppStyles.mainText,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CircularPercentIndicator(
                   circularStrokeCap: CircularStrokeCap.round,
                   radius: 75,
-                  lineWidth: 20,
+                  lineWidth: 17.5,
                   percent: _restRemaininPercentage[AppConstraints.restElapsedPercentage] / 100,
                   header: Padding(
                     padding: AppStyles.paddingBottom,
@@ -130,7 +144,7 @@ class _HabitDetailPageState extends State<HabitDetailPage> {
                   reverse: true,
                   circularStrokeCap: CircularStrokeCap.round,
                   radius: 75,
-                  lineWidth: 20,
+                  lineWidth: 17.5,
                   percent: _restRemaininPercentage[AppConstraints.restRemainingPercentage] / 100,
                   header: Padding(
                     padding: AppStyles.paddingBottom,
@@ -161,12 +175,8 @@ class _HabitDetailPageState extends State<HabitDetailPage> {
               ],
             ),
             const SizedBox(height: 16),
-            Text(
-              widget.habitModel.endDateTime.isAfter(DateTime.now()) ? appLocale.today : appLocale.completed,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+            Text(widget.habitModel.endDateTime.isAfter(DateTime.now()) ? appLocale.today : appLocale.completed,
+              style: AppStyles.mainTextBold,
             ),
             Consumer<HabitUseCase>(
               builder: (BuildContext context, habitDataState, _) {
@@ -191,14 +201,9 @@ class _HabitDetailPageState extends State<HabitDetailPage> {
                                     HapticFeedback.vibrate();
                                   }
                                   final completedDaysMap = {
-                                    DatabaseValues.dbHabitCompletedDays: jsonEncode(completedDays.map((e) => e ? 1 : 0).toList()),
-                                  };
-                                  Provider.of<HabitUseCase>(context, listen: false).updateHabit(
-                                    habitMap: completedDaysMap,
-                                    habitId: widget.habitModel.habitId,
-                                  );
-                                }
-                                : null,
+                                    DatabaseValues.dbHabitCompletedDays: jsonEncode(completedDays.map((e) => e ? 1 : 0).toList()),};
+                                  Provider.of<HabitUseCase>(context, listen: false).updateHabit(habitMap: completedDaysMap, habitId: widget.habitModel.habitId,);
+                                } : null,
                                 child: Icon(
                                   completedDays[index] ? Icons.check_circle_rounded : Icons.circle_outlined,
                                   color: completedDays[index] ? habitColor : index < _elapsedDays ? appColors.surfaceContainerHigh : appColors.inversePrimary,

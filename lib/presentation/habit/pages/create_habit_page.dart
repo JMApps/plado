@@ -11,11 +11,11 @@ import '../../state/habit/habit_remind_state.dart';
 import '../../state/habit/habit_title_state.dart';
 import '../../widgets/text_description.dart';
 import '../../widgets/main_back_button.dart';
-import '../widgets/add_habit_button.dart';
-import '../widgets/habit_color_list.dart';
-import '../widgets/habit_period_segment.dart';
-import '../widgets/habit_remind_time.dart';
-import '../widgets/habit_text_field.dart';
+import '../addchange/add_habit_button.dart';
+import '../addchange/habit_color_list.dart';
+import '../addchange/habit_period_segment.dart';
+import '../addchange/habit_remind_time.dart';
+import '../addchange/habit_text_field.dart';
 
 class CreateHabitPage extends StatelessWidget {
   const CreateHabitPage({super.key});

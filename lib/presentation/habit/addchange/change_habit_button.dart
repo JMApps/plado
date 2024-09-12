@@ -84,7 +84,7 @@ class _ChangeHabitButtonState extends State<ChangeHabitButton> {
         content: Text(
           message,
           style: TextStyle(
-            fontSize: 17,
+            fontSize: 18,
             color: textColor,
           ),
         ),
