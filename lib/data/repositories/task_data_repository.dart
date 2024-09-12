@@ -3,7 +3,7 @@ import 'package:sqflite/sqflite.dart';
 import '../../core/strings/database_values.dart';
 import '../../domain/entities/task_entity.dart';
 import '../../domain/repositories/task_repository.dart';
-import '../models/all_task_count_model.dart';
+import '../models/counts/all_task_count_model.dart';
 import '../models/task_model.dart';
 import '../services/plado_database_service.dart';
 
@@ -15,7 +15,14 @@ class TaskDataRepository implements TaskRepository {
   @override
   Future<List<TaskEntity>> getTaskByCategoryId({required int categoryId, required String orderBy}) async {
     final Database database = await _pladoDatabaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskSampleBy} = ?', whereArgs: [categoryId], orderBy: 'CASE WHEN ${DatabaseValues.dbTaskStatusIndex} = 1 THEN 1 ELSE 0 END, $orderBy');
+    final currentDateTime = DateTime.now().toIso8601String();
+    final Map<String, dynamic> taskMap = {
+      DatabaseValues.dbTaskSampleBy: -1,
+      DatabaseValues.dbTaskStatusIndex: 2,
+      DatabaseValues.dbTaskCompleteDateTime: currentDateTime,
+    };
+    await database.update(DatabaseValues.dbTaskTableName, taskMap, where: '${DatabaseValues.dbTaskSampleBy} = ? AND ${DatabaseValues.dbTaskEndDateTime} < ? AND ${DatabaseValues.dbTaskStatusIndex} != 1', whereArgs: [categoryId, currentDateTime]);
+    final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskSampleBy} = ? AND ${DatabaseValues.dbTaskStartDateTime} <= ? AND ${DatabaseValues.dbTaskEndDateTime} >= ?', whereArgs: [categoryId, currentDateTime, currentDateTime], orderBy: 'CASE WHEN ${DatabaseValues.dbTaskStatusIndex} = 1 THEN 1 ELSE 0 END, $orderBy');
     final List<TaskEntity> taskByCategoryId = resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
     return taskByCategoryId;
   }

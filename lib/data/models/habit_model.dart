@@ -46,10 +46,10 @@ class HabitModel {
   Map<String, dynamic> habitToMap() {
     return {
       DatabaseValues.dbHabitTitle: habitTitle,
-      DatabaseValues.dbHabitCreateDateTime: createDateTime,
-      DatabaseValues.dbHabitCompleteDateTime: completeDateTime,
-      DatabaseValues.dbHabitStartDateTime: startDateTime,
-      DatabaseValues.dbHabitEndDateTime: endDateTime,
+      DatabaseValues.dbHabitCreateDateTime: createDateTime.toIso8601String(),
+      DatabaseValues.dbHabitCompleteDateTime: completeDateTime.toIso8601String(),
+      DatabaseValues.dbHabitStartDateTime: startDateTime.toIso8601String(),
+      DatabaseValues.dbHabitEndDateTime: endDateTime.toIso8601String(),
       DatabaseValues.dbHabitPeriodIndex: habitPeriodIndex,
       DatabaseValues.dbHabitColorIndex: habitColorIndex,
       DatabaseValues.dbHabitCompletedDays: completedDays,
