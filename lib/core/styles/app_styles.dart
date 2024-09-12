@@ -52,7 +52,9 @@ class AppStyles {
 
   static const mainText = TextStyle(fontSize: 18, fontFamily: AppConstraints.fontRaleway);
   static const mainTextRoboto = TextStyle(fontSize: 18, fontFamily: AppConstraints.fontRobotoSlab);
+  static const mainTextRoboto16 = TextStyle(fontSize: 16, fontFamily: AppConstraints.fontRobotoSlab);
   static const mainTextBold = TextStyle(fontSize: 18, fontFamily: AppConstraints.fontRaleway, fontWeight: FontWeight.bold);
+  static const mainTextBold20 = TextStyle(fontSize: 20, fontFamily: AppConstraints.fontRaleway, fontWeight: FontWeight.bold);
 
   static const mainPages = <Widget>[
     CategoriesPage(),

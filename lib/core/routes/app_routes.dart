@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 
 import '../../data/models/arguments/category_model_args.dart';
-import '../../data/models/arguments/graphic_task_args.dart';
 import '../../data/models/arguments/habit_model_args.dart';
+import '../../data/models/arguments/statistic_task_args.dart';
 import '../../data/models/arguments/task_model_args.dart';
 import '../../presentation/backup/backup_detail_page.dart';
 import '../../presentation/habit/pages/create_habit_page.dart';
@@ -18,7 +18,7 @@ import '../../presentation/task/pages/update_task_page.dart';
 import '../strings/app_exception_messages.dart';
 import 'name_routes.dart';
 
-class MaterialRoutes {
+class AppRoutes {
   static Route onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case NameRoutes.taskCategoryPage:
@@ -51,9 +51,9 @@ class MaterialRoutes {
           builder: (_) => HabitDetailPage(habitModel: habitModelArgs.habitModel),
         );
       case NameRoutes.statisticTaskListPage:
-        final GraphicTaskArgs graphicTaskArgs = routeSettings.arguments as GraphicTaskArgs;
+        final StatisticTaskArgs graphicTaskArgs = routeSettings.arguments as StatisticTaskArgs;
         return MaterialPageRoute(
-          builder: (_) => StatisticTaskListPage(graphicTaskArgs: graphicTaskArgs),
+          builder: (_) => StatisticTaskListPage(statisticTaskArgs: graphicTaskArgs),
         );
       case NameRoutes.statisticHabitListPage:
         return MaterialPageRoute(

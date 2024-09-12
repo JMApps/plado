@@ -99,7 +99,7 @@ class _HabitDetailPageState extends State<HabitDetailPage> {
                 padding: AppStyles.padding,
                 child: Text(
                   widget.habitModel.habitTitle,
-                  style: AppStyles.mainText,
+                  style: AppStyles.mainTextBold,
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -176,7 +176,7 @@ class _HabitDetailPageState extends State<HabitDetailPage> {
             ),
             const SizedBox(height: 16),
             Text(widget.habitModel.endDateTime.isAfter(DateTime.now()) ? appLocale.today : appLocale.completed,
-              style: AppStyles.mainTextBold,
+              style: AppStyles.mainTextBold20,
             ),
             Consumer<HabitUseCase>(
               builder: (BuildContext context, habitDataState, _) {
