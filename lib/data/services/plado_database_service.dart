@@ -51,6 +51,14 @@ class PladoDatabaseService {
 
   void _createDb(Database db, int version) async {
     await db.execute('''
+      CREATE TABLE ${DatabaseValues.dbMarketTableName} (
+        ${DatabaseValues.dbMarketId} INTEGER PRIMARY KEY AUTOINCREMENT,
+        ${DatabaseValues.dbMarketTitle} TEXT,
+        ${DatabaseValues.dbMarketStatusIndex} INTEGER
+      );
+    ''');
+
+    await db.execute('''
       CREATE TABLE ${DatabaseValues.dbCategoryTableName} (
         ${DatabaseValues.dbCategoryId} INTEGER PRIMARY KEY AUTOINCREMENT,
         ${DatabaseValues.dbCategoryTitle} TEXT,

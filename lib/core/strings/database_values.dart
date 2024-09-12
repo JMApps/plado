@@ -1,4 +1,12 @@
 class DatabaseValues {
+
+  // Market
+  static const String dbMarketTableName = 'Table_of_market';
+
+  static const String dbMarketId = 'market_id';
+  static const String dbMarketTitle = 'market_title';
+  static const String dbMarketStatusIndex = 'market_status_index';
+
   // Categories
   static const String dbCategoryTableName = 'Table_of_categories';
 
