@@ -10,7 +10,7 @@ import '../../state/category/category_title_state.dart';
 import 'category_color_list.dart';
 import 'category_period_segment.dart';
 import 'category_text_field.dart';
-import 'change_category.dart';
+import 'change_category_button.dart';
 
 class ChangeCategoryBottomSheet extends StatelessWidget {
   const ChangeCategoryBottomSheet({
@@ -59,8 +59,8 @@ class ChangeCategoryBottomSheet extends StatelessWidget {
             const SizedBox(height: 4),
             const Divider(indent: 16, endIndent: 16),
             const SizedBox(height: 4),
-            ChangeCategory(categoryModel: categoryModel),
-            const SizedBox(height: 16),
+            ChangeCategoryButton(categoryModel: categoryModel),
+            const SizedBox(height: 8),
           ],
         ),
       ),

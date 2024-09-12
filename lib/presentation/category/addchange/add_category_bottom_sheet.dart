@@ -59,7 +59,7 @@ class AddCategoryBottomSheet extends StatelessWidget {
             const Divider(indent: 16, endIndent: 16),
             const SizedBox(height: 4),
             const AddCategoryButton(),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
           ],
         ),
       ),
