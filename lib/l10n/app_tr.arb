@@ -1,0 +1,146 @@
+{
+  "@@locale": "tr",
+  "appName": "PlaDo",
+  "fullAppName": "Planner TODO – planla ve harekete geç!",
+
+  "sortCategoryTasks": "Kategorileri sırala",
+  "sortTasks": "Görevleri sırala",
+  "sortHabits": "Alışkanlıkları sırala",
+
+  "sortByAddTime": "Eklenme zamanına göre",
+  "sortByTitle": "Başlığa göre",
+  "sortByPriority": "Önceliğe göre",
+  "sortByColor": "Renge Göre",
+
+  "order": "Sıra",
+
+  "firstNew": "Önce en yeniler (Z-A)",
+  "firstOld": "Önce en eskiler (A-Z)",
+
+  "timeInterval": "Zaman aralığı",
+
+  "day": "Gün",
+  "week": "Hafta",
+  "month": "Ay",
+  "season": "Mevsim",
+  "year": "Yıl",
+
+  "addFirstTask": "İlk görevinizi ekleyin",
+  "addFirstCategory": "İlk kategorinizi ekleyin",
+  "addFirstHabit": "İlk alışkanlığınızı ekleyin",
+
+  "addTask": "Görev ekle",
+  "addingTask": "Görev ekleniyor",
+  "addCategory": "Kategori ekle",
+  "addingCategory": "Kategori ekleniyor",
+  "addHabit": "Alışkanlık ekle",
+  "addingHabit": "Alışkanlık ekleniyor",
+
+  "changingTask": "Görev düzenleme",
+  "changeTask": "Görevi düzenle",
+  "changeCategory": "Kategoriyi düzenle",
+  "changingCategory": "Kategori düzenleme",
+  "changingHabit": "Alışkanlık düzenleme",
+  "changeHabit": "Alışkanlığı düzenle",
+
+  "tasks": "Görevler",
+  "habits": "Alışkanlıklar",
+  "statistics": "İstatistikler",
+  "settings": "Ayarlar",
+
+  "add": "Ekle",
+  "added": "Eklendi",
+  "change": "Değiştir",
+  "changed": "Değiştirildi",
+  "delete": "Sil",
+  "deleted": "Silindi",
+  "color": "Renk",
+  "back": "Geri",
+  "cancel": "İptal",
+  "warning": "Uyarı!",
+  "enterTitle": "Başlık girin",
+  "remaining": "Kalan",
+  "start": "Başlangıç",
+  "end": "Bitiş",
+  "today": "Bugün",
+  "hours": "Saat",
+  "minutes": "Dakika",
+  "select": "Seç",
+
+  "notifications": "Bildirimler",
+  "cancelAllNotifications": "Tüm bildirimleri İptal et",
+
+  "priority": "Öncelik",
+  "low": "Düşük",
+  "medium": "Orta",
+  "high": "Yüksek",
+
+  "dayNumbers": "Gün sayısı",
+  "days21": "21 gün",
+  "days40": "40 gün",
+  "days66": "66 gün",
+  "days90": "90 gün",
+
+  "remind": "Hatırlat",
+  "remindDaily": "Her gün hatırlat",
+  "selectDate": "Tarih Seç",
+  "selectTime": "Saat Seç",
+  "selectCorrectDateTime": "Geçerli bir tarih ve saat seçin",
+
+  "deleteTaskContent": "Bu görevi kalıcı olarak silmek istediğinize emin misiniz?",
+  "deleteCategoryContent": "Bu kategoriyi ve içindeki görevleri kalıcı olarak silmek istediğinize emin misiniz?",
+  "deleteHabitContent": "Bu alışkanlığı kalıcı olarak silmek istediğinize emin misiniz?",
+
+  "tasksNumber": "Görev sayısı",
+  "tasksIsEmpty": "Görev listesi boş",
+  "habitNumber": "Alışkanlık sayısı",
+  "habitsIsEmpty": "Alışkanlık listesi boş",
+
+  "descriptionHabit": "Alışkanlık açıklaması",
+  "errorGetData": "Veri alınırken hata oluştu.",
+
+  "elapsedDays": "Geçen günler:",
+  "remainingDays": "Kalan günler:",
+  "allDays": "Tüm Günler",
+  "remainingDayPercent": "Günün kalanı %",
+
+  "inProgress": "Devam ediyor",
+  "completed": "Tamamlandı",
+  "canceled": "İptal edildi",
+
+  "allTasks": "Tüm görevler",
+  "allHabits": "Tüm alışkanlıklar",
+
+  "shortDay": "g.",
+  "shortHour": "s.",
+  "shortMinute": "d.",
+
+  "language": "Dil",
+
+  "theme": "Tema",
+  "lightTheme": "Açık",
+  "darkTheme": "Koyu",
+  "systemTheme": "Sistem",
+  "themeColor": "Tema Rengi",
+
+  "display": "Ekran",
+  "displayAlwaysOn": "Ekran sürekli açık",
+
+  "otherApplications": "Diğer uygulamalar",
+
+  "weInSocials": "Sosyal medyada biz",
+
+  "rateApplication": "Uygulamayı puanla",
+  "rate": "Puanla",
+
+  "backup": "Yedekleme",
+  "backupWarning": "Dikkat! Yedek yükledikten sonra bildirimleri yeniden planlamanız gerekir.",
+  "import": "İçe Aktar",
+  "selectImportFile": "Yedek dosyası seç",
+  "export": "Dışa aktar",
+  "selectExportPath": "Yedeği kaydet",
+  "share": "Paylaş",
+  "version": "Sürüm",
+  "iOSVersion": "iOS sürümü",
+  "androidVersion": "Android sürümü"
+}

@@ -1,0 +1,146 @@
+{
+  "@@locale": "uz",
+  "appName": "PlaDo",
+  "fullAppName": "Planner TODO – rejalashtiring va harakat qiling!",
+
+  "sortCategoryTasks": "Kategoriya vazifalarini tartiblash",
+  "sortTasks": "Vazifalarni tartiblash",
+  "sortHabits": "Odatlarni tartiblash",
+
+  "sortByAddTime": "Qo'shilgan sanaga ko'ra",
+  "sortByTitle": "Sarlavhaga ko'ra",
+  "sortByPriority": "Ustuvorlikka ko'ra",
+  "sortByColor": "Rangga ko'ra",
+
+  "order": "Buyurtma",
+
+  "firstNew": "Birinchi yangi (Z-A)",
+  "firstOld": "Birinchi eski (A-Z)",
+
+  "timeInterval": "Vaqt oralig'i",
+
+  "day": "Kun",
+  "week": "Hafta",
+  "month": "Oy",
+  "season": "Fasl",
+  "year": "Yil",
+
+  "addFirstTask": "Birinchi vazifangizni qo'shing",
+  "addFirstCategory": "Birinchi kategoriyangizni qo'shing",
+  "addFirstHabit": "Birinchi odatingizni qo'shing",
+
+  "addTask": "Vazifa qo'shish",
+  "addingTask": "Vazifa qo'shilmoqda",
+  "addCategory": "Kategoriya qo'shish",
+  "addingCategory": "Kategoriya qo'shilmoqda",
+  "addHabit": "Odat qo'shish",
+  "addingHabit": "Odat qo'shilmoqda",
+
+  "changingTask": "Vazifani o'zgartirish",
+  "changeTask": "Vazifani o'zgartirish",
+  "changeCategory": "Kategoriyani o'zgartirish",
+  "changingCategory": "Kategoriyani o'zgartirish",
+  "changingHabit": "Odatni o'zgartirish",
+  "changeHabit": "Odatni o'zgartirish",
+
+  "tasks": "Vazifalar",
+  "habits": "Odatlar",
+  "statistics": "Statistika",
+  "settings": "Sozlamalar",
+
+  "add": "Qo'shish",
+  "added": "Qo'shildi",
+  "change": "O'zgartirish",
+  "changed": "O'zgartirildi",
+  "delete": "O'chirish",
+  "deleted": "O'chirildi",
+  "color": "Rang",
+  "back": "Orqaga",
+  "cancel": "Bekor qilish",
+  "warning": "Ogohlantirish!",
+  "enterTitle": "Sarlavhani kiriting",
+  "remaining": "Qolgan",
+  "start": "Boshlash",
+  "end": "Tugash",
+  "today": "Bugun",
+  "hours": "Soat",
+  "minutes": "Daqiqa",
+  "select": "Tanlash",
+
+  "notifications": "Bildirishnomalar",
+  "cancelAllNotifications": "Barcha bildirishnomalarni bekor qilish",
+
+  "priority": "Ustuvorlik",
+  "low": "Past",
+  "medium": "O'rtacha",
+  "high": "Yuqori",
+
+  "dayNumbers": "Kunlar soni",
+  "days21": "21 kun",
+  "days40": "40 kun",
+  "days66": "66 kun",
+  "days90": "90 kun",
+
+  "remind": "Eslatish",
+  "remindDaily": "Har kuni eslatish",
+  "selectDate": "Sanani tanlang",
+  "selectTime": "Vaqtni tanlang",
+  "selectCorrectDateTime": "To'g'ri sana va vaqtni tanlang",
+
+  "deleteTaskContent": "Ushbu vazifani butunlay o'chirmoqchimisiz?",
+  "deleteCategoryContent": "Ushbu kategoriyani va unga tegishli vazifalarni butunlay o'chirmoqchimisiz?",
+  "deleteHabitContent": "Ushbu odatni butunlay o'chirmoqchimisiz?",
+
+  "tasksNumber": "Vazifalar soni",
+  "tasksIsEmpty": "Vazifalar ro'yxati bo'sh",
+  "habitNumber": "Odatlar soni",
+  "habitsIsEmpty": "Odatlar ro'yxati bo'sh",
+
+  "descriptionHabit": "Odatning tavsifi",
+  "errorGetData": "Ma'lumotlarni olishda xatolik.",
+
+  "elapsedDays": "O'tgan kunlar:",
+  "remainingDays": "Qolgan kunlar:",
+  "allDays": "Barcha kunlar",
+  "remainingDayPercent": "Qolgan kun %",
+
+  "inProgress": "Jarayonda",
+  "completed": "Tugallandi",
+  "canceled": "Bekor qilindi",
+
+  "allTasks": "Barcha vazifalar",
+  "allHabits": "Barcha odatlar",
+
+  "shortDay": "k.",
+  "shortHour": "s.",
+  "shortMinute": "d.",
+
+  "language": "Til",
+
+  "theme": "Mavzu",
+  "lightTheme": "Yorug'",
+  "darkTheme": "Qorong'u",
+  "systemTheme": "Tizim",
+  "themeColor": "Mavzu rangi",
+
+  "display": "Ko'rsatish",
+  "displayAlwaysOn": "Ekran doimiy yoniq",
+
+  "otherApplications": "Boshqa ilovalar",
+
+  "weInSocials": "Biz ijtimoiy tarmoqlarda",
+
+  "rateApplication": "Ilovani baholang",
+  "rate": "Baholang",
+
+  "backup": "Zaxiralash",
+  "backupWarning": "Diqqat! Zaxira nusxasini import qilgandan so'ng, bildirishnomalarni qayta rejalashtirishingiz kerak bo'ladi.",
+  "import": "Import qilish",
+  "selectImportFile": "Zaxira faylini tanlang",
+  "export": "Eksport qilish",
+  "selectExportPath": "Zaxira nusxasini saqlash",
+  "share": "Ulashish",
+  "version": "Versiya",
+  "iOSVersion": "iOS versiyasi",
+  "androidVersion": "Android versiyasi"
+}

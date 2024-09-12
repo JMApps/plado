@@ -1,0 +1,146 @@
+{
+  "@@locale": "uk",
+  "appName": "PlaDo",
+  "fullAppName": "Planner TODO – плануй і дій!",
+
+  "sortCategoryTasks": "Сортування категорій завдань",
+  "sortTasks": "Сортування завдань",
+  "sortHabits": "Сортування звичок",
+
+  "sortByAddTime": "За датою додавання",
+  "sortByTitle": "За назвою",
+  "sortByPriority": "За пріоритетом",
+  "sortByColor": "За кольором",
+
+  "order": "Порядок",
+
+  "firstNew": "Спочатку нові (Z-A)",
+  "firstOld": "Спочатку старі (A-Z)",
+
+  "timeInterval": "Інтервал часу",
+
+  "day": "День",
+  "week": "Тиждень",
+  "month": "Місяць",
+  "season": "Сезон",
+  "year": "Рік",
+
+  "addFirstTask": "Додайте перше завдання",
+  "addFirstCategory": "Додайте першу категорію",
+  "addFirstHabit": "Додайте першу звичку",
+
+  "addTask": "Додати завдання",
+  "addingTask": "Додавання завдання",
+  "addCategory": "Додати категорію",
+  "addingCategory": "Додавання категорії",
+  "addHabit": "Додати звичку",
+  "addingHabit": "Додавання звички",
+
+  "changingTask": "Зміна завдання",
+  "changeTask": "Змінити завдання",
+  "changeCategory": "Змінити категорію",
+  "changingCategory": "Зміна категорії",
+  "changingHabit": "Зміна звички",
+  "changeHabit": "Змінити звичку",
+
+  "tasks": "Завдання",
+  "habits": "Звички",
+  "statistics": "Статистика",
+  "settings": "Налаштування",
+
+  "add": "Додати",
+  "added": "Додано",
+  "change": "Змінити",
+  "changed": "Змінено",
+  "delete": "Видалити",
+  "deleted": "Видалено",
+  "color": "Колір",
+  "back": "Назад",
+  "cancel": "Скасувати",
+  "warning": "Увага!",
+  "enterTitle": "Введіть назву",
+  "remaining": "Залишилось",
+  "start": "Початок",
+  "end": "Кінець",
+  "today": "Сьогодні",
+  "hours": "Години",
+  "minutes": "Хвилини",
+  "select": "Вибрати",
+
+  "notifications": "Сповіщення",
+  "cancelAllNotifications": "Скасувати всі сповіщення",
+
+  "priority": "Пріоритет",
+  "low": "Низький",
+  "medium": "Середній",
+  "high": "Високий",
+
+  "dayNumbers": "Кількість днів",
+  "days21": "21 день",
+  "days40": "40 днів",
+  "days66": "66 днів",
+  "days90": "90 днів",
+
+  "remind": "Нагадати",
+  "remindDaily": "Нагадувати щодня",
+  "selectDate": "Вибрати дату",
+  "selectTime": "Вибрати час",
+  "selectCorrectDateTime": "Виберіть коректну дату і час",
+
+  "deleteTaskContent": "Ви впевнені, що хочете безповоротно видалити це завдання?",
+  "deleteCategoryContent": "Ви впевнені, що хочете безповоротно видалити цю категорію разом з завданнями в ній?",
+  "deleteHabitContent": "Ви впевнені, що хочете безповоротно видалити цю звичку?",
+
+  "tasksNumber": "Кількість завдань",
+  "tasksIsEmpty": "Список завдань порожній",
+  "habitNumber": "Кількість звичок",
+  "habitsIsEmpty": "Список звичок порожній",
+
+  "descriptionHabit": "Опис звички",
+  "errorGetData": "Помилка при отриманні даних.",
+
+  "elapsedDays": "Пройшло днів:",
+  "remainingDays": "Залишилось днів:",
+  "allDays": "Всі дні",
+  "remainingDayPercent": "Залишок дня у %",
+
+  "inProgress": "У процесі",
+  "completed": "Завершено",
+  "canceled": "Скасовано",
+
+  "allTasks": "Всі завдання",
+  "allHabits": "Всі звички",
+
+  "shortDay": "д.",
+  "shortHour": "г.",
+  "shortMinute": "хв.",
+
+  "language": "Мова",
+
+  "theme": "Тема",
+  "lightTheme": "Світла",
+  "darkTheme": "Темна",
+  "systemTheme": "Системна",
+  "themeColor": "Колір теми",
+
+  "display": "Екран",
+  "displayAlwaysOn": "Екран завжди ввімкнений",
+
+  "otherApplications": "Інші додатки",
+
+  "weInSocials": "Ми в соцмережах",
+
+  "rateApplication": "Оцінити додаток",
+  "rate": "Оцінити",
+
+  "backup": "Резервне копіювання",
+  "backupWarning": "Увага! Після імпорту резервної копії потрібно перепланувати сповіщення.",
+  "import": "Імпорт",
+  "selectImportFile": "Виберіть файл резервної копії",
+  "export": "Експорт",
+  "selectExportPath": "Зберегти резервну копію",
+  "share": "Поділитися",
+  "version": "Версія",
+  "iOSVersion": "Версія iOS",
+  "androidVersion": "Версія android"
+}

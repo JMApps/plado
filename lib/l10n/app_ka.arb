@@ -1,0 +1,146 @@
+{
+  "@@locale": "ka",
+  "appName": "PlaDo",
+  "fullAppName": "Planner TODO – დაგეგმეთ და იმოქმედეთ!",
+
+  "sortCategoryTasks": "კატეგორიის დავალებების სორტირება",
+  "sortTasks": "დავალებების სორტირება",
+  "sortHabits": "ჩვევების სორტირება",
+
+  "sortByAddTime": "დამატების დროით",
+  "sortByTitle": "სათაურით",
+  "sortByPriority": "პრიორიტეტით",
+  "sortByColor": "ფერით",
+
+  "order": "თანმიმდევრობა",
+
+  "firstNew": "ჯერ ახალი (Z-A)",
+  "firstOld": "ჯერ ძველი (A-Z)",
+
+  "timeInterval": "დროის ინტერვალი",
+
+  "day": "დღე",
+  "week": "კვირა",
+  "month": "თვე",
+  "season": "სეზონი",
+  "year": "წელი",
+
+  "addFirstTask": "დაამატეთ თქვენი პირველი დავალება",
+  "addFirstCategory": "დაამატეთ თქვენი პირველი კატეგორია",
+  "addFirstHabit": "დაამატეთ თქვენი პირველი ჩვევა",
+
+  "addTask": "დავალების დამატება",
+  "addingTask": "დავალება ემატება",
+  "addCategory": "კატეგორიის დამატება",
+  "addingCategory": "კატეგორია ემატება",
+  "addHabit": "ჩვევის დამატება",
+  "addingHabit": "ჩვევა ემატება",
+
+  "changingTask": "დავალების შეცვლა",
+  "changeTask": "დავალების შეცვლა",
+  "changeCategory": "კატეგორიის შეცვლა",
+  "changingCategory": "კატეგორიის შეცვლა",
+  "changingHabit": "ჩვევის შეცვლა",
+  "changeHabit": "ჩვევის შეცვლა",
+
+  "tasks": "დავალებები",
+  "habits": "ჩვევები",
+  "statistics": "სტატისტიკა",
+  "settings": "პარამეტრები",
+
+  "add": "დამატება",
+  "added": "დაემატა",
+  "change": "შეცვლა",
+  "changed": "შეიცვალა",
+  "delete": "წაშლა",
+  "deleted": "წაიშალა",
+  "color": "ფერი",
+  "back": "უკან",
+  "cancel": "გაუქმება",
+  "warning": "გაფრთხილება!",
+  "enterTitle": "ჩაწერეთ სათაური",
+  "remaining": "დარჩენილი",
+  "start": "დაწყება",
+  "end": "დასრულება",
+  "today": "დღეს",
+  "hours": "საათები",
+  "minutes": "წუთები",
+  "select": "არჩევა",
+
+  "notifications": "შეტყობინებები",
+  "cancelAllNotifications": "გაუქმება ყველა შეტყობინებისა",
+
+  "priority": "პრიორიტეტი",
+  "low": "დაბალი",
+  "medium": "საშუალო",
+  "high": "მაღალი",
+
+  "dayNumbers": "დღეების რაოდენობა",
+  "days21": "21 დღე",
+  "days40": "40 დღე",
+  "days66": "66 დღე",
+  "days90": "90 დღე",
+
+  "remind": "შეგახსენოთ",
+  "remindDaily": "ყოველდღიურად შეგახსენოთ",
+  "selectDate": "აირჩიეთ თარიღი",
+  "selectTime": "აირჩიეთ დრო",
+  "selectCorrectDateTime": "გთხოვთ, სწორად აირჩიოთ თარიღი და დრო",
+
+  "deleteTaskContent": "დარწმუნებული ხართ, რომ გსურთ ამ დავალების სამუდამოდ წაშლა?",
+  "deleteCategoryContent": "დარწმუნებული ხართ, რომ გსურთ ამ კატეგორიისა და მასში არსებული დავალებების სამუდამოდ წაშლა?",
+  "deleteHabitContent": "დარწმუნებული ხართ, რომ გსურთ ამ ჩვევის სამუდამოდ წაშლა?",
+
+  "tasksNumber": "დავალებების რაოდენობა",
+  "tasksIsEmpty": "დავალებების სია ცარიელია",
+  "habitNumber": "ჩვევების რაოდენობა",
+  "habitsIsEmpty": "ჩვევების სია ცარიელია",
+
+  "descriptionHabit": "ჩვევის აღწერა",
+  "errorGetData": "შეცდომა მონაცემების მიღებისას.",
+
+  "elapsedDays": "გასული დღეები:",
+  "remainingDays": "დარჩენილი დღეები:",
+  "allDays": "ყველა დღე",
+  "remainingDayPercent": "დარჩენილი დღეების %",
+
+  "inProgress": "პროცესშია",
+  "completed": "დასრულდა",
+  "canceled": "გაუქმდა",
+
+  "allTasks": "ყველა დავალება",
+  "allHabits": "ყველა ჩვევა",
+
+  "shortDay": "დ.",
+  "shortHour": "ს.",
+  "shortMinute": "წ.",
+
+  "language": "ენა",
+
+  "theme": "თემა",
+  "lightTheme": "ნათელი",
+  "darkTheme": "მუქი",
+  "systemTheme": "სისტემა",
+  "themeColor": "თემის ფერი",
+
+  "display": "ჩვენება",
+  "displayAlwaysOn": "ეკრანი მუდმივად ჩართული",
+
+  "otherApplications": "სხვა აპლიკაციები",
+
+  "weInSocials": "ჩვენ სოციალურ ქსელებში",
+
+  "rateApplication": "აპლიკაციის შეფასება",
+  "rate": "შეფასება",
+
+  "backup": "სარეზერვო ასლი",
+  "backupWarning": "ყურადღება! სარეზერვო ასლის იმპორტირების შემდეგ, შეტყობინებების თავიდან დაგეგმვა მოგიწევთ.",
+  "import": "იმპორტი",
+  "selectImportFile": "აირჩიეთ სარეზერვო ფაილი",
+  "export": "ექსპორტი",
+  "selectExportPath": "შეინახეთ სარეზერვო ასლი",
+  "share": "გაზიარება",
+  "version": "ვერსია",
+  "iOSVersion": "iOS ვერსია",
+  "androidVersion": "Android ვერსია"
+}

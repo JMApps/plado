@@ -1,0 +1,146 @@
+{
+  "@@locale": "fr",
+  "appName": "PlaDo",
+  "fullAppName": "Planner TODO – planifiez et agissez !",
+
+  "sortCategoryTasks": "Trier les catégories",
+  "sortTasks": "Trier les tâches",
+  "sortHabits": "Trier les habitudes",
+
+  "sortByAddTime": "Par date d'Ajout",
+  "sortByTitle": "Par titre",
+  "sortByPriority": "Par priorité",
+  "sortByColor": "Par couleur",
+
+  "order": "Ordre",
+
+  "firstNew": "Les plus récentes en premier (Z-A)",
+  "firstOld": "Les plus anciennes en premier (A-Z)",
+
+  "timeInterval": "Intervalle de temps",
+
+  "day": "Jour",
+  "week": "Semaine",
+  "month": "Mois",
+  "season": "Saison",
+  "year": "Année",
+
+  "addFirstTask": "Ajoutez votre première tâche",
+  "addFirstCategory": "Ajoutez votre première catégorie",
+  "addFirstHabit": "Ajoutez votre première habitude",
+
+  "addTask": "Ajouter tâche",
+  "addingTask": "Ajout de tâche",
+  "addCategory": "Ajouter catégorie",
+  "addingCategory": "Ajout de catégorie",
+  "addHabit": "Ajouter habitude",
+  "addingHabit": "Ajout d'habitude",
+
+  "changingTask": "Modifier la tâche",
+  "changeTask": "Modifier tâche",
+  "changeCategory": "Modifier catégorie",
+  "changingCategory": "Modification de la catégorie",
+  "changingHabit": "Modification de l'habitude",
+  "changeHabit": "Modifier habitude",
+
+  "tasks": "Tâches",
+  "habits": "Habitudes",
+  "statistics": "Statistiques",
+  "settings": "Paramètres",
+
+  "add": "Ajouter",
+  "added": "Ajouté",
+  "change": "Modifier",
+  "changed": "Modifié",
+  "delete": "Supprimer",
+  "deleted": "Supprimé",
+  "color": "Couleur",
+  "back": "Retour",
+  "cancel": "Annuler",
+  "warning": "Attention !",
+  "enterTitle": "Entrez un titre",
+  "remaining": "Restant",
+  "start": "Début",
+  "end": "Fin",
+  "today": "Aujourd'hui",
+  "hours": "Heures",
+  "minutes": "Minutes",
+  "select": "Sélectionner",
+
+  "notifications": "Notifications",
+  "cancelAllNotifications": "Annuler toutes les notifications",
+
+  "priority": "Priorité",
+  "low": "Basse",
+  "medium": "Moyenne",
+  "high": "Haute",
+
+  "dayNumbers": "Nombre de Jours",
+  "days21": "21 jours",
+  "days40": "40 jours",
+  "days66": "66 jours",
+  "days90": "90 jours",
+
+  "remind": "Rappeler",
+  "remindDaily": "Rappeler quotidiennement",
+  "selectDate": "Sélectionner la date",
+  "selectTime": "Sélectionner l'heure",
+  "selectCorrectDateTime": "Sélectionnez la date et l'heure correctes",
+
+  "deleteTaskContent": "Êtes-vous sûr de vouloir supprimer définitivement cette tâche ?",
+  "deleteCategoryContent": "Êtes-vous sûr de vouloir supprimer définitivement cette catégorie et ses tâches ?",
+  "deleteHabitContent": "Êtes-vous sûr de vouloir supprimer définitivement cette habitude ?",
+
+  "tasksNumber": "Nombre de tâches",
+  "tasksIsEmpty": "La liste des tâches est vide",
+  "habitNumber": "Nombre d'habitudes",
+  "habitsIsEmpty": "La liste des habitudes est vide",
+
+  "descriptionHabit": "Description de l'habitude",
+  "errorGetData": "Erreur lors de la récupération des données.",
+
+  "elapsedDays": "Jours écoulés:",
+  "remainingDays": "Jours restants:",
+  "allDays": "Tous les Jours",
+  "remainingDayPercent": "Jour restant %",
+
+  "inProgress": "En cours",
+  "completed": "Terminé",
+  "canceled": "Annulé",
+
+  "allTasks": "Toutes les tâches",
+  "allHabits": "Toutes les habitudes",
+
+  "shortDay": "j.",
+  "shortHour": "h.",
+  "shortMinute": "m.",
+
+  "language": "Langue",
+
+  "theme": "Thème",
+  "lightTheme": "Clair",
+  "darkTheme": "Sombre",
+  "systemTheme": "Système",
+  "themeColor": "Couleur du thème",
+
+  "display": "Affichage",
+  "displayAlwaysOn": "Écran toujours allumé",
+
+  "otherApplications": "Autres applications",
+
+  "weInSocials": "Nous sur les réseaux sociaux",
+
+  "rateApplication": "Évaluer l'application",
+  "rate": "Évaluer",
+
+  "backup": "Sauvegarde",
+  "backupWarning": "Attention ! Après avoir importé la sauvegarde, vous devrez replanifier les notifications.",
+  "import": "Importer",
+  "selectImportFile": "Sélectionner le fichier de sauvegarde",
+  "export": "Exporter",
+  "selectExportPath": "Enregistrer la sauvegarde",
+  "share": "Partager",
+  "version": "Version",
+  "iOSVersion": "Version iOS",
+  "androidVersion": "Version android"
+}

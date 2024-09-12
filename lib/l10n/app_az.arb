@@ -1,0 +1,146 @@
+{
+  "@@locale": "az",
+  "appName": "PlaDo",
+  "fullAppName": "Planner TODO – planlaşdır və hərəkətə keç!",
+
+  "sortCategoryTasks": "Kateqoriyaları sırala",
+  "sortTasks": "Tapşırıqları sırala",
+  "sortHabits": "Vərdişləri sırala",
+
+  "sortByAddTime": "Əlavə edilmə vaxtına görə",
+  "sortByTitle": "Başlığa görə",
+  "sortByPriority": "Prioritetə görə",
+  "sortByColor": "Rəngə görə",
+
+  "order": "Sıra",
+
+  "firstNew": "Əvvəlcə ən yenilər (Z-A)",
+  "firstOld": "Əvvəlcə ən köhnələr (A-Z)",
+
+  "timeInterval": "Zaman aralığı",
+
+  "day": "Gün",
+  "week": "Həftə",
+  "month": "Ay",
+  "season": "Fəsil",
+  "year": "İl",
+
+  "addFirstTask": "İlk tapşırığınızı əlavə edin",
+  "addFirstCategory": "İlk kateqoriyanızı əlavə edin",
+  "addFirstHabit": "İlk vərdişinizi əlavə edin",
+
+  "addTask": "Tapşırıq əlavə Edin",
+  "addingTask": "Tapşırıq əlavə Edilir",
+  "addCategory": "Kateqoriya əlavə Edin",
+  "addingCategory": "Kateqoriya əlavə Edilir",
+  "addHabit": "Vərdiş əlavə edin",
+  "addingHabit": "Vərdiş əlavə edilir",
+
+  "changingTask": "Tapşırığı dəyişdir",
+  "changeTask": "Tapşırığı redaktə et",
+  "changeCategory": "Kateqoriyanı redaktə et",
+  "changingCategory": "Kateqoriyanı dəyişdir",
+  "changingHabit": "Vərdişi dəyişdir",
+  "changeHabit": "Vərdişi redaktə et",
+
+  "tasks": "Tapşırıqlar",
+  "habits": "Vərdişlər",
+  "statistics": "Statistika",
+  "settings": "Ayarlar",
+
+  "add": "Əlavə et",
+  "added": "Əlavə edildi",
+  "change": "Dəyişdir",
+  "changed": "Dəyişdirildi",
+  "delete": "Sil",
+  "deleted": "Silindi",
+  "color": "Rəng",
+  "back": "Geri",
+  "cancel": "Ləğv Et",
+  "warning": "Xəbərdarlıq!",
+  "enterTitle": "Başlıq daxil et",
+  "remaining": "Qalan",
+  "start": "Başlanğıc",
+  "end": "Son",
+  "today": "Bu Gün",
+  "hours": "Saat",
+  "minutes": "Dəqiqə",
+  "select": "Seç",
+
+  "notifications": "Bildirişlər",
+  "cancelAllNotifications": "Bütün dildirişləri ləğv et",
+
+  "priority": "Prioritet",
+  "low": "Aşağı",
+  "medium": "Orta",
+  "high": "Yüksək",
+
+  "dayNumbers": "Gün sayı",
+  "days21": "21 gün",
+  "days40": "40 gün",
+  "days66": "66 gün",
+  "days90": "90 gün",
+
+  "remind": "Xatırlat",
+  "remindDaily": "Gündəlik xatırlat",
+  "selectDate": "Tarix seç",
+  "selectTime": "Saat seç",
+  "selectCorrectDateTime": "Düzgün tarix və saat seçin",
+
+  "deleteTaskContent": "Bu tapşırığı tamamilə silmək istədiyinizə əminsinizmi?",
+  "deleteCategoryContent": "Bu kateqoriyanı və onun içindəkiləri tamamilə silmək istədiyinizə əminsinizmi?",
+  "deleteHabitContent": "Bu vərdişi tamamilə silmək istədiyinizə əminsinizmi?",
+
+  "tasksNumber": "Tapşırıqların sayı",
+  "tasksIsEmpty": "Tapşırıqlar siyahısı boşdur",
+  "habitNumber": "Vərdişlərin sayı",
+  "habitsIsEmpty": "Vərdişlər siyahısı boşdur",
+
+  "descriptionHabit": "Vərdişin təsviri",
+  "errorGetData": "Məlumat alınmasında səhv baş verdi.",
+
+  "elapsedDays": "Keçən günlər:",
+  "remainingDays": "Qalan günlər:",
+  "allDays": "Bütün günlər",
+  "remainingDayPercent": "Qalan gün %",
+
+  "inProgress": "Davam edir",
+  "completed": "Tamamlandı",
+  "canceled": "Ləğv edildi",
+
+  "allTasks": "Bütün tapşırıqlar",
+  "allHabits": "Bütün vərdişlər",
+
+  "shortDay": "g.",
+  "shortHour": "s.",
+  "shortMinute": "d.",
+
+  "language": "Dil",
+
+  "theme": "Tema",
+  "lightTheme": "Açıq",
+  "darkTheme": "Qaranlıq",
+  "systemTheme": "Sistem",
+  "themeColor": "Tema Rəngi",
+
+  "display": "Ekran",
+  "displayAlwaysOn": "Ekran həmişə açıq",
+
+  "otherApplications": "Digər tətbiqlər",
+
+  "weInSocials": "Sosial şəbəkələrdə biz",
+
+  "rateApplication": "Tətbiqi qiymətləndir",
+  "rate": "Qiymətləndir",
+
+  "backup": "Ehtiyat Nüsxə",
+  "backupWarning": "Diqqət! Yedəyi idxal etdikdən sonra bildirişləri yenidən planlaşdırmalısınız.",
+  "import": "İdxal",
+  "selectImportFile": "Ehtiyat faylını seç",
+  "export": "İxrac",
+  "selectExportPath": "Ehtiyat faylı yadda saxla",
+  "share": "Paylaş",
+  "version": "Versiya",
+  "iOSVersion": "iOS versiyası",
+  "androidVersion": "Android versiyası"
+}

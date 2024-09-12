@@ -1,0 +1,146 @@
+{
+  "@@locale": "kk",
+  "appName": "PlaDo",
+  "fullAppName": "Planner TODO – жоспарла және iске асыр!",
+
+  "sortCategoryTasks": "Категория тапсырмаларын сұрыптау",
+  "sortTasks": "Тапсырмаларды сұрыптау",
+  "sortHabits": "Әдеттерді сұрыптау",
+
+  "sortByAddTime": "Қосу күні бойынша",
+  "sortByTitle": "Атауы бойынша",
+  "sortByPriority": "Маңыздылығы бойынша",
+  "sortByColor": "Түсі бойынша",
+
+  "order": "Тәртібі",
+
+  "firstNew": "Алдымен жаңалары (Z-A)",
+  "firstOld": "Алдымен ескілері (A-Z)",
+
+  "timeInterval": "Уақыт аралығы",
+
+  "day": "Күн",
+  "week": "Апта",
+  "month": "Ай",
+  "season": "Маусым",
+  "year": "Жыл",
+
+  "addFirstTask": "Бірінші тапсырмаңызды қосыңыз",
+  "addFirstCategory": "Алғашқы категорияңызды қосыңыз",
+  "addFirstHabit": "Бірінші әдетіңізді қосыңыз",
+
+  "addTask": "Тапсырма қосу",
+  "addingTask": "Тапсырма қосу үстінде",
+  "addCategory": "Категория қосу",
+  "addingCategory": "Категория қосу үстінде",
+  "addHabit": "Әдет қосу",
+  "addingHabit": "Әдет қосу үстінде",
+
+  "changingTask": "Тапсырманы өзгерту",
+  "changeTask": "Тапсырманы өзгерту",
+  "changeCategory": "Категорияны өзгерту",
+  "changingCategory": "Категорияны өзгерту",
+  "changingHabit": "Әдетті өзгерту",
+  "changeHabit": "Әдетті өзгерту",
+
+  "tasks": "Тапсырмалар",
+  "habits": "Әдеттер",
+  "statistics": "Статистика",
+  "settings": "Параметрлер",
+
+  "add": "Қосу",
+  "added": "Қосылды",
+  "change": "Өзгерту",
+  "changed": "Өзгертілді",
+  "delete": "Жою",
+  "deleted": "Жойылды",
+  "color": "Түс",
+  "back": "Артқа",
+  "cancel": "Бас тарту",
+  "warning": "Ескерту!",
+  "enterTitle": "Атауды енгізіңіз",
+  "remaining": "Қалған",
+  "start": "Бастау",
+  "end": "Аяқтау",
+  "today": "Бүгін",
+  "hours": "Сағат",
+  "minutes": "Минут",
+  "select": "Таңдау",
+
+  "notifications": "Хабарламалар",
+  "cancelAllNotifications": "Барлық хабарламаларды тоқтату",
+
+  "priority": "Маңыздылық",
+  "low": "Төмен",
+  "medium": "Орташа",
+  "high": "Жоғары",
+
+  "dayNumbers": "Күндер саны",
+  "days21": "21 күн",
+  "days40": "40 күн",
+  "days66": "66 күн",
+  "days90": "90 күн",
+
+  "remind": "Еске салу",
+  "remindDaily": "Күн сайын еске салу",
+  "selectDate": "Күнді таңдау",
+  "selectTime": "Уақытты таңдау",
+  "selectCorrectDateTime": "Дұрыс күн мен уақытты таңдаңыз",
+
+  "deleteTaskContent": "Осы тапсырманы мәңгі жоюға сенімдісіз бе?",
+  "deleteCategoryContent": "Бұл категорияны және оған қатысты тапсырмаларды жоюға сенімдісіз бе?",
+  "deleteHabitContent": "Бұл әдетті мәңгі жоюға сенімдісіз бе?",
+
+  "tasksNumber": "Тапсырмалар саны",
+  "tasksIsEmpty": "Тапсырмалар тізімі бос",
+  "habitNumber": "Әдеттер саны",
+  "habitsIsEmpty": "Әдеттер тізімі бос",
+
+  "descriptionHabit": "Әдеттің сипаттамасы",
+  "errorGetData": "Деректерді алу кезінде қате орын алды.",
+
+  "elapsedDays": "Өткен күндер:",
+  "remainingDays": "Қалған күндер:",
+  "allDays": "Барлық күндер",
+  "remainingDayPercent": "Қалған күндер %",
+
+  "inProgress": "Үстінде",
+  "completed": "Аяқталды",
+  "canceled": "Болдырмау",
+
+  "allTasks": "Барлық тапсырмалар",
+  "allHabits": "Барлық әдеттер",
+
+  "shortDay": "к.",
+  "shortHour": "с.",
+  "shortMinute": "м.",
+
+  "language": "Тіл",
+
+  "theme": "Тақырып",
+  "lightTheme": "Жарық",
+  "darkTheme": "Қараңғы",
+  "systemTheme": "Жүйелік",
+  "themeColor": "Тақырыптың түсі",
+
+  "display": "Көрсету",
+  "displayAlwaysOn": "Экран әрдайым қосулы",
+
+  "otherApplications": "Басқа қосымшалар",
+
+  "weInSocials": "Біз әлеуметтік желілерде",
+
+  "rateApplication": "Қосымшаны бағалау",
+  "rate": "Бағалау",
+
+  "backup": "Қауіпсіздік көшірмесі",
+  "backupWarning": "Назар аударыңыз! Қауіпсіздік көшірмесін импорттағаннан кейін, хабарламаларды қайта жоспарлау қажет.",
+  "import": "Импорттау",
+  "selectImportFile": "Қауіпсіздік файлын таңдаңыз",
+  "export": "Экспорттау",
+  "selectExportPath": "Қауіпсіздік көшірмесін сақтау",
+  "share": "Бөлісу",
+  "version": "Нұсқа",
+  "iOSVersion": "iOS нұсқасы",
+  "androidVersion": "Android нұсқасы"
+}

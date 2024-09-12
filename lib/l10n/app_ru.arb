@@ -67,6 +67,9 @@
   "minutes": "Минуты",
   "select": "Выбрать",
 
+  "notifications": "Уведомления",
+  "cancelAllNotifications": "Отменить все уведомления",
+
   "priority": "Приоритет",
   "low": "Обычный",
   "medium": "Средний",

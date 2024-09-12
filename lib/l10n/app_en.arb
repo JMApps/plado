@@ -1,0 +1,146 @@
+{
+  "@@locale": "en",
+  "appName": "PlaDo",
+  "fullAppName": "Planner TODO – plan and act!",
+
+  "sortCategoryTasks": "Sort categories",
+  "sortTasks": "Sort tasks",
+  "sortHabits": "Sort habits",
+
+  "sortByAddTime": "By add time",
+  "sortByTitle": "By title",
+  "sortByPriority": "By priority",
+  "sortByColor": "By color",
+
+  "order": "Order",
+
+  "firstNew": "Newest first (Z-A)",
+  "firstOld": "Oldest first (A-Z)",
+
+  "timeInterval": "Time interval",
+
+  "day": "Day",
+  "week": "Week",
+  "month": "Month",
+  "season": "Season",
+  "year": "Year",
+
+  "addFirstTask": "Add your first task",
+  "addFirstCategory": "Add your first category",
+  "addFirstHabit": "Add your first habit",
+
+  "addTask": "Add task",
+  "addingTask": "Adding task",
+  "addCategory": "Add category",
+  "addingCategory": "Adding category",
+  "addHabit": "Add habit",
+  "addingHabit": "Adding habit",
+
+  "changingTask": "Editing task",
+  "changeTask": "Edit task",
+  "changeCategory": "Edit category",
+  "changingCategory": "Editing category",
+  "changingHabit": "Editing habit",
+  "changeHabit": "Edit habit",
+
+  "tasks": "Tasks",
+  "habits": "Habits",
+  "statistics": "Statistics",
+  "settings": "Settings",
+
+  "add": "Add",
+  "added": "Added",
+  "change": "Change",
+  "changed": "Changed",
+  "delete": "Delete",
+  "deleted": "Deleted",
+  "color": "Color",
+  "back": "Back",
+  "cancel": "Cancel",
+  "warning": "Warning!",
+  "enterTitle": "Enter title",
+  "remaining": "Remaining",
+  "start": "Start",
+  "end": "End",
+  "today": "Today",
+  "hours": "Hours",
+  "minutes": "Minutes",
+  "select": "Select",
+
+  "notifications": "Notifications",
+  "cancelAllNotifications": "Cancel all notifications",
+
+  "priority": "Priority",
+  "low": "Low",
+  "medium": "Medium",
+  "high": "High",
+
+  "dayNumbers": "Number of days",
+  "days21": "21 days",
+  "days40": "40 days",
+  "days66": "66 days",
+  "days90": "90 days",
+
+  "remind": "Remind",
+  "remindDaily": "Remind daily",
+  "selectDate": "Select date",
+  "selectTime": "Select time",
+  "selectCorrectDateTime": "Select a valid date and time",
+
+  "deleteTaskContent": "Are you sure you want to permanently delete this task?",
+  "deleteCategoryContent": "Are you sure you want to permanently delete this category and its tasks?",
+  "deleteHabitContent": "Are you sure you want to permanently delete this habit?",
+
+  "tasksNumber": "Number of tasks",
+  "tasksIsEmpty": "Task list is empty",
+  "habitNumber": "Number of habits",
+  "habitsIsEmpty": "Habit list is empty",
+
+  "descriptionHabit": "Habit description",
+  "errorGetData": "Error getting data.",
+
+  "elapsedDays": "Days Passed:",
+  "remainingDays": "Days Remaining:",
+  "allDays": "All days",
+  "remainingDayPercent": "Remaining day %",
+
+  "inProgress": "In progress",
+  "completed": "Completed",
+  "canceled": "Canceled",
+
+  "allTasks": "All tasks",
+  "allHabits": "All habits",
+
+  "shortDay": "d.",
+  "shortHour": "h.",
+  "shortMinute": "m.",
+
+  "language": "Language",
+
+  "theme": "Theme",
+  "lightTheme": "Light",
+  "darkTheme": "Dark",
+  "systemTheme": "System",
+  "themeColor": "Theme Color",
+
+  "display": "Display",
+  "displayAlwaysOn": "Display always on",
+
+  "otherApplications": "Other applications",
+
+  "weInSocials": "We are on social media",
+
+  "rateApplication": "Rate application",
+  "rate": "Rate",
+
+  "backup": "Backup",
+  "backupWarning": "Warning! After importing a backup, you need to reschedule notifications.",
+  "import": "Import",
+  "selectImportFile": "Select backup file",
+  "export": "Export",
+  "selectExportPath": "Save backup",
+  "share": "Share",
+  "version": "Version",
+  "iOSVersion": "iOS version",
+  "androidVersion": "Android version"
+}

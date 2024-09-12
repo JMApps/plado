@@ -1,0 +1,146 @@
+{
+  "@@locale": "it",
+  "appName": "PlaDo",
+  "fullAppName": "Planner TODO – pianifica e agisci!",
+
+  "sortCategoryTasks": "Ordina le categorie",
+  "sortTasks": "Ordina i compiti",
+  "sortHabits": "Ordina le abitudini",
+
+  "sortByAddTime": "Per Data di aggiunta",
+  "sortByTitle": "Per titolo",
+  "sortByPriority": "Per priorità",
+  "sortByColor": "Per Colore",
+
+  "order": "Ordine",
+
+  "firstNew": "Prima i più recenti (Z-A)",
+  "firstOld": "Prima i più vecchi (A-Z)",
+
+  "timeInterval": "Intervallo di tempo",
+
+  "day": "Giorno",
+  "week": "Settimana",
+  "month": "Mese",
+  "season": "Stagione",
+  "year": "Anno",
+
+  "addFirstTask": "Aggiungi il tuo primo compito",
+  "addFirstCategory": "Aggiungi la tua prima categoria",
+  "addFirstHabit": "Aggiungi la tua prima abitudine",
+
+  "addTask": "Aggiungi compito",
+  "addingTask": "Aggiunta di compito",
+  "addCategory": "Aggiungi categoria",
+  "addingCategory": "Aggiunta di categoria",
+  "addHabit": "Aggiungi abitudine",
+  "addingHabit": "Aggiunta di abitudine",
+
+  "changingTask": "Modifica il compito",
+  "changeTask": "Modifica compito",
+  "changeCategory": "Modifica categoria",
+  "changingCategory": "Modifica della categoria",
+  "changingHabit": "Modifica dell'abitudine",
+  "changeHabit": "Modifica abitudine",
+
+  "tasks": "Compiti",
+  "habits": "Abitudini",
+  "statistics": "Statistiche",
+  "settings": "Impostazioni",
+
+  "add": "Aggiungi",
+  "added": "Aggiunto",
+  "change": "Modifica",
+  "changed": "Modificato",
+  "delete": "Elimina",
+  "deleted": "Eliminato",
+  "color": "Colore",
+  "back": "Indietro",
+  "cancel": "Annulla",
+  "warning": "Attenzione!",
+  "enterTitle": "Inserisci il titolo",
+  "remaining": "Rimanente",
+  "start": "Inizio",
+  "end": "Fine",
+  "today": "Oggi",
+  "hours": "Ore",
+  "minutes": "Minuti",
+  "select": "Seleziona",
+
+  "notifications": "Notifiche",
+  "cancelAllNotifications": "Annulla Tutte le notifiche",
+
+  "priority": "Priorità",
+  "low": "Bassa",
+  "medium": "Media",
+  "high": "Alta",
+
+  "dayNumbers": "Numero di giorni",
+  "days21": "21 giorni",
+  "days40": "40 giorni",
+  "days66": "66 giorni",
+  "days90": "90 giorni",
+
+  "remind": "Ricorda",
+  "remindDaily": "Ricorda ogni giorno",
+  "selectDate": "Seleziona data",
+  "selectTime": "Seleziona ora",
+  "selectCorrectDateTime": "Seleziona una data e un'ora corrette",
+
+  "deleteTaskContent": "Sei sicuro di voler eliminare definitivamente questo compito?",
+  "deleteCategoryContent": "Sei sicuro di voler eliminare definitivamente questa categoria e i compiti al suo interno?",
+  "deleteHabitContent": "Sei sicuro di voler eliminare definitivamente questa abitudine?",
+
+  "tasksNumber": "Numero di compiti",
+  "tasksIsEmpty": "L'elenco dei compiti è vuoto",
+  "habitNumber": "Numero di abitudini",
+  "habitsIsEmpty": "L'elenco delle abitudini è vuoto",
+
+  "descriptionHabit": "Descrizione dell'Abitudine",
+  "errorGetData": "Errore durante il recupero dei dati.",
+
+  "elapsedDays": "Giorni trascorsi:",
+  "remainingDays": "Giorni rimanenti:",
+  "allDays": "Tutti i giorni",
+  "remainingDayPercent": "Giorno rimanente %",
+
+  "inProgress": "In corso",
+  "completed": "Completato",
+  "canceled": "Annullato",
+
+  "allTasks": "Tutti i compiti",
+  "allHabits": "Tutte le abitudini",
+
+  "shortDay": "g.",
+  "shortHour": "h.",
+  "shortMinute": "m.",
+
+  "language": "Lingua",
+
+  "theme": "Tema",
+  "lightTheme": "Chiaro",
+  "darkTheme": "Scuro",
+  "systemTheme": "Sistema",
+  "themeColor": "Colore del tema",
+
+  "display": "Schermo",
+  "displayAlwaysOn": "Schermo sempre attivo",
+
+  "otherApplications": "Altre applicazioni",
+
+  "weInSocials": "Noi sui Social",
+
+  "rateApplication": "Valuta l'applicazione",
+  "rate": "Valuta",
+
+  "backup": "Backup",
+  "backupWarning": "Attenzione! Dopo aver importato il backup, dovrai riprogrammare le notifiche.",
+  "import": "Importa",
+  "selectImportFile": "Seleziona il file di backup",
+  "export": "Esporta",
+  "selectExportPath": "Salva il backup",
+  "share": "Condividi",
+  "version": "Versione",
+  "iOSVersion": "Versione iOS",
+  "androidVersion": "Versione android"
+}

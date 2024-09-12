@@ -1,0 +1,146 @@
+{
+  "@@locale": "id",
+  "appName": "PlaDo",
+  "fullAppName": "Planner TODO – rencanakan dan bertindak!",
+
+  "sortCategoryTasks": "Urutkan kategori",
+  "sortTasks": "Urutkan tugas",
+  "sortHabits": "Urutkan kebiasaan",
+
+  "sortByAddTime": "Berdasarkan waktu ditambahkan",
+  "sortByTitle": "Berdasarkan judul",
+  "sortByPriority": "Berdasarkan prioritas",
+  "sortByColor": "Berdasarkan warna",
+
+  "order": "Urutan",
+
+  "firstNew": "Terbaru dulu (Z-A)",
+  "firstOld": "Terlama dulu (A-Z)",
+
+  "timeInterval": "Interval waktu",
+
+  "day": "Hari",
+  "week": "Minggu",
+  "month": "Bulan",
+  "season": "Musim",
+  "year": "Tahun",
+
+  "addFirstTask": "Tambahkan tugas pertama Anda",
+  "addFirstCategory": "Tambahkan kategori pertama Anda",
+  "addFirstHabit": "Tambahkan kebiasaan pertama Anda",
+
+  "addTask": "Tambahkan tugas",
+  "addingTask": "Menambahkan tugas",
+  "addCategory": "Tambahkan kategori",
+  "addingCategory": "Menambahkan kategori",
+  "addHabit": "Tambahkan kebiasaan",
+  "addingHabit": "Menambahkan kebiasaan",
+
+  "changingTask": "Mengubah tugas",
+  "changeTask": "Ubah tugas",
+  "changeCategory": "Ubah kategori",
+  "changingCategory": "Mengubah kategori",
+  "changingHabit": "Mengubah kebiasaan",
+  "changeHabit": "Ubah kebiasaan",
+
+  "tasks": "Tugas",
+  "habits": "Kebiasaan",
+  "statistics": "Statistik",
+  "settings": "Pengaturan",
+
+  "add": "Tambahkan",
+  "added": "Ditambahkan",
+  "change": "Ubah",
+  "changed": "Diubah",
+  "delete": "Hapus",
+  "deleted": "Dihapus",
+  "color": "Warna",
+  "back": "Kembali",
+  "cancel": "Batalkan",
+  "warning": "Peringatan!",
+  "enterTitle": "Masukkan judul",
+  "remaining": "Tersisa",
+  "start": "Mulai",
+  "end": "Selesai",
+  "today": "Hari ini",
+  "hours": "Jam",
+  "minutes": "Menit",
+  "select": "Pilih",
+
+  "notifications": "Notifikasi",
+  "cancelAllNotifications": "Batalkan semua notifikasi",
+
+  "priority": "Prioritas",
+  "low": "Rendah",
+  "medium": "Sedang",
+  "high": "Tinggi",
+
+  "dayNumbers": "Jumlah hari",
+  "days21": "21 hari",
+  "days40": "40 hari",
+  "days66": "66 hari",
+  "days90": "90 hari",
+
+  "remind": "Ingatkan",
+  "remindDaily": "Ingatkan setiap hari",
+  "selectDate": "Pilih tanggal",
+  "selectTime": "Pilih waktu",
+  "selectCorrectDateTime": "Pilih tanggal dan waktu yang benar",
+
+  "deleteTaskContent": "Apakah Anda yakin ingin menghapus tugas ini secara permanen?",
+  "deleteCategoryContent": "Apakah Anda yakin ingin menghapus kategori ini beserta tugas-tugas di dalamnya secara permanen?",
+  "deleteHabitContent": "Apakah Anda yakin ingin menghapus kebiasaan ini secara permanen?",
+
+  "tasksNumber": "Jumlah tugas",
+  "tasksIsEmpty": "Daftar tugas kosong",
+  "habitNumber": "Jumlah kebiasaan",
+  "habitsIsEmpty": "Daftar kebiasaan kosong",
+
+  "descriptionHabit": "Deskripsi kebiasaan",
+  "errorGetData": "Kesalahan dalam mengambil data.",
+
+  "elapsedDays": "Hari berlalu:",
+  "remainingDays": "Hari tersisa:",
+  "allDays": "Semua hari",
+  "remainingDayPercent": "Sisa hari %",
+
+  "inProgress": "Sedang berjalan",
+  "completed": "Selesai",
+  "canceled": "Dibatalkan",
+
+  "allTasks": "Semua tugas",
+  "allHabits": "Semua kebiasaan",
+
+  "shortDay": "h.",
+  "shortHour": "j.",
+  "shortMinute": "m.",
+
+  "language": "Bahasa",
+
+  "theme": "Tema",
+  "lightTheme": "Terang",
+  "darkTheme": "Gelap",
+  "systemTheme": "Sistem",
+  "themeColor": "Warna tema",
+
+  "display": "Tampilan",
+  "displayAlwaysOn": "Layar selalu aktif",
+
+  "otherApplications": "Aplikasi lainnya",
+
+  "weInSocials": "Kami di Media sosial",
+
+  "rateApplication": "Beri nilai aplikasi",
+  "rate": "Beri nilai",
+
+  "backup": "Cadangan",
+  "backupWarning": "Peringatan! Setelah impor cadangan, Anda perlu menjadwal ulang notifikasi.",
+  "import": "Impor",
+  "selectImportFile": "Pilih file cadangan",
+  "export": "Ekspor",
+  "selectExportPath": "Simpan cadangan",
+  "share": "Bagikan",
+  "version": "Versi",
+  "iOSVersion": "Versi iOS",
+  "androidVersion": "Versi android"
+}
