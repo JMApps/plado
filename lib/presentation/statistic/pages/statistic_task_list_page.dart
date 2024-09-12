@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
-import '../../../data/models/arguments/graphic_task_args.dart';
+import '../../../data/models/arguments/statistic_task_args.dart';
 import '../lists/static_tasks_list.dart';
 
 class StatisticTaskListPage extends StatelessWidget {
   const StatisticTaskListPage({
     super.key,
-    required this.graphicTaskArgs,
+    required this.statisticTaskArgs,
   });
 
-  final GraphicTaskArgs graphicTaskArgs;
+  final StatisticTaskArgs statisticTaskArgs;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(graphicTaskArgs.title),
+        title: Text(statisticTaskArgs.title),
       ),
-      body: StaticTasksList(taskStatusIndex: graphicTaskArgs.taskStatusIndex),
+      body: StaticTasksList(taskStatusIndex: statisticTaskArgs.taskStatusIndex),
     );
   }
 }

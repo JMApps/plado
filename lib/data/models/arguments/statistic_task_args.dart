@@ -1,8 +1,8 @@
-class GraphicTaskArgs {
+class StatisticTaskArgs {
   final int taskStatusIndex;
   final String title;
 
-  GraphicTaskArgs({
+  StatisticTaskArgs({
     required this.taskStatusIndex,
     required this.title,
   });

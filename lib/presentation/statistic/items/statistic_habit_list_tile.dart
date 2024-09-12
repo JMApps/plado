@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/routes/name_routes.dart';
-import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 
 class StaticHabitListTile extends StatelessWidget {
@@ -32,10 +31,7 @@ class StaticHabitListTile extends StatelessWidget {
         backgroundColor: color,
         child: Text(
           taskStatus.toString(),
-          style: const TextStyle(
-            fontSize: 16,
-            fontFamily: AppConstraints.fontRobotoSlab,
-          ),
+          style: AppStyles.mainTextRoboto16,
         ),
       ),
       trailing: const Icon(Icons.arrow_forward_ios_rounded),

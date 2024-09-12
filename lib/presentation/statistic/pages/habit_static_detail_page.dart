@@ -66,24 +66,38 @@ class _HabitStaticDetailPageState extends State<HabitStaticDetailPage> {
     final habitColor = AppStyles.appColorList[widget.habitModel.habitColorIndex];
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.habitModel.habitTitle),
+        title: Text(appLocale.habits),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
+            Card(
+              elevation: 0,
+              margin: AppStyles.paddingMini,
+              child: Container(
+                alignment: Alignment.center,
+                padding: AppStyles.padding,
+                child: Text(
+                  widget.habitModel.habitTitle,
+                  style: AppStyles.mainTextBold,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CircularPercentIndicator(
                   circularStrokeCap: CircularStrokeCap.round,
                   radius: 75,
-                  lineWidth: 20,
+                  lineWidth: 17.5,
                   percent: _restRemaininPercentage[AppConstraints.restElapsedPercentage] / 100,
                   header: Padding(
                     padding: AppStyles.paddingBottom,
                     child: Text(
                       appLocale.elapsedDays,
-                      style: const TextStyle(fontSize: 17),
+                      style: AppStyles.mainText,
                     ),
                   ),
                   center: Text(
@@ -110,13 +124,13 @@ class _HabitStaticDetailPageState extends State<HabitStaticDetailPage> {
                   reverse: true,
                   circularStrokeCap: CircularStrokeCap.round,
                   radius: 75,
-                  lineWidth: 20,
+                  lineWidth: 17.5,
                   percent: _restRemaininPercentage[AppConstraints.restRemainingPercentage] / 100,
                   header: Padding(
                     padding: AppStyles.paddingBottom,
                     child: Text(
                       appLocale.remainingDays,
-                      style: const TextStyle(fontSize: 17),
+                      style: AppStyles.mainText,
                     ),
                   ),
                   center: Text(
@@ -156,10 +170,7 @@ class _HabitStaticDetailPageState extends State<HabitStaticDetailPage> {
                           const SizedBox(height: 16),
                           Text(
                             widget.habitModel.endDateTime.isAfter(DateTime.now()) ? appLocale.inProgress : appLocale.completed,
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: AppStyles.mainTextBold20,
                           ),
                           const SizedBox(height: 8),
                           GridView.builder(
@@ -191,8 +202,8 @@ class _HabitStaticDetailPageState extends State<HabitStaticDetailPage> {
                             },
                             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 5,
-                              crossAxisSpacing: 8,
-                              mainAxisSpacing: 8,
+                              crossAxisSpacing: 4,
+                              mainAxisSpacing: 4,
                             ),
                           ),
                         ],

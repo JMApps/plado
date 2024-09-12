@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/routes/name_routes.dart';
-import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
-import '../../../data/models/arguments/graphic_task_args.dart';
+import '../../../data/models/arguments/statistic_task_args.dart';
 
 class StaticTaskListTile extends StatelessWidget {
   const StaticTaskListTile({
@@ -28,7 +27,7 @@ class StaticTaskListTile extends StatelessWidget {
         Navigator.pushNamed(
           context,
           NameRoutes.statisticTaskListPage,
-          arguments: GraphicTaskArgs(
+          arguments: StatisticTaskArgs(
             taskStatusIndex: taskStatusIndex,
             title: title,
           ),
@@ -39,10 +38,7 @@ class StaticTaskListTile extends StatelessWidget {
         backgroundColor: color,
         child: Text(
           taskStatus.toString(),
-          style: const TextStyle(
-            fontSize: 16,
-            fontFamily: AppConstraints.fontRobotoSlab,
-          ),
+          style: AppStyles.mainTextRoboto16,
         ),
       ),
       trailing: const Icon(Icons.arrow_forward_ios_rounded),
