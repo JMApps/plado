@@ -5,7 +5,6 @@ import 'package:sqflite/sqflite.dart';
 import '../../core/strings/database_values.dart';
 import '../../domain/entities/habit_entity.dart';
 import '../../domain/repositories/habit_repository.dart';
-import '../models/all_habit_count_model.dart';
 import '../models/habit_model.dart';
 import '../services/plado_database_service.dart';
 
@@ -31,16 +30,10 @@ class HabitDataRepository implements HabitRepository {
   }
 
   @override
-  Future<AllHabitCountModel> getAllHabitsNumber() async {
+  Future<int> getAllHabitNumber() async {
     final Database database = await _pladoDatabaseService.db;
-
-    final List<Map<String, Object?>> all = await database.query(
-      DatabaseValues.dbHabitTableName,
-    );
-
-    return AllHabitCountModel(
-      all: all.length,
-    );
+    final List<Map<String, Object?>> allHabits = await database.query(DatabaseValues.dbHabitTableName);
+    return allHabits.length;
   }
 
   @override
@@ -64,7 +57,7 @@ class HabitDataRepository implements HabitRepository {
   @override
   Future<int> updateHabit({required Map<String, dynamic> habitMap, required int habitId}) async {
     final Database database = await _pladoDatabaseService.db;
-    final int updateHabit = await database.update(DatabaseValues.dbHabitTableName, habitMap, where: '${DatabaseValues.dbHabitId} = ?', whereArgs: [habitId]);
+    final int updateHabit = await database.update(DatabaseValues.dbHabitTableName, habitMap, where: '${DatabaseValues.dbHabitId} = ?', whereArgs: [habitId], conflictAlgorithm: ConflictAlgorithm.replace);
     return updateHabit;
   }
 
