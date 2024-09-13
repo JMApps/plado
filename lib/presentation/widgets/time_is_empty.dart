@@ -6,9 +6,12 @@ class TimeIsEmpty extends StatelessWidget {
   const TimeIsEmpty({
     super.key,
     required this.title,
+    required this.icon,
   });
 
   final String title;
+  final IconData icon;
+
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,7 @@ class TimeIsEmpty extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Icon(
-            Icons.add_task_rounded,
+            icon,
             size: 150,
             color: Theme.of(context).colorScheme.inversePrimary.withOpacity(0.5),
           ),

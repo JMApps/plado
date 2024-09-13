@@ -48,7 +48,10 @@ class TasksMainList extends StatelessWidget {
               return MainErrorText(errorText: snapshot.error.toString());
             } else {
               return SafeArea(
-                child: TimeIsEmpty(title: appLocale.addFirstTask),
+                child: TimeIsEmpty(
+                  title: appLocale.addFirstTask,
+                  icon: Icons.add_task_rounded,
+                ),
               );
             }
           },

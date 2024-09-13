@@ -37,7 +37,8 @@ class TaskCategoriesList extends StatelessWidget {
                       padding: AppStyles.paddingWithoutBottomMini,
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
-                        final CategoryEntity categoryModel = snapshot.data![index];
+                        final CategoryEntity categoryModel =
+                            snapshot.data![index];
                         return CategoryItem(
                           categoryModel: categoryModel,
                           index: index,
@@ -49,7 +50,10 @@ class TaskCategoriesList extends StatelessWidget {
                   return MainErrorText(errorText: snapshot.error.toString());
                 } else {
                   return SafeArea(
-                    child: TimeIsEmpty(title: appLocale.addFirstCategory),
+                    child: TimeIsEmpty(
+                      title: appLocale.addFirstCategory,
+                      icon: Icons.category_outlined,
+                    ),
                   );
                 }
               },

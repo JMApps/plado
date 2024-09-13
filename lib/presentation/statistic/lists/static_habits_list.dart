@@ -44,6 +44,7 @@ class StaticHabitsList extends StatelessWidget {
             padding: AppStyles.padding,
             child: TimeIsEmpty(
               title: appLocale.habitsIsEmpty,
+              icon: Icons.add_task_rounded,
             ),
           );
         }

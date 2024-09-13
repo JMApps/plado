@@ -41,7 +41,10 @@ class HabitList extends StatelessWidget {
               return MainErrorText(errorText: snapshot.error.toString());
             } else {
               return SafeArea(
-                child: TimeIsEmpty(title: appLocale.addFirstHabit),
+                child: TimeIsEmpty(
+                  title: appLocale.addFirstHabit,
+                  icon: Icons.add_task_rounded,
+                ),
               );
             }
           },

@@ -45,6 +45,7 @@ class StaticTasksList extends StatelessWidget {
             padding: AppStyles.padding,
             child: TimeIsEmpty(
               title: appLocale.tasksIsEmpty,
+              icon: Icons.add_task_rounded,
             ),
           );
         }
