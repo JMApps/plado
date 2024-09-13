@@ -53,7 +53,7 @@ class CategoryItem extends StatelessWidget {
               return Text(
                 // Add tasks count
                 snapshot.data.toString(),
-                style: AppStyles.mainTextRoboto,
+                style: AppStyles.mainTextRoboto14,
               );
             } else {
               return const Text(

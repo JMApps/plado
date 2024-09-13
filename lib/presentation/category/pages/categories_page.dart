@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/enums/category_period.dart';
+import '../../../core/routes/name_routes.dart';
 import '../../../core/styles/app_styles.dart';
 import '../addchange/add_category_bottom_sheet.dart';
 import '../lists/task_categories_list.dart';
@@ -14,7 +15,8 @@ class CategoriesPage extends StatefulWidget {
   State<CategoriesPage> createState() => _CategoriesPageState();
 }
 
-class _CategoriesPageState extends State<CategoriesPage> with TickerProviderStateMixin {
+class _CategoriesPageState extends State<CategoriesPage>
+    with TickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -36,22 +38,28 @@ class _CategoriesPageState extends State<CategoriesPage> with TickerProviderStat
     return Scaffold(
       appBar: AppBar(
         title: Text(appLocale.appName),
-        // leading: IconButton(
-        //   onPressed: () {},
-        //   icon: Icon(
-        //     Icons.sell_outlined,
-        //     color: appColors.primary,
-        //   ),
-        // ),
-        actions: const [
-          // IconButton(
-          //   onPressed: () {},
-          //   icon: Icon(
-          //     Icons.today_rounded,
-          //     color: appColors.primary,
-          //   ),
-          // ),
-          SortCategoryButton(),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pushNamed(
+              context,
+              NameRoutes.marketPage,
+            );
+          },
+          tooltip: appLocale.purchases,
+          icon: Icon(
+            Icons.sell_outlined,
+            color: appColors.primary,
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.today_rounded,
+              color: appColors.primary,
+            ),
+          ),
+          const SortCategoryButton(),
         ],
         bottom: TabBar(
           controller: _tabController,
