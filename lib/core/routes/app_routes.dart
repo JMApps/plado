@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import '../../data/models/arguments/category_model_args.dart';
 import '../../data/models/arguments/habit_model_args.dart';
 import '../../data/models/arguments/statistic_task_args.dart';
@@ -9,6 +8,7 @@ import '../../presentation/backup/backup_detail_page.dart';
 import '../../presentation/habit/pages/create_habit_page.dart';
 import '../../presentation/habit/pages/habit_detail_page.dart';
 import '../../presentation/habit/pages/update_habit_page.dart';
+import '../../presentation/market/pages/market_page.dart';
 import '../../presentation/statistic/pages/habit_static_detail_page.dart';
 import '../../presentation/statistic/pages/statistic_habit_list_page.dart';
 import '../../presentation/statistic/pages/statistic_task_list_page.dart';
@@ -21,6 +21,10 @@ import 'name_routes.dart';
 class AppRoutes {
   static Route onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
+      case NameRoutes.marketPage:
+        return MaterialPageRoute(
+          builder: (_) => const MarketPage(),
+        );
       case NameRoutes.taskCategoryPage:
         final CategoryModelArgs categoryModelArgs = routeSettings.arguments as CategoryModelArgs;
         return MaterialPageRoute(
