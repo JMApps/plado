@@ -5,6 +5,7 @@ import '../../domain/entities/task_entity.dart';
 import '../../domain/repositories/task_repository.dart';
 import '../models/counts/all_task_count_model.dart';
 import '../models/task_model.dart';
+import '../services/notifications/notification_service.dart';
 import '../services/plado_database_service.dart';
 
 class TaskDataRepository implements TaskRepository {
@@ -16,14 +17,24 @@ class TaskDataRepository implements TaskRepository {
   Future<List<TaskEntity>> getTaskByCategoryId({required int categoryId, required String orderBy}) async {
     final Database database = await _pladoDatabaseService.db;
     final currentDateTime = DateTime.now().toIso8601String();
+
     final Map<String, dynamic> taskCanceledMap = {
       DatabaseValues.dbTaskSampleBy: -1,
       DatabaseValues.dbTaskStatusIndex: 2,
       DatabaseValues.dbTaskCompleteDateTime: currentDateTime,
     };
+
     final Map<String, dynamic> taskCompletedMap = {
       DatabaseValues.dbTaskSampleBy: -1,
     };
+
+    final List<Map<String, Object?>> completedTasks = await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskStatusIndex} = 2', whereArgs: [categoryId],);
+
+    for (var task in completedTasks) {
+      final TaskModel taskModel = TaskModel.fromMap(task);
+      await NotificationService().cancelNotificationWithId(taskModel.notificationId);
+    }
+
     await database.update(DatabaseValues.dbTaskTableName, taskCanceledMap, where: '${DatabaseValues.dbTaskSampleBy} = ? AND ${DatabaseValues.dbTaskEndDateTime} < ? AND ${DatabaseValues.dbTaskStatusIndex} != 1', whereArgs: [categoryId, currentDateTime]);
     await database.update(DatabaseValues.dbTaskTableName, taskCompletedMap, where: '${DatabaseValues.dbTaskSampleBy} = ? AND ${DatabaseValues.dbTaskEndDateTime} < ? AND ${DatabaseValues.dbTaskStatusIndex} = 1', whereArgs: [categoryId, currentDateTime]);
     final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskSampleBy} = ? AND ${DatabaseValues.dbTaskStartDateTime} <= ? AND ${DatabaseValues.dbTaskEndDateTime} >= ?', whereArgs: [categoryId, currentDateTime, currentDateTime], orderBy: 'CASE WHEN ${DatabaseValues.dbTaskStatusIndex} = 1 THEN 1 ELSE 0 END, $orderBy');

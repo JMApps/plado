@@ -4,6 +4,8 @@ import '../../core/strings/database_values.dart';
 import '../../domain/entities/category_entity.dart';
 import '../../domain/repositories/category_repository.dart';
 import '../models/category_model.dart';
+import '../models/task_model.dart';
+import '../services/notifications/notification_service.dart';
 import '../services/plado_database_service.dart';
 
 class CategoryDataRepository implements CategoryRepository {
@@ -34,7 +36,14 @@ class CategoryDataRepository implements CategoryRepository {
   @override
   Future<int> deleteCategory({required int categoryId}) async {
     final Database database = await _pladoDatabaseService.db;
+
     await database.delete(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskSampleBy} = ?', whereArgs: [categoryId]);
+    final List<Map<String, Object?>> completedTasks = await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskSampleBy} = ?', whereArgs: [categoryId],);
+
+    for (var task in completedTasks) {
+      final TaskModel taskModel = TaskModel.fromMap(task);
+      await NotificationService().cancelNotificationWithId(taskModel.notificationId);
+    }
     return await database.delete(DatabaseValues.dbCategoryTableName, where: '${DatabaseValues.dbCategoryId} = ?', whereArgs: [categoryId]);
   }
 }
