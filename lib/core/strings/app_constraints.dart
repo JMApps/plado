@@ -89,6 +89,9 @@ class AppConstraints {
   static const String keyAlwaysOnDisplay = 'key_always_on_display';
   static const String keyColorThemeIndex = 'key_color_theme_index';
 
+  static const String keyMarketSortIndex = 'key_market_sort_index';
+  static const String keyMarketOrderIndex = 'key_market_order_index';
+
   static const String keyTaskSortIndex = 'key_task_sort_index';
   static const String keyTaskOrderIndex = 'key_task_order_index';
 
