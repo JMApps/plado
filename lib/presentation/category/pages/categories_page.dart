@@ -47,7 +47,7 @@ class _CategoriesPageState extends State<CategoriesPage>
           },
           tooltip: appLocale.purchases,
           icon: Icon(
-            Icons.sell_outlined,
+            Icons.add_shopping_cart_rounded,
             color: appColors.primary,
           ),
         ),

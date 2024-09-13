@@ -43,7 +43,7 @@ class MainMarketList extends StatelessWidget {
               return SafeArea(
                 child: TimeIsEmpty(
                   title: appLocale.addFirstMarket,
-                  icon: Icons.sell_outlined,
+                  icon: Icons.add_shopping_cart_rounded,
                 ),
               );
             }

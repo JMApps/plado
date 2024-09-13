@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:hive_flutter/adapters.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'core/strings/app_constraints.dart';
@@ -15,6 +15,7 @@ import 'presentation/pages/root_material_page.dart';
 import 'presentation/state/bottom_nav_index_state.dart';
 import 'presentation/state/category/category_sort_state.dart';
 import 'presentation/state/habit/habit_sort_state.dart';
+import 'presentation/state/market/market_sort_state.dart';
 import 'presentation/state/rest_times_state.dart';
 import 'presentation/state/setting_data_state.dart';
 import 'presentation/state/task/task_sort_state.dart';
@@ -38,6 +39,9 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (_) => RestTimesState(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => MarketSortState(),
         ),
         ChangeNotifierProvider(
           create: (_) => TaskSortState(),
