@@ -1,0 +1,4 @@
+enum MarketStatus {
+  inProgress,
+  complete,
+}
