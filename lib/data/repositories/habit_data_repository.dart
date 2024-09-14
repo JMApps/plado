@@ -32,8 +32,8 @@ class HabitDataRepository implements HabitRepository {
   @override
   Future<int> getAllHabitNumber() async {
     final Database database = await _pladoDatabaseService.db;
-    final List<Map<String, Object?>> allHabits = await database.query(DatabaseValues.dbHabitTableName);
-    return allHabits.length;
+    final List<Map<String, Object?>> result = await database.rawQuery('SELECT COUNT(*) as count FROM ${DatabaseValues.dbHabitTableName}');
+    return Sqflite.firstIntValue(result) ?? 0;
   }
 
   @override

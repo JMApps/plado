@@ -39,7 +39,7 @@ class _UpdateDailyTaskButtonState extends State<UpdateDailyTaskButton> {
       onPressed: () {
         if (Provider.of<TaskTitleState>(context, listen: false).getTaskTitle.trim().isNotEmpty) {
           Navigator.of(context).pop();
-          _updateTask(appLocale.tasks);
+          _updateTask(appLocale.dailyTasks);
         } else {
           _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, appLocale.enterTitle);
         }

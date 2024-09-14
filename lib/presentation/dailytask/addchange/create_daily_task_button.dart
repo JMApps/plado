@@ -35,7 +35,7 @@ class _CreateDailyTaskButtonState extends State<CreateDailyTaskButton> {
       onPressed: () {
         if (Provider.of<TaskTitleState>(context, listen: false).getTaskTitle.trim().isNotEmpty) {
           Navigator.of(context).pop();
-          _createTask(appLocale.tasks);
+          _createTask(appLocale.dailyTasks);
         } else {
           _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, appLocale.enterTitle);
         }

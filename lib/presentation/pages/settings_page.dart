@@ -24,6 +24,7 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = Theme.of(context).colorScheme;
     final appLocale = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
@@ -81,6 +82,19 @@ class SettingsPage extends StatelessWidget {
                   ListTile(
                     onTap: () {
                       NotificationService().cancelAllNotification();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: appColors.inversePrimary,
+                          duration: const Duration(milliseconds: 1500),
+                          content: Text(
+                            appLocale.canceled,
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: appColors.onSurface,
+                            ),
+                          ),
+                        ),
+                      );
                     },
                     shape: AppStyles.shape,
                     title: Text(appLocale.cancelAllNotifications),
