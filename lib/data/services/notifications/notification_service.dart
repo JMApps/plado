@@ -4,6 +4,13 @@ import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class NotificationService {
+
+  static final NotificationService _instance = NotificationService.internal();
+
+  factory NotificationService() => _instance;
+
+  NotificationService.internal();
+
   static const String _logoName = 'ic_stat_notification';
 
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();

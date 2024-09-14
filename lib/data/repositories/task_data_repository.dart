@@ -13,19 +13,29 @@ class TaskDataRepository implements TaskRepository {
 
   TaskDataRepository(this._pladoDatabaseService);
 
+  final NotificationService _notificationService = NotificationService();
+
   @override
   Future<List<TaskEntity>> getTaskByCategoryId({required int categoryId, required String orderBy}) async {
     final Database database = await _pladoDatabaseService.db;
     final currentDateTime = DateTime.now().toIso8601String();
 
-    await _updateExpiredTasks(database, currentDateTime);
-    await _cancelNotificationsForCompletedTasks(database);
-    await _resetDailyTasks(database, currentDateTime);
+    await Future.wait([
+      _updateExpiredTasks(database, currentDateTime),
+      _cancelNotificationsForCompletedTasks(database),
+      _resetDailyTasks(database, currentDateTime),
+    ]);
 
-    final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskSampleBy} = ?', whereArgs: [categoryId], orderBy: 'CASE WHEN ${DatabaseValues.dbTaskStatusIndex} = 1 THEN 1 ELSE 0 END, $orderBy');
+    final List<Map<String, Object?>> resources = await database.query(
+        DatabaseValues.dbTaskTableName,
+        where: '${DatabaseValues.dbTaskSampleBy} = ?',
+        whereArgs: [categoryId],
+        orderBy: 'CASE WHEN ${DatabaseValues.dbTaskStatusIndex} = 1 THEN 1 ELSE 0 END, $orderBy'
+    );
 
-    final List<TaskEntity> taskByCategoryId = resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
-    return taskByCategoryId;
+    return resources.isNotEmpty
+        ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList()
+        : [];
   }
 
   Future<void> _updateExpiredTasks(Database database, String currentDateTime) async {
@@ -52,7 +62,7 @@ class TaskDataRepository implements TaskRepository {
 
     for (var task in canceledTasks) {
       final TaskModel taskModel = TaskModel.fromMap(task);
-      await NotificationService().cancelNotificationWithId(taskModel.notificationId);
+      await _notificationService.cancelNotificationWithId(taskModel.notificationId);
     }
   }
 
