@@ -142,5 +142,15 @@
   "share": "Share",
   "version": "Version",
   "iOSVersion": "iOS version",
-  "androidVersion": "Android version"
+  "androidVersion": "Android version",
+
+  "sortMarket": "Sort purchases",
+  "addFirstMarket": "Create a shopping list",
+  "addMarket": "Add purchase",
+  "addingMarket": "Adding purchase",
+  "changeMarket": "Edit purchase",
+  "changingMarket": "Editing purchase",
+  "clearMessage": "Clear the shopping list?",
+  "clear": "Clear",
+  "purchases": "Purchases"
 }

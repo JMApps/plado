@@ -142,5 +142,15 @@
   "share": "Ulashish",
   "version": "Versiya",
   "iOSVersion": "iOS versiyasi",
-  "androidVersion": "Android versiyasi"
+  "androidVersion": "Android versiyasi",
+
+  "sortMarket": "Xaridlarni tartiblash",
+  "addFirstMarket": "Xaridlar ro'yxatini yarating",
+  "addMarket": "Xarid qo'shish",
+  "addingMarket": "Xarid qo'shilmoqda",
+  "changeMarket": "Xaridni o'zgartirish",
+  "changingMarket": "Xaridni o'zgartirish",
+  "clearMessage": "Xaridlar ro'yxatini tozalaysizmi?",
+  "clear": "Tozalash",
+  "purchases": "Xaridlar"
 }

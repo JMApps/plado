@@ -142,5 +142,7 @@
   "share": "Paylaş",
   "version": "Versiya",
   "iOSVersion": "iOS versiyası",
-  "androidVersion": "Android versiyası"
+  "androidVersion": "Android versiyası",
+
+  "purchases": "Покупки"
 }

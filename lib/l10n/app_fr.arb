@@ -142,5 +142,15 @@
   "share": "Partager",
   "version": "Version",
   "iOSVersion": "Version iOS",
-  "androidVersion": "Version android"
+  "androidVersion": "Version android",
+
+  "sortMarket": "Trier les achats",
+  "addFirstMarket": "Créez une liste de courses",
+  "addMarket": "Ajouter un achat",
+  "addingMarket": "Ajout d'un achat",
+  "changeMarket": "Modifier l'achat",
+  "changingMarket": "Modification de l'achat",
+  "clearMessage": "Effacer la liste de courses ?",
+  "clear": "Effacer",
+  "purchases": "Achats"
 }

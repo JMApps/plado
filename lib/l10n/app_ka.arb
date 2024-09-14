@@ -142,5 +142,15 @@
   "share": "გაზიარება",
   "version": "ვერსია",
   "iOSVersion": "iOS ვერსია",
-  "androidVersion": "Android ვერსია"
+  "androidVersion": "Android ვერსია",
+
+  "sortMarket": "შეაჯამეთ შესყიდვები",
+  "addFirstMarket": "შექმენით შესყიდვების სია",
+  "addMarket": "დამატეთ შესყიდვა",
+  "addingMarket": "შესყიდვის დამატება",
+  "changeMarket": "შეიცვალეთ შესყიდვა",
+  "changingMarket": "შესყიდვის შეცვლა",
+  "clearMessage": "გაასუფთავეთ შესყიდვების სია?",
+  "clear": "გასუფთავება",
+  "purchases": "შესყიდვები"
 }

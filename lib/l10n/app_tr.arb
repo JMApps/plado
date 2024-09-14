@@ -142,5 +142,15 @@
   "share": "Paylaş",
   "version": "Sürüm",
   "iOSVersion": "iOS sürümü",
-  "androidVersion": "Android sürümü"
+  "androidVersion": "Android sürümü",
+
+  "sortMarket": "Alışverişleri sırala",
+  "addFirstMarket": "Bir alışveriş listesi oluşturun",
+  "addMarket": "Alışveriş ekle",
+  "addingMarket": "Alışveriş ekleniyor",
+  "changeMarket": "Alışverişi düzenle",
+  "changingMarket": "Alışveriş düzenleniyor",
+  "clearMessage": "Alışveriş listesini temizlemek istiyor musunuz?",
+  "clear": "Temizle",
+  "purchases": "Alışverişler"
 }

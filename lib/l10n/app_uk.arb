@@ -142,5 +142,15 @@
   "share": "Поділитися",
   "version": "Версія",
   "iOSVersion": "Версія iOS",
-  "androidVersion": "Версія android"
+  "androidVersion": "Версія android",
+
+  "sortMarket": "Сортувати покупки",
+  "addFirstMarket": "Створіть список покупок",
+  "addMarket": "Додати покупку",
+  "addingMarket": "Додавання покупки",
+  "changeMarket": "Змінити покупку",
+  "changingMarket": "Зміна покупки",
+  "clearMessage": "Очистити список покупок?",
+  "clear": "Очистити",
+  "purchases": "Покупки"
 }

@@ -142,5 +142,15 @@
   "share": "Бөлісу",
   "version": "Нұсқа",
   "iOSVersion": "iOS нұсқасы",
-  "androidVersion": "Android нұсқасы"
+  "androidVersion": "Android нұсқасы",
+
+  "sortMarket": "Сатып алуларды сұрыптау",
+  "addFirstMarket": "Сатып алу тізімін жасаңыз",
+  "addMarket": "Сатып алу қосу",
+  "addingMarket": "Сатып алу қосу",
+  "changeMarket": "Сатып алуды өзгерту",
+  "changingMarket": "Сатып алуды өзгерту",
+  "clearMessage": "Сатып алу тізімін тазарту керек пе?",
+  "clear": "Тазарту",
+  "purchases": "Сатып алулар"
 }

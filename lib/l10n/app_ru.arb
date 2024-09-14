@@ -142,5 +142,15 @@
   "share": "Поделиться",
   "version": "Версия",
   "iOSVersion": "Версия iOS",
-  "androidVersion": "Версия Android"
+  "androidVersion": "Версия Android",
+
+  "sortMarket": "Сортировка покупок",
+  "addFirstMarket": "Составьте список покупок",
+  "addMarket": "Добавить покупку",
+  "addingMarket": "Добавление покупки",
+  "changeMarket": "Изменить покупку",
+  "changingMarket": "Изменение покупки",
+  "clearMessage": "Очистить список покупок?",
+  "clear": "Очистить",
+  "purchases": "Покупки"
 }

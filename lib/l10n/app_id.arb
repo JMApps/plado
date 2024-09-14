@@ -142,5 +142,15 @@
   "share": "Bagikan",
   "version": "Versi",
   "iOSVersion": "Versi iOS",
-  "androidVersion": "Versi android"
+  "androidVersion": "Versi android",
+
+  "sortMarket": "Urutkan pembelian",
+  "addFirstMarket": "Buat daftar belanja",
+  "addMarket": "Tambahkan pembelian",
+  "addingMarket": "Menambahkan pembelian",
+  "changeMarket": "Ubah pembelian",
+  "changingMarket": "Mengubah pembelian",
+  "clearMessage": "Bersihkan daftar belanja?",
+  "clear": "Bersihkan",
+  "purchases": "Pembelian"
 }
