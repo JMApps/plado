@@ -108,6 +108,7 @@ class _CategoriesPageState extends State<CategoriesPage> with TickerProviderStat
             ),
           );
         },
+        tooltip: appLocale.addCategory,
         child: const Icon(Icons.add),
       ),
     );

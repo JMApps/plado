@@ -11,6 +11,7 @@ import '../../../core/styles/app_styles.dart';
 import '../../../data/models/arguments/task_model_args.dart';
 import '../../../data/services/notifications/notification_service.dart';
 import '../../../domain/usecases/task_use_case.dart';
+import '../../state/rest_times_state.dart';
 
 class DailyTaskItem extends StatelessWidget {
   const DailyTaskItem({
@@ -62,14 +63,18 @@ class DailyTaskItem extends StatelessWidget {
         leading: Checkbox(
           value: statusTask,
           onChanged: (bool? onChanged) {
+            Map<String, dynamic> restTimePeriods = Provider.of<RestTimesState>(context, listen: false).restCategoryTimes(0);
+            DateTime startTime = restTimePeriods[AppConstraints.startDateTime];
+            DateTime endTime = restTimePeriods[AppConstraints.endDateTime];
+
             final Map<String, dynamic> taskMap = {
               DatabaseValues.dbTaskStatusIndex: taskModel.taskStatusIndex == 0 ? 1 : 0,
-              DatabaseValues.dbHabitCompleteDateTime: DateTime.now().toIso8601String(),
+              DatabaseValues.dbTaskCompleteDateTime: DateTime.now().toIso8601String(),
+              DatabaseValues.dbTaskStartDateTime: startTime.toIso8601String(),
+              DatabaseValues.dbTaskEndDateTime: endTime.toIso8601String(),
             };
-            Provider.of<TaskUseCase>(context, listen: false).updateTask(
-              taskMap: taskMap,
-              taskId: taskModel.taskId,
-            );
+
+            Provider.of<TaskUseCase>(context, listen: false).updateTask(taskMap: taskMap, taskId: taskModel.taskId);
             if (onChanged!) {
               if (taskModel.notificationId > 0) {
                 NotificationService().cancelNotificationWithId(taskModel.notificationId);

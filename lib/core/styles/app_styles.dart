@@ -52,6 +52,7 @@ class AppStyles {
 
   static const mainText = TextStyle(fontSize: 18, fontFamily: AppConstraints.fontRaleway);
   static const mainTextRoboto = TextStyle(fontSize: 18, fontFamily: AppConstraints.fontRobotoSlab);
+  static const mainTextRoboto12 = TextStyle(fontSize: 12, fontFamily: AppConstraints.fontRobotoSlab);
   static const mainTextRoboto14 = TextStyle(fontSize: 14, fontFamily: AppConstraints.fontRobotoSlab);
   static const mainTextRoboto16 = TextStyle(fontSize: 16, fontFamily: AppConstraints.fontRobotoSlab);
   static const mainTextBold = TextStyle(fontSize: 18, fontFamily: AppConstraints.fontRaleway, fontWeight: FontWeight.bold);
