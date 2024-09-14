@@ -15,7 +15,7 @@ import '../../../domain/entities/habit_entity.dart';
 import '../../../domain/usecases/habit_use_case.dart';
 import '../../state/rest_times_state.dart';
 import '../../widgets/main_error_text.dart';
-import '../items/date_time_item.dart';
+import '../widgets/date_time_item.dart';
 
 class HabitDetailPage extends StatefulWidget {
   const HabitDetailPage({

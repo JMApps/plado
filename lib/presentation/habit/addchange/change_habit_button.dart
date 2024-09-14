@@ -44,7 +44,7 @@ class _ChangeHabitButtonState extends State<ChangeHabitButton> {
           _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, appLocale.enterTitle);
         }
       },
-      tooltip: appLocale.changingHabit,
+      tooltip: appLocale.changeHabit,
       icon: const Icon(Icons.check_circle_outlined),
     );
   }

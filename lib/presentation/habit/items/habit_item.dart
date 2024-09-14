@@ -43,16 +43,11 @@ class HabitItem extends StatelessWidget {
         },
         title: Text(
           habitModel.habitTitle,
-          style: const TextStyle(
-            fontSize: 17,
-            fontWeight: FontWeight.bold,
-          ),
+          style: AppStyles.mainTextBold,
         ),
         subtitle: Text(
           timeAgo,
-          style: const TextStyle(
-            fontFamily: AppConstraints.fontRobotoSlab,
-          ),
+          style: AppStyles.mainTextRoboto12,
         ),
         trailing: IconButton(
           onPressed: () {
@@ -62,7 +57,9 @@ class HabitItem extends StatelessWidget {
               arguments: HabitModelArgs(habitModel: habitModel),
             );
           },
-          icon: const Icon(Icons.info_outline),
+          icon: const Icon(
+            Icons.edit_square,
+          ),
         ),
         leading: Stack(
           alignment: Alignment.center,
@@ -80,7 +77,7 @@ class HabitItem extends StatelessWidget {
               (restRemaininPercentage[AppConstraints.restRemainingDays] + 1).toString(),
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 14,
+                fontSize: 16,
                 fontFamily: AppConstraints.fontRobotoSlab,
               ),
             ),

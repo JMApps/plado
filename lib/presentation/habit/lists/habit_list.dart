@@ -16,10 +16,10 @@ class HabitList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
-    return Consumer<HabitSortState>(
-      builder: (BuildContext context, habitSortState, _) {
+    return Consumer2<HabitUseCase, HabitSortState>(
+      builder: (BuildContext context, habitUseCase, habitSortState, _) {
         return FutureBuilder<List<HabitEntity>>(
-          future: Provider.of<HabitUseCase>(context).getAllHabits(
+          future: habitUseCase.getAllHabits(
             orderBy: '${AppStyles.habitSortList[habitSortState.getSortIndex]} ${AppStyles.orderList[habitSortState.getOrderIndex]}',
           ),
           builder: (context, snapshot) {

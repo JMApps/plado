@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plado/core/styles/app_styles.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -28,31 +29,29 @@ class _HabitRemindTimeState extends State<HabitRemindTime> {
     return Consumer2<HabitRemindState, HabitNotificationDateState>(
       builder: (context, habitRemindState, habitNotificationDateState, _) {
         return ListTile(
-          contentPadding: EdgeInsets.zero,
-          visualDensity: const VisualDensity(vertical: -4, horizontal: -4),
+          visualDensity: VisualDensity.comfortable,
+          shape: AppStyles.shape,
+          onTap: habitRemindState.getIsRemind ? () async {
+            final selectedTime = await showTimePicker(
+              context: context,
+              initialTime: TimeOfDay(hour: _argDateTime.hour, minute: _argDateTime.minute),
+              helpText: appLocale.selectTime,
+              hourLabelText: appLocale.hours,
+              minuteLabelText: appLocale.minutes,
+              cancelText: appLocale.cancel,
+              confirmText: appLocale.select,
+            );
+            if (selectedTime != null) {
+              _argDateTime = DateTime(_currentDateTime.year, _currentDateTime.month, _currentDateTime.day, selectedTime.hour, selectedTime.minute);
+              habitNotificationDateState.setTaskNotificationDate = _argDateTime.toIso8601String();
+            }
+          } : null,
           title: Text(
             appLocale.remindDaily,
-            style: const TextStyle(fontSize: 17),
+            style: AppStyles.mainText,
           ),
-          leading: IconButton(
-            onPressed: habitRemindState.getIsRemind ? () async {
-              final selectedTime = await showTimePicker(
-                context: context,
-                initialTime: TimeOfDay(hour: _argDateTime.hour, minute: _argDateTime.minute),
-                helpText: appLocale.selectTime,
-                hourLabelText: appLocale.hours,
-                minuteLabelText: appLocale.minutes,
-                cancelText: appLocale.cancel,
-                confirmText: appLocale.select,
-              );
-              if (selectedTime != null) {
-                _argDateTime = DateTime(_currentDateTime.year, _currentDateTime.month, _currentDateTime.day, selectedTime.hour, selectedTime.minute);
-                habitNotificationDateState.setTaskNotificationDate = _argDateTime.toIso8601String();
-              }
-            } : null,
-            icon: const Icon(
-              Icons.access_time,
-            ),
+          leading: const Icon(
+            Icons.notifications_active_outlined,
           ),
           trailing: Switch(
             value: habitRemindState.getIsRemind,

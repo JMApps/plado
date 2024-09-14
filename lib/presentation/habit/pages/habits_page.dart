@@ -31,7 +31,7 @@ class HabitsPage extends StatelessWidget {
       body: const HabitList(),
       floatingActionButton: FloatingActionButton(
         elevation: 0,
-        tooltip: appLocale.addingHabit,
+        tooltip: appLocale.addHabit,
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         child: const Icon(Icons.add),
         onPressed: () {

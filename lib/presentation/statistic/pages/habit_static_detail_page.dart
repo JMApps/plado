@@ -7,7 +7,7 @@ import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
 import '../../../domain/entities/habit_entity.dart';
 import '../../../domain/usecases/habit_use_case.dart';
-import '../../habit/items/date_time_item.dart';
+import '../../habit/widgets/date_time_item.dart';
 import '../../state/rest_times_state.dart';
 import '../../widgets/main_error_text.dart';
 

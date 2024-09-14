@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:plado/core/styles/app_styles.dart';
 
 import '../../../core/strings/app_constraints.dart';
 
@@ -19,10 +20,7 @@ class DateTimeItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       '$description\n${DateFormat(dateFormat).format(dateTime)}',
-      style: const TextStyle(
-        fontFamily: AppConstraints.fontRobotoSlab,
-        fontSize: 17,
-      ),
+      style: AppStyles.mainTextRoboto,
       textAlign: TextAlign.center,
     );
   }

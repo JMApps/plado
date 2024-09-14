@@ -63,6 +63,7 @@ class DeleteHabitDialog extends StatelessWidget {
           ),
         );
       },
+      tooltip: appLocale.delete,
       icon: const Icon(Icons.delete_outline_rounded),
     );
   }
