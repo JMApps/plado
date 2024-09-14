@@ -3,7 +3,7 @@ import 'dart:ui';
 class AppConstraints {
   static const int dbVersion = 3;
   static const String dbName = 'plado_database.plado';
-  static const String appVersion = '1.0.1';
+  static const String appVersion = '1.1.0';
 
   static const String appLinkIOS = 'https://apps.apple.com/app/plado/id6670274426';
   static const String appLinkAndroid = 'https://play.google.com/store/apps/details?id=jmapps.project.plado';
@@ -93,11 +93,11 @@ class AppConstraints {
   static const String keyMarketSortIndex = 'key_market_sort_index';
   static const String keyMarketOrderIndex = 'key_market_order_index';
 
-  static const String keyTaskSortIndex = 'key_task_sort_index';
-  static const String keyTaskOrderIndex = 'key_task_order_index';
-
   static const String keyCategorySortIndex = 'key_category_sort_index';
   static const String keyCategoryOrderIndex = 'key_category_order_index';
+
+  static const String keyTaskSortIndex = 'key_task_sort_index';
+  static const String keyTaskOrderIndex = 'key_task_order_index';
 
   static const String keyHabitSortIndex = 'key_habit_sort_index';
   static const String keyHabitOrderIndex = 'key_habit_order_index';
