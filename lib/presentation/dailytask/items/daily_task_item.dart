@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -50,15 +51,33 @@ class DailyTaskItem extends StatelessWidget {
           style: TextStyle(
             fontSize: 18,
             decoration: taskModel.taskStatusIndex == 0 ? TextDecoration.none : TextDecoration.lineThrough,
+            letterSpacing: 0.15,
           ),
           maxLines: 3,
         ),
-        subtitle: Text(
-          timeAgo,
-          style: const TextStyle(
-            fontSize: 12,
-            fontFamily: AppConstraints.fontRobotoSlab,
-          ),
+        subtitle: taskModel.notificationId > 0 ? Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(Icons.notifications_active_outlined,
+              size: 16,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            const SizedBox(width: 4),
+            Text(
+              DateFormat(taskModel.taskPeriodIndex > 0 ? AppConstraints.dateTimeFormat : AppConstraints.timeFormat).format(DateTime.parse(taskModel.notificationDate)),
+              style: AppStyles.mainTextRoboto12,
+            ),
+          ],
+        ) : Row(
+          children: [
+            Text(
+              timeAgo,
+              style: const TextStyle(
+                fontSize: 12,
+                fontFamily: AppConstraints.fontRobotoSlab,
+              ),
+            ),
+          ],
         ),
         leading: Checkbox(
           value: statusTask,
@@ -74,7 +93,10 @@ class DailyTaskItem extends StatelessWidget {
               DatabaseValues.dbTaskEndDateTime: endTime.toIso8601String(),
             };
 
-            Provider.of<TaskUseCase>(context, listen: false).updateTask(taskMap: taskMap, taskId: taskModel.taskId);
+            Provider.of<TaskUseCase>(context, listen: false).updateTask(
+              taskMap: taskMap,
+              taskId: taskModel.taskId,
+            );
             if (onChanged!) {
               if (taskModel.notificationId > 0) {
                 NotificationService().cancelNotificationWithId(taskModel.notificationId);

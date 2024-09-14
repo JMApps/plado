@@ -16,10 +16,10 @@ class DailyTasksMainList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
-    return Consumer<TaskSortState>(
-      builder: (BuildContext context, taskSortState, _) {
+    return Consumer2<TaskUseCase,TaskSortState>(
+      builder: (BuildContext context, taskUseCase, taskSortState, _) {
         return FutureBuilder<List<TaskEntity>>(
-          future: Provider.of<TaskUseCase>(context).fetchTaskByCategoryId(
+          future: taskUseCase.fetchTaskByCategoryId(
             categoryId: 0,
             orderBy: '${AppStyles.taskSortList[taskSortState.getSortIndex]} ${AppStyles.orderList[taskSortState.getOrderIndex]}',
           ),

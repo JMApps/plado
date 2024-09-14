@@ -44,7 +44,7 @@ class _UpdateDailyTaskButtonState extends State<UpdateDailyTaskButton> {
           _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, appLocale.enterTitle);
         }
       },
-      tooltip: appLocale.changingTask,
+      tooltip: appLocale.changeTask,
       icon: const Icon(Icons.check_circle_outlined),
     );
   }

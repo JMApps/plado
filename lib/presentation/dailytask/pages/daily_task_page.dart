@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:plado/presentation/dailytask/lists/daily_tasks_main_list.dart';
 
 import '../../../core/routes/name_routes.dart';
 import '../../task/widgets/task_sort_bottom_sheet.dart';
+import '../lists/daily_tasks_main_list.dart';
 
 class DailyTaskPage extends StatelessWidget {
   const DailyTaskPage({super.key});
@@ -22,6 +22,7 @@ class DailyTaskPage extends StatelessWidget {
                 builder: (_) => const TaskSortBottomSheet(),
               );
             },
+            tooltip: appLocale.sortTasks,
             icon: const Icon(Icons.sort),
           ),
         ],
@@ -34,6 +35,7 @@ class DailyTaskPage extends StatelessWidget {
             NameRoutes.createDailyTaskPage,
           );
         },
+        tooltip: appLocale.addTask,
         child: const Icon(Icons.add),
       ),
     );
