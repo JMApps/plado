@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import '../../../data/repositories/market_data_repository.dart';
-import '../../../data/services/plado_database_service.dart';
+import '../../../core/strings/app_constraints.dart';
+import '../../../core/strings/database_values.dart';
+import '../../../core/styles/app_styles.dart';
+import '../../../domain/entities/market_entity.dart';
 import '../../../domain/usecases/market_use_case.dart';
+import '../addchange/add_market_bottom_sheet.dart';
 import '../lists/main_market_list.dart';
 import '../widgets/market_sort_bottom_sheet.dart';
 
@@ -14,32 +17,80 @@ class MarketPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => MarketUseCase(MarketDataRepository(PladoDatabaseService())),
-        ),
-      ],
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(appLocale.purchases),
-          actions: [
-            IconButton(
-              onPressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (_) => const MarketSortBottomSheet(),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(appLocale.purchases),
+        actions: [
+          FutureBuilder<List<MarketEntity>>(
+            future: Provider.of<MarketUseCase>(context).fetchAllMarkets(orderBy: '${DatabaseValues.dbMarketId} ${AppConstraints.descSort}'),
+            builder: (context, snapshot) {
+              if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                return IconButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (_) => AlertDialog(
+                        title: Text(appLocale.warning),
+                        content: Text(
+                          appLocale.clearMessage,
+                          style: AppStyles.mainText,
+                        ),
+                        actions: [
+                          OutlinedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text(appLocale.cancel),
+                          ),
+                          OutlinedButton(
+                            onPressed: () async {
+                              Navigator.pop(context);
+                              await Provider.of<MarketUseCase>(context, listen: false).fetchClearList();
+                            },
+                            child: Text(
+                              appLocale.clear,
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.error,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.clear),
                 );
-              },
-              icon: const Icon(Icons.sort),
+              } else {
+                return const SizedBox();
+              }
+            },
+          ),
+          IconButton(
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (_) => const MarketSortBottomSheet(),
+              );
+            },
+            icon: const Icon(Icons.sort),
+          ),
+        ],
+      ),
+      body: const MainMarketList(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            builder: (context) => AnimatedPadding(
+              padding: MediaQuery.of(context).viewInsets,
+              duration: const Duration(milliseconds: 250),
+              curve: Curves.decelerate,
+              child: const AddMarketBottomSheet(),
             ),
-          ],
-        ),
-        body: const MainMarketList(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: const Icon(Icons.add),
-        ),
+          );
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

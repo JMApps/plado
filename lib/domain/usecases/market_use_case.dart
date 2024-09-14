@@ -18,6 +18,16 @@ class MarketUseCase extends ChangeNotifier {
     }
   }
 
+  Future<int> fetchClearList() async {
+    try {
+      final int clearList = await _marketRepository.clearList();
+      notifyListeners();
+      return clearList;
+    } catch (e) {
+      throw Exception('${AppConstraints.errorMessage} $e');
+    }
+  }
+
   Future<int> createMarket({required MarketModel marketModel}) async {
     try {
       final int createMarket = await _marketRepository.createMarket(marketModel: marketModel);

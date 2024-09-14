@@ -5,11 +5,13 @@ import 'package:provider/provider.dart';
 import 'core/strings/app_constraints.dart';
 import 'data/repositories/category_data_repository.dart';
 import 'data/repositories/habit_data_repository.dart';
+import 'data/repositories/market_data_repository.dart';
 import 'data/repositories/task_data_repository.dart';
 import 'data/services/notifications/notification_service.dart';
 import 'data/services/plado_database_service.dart';
 import 'domain/usecases/category_use_case.dart';
 import 'domain/usecases/habit_use_case.dart';
+import 'domain/usecases/market_use_case.dart';
 import 'domain/usecases/task_use_case.dart';
 import 'presentation/pages/root_material_page.dart';
 import 'presentation/state/bottom_nav_index_state.dart';
@@ -42,6 +44,9 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (_) => MarketSortState(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => MarketUseCase(MarketDataRepository(pladoDatabaseService)),
         ),
         ChangeNotifierProvider(
           create: (_) => TaskSortState(),

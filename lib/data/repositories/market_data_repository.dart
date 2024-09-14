@@ -14,9 +14,16 @@ class MarketDataRepository implements MarketRepository {
   @override
   Future<List<MarketEntity>> getAllMarkets({required String orderBy}) async {
     final Database database = await _pladoDatabaseService.db;
-    final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbMarketTableName, orderBy: orderBy);
+    final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbMarketTableName, orderBy: 'CASE WHEN ${DatabaseValues.dbMarketStatusIndex} = 1 THEN 1 ELSE 0 END, $orderBy');
     final List<MarketEntity> allMarkets = resources.isNotEmpty ? resources.map((e) => MarketEntity.fromModel(MarketModel.fromMap(e))).toList() : [];
     return allMarkets;
+  }
+
+  @override
+  Future<int> clearList() async {
+    final Database database = await _pladoDatabaseService.db;
+    final int clearList = await database.delete(DatabaseValues.dbMarketTableName);
+    return clearList;
   }
 
   @override
