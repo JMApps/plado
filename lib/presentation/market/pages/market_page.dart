@@ -22,8 +22,7 @@ class MarketPage extends StatelessWidget {
         title: Text(appLocale.purchases),
         actions: [
           FutureBuilder<List<MarketEntity>>(
-            future: Provider.of<MarketUseCase>(context).fetchAllMarkets(
-                orderBy: '${DatabaseValues.dbMarketId} ${AppConstraints.descSort}'),
+            future: Provider.of<MarketUseCase>(context).fetchAllMarkets(orderBy: '${DatabaseValues.dbMarketId} ${AppConstraints.descSort}'),
             builder: (context, snapshot) {
               if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                 return IconButton(
@@ -64,6 +63,7 @@ class MarketPage extends StatelessWidget {
                       ),
                     );
                   },
+                  tooltip: appLocale.clear,
                   icon: const Icon(Icons.clear),
                 );
               } else {
@@ -78,6 +78,7 @@ class MarketPage extends StatelessWidget {
                 builder: (_) => const MarketSortBottomSheet(),
               );
             },
+            tooltip: appLocale.sortMarket,
             icon: const Icon(Icons.sort),
           ),
         ],
@@ -96,6 +97,7 @@ class MarketPage extends StatelessWidget {
             ),
           );
         },
+        tooltip: appLocale.addMarket,
         child: const Icon(Icons.add),
       ),
     );

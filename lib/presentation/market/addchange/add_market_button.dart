@@ -16,7 +16,7 @@ class AddMarketButton extends StatelessWidget {
     final appLocale = AppLocalizations.of(context)!;
     return OutlinedButton(
       onPressed: () async {
-        final String marketTitle = Provider.of<MarketTitleState>(context, listen: false).getMarketTitle;
+        final String marketTitle = Provider.of<MarketTitleState>(context, listen: false).getMarketTitle.trim();
 
         final MarketModel marketModel = MarketModel(
           marketId: 0,
