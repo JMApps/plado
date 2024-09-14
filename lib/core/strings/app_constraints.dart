@@ -3,7 +3,7 @@ import 'dart:ui';
 class AppConstraints {
   static const int dbVersion = 3;
   static const String dbName = 'plado_database.plado';
-  static const String appVersion = '1.1.0';
+  static const String appVersion = '1.1.1';
 
   static const String appLinkIOS = 'https://apps.apple.com/app/plado/id6670274426';
   static const String appLinkAndroid = 'https://play.google.com/store/apps/details?id=jmapps.project.plado';
