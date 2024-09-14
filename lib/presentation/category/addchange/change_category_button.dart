@@ -22,11 +22,11 @@ class ChangeCategoryButton extends StatelessWidget {
     final appLocale = AppLocalizations.of(context)!;
     return OutlinedButton(
       onPressed: () async {
-        final String categoryTitle = Provider.of<CategoryTitleState>(context, listen: false).getCategoryTitle;
+        final String categoryTitle = Provider.of<CategoryTitleState>(context, listen: false).getCategoryTitle.trim();
         final int categoryColorIndex = Provider.of<CategoryColorState>(context, listen: false).getColorIndex;
 
         if (categoryTitle.isNotEmpty) {
-          if (categoryTitle != categoryModel.categoryTitle || categoryColorIndex != categoryModel.categoryColorIndex) {
+          if (categoryTitle != categoryModel.categoryTitle.trim() || categoryColorIndex != categoryModel.categoryColorIndex) {
             Navigator.of(context).pop();
             final Map<String, dynamic> categoryMap = {
               DatabaseValues.dbCategoryTitle: categoryTitle,

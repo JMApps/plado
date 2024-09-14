@@ -24,11 +24,11 @@ class ChangeMarketButton extends StatelessWidget {
         final String marketTitle = Provider.of<MarketTitleState>(context, listen: false).getMarketTitle;
 
         final Map<String, dynamic> marketMap = {
-          DatabaseValues.dbMarketTitle: marketTitle,
+          DatabaseValues.dbMarketTitle: marketTitle.trim(),
         };
 
         if (marketTitle.isNotEmpty) {
-          if (marketTitle != marketModel.marketTitle) {
+          if (marketTitle != marketModel.marketTitle.trim()) {
             Navigator.of(context).pop();
             await Provider.of<MarketUseCase>(context, listen: false).updateMarket(marketMap: marketMap, marketId: marketModel.marketId);
           } else {

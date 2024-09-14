@@ -20,7 +20,7 @@ class AddMarketButton extends StatelessWidget {
 
         final MarketModel marketModel = MarketModel(
           marketId: 0,
-          marketTitle: marketTitle,
+          marketTitle: marketTitle.trim(),
           marketStatusIndex: MarketStatus.inProgress.index,
         );
 

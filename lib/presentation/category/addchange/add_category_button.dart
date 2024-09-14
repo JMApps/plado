@@ -17,7 +17,7 @@ class AddCategoryButton extends StatelessWidget {
     final appLocale = AppLocalizations.of(context)!;
     return OutlinedButton(
       onPressed: () async {
-        final String categoryTitle = Provider.of<CategoryTitleState>(context, listen: false).getCategoryTitle;
+        final String categoryTitle = Provider.of<CategoryTitleState>(context, listen: false).getCategoryTitle.trim();
         final int categoryColorIndex = Provider.of<CategoryColorState>(context, listen: false).getColorIndex;
         final int categoryPeriodIndex = Provider.of<CategoryPeriodState>(context, listen: false).getCategoryPeriodIndex;
 

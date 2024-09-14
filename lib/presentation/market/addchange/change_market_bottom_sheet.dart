@@ -33,7 +33,7 @@ class ChangeMarketBottomSheet extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              appLocale.addingMarket,
+              appLocale.changingMarket,
               style: AppStyles.mainText,
               textAlign: TextAlign.center,
             ),
