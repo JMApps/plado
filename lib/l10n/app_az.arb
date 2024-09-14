@@ -144,5 +144,13 @@
   "iOSVersion": "iOS versiyası",
   "androidVersion": "Android versiyası",
 
-  "purchases": "Покупки"
+  "sortMarket": "Alışları sırala",
+  "addFirstMarket": "Alış-veriş siyahısı yaradın",
+  "addMarket": "Alış əlavə edin",
+  "addingMarket": "Alış əlavə olunur",
+  "changeMarket": "Alışı dəyişdir",
+  "changingMarket": "Alış dəyişdirilir",
+  "clearMessage": "Alış-veriş siyahısını təmizləmək istəyirsiniz?",
+  "clear": "Təmizlə",
+  "purchases": "Alışlar"
 }
