@@ -11,7 +11,7 @@ import '../../state/habit/habit_remind_state.dart';
 import '../../state/habit/habit_title_state.dart';
 import '../../widgets/text_description.dart';
 import '../../widgets/main_back_button.dart';
-import '../addchange/add_habit_button.dart';
+import '../addchange/create_habit_button.dart';
 import '../addchange/habit_color_list.dart';
 import '../addchange/habit_period_segment.dart';
 import '../addchange/habit_remind_time.dart';
@@ -49,7 +49,7 @@ class CreateHabitPage extends StatelessWidget {
           title: Text(appLocale.addingHabit),
           leading: const MainBackButton(),
           actions: const [
-            AddHabitButton(),
+            CreateHabitButton(),
           ],
         ),
         body: SingleChildScrollView(

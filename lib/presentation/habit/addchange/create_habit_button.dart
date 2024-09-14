@@ -17,14 +17,14 @@ import '../../state/habit/habit_remind_state.dart';
 import '../../state/habit/habit_title_state.dart';
 import '../../state/rest_times_state.dart';
 
-class AddHabitButton extends StatefulWidget {
-  const AddHabitButton({super.key});
+class CreateHabitButton extends StatefulWidget {
+  const CreateHabitButton({super.key});
 
   @override
-  State<AddHabitButton> createState() => _AddHabitButtonState();
+  State<CreateHabitButton> createState() => _CreateHabitButtonState();
 }
 
-class _AddHabitButtonState extends State<AddHabitButton> {
+class _CreateHabitButtonState extends State<CreateHabitButton> {
   final DateTime _currentDateTime = DateTime.now();
 
   @override
