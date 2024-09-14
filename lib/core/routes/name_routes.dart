@@ -4,7 +4,9 @@ class NameRoutes {
   static const String taskCategoryPage = '/task_category_page';
   static const String dailyTasksPage = '/daily_tasks_page';
   static const String createTaskPage = '/create_task_page';
+  static const String createDailyTaskPage = '/create_daily_task_page';
   static const String updateTaskPage = '/update_task_page';
+  static const String updateDailyTaskPage = '/update_daily_task_page';
 
   static const String habitsPage = '/habits_page';
   static const String createHabitPage = '/create_habit_page';

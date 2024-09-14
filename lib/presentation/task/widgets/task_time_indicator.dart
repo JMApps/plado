@@ -9,7 +9,7 @@ import '../../state/rest_times_state.dart';
 class TaskTimeIndicator extends StatefulWidget {
   const TaskTimeIndicator({
     super.key,
-    required this.periodIndex,
+    this.periodIndex = 0,
   });
 
   final int periodIndex;
@@ -27,7 +27,7 @@ class _TaskTimeIndicatorState extends State<TaskTimeIndicator> {
     final appColors = Theme.of(context).colorScheme;
     return Consumer<RestTimesState>(
       builder: (context, restTimeState, _) {
-        Map<String, dynamic> restTimePeriods = restTimeState.restCategoryTimes(widget.periodIndex);
+        Map<String, dynamic> restTimePeriods = restTimeState.restCategoryTimes(widget.periodIndex!);
         Duration remainingTime = restTimePeriods[AppConstraints.taskRemaininDateTime];
         _elapsedPercentage = restTimePeriods[AppConstraints.taskElapsedPercentage];
 

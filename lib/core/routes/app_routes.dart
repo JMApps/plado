@@ -5,6 +5,9 @@ import '../../data/models/arguments/habit_model_args.dart';
 import '../../data/models/arguments/statistic_task_args.dart';
 import '../../data/models/arguments/task_model_args.dart';
 import '../../presentation/backup/backup_detail_page.dart';
+import '../../presentation/dailytask/pages/create_daily_task_page.dart';
+import '../../presentation/dailytask/pages/daily_task_page.dart';
+import '../../presentation/dailytask/pages/update_daily_task_page.dart';
 import '../../presentation/habit/pages/create_habit_page.dart';
 import '../../presentation/habit/pages/habit_detail_page.dart';
 import '../../presentation/habit/pages/update_habit_page.dart';
@@ -24,6 +27,19 @@ class AppRoutes {
       case NameRoutes.marketPage:
         return MaterialPageRoute(
           builder: (_) => const MarketPage(),
+        );
+      case NameRoutes.dailyTasksPage:
+        return MaterialPageRoute(
+          builder: (_) => const DailyTaskPage(),
+        );
+      case NameRoutes.createDailyTaskPage:
+        return MaterialPageRoute(
+          builder: (_) => const CreateDailyTaskPage(),
+        );
+      case NameRoutes.updateDailyTaskPage:
+        final TaskModelArgs taskModelArgs = routeSettings.arguments as TaskModelArgs;
+        return MaterialPageRoute(
+          builder: (_) => UpdateDailyTaskPage(taskModel: taskModelArgs.taskModel),
         );
       case NameRoutes.taskCategoryPage:
         final CategoryModelArgs categoryModelArgs = routeSettings.arguments as CategoryModelArgs;

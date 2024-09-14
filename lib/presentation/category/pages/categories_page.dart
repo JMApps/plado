@@ -53,7 +53,12 @@ class _CategoriesPageState extends State<CategoriesPage>
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                NameRoutes.dailyTasksPage,
+              );
+            },
             icon: Icon(
               Icons.today_rounded,
               color: appColors.primary,

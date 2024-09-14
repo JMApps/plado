@@ -22,7 +22,8 @@ class MarketPage extends StatelessWidget {
         title: Text(appLocale.purchases),
         actions: [
           FutureBuilder<List<MarketEntity>>(
-            future: Provider.of<MarketUseCase>(context).fetchAllMarkets(orderBy: '${DatabaseValues.dbMarketId} ${AppConstraints.descSort}'),
+            future: Provider.of<MarketUseCase>(context).fetchAllMarkets(
+                orderBy: '${DatabaseValues.dbMarketId} ${AppConstraints.descSort}'),
             builder: (context, snapshot) {
               if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                 return IconButton(
@@ -30,7 +31,12 @@ class MarketPage extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (_) => AlertDialog(
-                        title: Text(appLocale.warning),
+                        title: Text(
+                          appLocale.warning,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.error,
+                          ),
+                        ),
                         content: Text(
                           appLocale.clearMessage,
                           style: AppStyles.mainText,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/strings/app_constraints.dart';
 import '../../../core/styles/app_styles.dart';
@@ -10,7 +10,10 @@ import '../../state/task/task_remind_state.dart';
 import '../../widgets/text_description_bold.dart';
 
 class TaskRemindDateTime extends StatefulWidget {
-  const TaskRemindDateTime({super.key, required this.periodIndex,});
+  const TaskRemindDateTime({
+    super.key,
+    required this.periodIndex,
+  });
 
   final int periodIndex;
 
@@ -60,11 +63,13 @@ class _TaskRemindDateTimeState extends State<TaskRemindDateTime> {
                       lastDate: Provider.of<RestTimesState>(context, listen: false).restCategoryTimes(widget.periodIndex)[AppConstraints.endDateTime],
                     );
                     if (selectedDate != null) {
-                      _argDateTime = selectedDate;dateState.setTaskNotificationDate = selectedDate.toIso8601String();
+                      _argDateTime = selectedDate;
+                      dateState.setTaskNotificationDate = selectedDate.toIso8601String();
                     }
                   } : null,
                   icon: const Icon(Icons.date_range),
-                  label: Text(appLocale.selectDate,
+                  label: Text(
+                    appLocale.selectDate,
                     style: const TextStyle(fontSize: 16),
                   ),
                 ),
@@ -89,8 +94,9 @@ class _TaskRemindDateTimeState extends State<TaskRemindDateTime> {
                     }
                   } : null,
                   icon: const Icon(Icons.access_time),
-                  label: Text(appLocale.selectTime,
-                  style: const TextStyle(fontSize: 16),
+                  label: Text(
+                    appLocale.selectTime,
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ),
               ],

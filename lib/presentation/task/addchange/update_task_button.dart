@@ -76,6 +76,7 @@ class _UpdateTaskButtonState extends State<UpdateTaskButton> {
       _notificationService.scheduleTimeNotifications(DateTime.parse(taskNotificationDateTime), tasks, taskTitleState, taskNotificationId);
     } else {
       _notificationService.cancelNotificationWithId(taskNotificationId);
+      taskNotificationId = 0;
     }
 
     final Map<String, dynamic> taskMap = {
