@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:plado/core/styles/app_styles.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../core/styles/app_styles.dart';
 import '../../state/habit/habit_notification_date_state.dart';
 import '../../state/habit/habit_remind_state.dart';
 
@@ -29,8 +29,9 @@ class _HabitRemindTimeState extends State<HabitRemindTime> {
     return Consumer2<HabitRemindState, HabitNotificationDateState>(
       builder: (context, habitRemindState, habitNotificationDateState, _) {
         return ListTile(
-          visualDensity: VisualDensity.comfortable,
           shape: AppStyles.shape,
+          visualDensity: VisualDensity.comfortable,
+          contentPadding: EdgeInsets.zero,
           onTap: habitRemindState.getIsRemind ? () async {
             final selectedTime = await showTimePicker(
               context: context,
@@ -52,6 +53,7 @@ class _HabitRemindTimeState extends State<HabitRemindTime> {
           ),
           leading: const Icon(
             Icons.notifications_active_outlined,
+            size: 30,
           ),
           trailing: Switch(
             value: habitRemindState.getIsRemind,

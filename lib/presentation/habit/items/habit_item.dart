@@ -58,7 +58,7 @@ class HabitItem extends StatelessWidget {
             );
           },
           icon: const Icon(
-            Icons.edit_square,
+            Icons.edit,
           ),
         ),
         leading: Stack(

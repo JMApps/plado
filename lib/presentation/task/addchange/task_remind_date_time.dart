@@ -39,14 +39,20 @@ class _TaskRemindDateTimeState extends State<TaskRemindDateTime> {
       builder: (context, remindState, dateState, _) {
         return Column(
           children: [
-            SwitchListTile(
+            ListTile(
               shape: AppStyles.shape,
-              visualDensity: const VisualDensity(vertical: -4, horizontal: -4),
+              visualDensity: VisualDensity.comfortable,
+              contentPadding: EdgeInsets.zero,
               title: TextDescriptionBold(text: appLocale.remind),
-              value: remindState.getIsRemind,
-              onChanged: (bool onChanged) {
-                remindState.setIsRemind = onChanged;
-              },
+              leading: const Icon(
+                Icons.notifications_active_outlined,
+                size: 30,
+              ),
+              trailing: Switch(value: remindState.getIsRemind,
+                onChanged: (bool onChanged) {
+                  remindState.setIsRemind = onChanged;
+                },
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

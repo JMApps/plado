@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:plado/core/styles/app_styles.dart';
 
-import '../../../core/strings/app_constraints.dart';
-
 class DateTimeItem extends StatelessWidget {
   const DateTimeItem({
     super.key,

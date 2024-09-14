@@ -51,7 +51,7 @@ class UpdateHabitPage extends StatelessWidget {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: Text(appLocale.addingHabit),
+          title: Text(appLocale.changeHabit),
           leading: const MainBackButton(),
           actions: [
             DeleteHabitDialog(habitModel: habitModel),

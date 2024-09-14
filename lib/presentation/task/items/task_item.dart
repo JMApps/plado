@@ -50,6 +50,7 @@ class TaskItem extends StatelessWidget {
           style: TextStyle(
             fontSize: 18,
             decoration: taskModel.taskStatusIndex == 0 ? TextDecoration.none : TextDecoration.lineThrough,
+            letterSpacing: 0.15,
           ),
           maxLines: 3,
         ),
