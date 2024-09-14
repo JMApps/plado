@@ -5,7 +5,7 @@ import '../../../core/enums/category_period.dart';
 import '../../../core/routes/name_routes.dart';
 import '../../../core/styles/app_styles.dart';
 import '../addchange/add_category_bottom_sheet.dart';
-import '../lists/task_categories_list.dart';
+import '../lists/categories_list.dart';
 import '../widgets/sort_category_button.dart';
 
 class CategoriesPage extends StatefulWidget {
@@ -15,8 +15,7 @@ class CategoriesPage extends StatefulWidget {
   State<CategoriesPage> createState() => _CategoriesPageState();
 }
 
-class _CategoriesPageState extends State<CategoriesPage>
-    with TickerProviderStateMixin {
+class _CategoriesPageState extends State<CategoriesPage> with TickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -59,6 +58,7 @@ class _CategoriesPageState extends State<CategoriesPage>
                 NameRoutes.dailyTasksPage,
               );
             },
+            tooltip: appLocale.dailyTasks,
             icon: Icon(
               Icons.today_rounded,
               color: appColors.primary,
@@ -86,11 +86,11 @@ class _CategoriesPageState extends State<CategoriesPage>
       body: TabBarView(
         controller: _tabController,
         children: [
-          TaskCategoriesList(taskPeriodIndex: CategoryPeriod.day.index),
-          TaskCategoriesList(taskPeriodIndex: CategoryPeriod.week.index),
-          TaskCategoriesList(taskPeriodIndex: CategoryPeriod.month.index),
-          TaskCategoriesList(taskPeriodIndex: CategoryPeriod.season.index),
-          TaskCategoriesList(taskPeriodIndex: CategoryPeriod.year.index),
+          CategoriesList(taskPeriodIndex: CategoryPeriod.day.index),
+          CategoriesList(taskPeriodIndex: CategoryPeriod.week.index),
+          CategoriesList(taskPeriodIndex: CategoryPeriod.month.index),
+          CategoriesList(taskPeriodIndex: CategoryPeriod.season.index),
+          CategoriesList(taskPeriodIndex: CategoryPeriod.year.index),
         ],
       ),
       floatingActionButton: FloatingActionButton(

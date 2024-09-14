@@ -44,7 +44,7 @@ class CategoryPeriodSegment extends StatelessWidget {
               value: CategoryPeriod.season.index,
               label: Text(
                 appLocale.season,
-                overflow: TextOverflow.clip,
+                overflow: TextOverflow.ellipsis,
               ),
               tooltip: appLocale.season,
             ),
@@ -52,7 +52,7 @@ class CategoryPeriodSegment extends StatelessWidget {
               value: CategoryPeriod.year.index,
               label: Text(
                 appLocale.year,
-                overflow: TextOverflow.clip,
+                overflow: TextOverflow.ellipsis,
               ),
               tooltip: appLocale.year,
             ),
