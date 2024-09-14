@@ -152,5 +152,7 @@
   "changingMarket": "Editing purchase",
   "clearMessage": "Clear the shopping list?",
   "clear": "Clear",
-  "purchases": "Purchases"
+  "purchases": "Purchases",
+
+  "dailyTasks": "Daily tasks"
 }

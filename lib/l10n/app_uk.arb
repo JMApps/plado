@@ -152,5 +152,7 @@
   "changingMarket": "Зміна покупки",
   "clearMessage": "Очистити список покупок?",
   "clear": "Очистити",
-  "purchases": "Покупки"
+  "purchases": "Покупки",
+
+  "dailyTasks": "Щоденні завдання"
 }

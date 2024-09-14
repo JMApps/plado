@@ -152,5 +152,7 @@
   "changingMarket": "Xaridni o'zgartirish",
   "clearMessage": "Xaridlar ro'yxatini tozalaysizmi?",
   "clear": "Tozalash",
-  "purchases": "Xaridlar"
+  "purchases": "Xaridlar",
+
+  "dailyTasks": "Kundalik vazifalar"
 }

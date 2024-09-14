@@ -152,5 +152,7 @@
   "changingMarket": "Mengubah pembelian",
   "clearMessage": "Bersihkan daftar belanja?",
   "clear": "Bersihkan",
-  "purchases": "Pembelian"
+  "purchases": "Pembelian",
+
+  "dailyTasks": "Tugas harian"
 }

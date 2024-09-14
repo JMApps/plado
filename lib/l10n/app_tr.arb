@@ -152,5 +152,7 @@
   "changingMarket": "Alışveriş düzenleniyor",
   "clearMessage": "Alışveriş listesini temizlemek istiyor musunuz?",
   "clear": "Temizle",
-  "purchases": "Alışverişler"
+  "purchases": "Alışverişler",
+
+  "dailyTasks": "Günlük görevler"
 }

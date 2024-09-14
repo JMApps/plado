@@ -152,5 +152,7 @@
   "changingMarket": "Modification de l'achat",
   "clearMessage": "Effacer la liste de courses ?",
   "clear": "Effacer",
-  "purchases": "Achats"
+  "purchases": "Achats",
+
+  "dailyTasks": "Tâches quotidiennes"
 }

@@ -152,5 +152,7 @@
   "changingMarket": "Modificando acquisto",
   "clearMessage": "Cancellare la lista della spesa?",
   "clear": "Cancella",
-  "purchases": "Acquisti"
+  "purchases": "Acquisti",
+
+  "dailyTasks": "Compiti quotidiani"
 }
