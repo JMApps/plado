@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -52,19 +53,36 @@ class TaskItem extends StatelessWidget {
           ),
           maxLines: 3,
         ),
-        subtitle: Text(
-          timeAgo,
-          style: const TextStyle(
-            fontSize: 12,
-            fontFamily: AppConstraints.fontRobotoSlab,
-          ),
+        subtitle: taskModel.notificationId > 0 ? Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(Icons.notifications_active_outlined,
+              size: 16,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            const SizedBox(width: 4),
+            Text(
+              DateFormat(taskModel.taskPeriodIndex > 0 ? AppConstraints.dateTimeFormat : AppConstraints.timeFormat).format(DateTime.parse(taskModel.notificationDate)),
+              style: AppStyles.mainTextRoboto12,
+            ),
+          ],
+        ) : Row(
+          children: [
+            Text(
+              timeAgo,
+              style: const TextStyle(
+                fontSize: 12,
+                fontFamily: AppConstraints.fontRobotoSlab,
+              ),
+            ),
+          ],
         ),
         leading: Checkbox(
           value: statusTask,
           onChanged: (bool? onChanged) {
             final Map<String, dynamic> taskMap = {
               DatabaseValues.dbTaskStatusIndex: taskModel.taskStatusIndex == 0 ? 1 : 0,
-              DatabaseValues.dbHabitCompleteDateTime: DateTime.now().toIso8601String(),
+              DatabaseValues.dbTaskCompleteDateTime: DateTime.now().toIso8601String(),
             };
             Provider.of<TaskUseCase>(context, listen: false).updateTask(
               taskMap: taskMap,

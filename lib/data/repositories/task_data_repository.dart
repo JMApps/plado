@@ -18,28 +18,51 @@ class TaskDataRepository implements TaskRepository {
     final Database database = await _pladoDatabaseService.db;
     final currentDateTime = DateTime.now().toIso8601String();
 
+    await _updateExpiredTasks(database, currentDateTime);
+    await _cancelNotificationsForCompletedTasks(database);
+    await _resetDailyTasks(database, currentDateTime);
+
+    final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskSampleBy} = ?', whereArgs: [categoryId], orderBy: 'CASE WHEN ${DatabaseValues.dbTaskStatusIndex} = 1 THEN 1 ELSE 0 END, $orderBy');
+
+    final List<TaskEntity> taskByCategoryId = resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
+    return taskByCategoryId;
+  }
+
+  Future<void> _updateExpiredTasks(Database database, String currentDateTime) async {
     final Map<String, dynamic> taskCanceledMap = {
       DatabaseValues.dbTaskSampleBy: -1,
       DatabaseValues.dbTaskStatusIndex: 2,
       DatabaseValues.dbTaskCompleteDateTime: currentDateTime,
     };
 
-    final Map<String, dynamic> taskCompletedMap = {
-      DatabaseValues.dbTaskSampleBy: -1,
-    };
+    await database.update(
+      DatabaseValues.dbTaskTableName,
+      taskCanceledMap,
+      where: '${DatabaseValues.dbTaskSampleBy} != ? AND ${DatabaseValues.dbTaskSampleBy} != ? AND ${DatabaseValues.dbTaskEndDateTime} < ? AND ${DatabaseValues.dbTaskStatusIndex} != ?',
+      whereArgs: [-1, 0, currentDateTime, 2],
+    );
+  }
 
-    final List<Map<String, Object?>> completedTasks = await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskStatusIndex} = 2', whereArgs: [categoryId],);
+  Future<void> _cancelNotificationsForCompletedTasks(Database database) async {
+    final List<Map<String, Object?>> canceledTasks = await database.query(
+      DatabaseValues.dbTaskTableName,
+      where: '${DatabaseValues.dbTaskStatusIndex} = ?',
+      whereArgs: [2],
+    );
 
-    for (var task in completedTasks) {
+    for (var task in canceledTasks) {
       final TaskModel taskModel = TaskModel.fromMap(task);
       await NotificationService().cancelNotificationWithId(taskModel.notificationId);
     }
+  }
 
-    await database.update(DatabaseValues.dbTaskTableName, taskCanceledMap, where: '${DatabaseValues.dbTaskSampleBy} = ? AND ${DatabaseValues.dbTaskEndDateTime} < ? AND ${DatabaseValues.dbTaskStatusIndex} != 1', whereArgs: [categoryId, currentDateTime]);
-    await database.update(DatabaseValues.dbTaskTableName, taskCompletedMap, where: '${DatabaseValues.dbTaskSampleBy} = ? AND ${DatabaseValues.dbTaskEndDateTime} < ? AND ${DatabaseValues.dbTaskStatusIndex} = 1', whereArgs: [categoryId, currentDateTime]);
-    final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskSampleBy} = ? AND ${DatabaseValues.dbTaskStartDateTime} <= ? AND ${DatabaseValues.dbTaskEndDateTime} >= ?', whereArgs: [categoryId, currentDateTime, currentDateTime], orderBy: 'CASE WHEN ${DatabaseValues.dbTaskStatusIndex} = 1 THEN 1 ELSE 0 END, $orderBy');
-    final List<TaskEntity> taskByCategoryId = resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
-    return taskByCategoryId;
+  Future<void> _resetDailyTasks(Database database, String currentDateTime) async {
+    await database.update(
+      DatabaseValues.dbTaskTableName,
+      {DatabaseValues.dbTaskStatusIndex: 0},
+      where: '${DatabaseValues.dbTaskSampleBy} = ? AND ${DatabaseValues.dbTaskEndDateTime} < ?',
+      whereArgs: [0, currentDateTime],
+    );
   }
 
   @override

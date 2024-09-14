@@ -67,6 +67,7 @@ class _DeleteTaskDialogState extends State<DeleteTaskDialog> {
           ),
         );
       },
+      tooltip: appLocale.delete,
       icon: const Icon(Icons.delete_outline_rounded),
     );
   }

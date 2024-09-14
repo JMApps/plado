@@ -13,7 +13,9 @@ class TaskUseCase extends ChangeNotifier {
 
   Future<List<TaskEntity>> fetchTaskByCategoryId({required int categoryId, required String orderBy}) async {
     try {
-      return await _taskRepository.getTaskByCategoryId(categoryId: categoryId, orderBy: orderBy);
+      final List<TaskEntity> taskByCategoryId = await _taskRepository.getTaskByCategoryId(categoryId: categoryId, orderBy: orderBy);
+      fetchTaskCountByCategoryId(categoryId: categoryId);
+      return taskByCategoryId;
     } catch (e) {
       throw Exception('${AppConstraints.errorMessage} $e');
     }
@@ -37,7 +39,9 @@ class TaskUseCase extends ChangeNotifier {
 
   Future<int> fetchTaskCountByCategoryId({required int categoryId}) async {
     try {
-      return await _taskRepository.getTaskCountByCategoryId(categoryId: categoryId);
+      final int taskCountByCategoryId = await _taskRepository.getTaskCountByCategoryId(categoryId: categoryId);
+      notifyListeners();
+      return taskCountByCategoryId;
     } catch (e) {
       throw Exception('${AppConstraints.errorMessage} $e');
     }

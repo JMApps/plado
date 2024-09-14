@@ -55,7 +55,7 @@ class _UpdateTaskButtonState extends State<UpdateTaskButton> {
           _showScaffoldMessage(appColors.inversePrimary, appColors.onSurface, appLocale.enterTitle);
         }
       },
-      tooltip: appLocale.changingTask,
+      tooltip: appLocale.changeTask,
       icon: const Icon(Icons.check_circle_outlined),
     );
   }
@@ -98,7 +98,7 @@ class _UpdateTaskButtonState extends State<UpdateTaskButton> {
         content: Text(
           message,
           style: TextStyle(
-            fontSize: 17,
+            fontSize: 18,
             color: textColor,
           ),
         ),

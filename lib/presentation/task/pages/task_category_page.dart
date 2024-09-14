@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/routes/name_routes.dart';
 import '../../../data/models/arguments/category_model_args.dart';
@@ -16,6 +17,7 @@ class TaskCategoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         title: Text(categoryModel.categoryTitle),
@@ -27,6 +29,7 @@ class TaskCategoryPage extends StatelessWidget {
                 builder: (_) => const TaskSortBottomSheet(),
               );
             },
+            tooltip: appLocale.sortTasks,
             icon: const Icon(Icons.sort),
           ),
         ],
@@ -42,6 +45,7 @@ class TaskCategoryPage extends StatelessWidget {
             ),
           );
         },
+        tooltip: appLocale.addTask,
         child: const Icon(Icons.add),
       ),
     );

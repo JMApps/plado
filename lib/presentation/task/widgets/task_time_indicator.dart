@@ -9,7 +9,7 @@ import '../../state/rest_times_state.dart';
 class TaskTimeIndicator extends StatefulWidget {
   const TaskTimeIndicator({
     super.key,
-    this.periodIndex = 0,
+    required this.periodIndex,
   });
 
   final int periodIndex;
