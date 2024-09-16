@@ -19,8 +19,7 @@ class DailyTasksMainList extends StatelessWidget {
     return Consumer2<TaskUseCase,TaskSortState>(
       builder: (BuildContext context, taskUseCase, taskSortState, _) {
         return FutureBuilder<List<TaskEntity>>(
-          future: taskUseCase.fetchTaskByCategoryId(
-            categoryId: 0,
+          future: taskUseCase.fetchDailyTask(
             orderBy: '${AppStyles.taskSortList[taskSortState.getSortIndex]} ${AppStyles.orderList[taskSortState.getOrderIndex]}',
           ),
           builder: (context, snapshot) {

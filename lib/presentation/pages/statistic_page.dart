@@ -11,8 +11,28 @@ import '../statistic/items/statistic_task_list_tile.dart';
 import '../widgets/main_error_text.dart';
 import '../widgets/text_description_bold.dart';
 
-class StatisticPage extends StatelessWidget {
+class StatisticPage extends StatefulWidget {
   const StatisticPage({super.key});
+
+  @override
+  State<StatisticPage> createState() => _StatisticPageState();
+}
+
+class _StatisticPageState extends State<StatisticPage> {
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _updateExpiredTasks();
+  }
+
+  _updateExpiredTasks() async {
+    if (mounted) {
+      final taskUseCase = Provider.of<TaskUseCase>(context, listen: false);
+      await taskUseCase.updateCompletedTasks();
+      await taskUseCase.updateExpiredTasks();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

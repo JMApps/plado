@@ -29,8 +29,10 @@ class AddCategoryButton extends StatelessWidget {
         );
 
         if (categoryTitle.isNotEmpty) {
-          Navigator.of(context).pop();
           await Provider.of<CategoryUseCase>(context, listen: false).createCategory(categoryModel: categoryModel);
+          if (context.mounted) {
+            Navigator.of(context).pop();
+          }
         }
       },
       child: Text(

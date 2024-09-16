@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:plado/domain/usecases/task_use_case.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/styles/app_styles.dart';
@@ -21,8 +22,8 @@ class CategoriesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
-    return Consumer2<CategoryUseCase, CategorySortState>(
-      builder: (BuildContext context, categoryUseCase, categorySortState, _) {
+    return Consumer3<CategoryUseCase, CategorySortState, TaskUseCase>(
+      builder: (BuildContext context, categoryUseCase, categorySortState, taskUseCase, _) {
         return FutureBuilder<List<CategoryEntity>>(
           future: Provider.of<CategoryUseCase>(context).fetchCategoriesByPeriod(
             periodIndex: taskPeriodIndex,
@@ -34,9 +35,8 @@ class CategoriesList extends StatelessWidget {
                 child: ListView.builder(
                   padding: AppStyles.paddingWithoutBottomMini,
                   itemCount: snapshot.data!.length,
-                  itemBuilder: (context, index) {
-                    final CategoryEntity categoryModel =
-                    snapshot.data![index];
+                  itemBuilder: (context, index)  {
+                    final CategoryEntity categoryModel = snapshot.data![index];
                     return CategoryItem(
                       categoryModel: categoryModel,
                       index: index,

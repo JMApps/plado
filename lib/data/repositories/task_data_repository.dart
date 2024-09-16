@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 
+import '../../core/strings/app_constraints.dart';
 import '../../core/strings/database_values.dart';
 import '../../domain/entities/task_entity.dart';
 import '../../domain/repositories/task_repository.dart';
@@ -17,60 +18,75 @@ class TaskDataRepository implements TaskRepository {
 
   @override
   Future<List<TaskEntity>> getTaskByCategoryId({required int categoryId, required String orderBy}) async {
+    final String currentDateTime = DateTime.now().toIso8601String();
     final Database database = await _pladoDatabaseService.db;
-    final currentDateTime = DateTime.now().toIso8601String();
-
-    await Future.wait([
-      _updateExpiredTasks(database, currentDateTime),
-      _cancelNotificationsForCompletedTasks(database),
-      _resetDailyTasks(database, currentDateTime),
-    ]);
-
-    final List<Map<String, Object?>> resources = await database.query(
-        DatabaseValues.dbTaskTableName,
-        where: '${DatabaseValues.dbTaskSampleBy} = ?',
-        whereArgs: [categoryId],
-        orderBy: 'CASE WHEN ${DatabaseValues.dbTaskStatusIndex} = 1 THEN 1 ELSE 0 END, $orderBy'
-    );
-
-    return resources.isNotEmpty
-        ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList()
-        : [];
+    final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskSampleBy} = ? AND ${DatabaseValues.dbTaskEndDateTime} >= ?', whereArgs: [categoryId, currentDateTime], orderBy: 'CASE WHEN ${DatabaseValues.dbTaskStatusIndex} = 1 THEN 1 ELSE 0 END, $orderBy');
+    return resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
   }
 
-  Future<void> _updateExpiredTasks(Database database, String currentDateTime) async {
+  @override
+  Future<List<TaskEntity>> getDailyTask({required String orderBy}) async {
+    final Database database = await _pladoDatabaseService.db;
+    final List<Map<String, Object?>> resources = await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskSampleBy} = ?', whereArgs: [0], orderBy: 'CASE WHEN ${DatabaseValues.dbTaskStatusIndex} = 1 THEN 1 ELSE 0 END, $orderBy');
+    return resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
+  }
+
+  @override
+  Future<void> updateExpiredTasks() async {
+    final String currentDateTime = DateTime.now().toIso8601String();
+    final Database database = await _pladoDatabaseService.db;
     final Map<String, dynamic> taskCanceledMap = {
       DatabaseValues.dbTaskSampleBy: -1,
       DatabaseValues.dbTaskStatusIndex: 2,
       DatabaseValues.dbTaskCompleteDateTime: currentDateTime,
     };
 
-    await database.update(
-      DatabaseValues.dbTaskTableName,
-      taskCanceledMap,
-      where: '${DatabaseValues.dbTaskSampleBy} != ? AND ${DatabaseValues.dbTaskSampleBy} != ? AND ${DatabaseValues.dbTaskEndDateTime} < ? AND ${DatabaseValues.dbTaskStatusIndex} != ?',
-      whereArgs: [-1, 0, currentDateTime, 2],
-    );
+    await database.transaction((txn) async {
+      await txn.update(DatabaseValues.dbTaskTableName, taskCanceledMap,
+        where: '${DatabaseValues.dbTaskSampleBy} != ? AND ${DatabaseValues.dbTaskSampleBy} != ? AND ${DatabaseValues.dbTaskEndDateTime} <= ? AND ${DatabaseValues.dbTaskStatusIndex} = ?',
+        whereArgs: [-1, 0, currentDateTime, 0],
+      );
+    });
   }
 
-  Future<void> _cancelNotificationsForCompletedTasks(Database database) async {
+  @override
+  Future<void> updateCompletedTasks() async {
+    final String currentDateTime = DateTime.now().toIso8601String();
+    final Database database = await _pladoDatabaseService.db;
+    final Map<String, dynamic> taskCompletedMap = {
+      DatabaseValues.dbTaskSampleBy: -1,
+    };
+
+    await database.transaction((txn) async {
+      await txn.update(DatabaseValues.dbTaskTableName, taskCompletedMap,
+        where: '${DatabaseValues.dbTaskSampleBy} != ? AND ${DatabaseValues.dbTaskSampleBy} != ? AND ${DatabaseValues.dbTaskEndDateTime} <= ? AND ${DatabaseValues.dbTaskStatusIndex} = ?',
+        whereArgs: [-1, 0, currentDateTime, 1],
+      );
+    });
+  }
+
+  @override
+  Future<void> cancelNotificationsForCompletedTasks() async {
+    final String currentDateTime = DateTime.now().toIso8601String();
+    final Database database = await _pladoDatabaseService.db;
     final List<Map<String, Object?>> canceledTasks = await database.query(
       DatabaseValues.dbTaskTableName,
-      where: '${DatabaseValues.dbTaskStatusIndex} = ?',
-      whereArgs: [2],
+      where: '${DatabaseValues.dbTaskSampleBy} != ? AND ${DatabaseValues.dbTaskEndDateTime} <= ? AND ${DatabaseValues.dbTaskNotificationId} > ?',
+      whereArgs: [0, currentDateTime, 0],
     );
 
     for (var task in canceledTasks) {
-      final TaskModel taskModel = TaskModel.fromMap(task);
-      await _notificationService.cancelNotificationWithId(taskModel.notificationId);
+      final int notificationId = TaskModel.fromMap(task).notificationId;
+      await _notificationService.cancelNotificationWithId(notificationId);
     }
   }
 
-  Future<void> _resetDailyTasks(Database database, String currentDateTime) async {
-    await database.update(
-      DatabaseValues.dbTaskTableName,
-      {DatabaseValues.dbTaskStatusIndex: 0},
-      where: '${DatabaseValues.dbTaskSampleBy} = ? AND ${DatabaseValues.dbTaskEndDateTime} < ?',
+  @override
+  Future<void> resetDailyTasks() async {
+    final String currentDateTime = DateTime.now().toIso8601String();
+    final Database database = await _pladoDatabaseService.db;
+    await database.update(DatabaseValues.dbTaskTableName, {DatabaseValues.dbTaskStatusIndex: 0},
+      where: '${DatabaseValues.dbTaskSampleBy} = ? AND ${DatabaseValues.dbTaskEndDateTime} <= ?',
       whereArgs: [0, currentDateTime],
     );
   }
@@ -120,14 +136,17 @@ class TaskDataRepository implements TaskRepository {
   @override
   Future<int> getTaskCountByCategoryId({required int categoryId}) async {
     final Database database = await _pladoDatabaseService.db;
-    final List<Map<String, Object?>> taskSampleByLength = await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskSampleBy} = ?', whereArgs: [categoryId]);
-    return taskSampleByLength.length;
+    final List<Map<String, Object?>> result = await database.rawQuery(
+      'SELECT COUNT(*) as count FROM ${DatabaseValues.dbTaskTableName} WHERE ${DatabaseValues.dbTaskSampleBy} = ?',
+      [categoryId],
+    );
+    return Sqflite.firstIntValue(result) ?? 0;
   }
 
   @override
   Future<List<TaskEntity>> getTaskByStatus({required int taskStatusIndex}) async {
     final Database database = await _pladoDatabaseService.db;
-    final List<Map<String, Object?>> resources = taskStatusIndex == 3 ? await database.query(DatabaseValues.dbTaskTableName) : await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskStatusIndex} = ?', whereArgs: [taskStatusIndex]);
+    final List<Map<String, Object?>> resources = taskStatusIndex == 3 ? await database.query(DatabaseValues.dbTaskTableName, orderBy: '${DatabaseValues.dbTaskId} ${AppConstraints.descSort}') : await database.query(DatabaseValues.dbTaskTableName, where: '${DatabaseValues.dbTaskStatusIndex} = ?', whereArgs: [taskStatusIndex], orderBy: '${DatabaseValues.dbTaskId} ${AppConstraints.descSort}');
     final List<TaskEntity> taskByStatus = resources.isNotEmpty ? resources.map((e) => TaskEntity.fromModel(TaskModel.fromMap(e))).toList() : [];
     return taskByStatus;
   }

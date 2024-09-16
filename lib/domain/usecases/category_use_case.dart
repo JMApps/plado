@@ -21,7 +21,7 @@ class CategoryUseCase extends ChangeNotifier {
   Future<int> createCategory({required CategoryModel categoryModel}) async {
     try {
       final int createCategory = await _categoryRepository.createCategory(categoryModel: categoryModel);
-      notifyListeners();
+      emptyNotify();
       return createCategory;
     } catch (e) {
       throw Exception('${AppConstraints.errorMessage} $e');
@@ -31,7 +31,7 @@ class CategoryUseCase extends ChangeNotifier {
   Future<int> updateTaskCategory({required Map<String, dynamic> categoryMap, required int categoryId}) async {
     try {
       final int updateCategory = await _categoryRepository.updateCategory(categoryMap: categoryMap, categoryId: categoryId);
-      notifyListeners();
+      emptyNotify();
       return updateCategory;
     } catch (e) {
       throw Exception('${AppConstraints.errorMessage} $e');
@@ -41,10 +41,14 @@ class CategoryUseCase extends ChangeNotifier {
   Future<int> deleteTaskCategory({required int categoryId}) async {
     try {
       final int deleteCategory = await _categoryRepository.deleteCategory(categoryId: categoryId);
-      notifyListeners();
+      emptyNotify();
       return deleteCategory;
     } catch (e) {
       throw Exception('${AppConstraints.errorMessage} $e');
     }
+  }
+
+  Future<void> emptyNotify() async {
+    notifyListeners();
   }
 }

@@ -21,54 +21,58 @@ class MarketPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(appLocale.purchases),
         actions: [
-          FutureBuilder<List<MarketEntity>>(
-            future: Provider.of<MarketUseCase>(context).fetchAllMarkets(orderBy: '${DatabaseValues.dbMarketId} ${AppConstraints.descSort}'),
-            builder: (context, snapshot) {
-              if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-                return IconButton(
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (_) => AlertDialog(
-                        title: Text(
-                          appLocale.warning,
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.error,
-                          ),
-                        ),
-                        content: Text(
-                          appLocale.clearMessage,
-                          style: AppStyles.mainText,
-                        ),
-                        actions: [
-                          OutlinedButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text(appLocale.cancel),
-                          ),
-                          OutlinedButton(
-                            onPressed: () async {
-                              Navigator.pop(context);
-                              await Provider.of<MarketUseCase>(context, listen: false).fetchClearList();
-                            },
-                            child: Text(
-                              appLocale.clear,
+          Consumer<MarketUseCase>(
+            builder: (BuildContext context, marketUseCase, _) {
+              return FutureBuilder<List<MarketEntity>>(
+                future: marketUseCase.fetchAllMarkets(orderBy: '${DatabaseValues.dbMarketId} ${AppConstraints.descSort}'),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                    return IconButton(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (_) => AlertDialog(
+                            title: Text(
+                              appLocale.warning,
                               style: TextStyle(
                                 color: Theme.of(context).colorScheme.error,
                               ),
                             ),
+                            content: Text(
+                              appLocale.clearMessage,
+                              style: AppStyles.mainText,
+                            ),
+                            actions: [
+                              OutlinedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text(appLocale.cancel),
+                              ),
+                              OutlinedButton(
+                                onPressed: () async {
+                                  Navigator.pop(context);
+                                  await Provider.of<MarketUseCase>(context, listen: false).fetchClearList();
+                                },
+                                child: Text(
+                                  appLocale.clear,
+                                  style: TextStyle(
+                                    color: Theme.of(context).colorScheme.error,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        );
+                      },
+                      tooltip: appLocale.clear,
+                      icon: const Icon(Icons.clear),
                     );
-                  },
-                  tooltip: appLocale.clear,
-                  icon: const Icon(Icons.clear),
-                );
-              } else {
-                return const SizedBox();
-              }
+                  } else {
+                    return const SizedBox();
+                  }
+                },
+              );
             },
           ),
           IconButton(

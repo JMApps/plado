@@ -5,6 +5,16 @@ import '../entities/task_entity.dart';
 abstract class TaskRepository {
   Future<List<TaskEntity>> getTaskByCategoryId({required int categoryId, required String orderBy});
 
+  Future<List<TaskEntity>> getDailyTask({required String orderBy});
+
+  Future<void> updateExpiredTasks();
+
+  Future<void> updateCompletedTasks();
+
+  Future<void> cancelNotificationsForCompletedTasks();
+
+  Future<void> resetDailyTasks();
+
   Future<TaskEntity> getTaskById({required int taskId});
 
   Future<AllTaskCountModel> getAllTaskCount();

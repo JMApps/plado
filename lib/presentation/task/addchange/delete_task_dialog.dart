@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../data/services/notifications/notification_service.dart';
 import '../../../domain/entities/task_entity.dart';
+import '../../../domain/usecases/category_use_case.dart';
 import '../../../domain/usecases/task_use_case.dart';
 
 class DeleteTaskDialog extends StatefulWidget {
@@ -55,6 +56,7 @@ class _DeleteTaskDialogState extends State<DeleteTaskDialog> {
                     NotificationService().cancelNotificationWithId(widget.taskModel.notificationId);
                   }
                   Provider.of<TaskUseCase>(context, listen: false).deleteTask(taskId: widget.taskModel.taskId);
+                  Provider.of<CategoryUseCase>(context, listen: false).emptyNotify();
                 },
                 child: Text(
                   appLocale.delete,

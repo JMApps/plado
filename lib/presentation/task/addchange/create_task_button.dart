@@ -9,6 +9,7 @@ import '../../../core/strings/app_constraints.dart';
 import '../../../data/models/task_model.dart';
 import '../../../data/services/notifications/notification_service.dart';
 import '../../../domain/entities/category_entity.dart';
+import '../../../domain/usecases/category_use_case.dart';
 import '../../../domain/usecases/task_use_case.dart';
 import '../../state/rest_times_state.dart';
 import '../../state/task/task_color_state.dart';
@@ -96,6 +97,7 @@ class _CreateTaskButtonState extends State<CreateTaskButton> {
     );
 
     Provider.of<TaskUseCase>(context, listen: false).createTask(taskModel: taskModel);
+    Provider.of<CategoryUseCase>(context, listen: false).emptyNotify();
   }
 
   void _showScaffoldMessage(Color color, Color textColor, String message) {

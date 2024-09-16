@@ -9,13 +9,53 @@ import '../repositories/task_repository.dart';
 class TaskUseCase extends ChangeNotifier {
   final TaskRepository _taskRepository;
 
-  TaskUseCase(this._taskRepository);
+  TaskUseCase(this._taskRepository) {
+    _taskRepository.cancelNotificationsForCompletedTasks();
+  }
 
   Future<List<TaskEntity>> fetchTaskByCategoryId({required int categoryId, required String orderBy}) async {
     try {
-      final List<TaskEntity> taskByCategoryId = await _taskRepository.getTaskByCategoryId(categoryId: categoryId, orderBy: orderBy);
-      fetchTaskCountByCategoryId(categoryId: categoryId);
-      return taskByCategoryId;
+      return await _taskRepository.getTaskByCategoryId(categoryId: categoryId, orderBy: orderBy);
+    } catch (e) {
+      throw Exception('${AppConstraints.errorMessage} $e');
+    }
+  }
+
+  Future<List<TaskEntity>> fetchDailyTask({required String orderBy}) async {
+    try {
+      return await _taskRepository.getDailyTask(orderBy: orderBy);
+    } catch (e) {
+      throw Exception('${AppConstraints.errorMessage} $e');
+    }
+  }
+
+  Future<void> updateExpiredTasks() async {
+    try {
+      await _taskRepository.updateExpiredTasks();
+    } catch (e) {
+      throw Exception('${AppConstraints.errorMessage} $e');
+    }
+  }
+
+  Future<void> updateCompletedTasks() async {
+    try {
+      await _taskRepository.updateExpiredTasks();
+    } catch (e) {
+      throw Exception('${AppConstraints.errorMessage} $e');
+    }
+  }
+
+  Future<void> cancelNotificationsForCompletedTasks() async {
+    try {
+      return await _taskRepository.cancelNotificationsForCompletedTasks();
+    } catch (e) {
+      throw Exception('${AppConstraints.errorMessage} $e');
+    }
+  }
+
+  Future<void> resetDailyTasks() async {
+    try {
+      return await _taskRepository.resetDailyTasks();
     } catch (e) {
       throw Exception('${AppConstraints.errorMessage} $e');
     }

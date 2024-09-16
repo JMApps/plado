@@ -25,8 +25,11 @@ import 'presentation/state/task/task_sort_state.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final PladoDatabaseService pladoDatabaseService = PladoDatabaseService();
+  final NotificationService notificationService = NotificationService();
+
   await pladoDatabaseService.initializeDatabase();
-  await NotificationService().setupNotification();
+  await notificationService.setupNotification();
+
   await Hive.initFlutter();
   await Hive.openBox(AppConstraints.keyMainAppSettingsBox);
 
