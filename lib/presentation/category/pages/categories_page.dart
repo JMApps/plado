@@ -55,6 +55,19 @@ class _CategoriesPageState extends State<CategoriesPage> with TickerProviderStat
             onPressed: () {
               Navigator.pushNamed(
                 context,
+                NameRoutes.taskTimerPage,
+              );
+            },
+            tooltip: appLocale.timerConcentration,
+            icon: Icon(
+              Icons.timer_outlined,
+              color: appColors.primary,
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
                 NameRoutes.dailyTasksPage,
               );
             },

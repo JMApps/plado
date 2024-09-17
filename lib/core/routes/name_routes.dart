@@ -1,8 +1,9 @@
 class NameRoutes {
   static const String marketPage = '/market_pages';
+  static const String taskTimerPage = '/task_timer_page';
+  static const String dailyTasksPage = '/daily_tasks_page';
 
   static const String taskCategoryPage = '/task_category_page';
-  static const String dailyTasksPage = '/daily_tasks_page';
   static const String createTaskPage = '/create_task_page';
   static const String createDailyTaskPage = '/create_daily_task_page';
   static const String updateTaskPage = '/update_task_page';

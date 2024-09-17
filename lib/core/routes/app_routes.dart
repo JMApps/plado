@@ -18,6 +18,7 @@ import '../../presentation/statistic/pages/statistic_task_list_page.dart';
 import '../../presentation/task/pages/create_task_page.dart';
 import '../../presentation/task/pages/task_category_page.dart';
 import '../../presentation/task/pages/update_task_page.dart';
+import '../../presentation/timer/pages/task_timer_page.dart';
 import '../strings/app_exception_messages.dart';
 import 'name_routes.dart';
 
@@ -27,6 +28,10 @@ class AppRoutes {
       case NameRoutes.marketPage:
         return MaterialPageRoute(
           builder: (_) => const MarketPage(),
+        );
+      case NameRoutes.taskTimerPage:
+        return MaterialPageRoute(
+          builder: (_) => const TaskTimerPage(),
         );
       case NameRoutes.dailyTasksPage:
         return MaterialPageRoute(
