@@ -7,8 +7,15 @@ import '../../core/styles/app_styles.dart';
 import '../state/bottom_nav_index_state.dart';
 import '../widgets/main_bottom_item_text.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
 
   @override
   Widget build(BuildContext context) {

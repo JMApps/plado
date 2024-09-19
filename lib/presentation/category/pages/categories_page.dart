@@ -58,7 +58,7 @@ class _CategoriesPageState extends State<CategoriesPage> with TickerProviderStat
                 NameRoutes.taskTimerPage,
               );
             },
-            tooltip: appLocale.timerConcentration,
+            tooltip: appLocale.taskTimer,
             icon: Icon(
               Icons.timer_outlined,
               color: appColors.primary,

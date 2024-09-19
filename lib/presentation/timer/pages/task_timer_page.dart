@@ -9,7 +9,7 @@ class TaskTimerPage extends StatelessWidget {
     final appLocale = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text(appLocale.timerConcentration),
+        title: Text(appLocale.taskTimer),
       ),
       body: Container(),
     );
